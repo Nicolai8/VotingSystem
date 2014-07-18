@@ -1,0 +1,9 @@
+﻿<h2 class="padding-left-right-x2">
+	<a href="#/votingpage/<%=VotingId%>"><%= VotingName %></a>
+</h2>
+<hr />
+<div class="padding-left-right-x2">
+	<p><%=Description.substr(0,1000)%>...</p>
+	<a class="margin-bottom-x2 btn btn-primary" href="#votingpage/<%=VotingId%>">Read More<i class="glyphicon glyphicon-chevron-right"></i></a>
+</div>
+<div class="well well-sm"><i class="glyphicon glyphicon-user"></i>by <a href="#profilepage/<%=CreatedBy%>"><%=CreatedBy%></a> |<i class="glyphicon glyphicon-calendar"></i><%=CreateDate%> |<i class="glyphicon glyphicon-comment"></i><%= CommentsCount %> Comments |<i class="glyphicon glyphicon-book"></i><%= AnswersCount %> Answers</div>

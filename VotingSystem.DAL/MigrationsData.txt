@@ -1,0 +1,3 @@
+﻿Add-Migration -project:VotingSystem.DAL -Force
+
+Update-Database -project:VotingSystem.DAL -Force -Verbose

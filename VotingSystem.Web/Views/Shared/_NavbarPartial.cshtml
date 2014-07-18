@@ -1,0 +1,51 @@
+﻿<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+	<div class="container">
+		<div class="navbar-header">
+			<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse-part">
+				<span class="sr-only">Toggle navigation</span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+			</button>
+			<a href="@Url.Action("Index", "Main")" class="navbar-brand">
+				<img src="~/Content/images/vote_logo.png" class="logo" alt="Logo" /></a>
+		</div>
+		<div class="collapse navbar-collapse" id="navbar-collapse-part">
+			<ul class="nav navbar-nav">
+				<li class="dropdown">
+					<a href="#mainpage/1" id="menu-allvotings">All votings</a>
+				</li>
+			</ul>
+			<ul class="nav navbar-nav for-loggedIn" hidden>
+				<li class="dropdown">
+					<a href="#" class="dropdown-toggle" data-toggle="dropdown">My Activity <b class="caret"></b></a>
+					<ul class="dropdown-menu">
+						<li><a href="#myvotingspage/1">Votings</a></li>
+						<li><a href="#myvoicespage/1">Voices</a></li>
+						<li><a href="#mycommentspage/1">Comments</a></li>
+					</ul>
+				</li>
+			</ul>
+			<ul class="nav navbar-nav for-moderator for-loggedIn" hidden>
+				<li class="dropdown">
+					<a href="#" class="dropdown-toggle" data-toggle="dropdown">Administration Panel <b class="caret"></b></a>
+					<ul class="dropdown-menu">
+						<li><a href="#adminvotingspage/1">Votings</a></li>
+						<li class="for-administrator"><a href="#userspage/1">Users</a></li>
+						<li class="for-administrator"><a href="#suggesteduserspage/1">Suggested to Block Users</a></li>
+					</ul>
+				</li>
+			</ul>
+			<ul class="nav navbar-nav navbar-right">
+				<li class="dropdown">
+					<a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="glyphicon glyphicon-user"></i><span role="loggedUserName">Account</span> <b class="caret"></b></a>
+					<ul class="dropdown-menu">
+						<li><a href="#" data-toggle="modal" class="for-notLoggedIn" data-target="#loginForm"><i class="glyphicon glyphicon-log-in"></i>Sign In</a></li>
+						<li><a class="for-loggedIn" href="#profilepage"><i class="glyphicon glyphicon-user"></i>Account</a></li>
+						<li><a class="for-loggedIn" id="signOut" href="#"><i class="glyphicon glyphicon-log-out"></i>Sign Out</a></li>
+					</ul>
+				</li>
+			</ul>
+		</div>
+	</div>
+</nav>

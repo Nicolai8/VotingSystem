@@ -1,0 +1,56 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8" />
+	<title>Voting System</title>
+	<link href="~/Content/images/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+	<meta name="viewport" content="width=device-width" />
+	<link rel="stylesheet/css" href="~/Content/css/jquery.fileupload.css" />
+
+	@Styles.Render("~/bundles/css")
+	@Styles.Render("~/content/main")
+	@Styles.Render("~/bundles/less")
+	@Scripts.Render("~/scripts/libraries/gremlins.min.js")
+
+	<script type="text/javascript">
+		var cacheScripts = true;
+		var horde = gremlins.createHorde();
+		var authenticated = @Html.Raw(Request.IsAuthenticated ? "true" : "false");
+		var loggedUserName = "@Html.Raw(Request.IsAuthenticated ? User.Identity.Name : "Account")";
+	</script>
+</head>
+<body>
+	<div id="preloader" hidden=""></div>
+	<header>
+		@Html.Partial("_NavbarPartial")
+		<div class="container">
+			<div class="row clearfix" id="breadcrumb">
+			</div>
+		</div>
+	</header>
+
+	<div id="index">
+		<div class="container">
+
+			@Html.Partial("_LoginPartial")
+			@Html.Partial("_ProfilePartial")
+			@Html.Partial("_403Partial")
+			@Html.Partial("_404Partial")
+			@Html.Partial("_500Partial")
+			@RenderBody()
+
+		</div>
+	</div>
+	<footer>
+		<div class="container">
+			<div class="col-xs-12 footer">
+				<p>&copy; @DateTime.Now.Year - Voting System</p>
+			</div>
+		</div>
+	</footer>
+
+	@Scripts.Render("~/Scripts/libraries/require.js")
+	@Html.Partial("_UrlsPartial")
+	@Scripts.Render("~/Scripts/main.js")
+</body>
+</html>

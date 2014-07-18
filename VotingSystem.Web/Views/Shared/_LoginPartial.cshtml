@@ -1,0 +1,72 @@
+﻿<div class="modal fade" id="loginForm" tabindex="-1" role="dialog" aria-hidden="true">
+	<div class="modal-dialog modal-md">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				<h4 class="modal-title">Log In</h4>
+			</div>
+			<div class="modal-body">
+				<form class="form-horizontal" data-validate-form="true">
+					<div class="form-group">
+						<label class="col-md-4 control-label">Username</label>
+						<div class="col-md-7">
+							<input id="userName" name="username" type="text" placeholder="Username" class="form-control"
+								required data-bv-stringlength="true"
+								data-bv-stringlength-min="5" data-bv-stringlength-message="Login must be at least 5 characters length." />
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-md-4 control-label">Password</label>
+						<div class="col-md-7">
+							<input id="password" name="password" type="password" placeholder="Password" class="form-control"
+								required data-bv-stringlength="true"
+								data-bv-stringlength-min="6" data-bv-stringlength-message="Password must be at least 6 characters length." />
+						</div>
+					</div>
+				</form>
+				If you don't have an account please <a href="#" data-toggle="modal" data-target="#registerForm">Sign Up</a>.
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+				<button type="button" id="logInButton" class="btn btn-primary">Log In</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="modal fade" id="registerForm" tabindex="-1" role="dialog" aria-hidden="true">
+	<div class="modal-dialog modal-md">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				<h4 class="modal-title">Register</h4>
+			</div>
+			<div class="modal-body">
+				<form id="registerInnerForm" class="form-horizontal" data-validate-form="true">
+					<fieldset>
+						Please enter correct email we will send confirmation email on it.
+						<div class="form-group">
+							<label class="col-md-4 control-label" for="userName">Username</label>
+							<div class="col-md-7">
+								<input id="registerUserName" name="userName" type="text" placeholder="Username" class="form-control"
+									required data-bv-stringlength="true"
+									data-bv-stringlength-min="5" data-bv-stringlength-message="Login must be at least 5 characters length."/>
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-md-4 control-label" for="Email">Email</label>
+							<div class="col-md-7">
+								<input id="registerEmail" name="Email" type="email" placeholder="Email" class="form-control"
+									required data-bv-emailaddress-message="The input is not a valid email address">
+							</div>
+						</div>
+					</fieldset>
+				</form>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+				<button type="button" id="registerButton" class="btn btn-primary">Register</button>
+			</div>
+		</div>
+	</div>
+</div>

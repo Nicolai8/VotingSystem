@@ -1,0 +1,618 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{A606D668-7F89-4235-A515-AAB9939CE0A1}</ProjectGuid>
+    <ProjectTypeGuids>{E3E379DF-F4C6-4180-9B81-6769533ABE47};{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>VotingSystem.Web</RootNamespace>
+    <AssemblyName>VotingSystem.Web</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <MvcBuildViews>false</MvcBuildViews>
+    <UseIISExpress>true</UseIISExpress>
+    <IISExpressSSLPort>
+    </IISExpressSSLPort>
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <WebGreaseLibPath>..\packages\WebGrease.1.5.2\lib</WebGreaseLibPath>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <UseVSHostingProcess>true</UseVSHostingProcess>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Antlr3.Runtime, Version=3.4.1.9004, Culture=neutral, PublicKeyToken=eb42632606e9261f, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Antlr.3.4.1.9004\lib\Antlr3.Runtime.dll</HintPath>
+    </Reference>
+    <Reference Include="AutoMapper">
+      <HintPath>..\packages\AutoMapper.3.2.1\lib\net40\AutoMapper.dll</HintPath>
+    </Reference>
+    <Reference Include="AutoMapper.Net4">
+      <HintPath>..\packages\AutoMapper.3.2.1\lib\net40\AutoMapper.Net4.dll</HintPath>
+    </Reference>
+    <Reference Include="dotless.Core">
+      <HintPath>..\packages\dotless.1.4.0.0\lib\dotless.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\EntityFramework.6.0.2\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer">
+      <HintPath>..\packages\EntityFramework.6.0.2\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.SignalR.Core">
+      <HintPath>..\packages\Microsoft.AspNet.SignalR.Core.2.1.0\lib\net45\Microsoft.AspNet.SignalR.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.SignalR.Owin">
+      <HintPath>..\packages\Microsoft.AspNet.SignalR.Owin.1.0.0\lib\net45\Microsoft.AspNet.SignalR.Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.SignalR.SystemWeb">
+      <HintPath>..\packages\Microsoft.AspNet.SignalR.SystemWeb.2.1.0\lib\net45\Microsoft.AspNet.SignalR.SystemWeb.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.Owin">
+      <HintPath>..\packages\Microsoft.Owin.2.0.1\lib\net45\Microsoft.Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Host.SystemWeb">
+      <HintPath>..\packages\Microsoft.Owin.Host.SystemWeb.2.0.1\lib\net45\Microsoft.Owin.Host.SystemWeb.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security">
+      <HintPath>..\packages\Microsoft.Owin.Security.2.0.1\lib\net45\Microsoft.Owin.Security.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.ServiceLocation, Version=1.2.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\CommonServiceLocator.1.2\lib\portable-windows8+net40+sl5+windowsphone8\Microsoft.Practices.ServiceLocation.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.Unity, Version=3.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Unity.3.5.1404.0\lib\net45\Microsoft.Practices.Unity.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.Unity.Configuration, Version=3.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Unity.3.5.1404.0\lib\net45\Microsoft.Practices.Unity.Configuration.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.Unity.Mvc, Version=3.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Unity.Mvc.3.5.1404.0\lib\net45\Microsoft.Practices.Unity.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.Unity.RegistrationByConvention, Version=3.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Unity.3.5.1404.0\lib\net45\Microsoft.Practices.Unity.RegistrationByConvention.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Web.Mvc">
+      <HintPath>..\packages\Mvc4Futures.4.0.20710.0\lib\net40\Microsoft.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=4.5.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Newtonsoft.Json.5.0.4\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="Owin">
+      <HintPath>..\packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Net.Http.Formatting, Version=5.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.0.0\lib\net45\System.Net.Http.Formatting.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Web.Helpers, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.2.0.30506.0\lib\net40\System.Web.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Http, Version=5.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Core.5.0.0\lib\net45\System.Web.Http.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Http.OData, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.OData.4.0.30506\lib\net40\System.Web.Http.OData.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Http.WebHost, Version=5.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.WebHost.5.0.0\lib\net45\System.Web.Http.WebHost.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.4.0.30506.0\lib\net40\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Optimization, Version=1.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.AspNet.Web.Optimization.1.1.2\lib\net40\System.Web.Optimization.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Optimization.Less, Version=1.3.0.0, Culture=neutral, PublicKeyToken=9b7581e0240fe480, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\System.Web.Optimization.Less.1.3.2\lib\net40\System.Web.Optimization.Less.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.WebPages, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.2.0.30506.0\lib\net40\System.Web.WebPages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.2.0.30506.0\lib\net40\System.Web.WebPages.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.2.0.30506.0\lib\net40\System.Web.WebPages.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Abstractions" />
+    <Reference Include="System.Web.Routing" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Transactions" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Web.Mvc.FixedDisplayModes, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.FixedDisplayModes.1.0.0\lib\net40\Microsoft.Web.Mvc.FixedDisplayModes.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http">
+    </Reference>
+    <Reference Include="System.Net.Http.WebRequest">
+    </Reference>
+    <Reference Include="Unity.Mvc4, Version=1.4.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Unity.Mvc4.1.4.0.0\lib\net45\Unity.Mvc4.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.WebApi, Version=5.1.0.0, Culture=neutral, PublicKeyToken=43da31bc42a85347, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Unity.WebAPI.5.1\lib\net45\Unity.WebApi.dll</HintPath>
+    </Reference>
+    <Reference Include="WebActivatorEx, Version=2.0.0.0, Culture=neutral, PublicKeyToken=7b26dc2a43f6a0d4, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\WebActivatorEx.2.0\lib\net40\WebActivatorEx.dll</HintPath>
+    </Reference>
+    <Reference Include="WebGrease, Version=1.5.2.14234, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\WebGrease.1.5.2\lib\WebGrease.dll</HintPath>
+    </Reference>
+    <Reference Include="WebMatrix.Data, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.Data.2.0.20710.0\lib\net40\WebMatrix.Data.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Web.WebPages.OAuth, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.OAuth.2.0.20710.0\lib\net40\Microsoft.Web.WebPages.OAuth.dll</HintPath>
+    </Reference>
+    <Reference Include="WebMatrix.WebData, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.WebData.2.0.20710.0\lib\net40\WebMatrix.WebData.dll</HintPath>
+    </Reference>
+    <Reference Include="DotNetOpenAuth.AspNet, Version=4.1.0.0, Culture=neutral, PublicKeyToken=2780ccd10d57b246, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\DotNetOpenAuth.AspNet.4.1.4.12333\lib\net45-full\DotNetOpenAuth.AspNet.dll</HintPath>
+    </Reference>
+    <Reference Include="DotNetOpenAuth.Core, Version=4.1.0.0, Culture=neutral, PublicKeyToken=2780ccd10d57b246, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\DotNetOpenAuth.Core.4.1.4.12333\lib\net45-full\DotNetOpenAuth.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="DotNetOpenAuth.OAuth.Consumer, Version=4.1.0.0, Culture=neutral, PublicKeyToken=2780ccd10d57b246, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\DotNetOpenAuth.OAuth.Consumer.4.1.4.12333\lib\net45-full\DotNetOpenAuth.OAuth.Consumer.dll</HintPath>
+    </Reference>
+    <Reference Include="DotNetOpenAuth.OAuth, Version=4.1.0.0, Culture=neutral, PublicKeyToken=2780ccd10d57b246, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\DotNetOpenAuth.OAuth.Core.4.1.4.12333\lib\net45-full\DotNetOpenAuth.OAuth.dll</HintPath>
+    </Reference>
+    <Reference Include="DotNetOpenAuth.OpenId, Version=4.1.0.0, Culture=neutral, PublicKeyToken=2780ccd10d57b246, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\DotNetOpenAuth.OpenId.Core.4.1.4.12333\lib\net45-full\DotNetOpenAuth.OpenId.dll</HintPath>
+    </Reference>
+    <Reference Include="DotNetOpenAuth.OpenId.RelyingParty, Version=4.1.0.0, Culture=neutral, PublicKeyToken=2780ccd10d57b246, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\DotNetOpenAuth.OpenId.RelyingParty.4.1.4.12333\lib\net45-full\DotNetOpenAuth.OpenId.RelyingParty.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Data.Edm, Version=5.2.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.Data.Edm.5.2.0\lib\net40\Microsoft.Data.Edm.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Data.OData, Version=5.2.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.Data.OData.5.2.0\lib\net40\Microsoft.Data.OData.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Spatial, Version=5.2.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\System.Spatial.5.2.0\lib\net40\System.Spatial.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="App_Start\AuthConfig.cs" />
+    <Compile Include="App_Start\BundleConfig.cs" />
+    <Compile Include="App_Start\FilterConfig.cs" />
+    <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="App_Start\Startup.cs" />
+    <Compile Include="App_Start\UnityWebActivator.cs" />
+    <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\API\UserApiController.cs" />
+    <Compile Include="Controllers\API\AnswerApiController.cs" />
+    <Compile Include="Controllers\API\BaseApiController.cs" />
+    <Compile Include="Controllers\BaseController.cs" />
+    <Compile Include="Controllers\API\CommentApiController.cs" />
+    <Compile Include="Controllers\MainController.cs" />
+    <Compile Include="Controllers\API\VotingApiController.cs" />
+    <Compile Include="Filters\OwnsHubAttribute.cs" />
+    <Compile Include="Filters\CustomAuthorizeHubAttribute.cs" />
+    <Compile Include="Filters\CustomAuthorizeApiAttribute.cs" />
+    <Compile Include="Filters\CustomAuthorizeMvcAttribute.cs" />
+    <Compile Include="Filters\CustomExceptionApiAttribute.cs" />
+    <Compile Include="Filters\OwnsApiAttribute.cs" />
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Helpers\AuthorizeAttributeHelper.cs" />
+    <Compile Include="Helpers\CaptchaHelper.cs" />
+    <Compile Include="Helpers\ConvertHelper.cs" />
+    <Compile Include="Helpers\FileHelper.cs" />
+    <Compile Include="Helpers\GlobalVariables.cs" />
+    <Compile Include="Helpers\MailHelper.cs" />
+    <Compile Include="Controllers\Hubs\CommentsHub.cs" />
+    <Compile Include="Models\AnswerModel.cs" />
+    <Compile Include="Models\CommentModel.cs" />
+    <Compile Include="Models\ConnectionMapping.cs" />
+    <Compile Include="Models\FixedAnswerModel.cs" />
+    <Compile Include="Models\MainPageModel.cs" />
+    <Compile Include="Models\OwnsType.cs" />
+    <Compile Include="Models\PageType.cs" />
+    <Compile Include="Models\QuestionModel.cs" />
+    <Compile Include="Models\RoleType.cs" />
+    <Compile Include="Models\UserModel.cs" />
+    <Compile Include="Models\VotingModel.cs" />
+    <Compile Include="Models\VotingPageModel.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="App_GlobalResources\Resource.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resource.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Providers\CustomeRoleProvider.cs" />
+    <Compile Include="Providers\CustomMembershipProvider.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Content\css\bootstrap.css" />
+    <Content Include="Content\css\bootstrap.min.css" />
+    <Content Include="Content\css\bootstrapValidator.css" />
+    <Content Include="Content\css\font-awesome.css" />
+    <Content Include="Content\css\font-awesome.min.css" />
+    <Content Include="Content\css\jquery.fileupload.css" />
+    <Content Include="Content\css\jquery.fileupload.min.css">
+      <DependentUpon>jquery.fileupload.css</DependentUpon>
+    </Content>
+    <Content Include="Content\css\icheck.css" />
+    <Content Include="Content\css\site.min.css" />
+    <Content Include="Content\css\toastr.min.css" />
+    <Content Include="Content\fonts\fontawesome-webfont.svg" />
+    <Content Include="Content\images\red%402x.png" />
+    <Content Include="Content\images\red.png" />
+    <Content Include="Content\images\vote_logo.png" />
+    <Content Include="Content\images\favicon.ico" />
+    <Content Include="Content\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Content\css\toastr.css" />
+    <Content Include="Global.asax" />
+    <Content Include="Scripts\libraries\async.js" />
+    <Content Include="Scripts\libraries\icheck.js" />
+    <Content Include="Scripts\libraries\icheck.min.js" />
+    <Content Include="Scripts\libraries\jquery.signalR-2.1.0.js" />
+    <Content Include="Scripts\libraries\jquery.signalR-2.1.0.min.js" />
+    <Content Include="Scripts\libraries\backbone.js" />
+    <Content Include="Content\fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="Content\fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="Content\fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="Content\less\bootstrap\_alerts.less" />
+    <Content Include="Content\less\bootstrap\_badges.less" />
+    <Content Include="Content\less\bootstrap\_bootstrap.less" />
+    <Content Include="Content\less\bootstrap\_breadcrumbs.less" />
+    <Content Include="Content\less\bootstrap\_button-groups.less" />
+    <Content Include="Content\less\bootstrap\_buttons.less" />
+    <Content Include="Content\less\bootstrap\_carousel.less" />
+    <Content Include="Content\less\bootstrap\_close.less" />
+    <Content Include="Content\less\bootstrap\_code.less" />
+    <Content Include="Content\less\bootstrap\_component-animations.less" />
+    <Content Include="Content\less\bootstrap\_dropdowns.less" />
+    <Content Include="Content\less\bootstrap\_forms.less" />
+    <Content Include="Content\less\bootstrap\_glyphicons.less" />
+    <Content Include="Content\less\bootstrap\_grid.less" />
+    <Content Include="Content\less\bootstrap\_input-groups.less" />
+    <Content Include="Content\less\bootstrap\_jumbotron.less" />
+    <Content Include="Content\less\bootstrap\_labels.less" />
+    <Content Include="Content\less\bootstrap\_list-group.less" />
+    <Content Include="Content\less\bootstrap\_media.less" />
+    <Content Include="Content\less\bootstrap\_mixins.less" />
+    <Content Include="Content\less\bootstrap\_modals.less" />
+    <Content Include="Content\less\bootstrap\_navbar.less" />
+    <Content Include="Content\less\bootstrap\_navs.less" />
+    <Content Include="Content\less\bootstrap\_normalize.less" />
+    <Content Include="Content\less\bootstrap\_pager.less" />
+    <Content Include="Content\less\bootstrap\_pagination.less" />
+    <Content Include="Content\less\bootstrap\_panels.less" />
+    <Content Include="Content\less\bootstrap\_popovers.less" />
+    <Content Include="Content\less\bootstrap\_print.less" />
+    <Content Include="Content\less\bootstrap\_progress-bars.less" />
+    <Content Include="Content\less\bootstrap\_responsive-utilities.less" />
+    <Content Include="Content\less\bootstrap\_scaffolding.less" />
+    <Content Include="Content\less\bootstrap\_tables.less" />
+    <Content Include="Content\less\bootstrap\_theme.less" />
+    <Content Include="Content\less\bootstrap\_thumbnails.less" />
+    <Content Include="Content\less\bootstrap\_tooltip.less" />
+    <Content Include="Content\less\bootstrap\_type.less" />
+    <Content Include="Content\less\bootstrap\_utilities.less" />
+    <Content Include="Content\less\bootstrap\_variables.less" />
+    <Content Include="Content\less\bootstrap\_wells.less" />
+    <Content Include="Content\less\_datetimepicker.less" />
+    <Content Include="Content\less\_bootstrap-datetimepicker.less" />
+    <Content Include="Content\less\_bootswatch.less" />
+    <Content Include="Content\bootstrap.less" />
+    <Content Include="Content\less\_variables.less" />
+    <Content Include="Content\site.less" />
+    <Content Include="Content\less\_bootstrap-markdown.less" />
+    <Content Include="Content\fonts\fontawesome-webfont.eot" />
+    <Content Include="Content\fonts\fontawesome-webfont.ttf" />
+    <Content Include="Content\fonts\fontawesome-webfont.woff" />
+    <Content Include="Content\fonts\FontAwesome.otf" />
+    <Content Include="Content\less\font-awesome\_bordered-pulled.less" />
+    <Content Include="Content\less\font-awesome\_core.less" />
+    <Content Include="Content\less\font-awesome\_fixed-width.less" />
+    <Content Include="Content\font-awesome.less" />
+    <Content Include="Content\less\font-awesome\_icons.less" />
+    <Content Include="Content\less\font-awesome\_larger.less" />
+    <Content Include="Content\less\font-awesome\_list.less" />
+    <Content Include="Content\less\font-awesome\_mixins.less" />
+    <Content Include="Content\less\font-awesome\_path.less" />
+    <Content Include="Content\less\font-awesome\_rotated-flipped.less" />
+    <Content Include="Content\less\font-awesome\_spinning.less" />
+    <Content Include="Content\less\font-awesome\_stacked.less" />
+    <Content Include="Content\less\font-awesome\_variables.less" />
+    <Content Include="Content\toastr.less" />
+    <None Include="Properties\PublishProfiles\LocalIIS.pubxml" />
+    <None Include="Scripts\libraries\jquery-2.0.3.intellisense.js" />
+    <Content Include="Scripts\libraries\backbone.min.js">
+      <DependentUpon>backbone.js</DependentUpon>
+    </Content>
+    <Content Include="Scripts\libraries\backbone.stickit.js" />
+    <Content Include="Scripts\libraries\backbone.stickit.min.js">
+      <DependentUpon>backbone.stickit.js</DependentUpon>
+    </Content>
+    <Content Include="Scripts\libraries\bootstrap-datetimepicker.js" />
+    <Content Include="Scripts\libraries\bootstrap-datetimepicker.min.js">
+      <DependentUpon>bootstrap-datetimepicker.js</DependentUpon>
+    </Content>
+    <Content Include="Scripts\libraries\bootstrap.js" />
+    <Content Include="Scripts\libraries\bootstrap.min.js">
+      <DependentUpon>bootstrap.js</DependentUpon>
+    </Content>
+    <Content Include="Scripts\libraries\bootstrapValidator.js" />
+    <Content Include="Scripts\libraries\bootstrapValidator.min.js">
+      <DependentUpon>bootstrapValidator.js</DependentUpon>
+    </Content>
+    <Content Include="Scripts\libraries\gremlins.min.js" />
+    <Content Include="Scripts\libraries\jquery-ui-1.10.3.min.js">
+      <DependentUpon>jquery-ui-1.10.3.js</DependentUpon>
+    </Content>
+    <Content Include="Scripts\libraries\jquery.bootpag.js" />
+    <Content Include="Scripts\libraries\jquery.bootpag.min.js">
+      <DependentUpon>jquery.bootpag.js</DependentUpon>
+    </Content>
+    <Content Include="Scripts\libraries\jquery.fileupload.js" />
+    <Content Include="Scripts\libraries\jquery.iframe-transport.js" />
+    <Content Include="Scripts\libraries\jquery.pagedown-bootstrap.combined.js" />
+    <Content Include="Scripts\libraries\jquery.ui.widget.js" />
+    <Content Include="Scripts\libraries\less.js" />
+    <Content Include="Scripts\libraries\less.min.js">
+      <DependentUpon>less.js</DependentUpon>
+    </Content>
+    <Content Include="Scripts\libraries\moment-2.4.0.js" />
+    <Content Include="Scripts\libraries\r.js" />
+    <Content Include="Scripts\libraries\require.js" />
+    <Content Include="Scripts\libraries\goog.js" />
+    <Content Include="Scripts\libraries\propertyParser.js" />
+    <Content Include="Scripts\libraries\spin.js" />
+    <Content Include="Scripts\libraries\toastr.min.js">
+      <DependentUpon>toastr.js</DependentUpon>
+    </Content>
+    <Content Include="Scripts\libraries\underi18n.js" />
+    <Content Include="Scripts\libraries\underscore.min.js">
+      <DependentUpon>underscore.js</DependentUpon>
+    </Content>
+    <Content Include="Scripts\main.js" />
+    <Content Include="Scripts\libraries\toastr.js" />
+    <Content Include="Scripts\user-defined\backbone.router.js" />
+    <Content Include="Scripts\user-defined\collections\backbone.collection.comments.js" />
+    <Content Include="Scripts\user-defined\collections\backbone.collection.fixedanswers.js" />
+    <Content Include="Scripts\user-defined\collections\backbone.collection.users.js" />
+    <Content Include="Scripts\user-defined\collections\backbone.collection.voices.js" />
+    <Content Include="Scripts\user-defined\collections\backbone.collection.votingresult.js" />
+    <Content Include="Scripts\user-defined\collections\backbone.collection.votings.js" />
+    <Content Include="Scripts\user-defined\models\backbone.model.comment.js" />
+    <Content Include="Scripts\user-defined\models\backbone.model.fixedanswer.js" />
+    <Content Include="Scripts\user-defined\models\backbone.model.js" />
+    <Content Include="Scripts\user-defined\models\backbone.model.question.js" />
+    <Content Include="Scripts\user-defined\models\backbone.model.user.js" />
+    <Content Include="Scripts\user-defined\models\backbone.model.voice.js" />
+    <Content Include="Scripts\user-defined\models\backbone.model.voting.js" />
+    <Content Include="Scripts\user-defined\pages\backbone.page.collection.js" />
+    <Content Include="Scripts\user-defined\pages\backbone.page.js" />
+    <Content Include="Scripts\user-defined\templates.js" />
+    <Content Include="Scripts\user-defined\views\backbone.view.addquestion.js" />
+    <Content Include="Scripts\user-defined\views\backbone.view.addvoting.js" />
+    <Content Include="Scripts\user-defined\views\backbone.view.fixedquestion.js" />
+    <Content Include="Scripts\user-defined\views\backbone.view.openquestion.js" />
+    <Content Include="Scripts\user-defined\views\backbone.view.comment.js" />
+    <Content Include="Scripts\user-defined\pages\backbone.page.comments.js" />
+    <Content Include="Scripts\user-defined\pages\backbone.page.profile.js" />
+    <Content Include="Scripts\user-defined\views\backbone.view.js" />
+    <Content Include="Scripts\user-defined\views\backbone.view.user.js" />
+    <Content Include="Scripts\user-defined\pages\backbone.page.users.js" />
+    <Content Include="Scripts\user-defined\views\backbone.view.voice.js" />
+    <Content Include="Scripts\user-defined\pages\backbone.page.voting.js" />
+    <Content Include="Scripts\libraries\html5shiv.js" />
+    <Content Include="Scripts\libraries\jquery.js" />
+    <Content Include="Scripts\libraries\jquery.min.js" />
+    <Content Include="Scripts\libraries\jquery-ui-1.10.3.js" />
+    <Content Include="Scripts\user-defined\pages\backbone.page.voices.js" />
+    <Content Include="Scripts\user-defined\pages\backbone.page.uservotings.js" />
+    <Content Include="Scripts\libraries\underscore.js" />
+    <Content Include="Scripts\user-defined\models\backbone.model.state.js" />
+    <Content Include="Scripts\user-defined\constants.js" />
+    <Content Include="Scripts\user-defined\views\backbone.view.votingresult.js" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Content\css\site.css" />
+    <Content Include="Scripts\libraries\_references.js" />
+    <Content Include="Views\_ViewStart.cshtml" />
+    <Content Include="Views\Main\Index.cshtml" />
+    <Content Include="Views\Shared\_404Partial.cshtml" />
+    <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\Web.config" />
+    <Content Include="Views\Shared\_LoginPartial.cshtml" />
+    <Content Include="Views\Main\_MainPagePartial.cshtml" />
+    <Content Include="Views\Main\_UserVotingsPagePartial.cshtml" />
+    <Content Include="Views\Main\_AdminVotingsPagePartial.cshtml" />
+    <Content Include="Views\Main\_VotingPagePartial.cshtml" />
+    <Content Include="Views\Main\_UsersPagePartial.cshtml" />
+    <Content Include="Scripts\user-defined\models\backbone.model.profile.js" />
+    <Content Include="Views\Shared\_ProfilePartial.cshtml" />
+    <Content Include="Views\Main\_CommentsPagePartial.cshtml" />
+    <Content Include="Views\Main\_VoicesPagePartial.cshtml" />
+    <Content Include="Views\Main\_WithSideBar.cshtml" />
+    <Content Include="Scripts\user-defined\pages\backbone.page.main.js" />
+    <Content Include="Scripts\user-defined\views\backbone.view.voting.js" />
+    <Content Include="Scripts\user-defined\pages\backbone.page.adminvotings.js" />
+    <None Include="log4net.config" />
+    <Content Include="Views\Shared\_UrlsPartial.cshtml" />
+    <Content Include="Views\Shared\_NavbarPartial.cshtml" />
+    <Content Include="Views\Shared\_500Partial.cshtml" />
+    <Content Include="Views\Shared\_403Partial.cshtml" />
+    <Content Include="Views\Shared\Templates\FixedAnswerTemplateForVotingPage.cshtml" />
+    <Content Include="Views\Shared\Templates\CommentTemplateForVotingPage.cshtml" />
+    <Content Include="Views\Shared\Templates\VotingResultTableTemplate.cshtml" />
+    <Content Include="Views\Shared\Templates\VotingResultItemTemplate.cshtml" />
+    <Content Include="Views\Shared\Templates\AdminVotingsPageVotingTemplate.cshtml" />
+    <Content Include="Views\Shared\Templates\CommentTemplateForCommentsPage.cshtml" />
+    <Content Include="Views\Shared\Templates\MainPageVotingTemplate.cshtml" />
+    <Content Include="Views\Shared\Templates\UserTemplate.cshtml" />
+    <Content Include="Views\Shared\Templates\RoleTemplate.cshtml" />
+    <Content Include="Views\Shared\Templates\NewAnswerTemplate.cshtml" />
+    <Content Include="Views\Shared\Templates\MyVotingsPageVotingTemplate.cshtml" />
+    <Content Include="Views\Shared\Templates\VoiceTemplate.cshtml" />
+    <Content Include="Views\Shared\Templates\NoDataTemplate.cshtml" />
+    <Content Include="Views\Shared\Templates\ToggleProfileLockButton.cshtml" />
+    <Content Include="Views\Shared\Templates\BreadCrumbTemplate.cshtml" />
+    <Content Include="Views\Shared\Templates\OpenQuestionTemplate.cshtml" />
+    <Content Include="Scripts\user-defined\collections\backbone.collection.questions.js" />
+    <Content Include="Views\Shared\Templates\FixedQuestionTemplate.cshtml" />
+    <Content Include="Views\Shared\Templates\NewQuestionTemplate.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="App_Data\" />
+    <Folder Include="Content\Pictures\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\VotingSystem.BLL.Interfaces\VotingSystem.BLL.Interfaces.csproj">
+      <Project>{463cd2bc-f11e-48a1-ac77-269dbfb6a8cd}</Project>
+      <Name>VotingSystem.BLL.Interfaces</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\VotingSystem.BLL\VotingSystem.BLL.csproj">
+      <Project>{dd7c3f5e-12ca-4bd8-82de-0f13b4c6fb29}</Project>
+      <Name>VotingSystem.BLL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\VotingSystem.Common\VotingSystem.Common.csproj">
+      <Project>{1e4e11bb-1921-4593-b929-4e7173cacd4f}</Project>
+      <Name>VotingSystem.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\VotingSystem.UnityDI\VotingSystem.UnityDI.csproj">
+      <Project>{979505ba-98b5-47bb-8503-58fc82eb76a6}</Project>
+      <Name>VotingSystem.UnityDI</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\VotingSystem.DAL\VotingSystem.DAL.csproj">
+      <Project>{e93daf0b-b464-4e03-ada9-1f2ffa0981a5}</Project>
+      <Name>VotingSystem.DAL</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="App_GlobalResources\Resource.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resource.Designer.cs</LastGenOutput>
+      <CustomToolNamespace>VotingSystem.Web.Resources</CustomToolNamespace>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Content Include="Scripts\user-defined\backbone.view.layout.js" />
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>Content\images\favicon.ico</ApplicationIcon>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <Target Name="MvcBuildViews" AfterTargets="AfterBuild" Condition="'$(MvcBuildViews)'=='true'">
+    <AspNetCompiler VirtualPath="temp" PhysicalPath="$(WebProjectOutputDir)" />
+  </Target>
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <SaveServerSettingsInUserFile>True</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <Import Project="..\packages\AutoMapper.3.2.1\tools\AutoMapper.targets" Condition="Exists('..\packages\AutoMapper.3.2.1\tools\AutoMapper.targets')" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target> -->
+</Project>

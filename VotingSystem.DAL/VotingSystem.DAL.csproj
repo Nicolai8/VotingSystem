@@ -1,0 +1,209 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{E93DAF0B-B464-4E03-ADA9-1F2FFA0981A5}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>VotingSystem.DAL</RootNamespace>
+    <AssemblyName>VotingSystem.DAL</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework">
+      <HintPath>..\packages\EntityFramework.6.0.1\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer">
+      <HintPath>..\packages\EntityFramework.6.0.1\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.Unity">
+      <HintPath>..\packages\Unity.3.5.1404.0\lib\net45\Microsoft.Practices.Unity.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.Unity.Configuration">
+      <HintPath>..\packages\Unity.3.5.1404.0\lib\net45\Microsoft.Practices.Unity.Configuration.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.Unity.RegistrationByConvention">
+      <HintPath>..\packages\Unity.3.5.1404.0\lib\net45\Microsoft.Practices.Unity.RegistrationByConvention.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Entities\Answer.cs" />
+    <Compile Include="Entities\BaseEntity.cs" />
+    <Compile Include="Entities\Comment.cs" />
+    <Compile Include="Entities\FixedAnswer.cs" />
+    <Compile Include="Entities\Log.cs" />
+    <Compile Include="Entities\PrivacyType.cs" />
+    <Compile Include="Entities\Question.cs" />
+    <Compile Include="Entities\Role.cs" />
+    <Compile Include="Entities\StatusType.cs" />
+    <Compile Include="Entities\Theme.cs" />
+    <Compile Include="Entities\QuestionType.cs" />
+    <Compile Include="Entities\User.cs" />
+    <Compile Include="Entities\UserProfile.cs" />
+    <Compile Include="IUnitOfWork.cs" />
+    <Compile Include="Migrations\201312131211010_AnswerAddCreationDate.cs" />
+    <Compile Include="Migrations\201312131211010_AnswerAddCreationDate.Designer.cs">
+      <DependentUpon>201312131211010_AnswerAddCreationDate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201312271405461_addFieldsToUser.cs" />
+    <Compile Include="Migrations\201312271405461_addFieldsToUser.Designer.cs">
+      <DependentUpon>201312271405461_addFieldsToUser.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201312301132347_ChangesForNeedsForMembershipProvider.cs" />
+    <Compile Include="Migrations\201312301132347_ChangesForNeedsForMembershipProvider.Designer.cs">
+      <DependentUpon>201312301132347_ChangesForNeedsForMembershipProvider.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201401151315125_addVotingName.cs" />
+    <Compile Include="Migrations\201401151315125_addVotingName.Designer.cs">
+      <DependentUpon>201401151315125_addVotingName.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201402120923368_ChangesInAnswerTable.cs" />
+    <Compile Include="Migrations\201402120923368_ChangesInAnswerTable.Designer.cs">
+      <DependentUpon>201402120923368_ChangesInAnswerTable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201402181151222_SetNotNullFieldsInTheme.cs" />
+    <Compile Include="Migrations\201402181151222_SetNotNullFieldsInTheme.Designer.cs">
+      <DependentUpon>201402181151222_SetNotNullFieldsInTheme.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201402260953347_CreateUserProfile.cs" />
+    <Compile Include="Migrations\201402260953347_CreateUserProfile.Designer.cs">
+      <DependentUpon>201402260953347_CreateUserProfile.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201404210613423_UpdateDateTimeFields.cs" />
+    <Compile Include="Migrations\201404210613423_UpdateDateTimeFields.Designer.cs">
+      <DependentUpon>201404210613423_UpdateDateTimeFields.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201404210621255_RenameEntitiesIds.cs" />
+    <Compile Include="Migrations\201404210621255_RenameEntitiesIds.Designer.cs">
+      <DependentUpon>201404210621255_RenameEntitiesIds.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201404220847070_ChangeLogEntity.cs" />
+    <Compile Include="Migrations\201404220847070_ChangeLogEntity.Designer.cs">
+      <DependentUpon>201404220847070_ChangeLogEntity.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201406061306495_MissedMigration.cs" />
+    <Compile Include="Migrations\201406061306495_MissedMigration.Designer.cs">
+      <DependentUpon>201406061306495_MissedMigration.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201406100818478_NewTypeOfQuestionChangeTypeToDate.cs" />
+    <Compile Include="Migrations\201406100818478_NewTypeOfQuestionChangeTypeToDate.Designer.cs">
+      <DependentUpon>201406100818478_NewTypeOfQuestionChangeTypeToDate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201407151148461_AddQuestions.cs" />
+    <Compile Include="Migrations\201407151148461_AddQuestions.Designer.cs">
+      <DependentUpon>201407151148461_AddQuestions.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Repositories\GenericRepository.cs" />
+    <Compile Include="Migrations\201312121157133_InitialCreate.cs" />
+    <Compile Include="Migrations\201312121157133_InitialCreate.Designer.cs">
+      <DependentUpon>201312121157133_InitialCreate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201312121212364_ChangeFieldName.cs" />
+    <Compile Include="Migrations\201312121212364_ChangeFieldName.Designer.cs">
+      <DependentUpon>201312121212364_ChangeFieldName.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repositories\IGenericRepository.cs" />
+    <Compile Include="Repositories\RepositoryQueryHelper.cs" />
+    <Compile Include="UnitOfWork.cs" />
+    <Compile Include="VotingSystemContext.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201312121157133_InitialCreate.resx">
+      <DependentUpon>201312121157133_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201312121212364_ChangeFieldName.resx">
+      <DependentUpon>201312121212364_ChangeFieldName.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201312131211010_AnswerAddCreationDate.resx">
+      <DependentUpon>201312131211010_AnswerAddCreationDate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201312271405461_addFieldsToUser.resx">
+      <DependentUpon>201312271405461_addFieldsToUser.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201312301132347_ChangesForNeedsForMembershipProvider.resx">
+      <DependentUpon>201312301132347_ChangesForNeedsForMembershipProvider.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201401151315125_addVotingName.resx">
+      <DependentUpon>201401151315125_addVotingName.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201402120923368_ChangesInAnswerTable.resx">
+      <DependentUpon>201402120923368_ChangesInAnswerTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201402181151222_SetNotNullFieldsInTheme.resx">
+      <DependentUpon>201402181151222_SetNotNullFieldsInTheme.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201402260953347_CreateUserProfile.resx">
+      <DependentUpon>201402260953347_CreateUserProfile.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201404210613423_UpdateDateTimeFields.resx">
+      <DependentUpon>201404210613423_UpdateDateTimeFields.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201404210621255_RenameEntitiesIds.resx">
+      <DependentUpon>201404210621255_RenameEntitiesIds.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201404220847070_ChangeLogEntity.resx">
+      <DependentUpon>201404220847070_ChangeLogEntity.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201406061306495_MissedMigration.resx">
+      <DependentUpon>201406061306495_MissedMigration.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201406100818478_NewTypeOfQuestionChangeTypeToDate.resx">
+      <DependentUpon>201406100818478_NewTypeOfQuestionChangeTypeToDate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201407151148461_AddQuestions.resx">
+      <DependentUpon>201407151148461_AddQuestions.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\VotingSystem.Common\VotingSystem.Common.csproj">
+      <Project>{1e4e11bb-1921-4593-b929-4e7173cacd4f}</Project>
+      <Name>VotingSystem.Common</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="MigrationsData.txt" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

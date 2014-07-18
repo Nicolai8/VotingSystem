@@ -1,0 +1,12 @@
+﻿<a href="#" data-id="<%=QuestionId%>" class="list-group-item"><%=Text%>
+	<i class="pull-right fa fa-minus"></i>
+	<%if(Type==0){%>
+	<label class="label-primary-question pull-right">
+		(Open Question)
+	</label>
+	<%} else {%>
+	<label class="label-primary-question pull-right">
+		(Choice Question)
+	</label>
+	<%}%>
+</a>

@@ -1,0 +1,18 @@
+﻿<td><a href="#/profilepage/<%= UserName %>"><%= UserName %></a></td>
+<td><%= Roles.join(",") %></td>
+<td><%= Email %></td>
+<td><%= CreateDate %></td>
+<td>		
+	<a href="#" class="toggle-lock-user-button"><% if(IsBlocked){ %>
+			Unblock
+		<% } else{ %>
+			Block
+		<% }%>
+	</a> | 
+	<a href="#" class="remove-user-button">Remove</a>
+	<% if(IsSuggested){ %>
+		| <a href="#" class="unsuggest-user-button">Unsuggest</a>
+	<% } else {%>
+		| <a href="#" class="change-roles-open-dialog-button">Change Roles</a>
+	<% }%>			
+</td>

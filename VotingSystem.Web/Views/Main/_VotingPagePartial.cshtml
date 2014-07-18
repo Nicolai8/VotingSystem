@@ -1,0 +1,105 @@
+﻿<div id="votingPage" class="page" hidden>
+	<div id="votingPageContent">
+		<h1 role="name"></h1>
+		<p class="lead">
+			by <a href="#" role="createdBy"></a>
+		</p>
+		<hr>
+		<p>
+			<i class="glyphicon glyphicon-time"></i>Posted on <span role="createDate"></span>
+		</p>
+		<div class="row clearfix">
+			<div class="col-md-6">
+				<b>Start Date: </b><span role="startDate"></span>
+			</div>
+			<div class="col-md-6">
+				<b>Time Left: </b><span role="timeLeft"></span>
+			</div>
+		</div>
+		<div class="row clearfix">
+			<div class="col-md-6">
+				<b>Total Votes: </b><span role="totalVotes"></span>
+			</div>
+		</div>
+		<br />
+		<p><strong>Description:</strong></p>
+		<p role="description"></p>
+		<br />
+		<div class="row">
+			<div class="col-xs-6">
+				<button class="btn btn-default text-center margin-bottom-x2" data-toggle="collapse" id="toggleResultsButton" data-target="#votingResults">Toggle results</button>
+			</div>
+			<div class="col-xs-6">
+				<span id="voteButtonReplacement">You already answered on this voting.</span>
+				<button id="voteButton" class="btn btn-primary" data-toggle="modal" data-target="#votingModal">Vote</button>
+			</div>
+			<div id="votingResults" class="row collapse">
+				<div class="col-xs-12">
+					<ul class="nav nav-tabs" role="tablist">
+						<li class="active"><a href=".result-table" role="tab" data-toggle="tab">Grid View</a></li>
+						<li><a href=".result-chart" role="tab" data-toggle="tab">Chart View</a></li>
+					</ul>
+					<div class="tab-content">
+						<div class="tab-pane active destroy-on-page-close result-table"></div>
+						<div class="tab-pane destroy-on-page-close result-chart"></div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<br />
+
+		<div class="modal" id="votingModal" tabindex="-1" role="dialog" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+						<h4 class="modal-title" role="name"></h4>
+					</div>
+					<div class="modal-body">
+						<div class="alert alert-warning">
+							<strong>Please be careful!</strong> After posting your vote you will not be able to change or delete it.
+						</div>
+						<form role="form" class="form-horizontal">
+							<div id="questions" class="destroy-on-page-close"></div>
+							<div class="form-group captcha for-notLoggedIn">
+								<label class="col-xs-5 control-label">
+									<img alt="Captcha" id="captchaImage" src="@Url.Action("Captcha")"/>
+								</label>
+								<div class="col-xs-7">
+									<input type="text" id="captchaText" class="form-control" required name="captchaText" />
+								</div>
+							</div>
+
+						</form>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+						<button type="button" id="voteOnVoting" class="btn btn-primary">Vote</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="row for-loggedIn">
+		<div class="well">
+			<h4>Leave a Comment:</h4>
+			<form role="form" data-validate-form="true">
+				<div class="form-group">
+					<textarea class="form-control" rows="3" id="newCommentText" name="newCommentText"
+						required data-bv-stringlength="true"
+						data-bv-stringlength-min="4" data-bv-stringlength-message="Comment lenght can't be less than 4 characters."></textarea>
+				</div>
+				<button class="btn btn-primary" id="addNewComment"><i class="glyphicon glyphicon-plus"></i>Add comment</button>
+			</form>
+		</div>
+	</div>
+	<div class="row">
+		<hr />
+		<div class="comments-widget">
+			<ul class="list-group destroy-on-page-close" id="comments"></ul>
+		</div>
+	</div>
+</div>
+
+

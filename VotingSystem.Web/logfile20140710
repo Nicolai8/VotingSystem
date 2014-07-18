@@ -1,0 +1,313 @@
+
+2014-07-10 11:01:45,897 WARN  default Voting not found.
+ Exception:
+
+
+2014-07-10 13:39:14,941 ERROR default System error.
+ Exception:
+System.Security.Authentication.AuthenticationException: System error.
+   at VotingSystem.Web.Controllers.API.BaseApiController.get_UserId() in d:\TrainingProject\VotingSystem\VotingSystem.Web\Controllers\API\BaseApiController.cs:line 19
+   at VotingSystem.Web.Controllers.API.VotingApiController.Get(PageType pageType, Int32 page, Int32 size, String query) in d:\TrainingProject\VotingSystem\VotingSystem.Web\Controllers\API\VotingApiController.cs:line 59
+   at lambda_method(Closure , Object , Object[] )
+   at System.Web.Http.Controllers.ReflectedHttpActionDescriptor.ActionExecutor.<>c__DisplayClass10.<GetExecutor>b__9(Object instance, Object[] methodParameters)
+   at System.Web.Http.Controllers.ReflectedHttpActionDescriptor.ActionExecutor.Execute(Object instance, Object[] arguments)
+   at System.Web.Http.Controllers.ReflectedHttpActionDescriptor.ExecuteAsync(HttpControllerContext controllerContext, IDictionary`2 arguments, CancellationToken cancellationToken)
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Web.Http.Controllers.ApiControllerActionInvoker.<InvokeUsingResultConverterAsync>d__8.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Web.Http.Controllers.ActionFilterResult.<ExecuteAsync>d__2.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Web.Http.ApiController.<InvokeActionWithExceptionFilters>d__1.MoveNext()
+
+
+2014-07-10 14:06:47,561 WARN  default Unauthorized request
+ Exception:
+
+
+2014-07-10 16:03:13,570 ERROR default The partial view 'FixedAnswerTemplateForVotingPage' was not found or no view engine supports the searched locations. The following locations were searched:
+~/Views/Main/FixedAnswerTemplateForVotingPage.aspx
+~/Views/Main/FixedAnswerTemplateForVotingPage.ascx
+~/Views/Shared/FixedAnswerTemplateForVotingPage.aspx
+~/Views/Shared/FixedAnswerTemplateForVotingPage.ascx
+~/Views/Main/FixedAnswerTemplateForVotingPage.cshtml
+~/Views/Main/FixedAnswerTemplateForVotingPage.vbhtml
+~/Views/Shared/FixedAnswerTemplateForVotingPage.cshtml
+~/Views/Shared/FixedAnswerTemplateForVotingPage.vbhtml
+ Exception:
+System.InvalidOperationException: The partial view 'FixedAnswerTemplateForVotingPage' was not found or no view engine supports the searched locations. The following locations were searched:
+~/Views/Main/FixedAnswerTemplateForVotingPage.aspx
+~/Views/Main/FixedAnswerTemplateForVotingPage.ascx
+~/Views/Shared/FixedAnswerTemplateForVotingPage.aspx
+~/Views/Shared/FixedAnswerTemplateForVotingPage.ascx
+~/Views/Main/FixedAnswerTemplateForVotingPage.cshtml
+~/Views/Main/FixedAnswerTemplateForVotingPage.vbhtml
+~/Views/Shared/FixedAnswerTemplateForVotingPage.cshtml
+~/Views/Shared/FixedAnswerTemplateForVotingPage.vbhtml
+   at System.Web.Mvc.PartialViewResult.FindView(ControllerContext context)
+   at System.Web.Mvc.ViewResultBase.ExecuteResult(ControllerContext context)
+   at System.Web.Mvc.ControllerActionInvoker.InvokeActionResult(ControllerContext controllerContext, ActionResult actionResult)
+   at System.Web.Mvc.ControllerActionInvoker.<>c__DisplayClass1a.<InvokeActionResultWithFilters>b__17()
+   at System.Web.Mvc.ControllerActionInvoker.InvokeActionResultFilter(IResultFilter filter, ResultExecutingContext preContext, Func`1 continuation)
+   at System.Web.Mvc.ControllerActionInvoker.<>c__DisplayClass1a.<>c__DisplayClass1c.<InvokeActionResultWithFilters>b__19()
+   at System.Web.Mvc.ControllerActionInvoker.InvokeActionResultWithFilters(ControllerContext controllerContext, IList`1 filters, ActionResult actionResult)
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass25.<>c__DisplayClass2a.<BeginInvokeAction>b__20()
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass25.<BeginInvokeAction>b__22(IAsyncResult asyncResult)
+   at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.End()
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeAction(IAsyncResult asyncResult)
+   at System.Web.Mvc.Controller.<>c__DisplayClass1d.<BeginExecuteCore>b__18(IAsyncResult asyncResult)
+   at System.Web.Mvc.Async.AsyncResultWrapper.<>c__DisplayClass4.<MakeVoidDelegate>b__3(IAsyncResult ar)
+   at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.End()
+   at System.Web.Mvc.Controller.EndExecuteCore(IAsyncResult asyncResult)
+   at System.Web.Mvc.Async.AsyncResultWrapper.<>c__DisplayClass4.<MakeVoidDelegate>b__3(IAsyncResult ar)
+   at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.End()
+   at System.Web.Mvc.Controller.EndExecute(IAsyncResult asyncResult)
+   at System.Web.Mvc.Controller.System.Web.Mvc.Async.IAsyncController.EndExecute(IAsyncResult asyncResult)
+   at System.Web.Mvc.MvcHandler.<>c__DisplayClass8.<BeginProcessRequest>b__3(IAsyncResult asyncResult)
+   at System.Web.Mvc.Async.AsyncResultWrapper.<>c__DisplayClass4.<MakeVoidDelegate>b__3(IAsyncResult ar)
+   at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.End()
+   at System.Web.Mvc.MvcHandler.EndProcessRequest(IAsyncResult asyncResult)
+   at System.Web.Mvc.MvcHandler.System.Web.IHttpAsyncHandler.EndProcessRequest(IAsyncResult result)
+   at System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   at System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+
+
+2014-07-10 16:03:34,218 ERROR default The partial view 'FixedAnswerTemplateForVotingPage' was not found or no view engine supports the searched locations. The following locations were searched:
+~/Views/Main/FixedAnswerTemplateForVotingPage.aspx
+~/Views/Main/FixedAnswerTemplateForVotingPage.ascx
+~/Views/Shared/FixedAnswerTemplateForVotingPage.aspx
+~/Views/Shared/FixedAnswerTemplateForVotingPage.ascx
+~/Views/Main/FixedAnswerTemplateForVotingPage.cshtml
+~/Views/Main/FixedAnswerTemplateForVotingPage.vbhtml
+~/Views/Shared/FixedAnswerTemplateForVotingPage.cshtml
+~/Views/Shared/FixedAnswerTemplateForVotingPage.vbhtml
+ Exception:
+System.InvalidOperationException: The partial view 'FixedAnswerTemplateForVotingPage' was not found or no view engine supports the searched locations. The following locations were searched:
+~/Views/Main/FixedAnswerTemplateForVotingPage.aspx
+~/Views/Main/FixedAnswerTemplateForVotingPage.ascx
+~/Views/Shared/FixedAnswerTemplateForVotingPage.aspx
+~/Views/Shared/FixedAnswerTemplateForVotingPage.ascx
+~/Views/Main/FixedAnswerTemplateForVotingPage.cshtml
+~/Views/Main/FixedAnswerTemplateForVotingPage.vbhtml
+~/Views/Shared/FixedAnswerTemplateForVotingPage.cshtml
+~/Views/Shared/FixedAnswerTemplateForVotingPage.vbhtml
+   at System.Web.Mvc.PartialViewResult.FindView(ControllerContext context)
+   at System.Web.Mvc.ViewResultBase.ExecuteResult(ControllerContext context)
+   at System.Web.Mvc.ControllerActionInvoker.InvokeActionResult(ControllerContext controllerContext, ActionResult actionResult)
+   at System.Web.Mvc.ControllerActionInvoker.<>c__DisplayClass1a.<InvokeActionResultWithFilters>b__17()
+   at System.Web.Mvc.ControllerActionInvoker.InvokeActionResultFilter(IResultFilter filter, ResultExecutingContext preContext, Func`1 continuation)
+   at System.Web.Mvc.ControllerActionInvoker.<>c__DisplayClass1a.<>c__DisplayClass1c.<InvokeActionResultWithFilters>b__19()
+   at System.Web.Mvc.ControllerActionInvoker.InvokeActionResultWithFilters(ControllerContext controllerContext, IList`1 filters, ActionResult actionResult)
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass25.<>c__DisplayClass2a.<BeginInvokeAction>b__20()
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass25.<BeginInvokeAction>b__22(IAsyncResult asyncResult)
+   at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.End()
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeAction(IAsyncResult asyncResult)
+   at System.Web.Mvc.Controller.<>c__DisplayClass1d.<BeginExecuteCore>b__18(IAsyncResult asyncResult)
+   at System.Web.Mvc.Async.AsyncResultWrapper.<>c__DisplayClass4.<MakeVoidDelegate>b__3(IAsyncResult ar)
+   at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.End()
+   at System.Web.Mvc.Controller.EndExecuteCore(IAsyncResult asyncResult)
+   at System.Web.Mvc.Async.AsyncResultWrapper.<>c__DisplayClass4.<MakeVoidDelegate>b__3(IAsyncResult ar)
+   at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.End()
+   at System.Web.Mvc.Controller.EndExecute(IAsyncResult asyncResult)
+   at System.Web.Mvc.Controller.System.Web.Mvc.Async.IAsyncController.EndExecute(IAsyncResult asyncResult)
+   at System.Web.Mvc.MvcHandler.<>c__DisplayClass8.<BeginProcessRequest>b__3(IAsyncResult asyncResult)
+   at System.Web.Mvc.Async.AsyncResultWrapper.<>c__DisplayClass4.<MakeVoidDelegate>b__3(IAsyncResult ar)
+   at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.End()
+   at System.Web.Mvc.MvcHandler.EndProcessRequest(IAsyncResult asyncResult)
+   at System.Web.Mvc.MvcHandler.System.Web.IHttpAsyncHandler.EndProcessRequest(IAsyncResult result)
+   at System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   at System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+
+
+2014-07-10 16:04:40,865 ERROR default The partial view 'FixedAnswerTemplateForVotingPage' was not found or no view engine supports the searched locations. The following locations were searched:
+~/Views/Main/FixedAnswerTemplateForVotingPage.aspx
+~/Views/Main/FixedAnswerTemplateForVotingPage.ascx
+~/Views/Shared/FixedAnswerTemplateForVotingPage.aspx
+~/Views/Shared/FixedAnswerTemplateForVotingPage.ascx
+~/Views/Main/FixedAnswerTemplateForVotingPage.cshtml
+~/Views/Main/FixedAnswerTemplateForVotingPage.vbhtml
+~/Views/Shared/FixedAnswerTemplateForVotingPage.cshtml
+~/Views/Shared/FixedAnswerTemplateForVotingPage.vbhtml
+ Exception:
+System.InvalidOperationException: The partial view 'FixedAnswerTemplateForVotingPage' was not found or no view engine supports the searched locations. The following locations were searched:
+~/Views/Main/FixedAnswerTemplateForVotingPage.aspx
+~/Views/Main/FixedAnswerTemplateForVotingPage.ascx
+~/Views/Shared/FixedAnswerTemplateForVotingPage.aspx
+~/Views/Shared/FixedAnswerTemplateForVotingPage.ascx
+~/Views/Main/FixedAnswerTemplateForVotingPage.cshtml
+~/Views/Main/FixedAnswerTemplateForVotingPage.vbhtml
+~/Views/Shared/FixedAnswerTemplateForVotingPage.cshtml
+~/Views/Shared/FixedAnswerTemplateForVotingPage.vbhtml
+   at System.Web.Mvc.PartialViewResult.FindView(ControllerContext context)
+   at System.Web.Mvc.ViewResultBase.ExecuteResult(ControllerContext context)
+   at System.Web.Mvc.ControllerActionInvoker.InvokeActionResult(ControllerContext controllerContext, ActionResult actionResult)
+   at System.Web.Mvc.ControllerActionInvoker.<>c__DisplayClass1a.<InvokeActionResultWithFilters>b__17()
+   at System.Web.Mvc.ControllerActionInvoker.InvokeActionResultFilter(IResultFilter filter, ResultExecutingContext preContext, Func`1 continuation)
+   at System.Web.Mvc.ControllerActionInvoker.<>c__DisplayClass1a.<>c__DisplayClass1c.<InvokeActionResultWithFilters>b__19()
+   at System.Web.Mvc.ControllerActionInvoker.InvokeActionResultWithFilters(ControllerContext controllerContext, IList`1 filters, ActionResult actionResult)
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass25.<>c__DisplayClass2a.<BeginInvokeAction>b__20()
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass25.<BeginInvokeAction>b__22(IAsyncResult asyncResult)
+   at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.End()
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeAction(IAsyncResult asyncResult)
+   at System.Web.Mvc.Controller.<>c__DisplayClass1d.<BeginExecuteCore>b__18(IAsyncResult asyncResult)
+   at System.Web.Mvc.Async.AsyncResultWrapper.<>c__DisplayClass4.<MakeVoidDelegate>b__3(IAsyncResult ar)
+   at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.End()
+   at System.Web.Mvc.Controller.EndExecuteCore(IAsyncResult asyncResult)
+   at System.Web.Mvc.Async.AsyncResultWrapper.<>c__DisplayClass4.<MakeVoidDelegate>b__3(IAsyncResult ar)
+   at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.End()
+   at System.Web.Mvc.Controller.EndExecute(IAsyncResult asyncResult)
+   at System.Web.Mvc.Controller.System.Web.Mvc.Async.IAsyncController.EndExecute(IAsyncResult asyncResult)
+   at System.Web.Mvc.MvcHandler.<>c__DisplayClass8.<BeginProcessRequest>b__3(IAsyncResult asyncResult)
+   at System.Web.Mvc.Async.AsyncResultWrapper.<>c__DisplayClass4.<MakeVoidDelegate>b__3(IAsyncResult ar)
+   at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.End()
+   at System.Web.Mvc.MvcHandler.EndProcessRequest(IAsyncResult asyncResult)
+   at System.Web.Mvc.MvcHandler.System.Web.IHttpAsyncHandler.EndProcessRequest(IAsyncResult result)
+   at System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   at System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+
+
+2014-07-10 16:07:29,832 ERROR default The partial view 'FixedAnswerTemplateForVotingPage' was not found or no view engine supports the searched locations. The following locations were searched:
+~/Views/Main/FixedAnswerTemplateForVotingPage.aspx
+~/Views/Main/FixedAnswerTemplateForVotingPage.ascx
+~/Views/Shared/FixedAnswerTemplateForVotingPage.aspx
+~/Views/Shared/FixedAnswerTemplateForVotingPage.ascx
+~/Views/Main/FixedAnswerTemplateForVotingPage.cshtml
+~/Views/Main/FixedAnswerTemplateForVotingPage.vbhtml
+~/Views/Shared/FixedAnswerTemplateForVotingPage.cshtml
+~/Views/Shared/FixedAnswerTemplateForVotingPage.vbhtml
+ Exception:
+System.InvalidOperationException: The partial view 'FixedAnswerTemplateForVotingPage' was not found or no view engine supports the searched locations. The following locations were searched:
+~/Views/Main/FixedAnswerTemplateForVotingPage.aspx
+~/Views/Main/FixedAnswerTemplateForVotingPage.ascx
+~/Views/Shared/FixedAnswerTemplateForVotingPage.aspx
+~/Views/Shared/FixedAnswerTemplateForVotingPage.ascx
+~/Views/Main/FixedAnswerTemplateForVotingPage.cshtml
+~/Views/Main/FixedAnswerTemplateForVotingPage.vbhtml
+~/Views/Shared/FixedAnswerTemplateForVotingPage.cshtml
+~/Views/Shared/FixedAnswerTemplateForVotingPage.vbhtml
+   at System.Web.Mvc.PartialViewResult.FindView(ControllerContext context)
+   at System.Web.Mvc.ViewResultBase.ExecuteResult(ControllerContext context)
+   at System.Web.Mvc.ControllerActionInvoker.InvokeActionResult(ControllerContext controllerContext, ActionResult actionResult)
+   at System.Web.Mvc.ControllerActionInvoker.<>c__DisplayClass1a.<InvokeActionResultWithFilters>b__17()
+   at System.Web.Mvc.ControllerActionInvoker.InvokeActionResultFilter(IResultFilter filter, ResultExecutingContext preContext, Func`1 continuation)
+   at System.Web.Mvc.ControllerActionInvoker.<>c__DisplayClass1a.<>c__DisplayClass1c.<InvokeActionResultWithFilters>b__19()
+   at System.Web.Mvc.ControllerActionInvoker.InvokeActionResultWithFilters(ControllerContext controllerContext, IList`1 filters, ActionResult actionResult)
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass25.<>c__DisplayClass2a.<BeginInvokeAction>b__20()
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass25.<BeginInvokeAction>b__22(IAsyncResult asyncResult)
+   at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.End()
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeAction(IAsyncResult asyncResult)
+   at System.Web.Mvc.Controller.<>c__DisplayClass1d.<BeginExecuteCore>b__18(IAsyncResult asyncResult)
+   at System.Web.Mvc.Async.AsyncResultWrapper.<>c__DisplayClass4.<MakeVoidDelegate>b__3(IAsyncResult ar)
+   at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.End()
+   at System.Web.Mvc.Controller.EndExecuteCore(IAsyncResult asyncResult)
+   at System.Web.Mvc.Async.AsyncResultWrapper.<>c__DisplayClass4.<MakeVoidDelegate>b__3(IAsyncResult ar)
+   at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.End()
+   at System.Web.Mvc.Controller.EndExecute(IAsyncResult asyncResult)
+   at System.Web.Mvc.Controller.System.Web.Mvc.Async.IAsyncController.EndExecute(IAsyncResult asyncResult)
+   at System.Web.Mvc.MvcHandler.<>c__DisplayClass8.<BeginProcessRequest>b__3(IAsyncResult asyncResult)
+   at System.Web.Mvc.Async.AsyncResultWrapper.<>c__DisplayClass4.<MakeVoidDelegate>b__3(IAsyncResult ar)
+   at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.End()
+   at System.Web.Mvc.MvcHandler.EndProcessRequest(IAsyncResult asyncResult)
+   at System.Web.Mvc.MvcHandler.System.Web.IHttpAsyncHandler.EndProcessRequest(IAsyncResult result)
+   at System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   at System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+
+
+2014-07-10 16:07:47,704 ERROR default The partial view 'FixedAnswerTemplateForVotingPage' was not found or no view engine supports the searched locations. The following locations were searched:
+~/Views/Main/FixedAnswerTemplateForVotingPage.aspx
+~/Views/Main/FixedAnswerTemplateForVotingPage.ascx
+~/Views/Shared/FixedAnswerTemplateForVotingPage.aspx
+~/Views/Shared/FixedAnswerTemplateForVotingPage.ascx
+~/Views/Main/FixedAnswerTemplateForVotingPage.cshtml
+~/Views/Main/FixedAnswerTemplateForVotingPage.vbhtml
+~/Views/Shared/FixedAnswerTemplateForVotingPage.cshtml
+~/Views/Shared/FixedAnswerTemplateForVotingPage.vbhtml
+ Exception:
+System.InvalidOperationException: The partial view 'FixedAnswerTemplateForVotingPage' was not found or no view engine supports the searched locations. The following locations were searched:
+~/Views/Main/FixedAnswerTemplateForVotingPage.aspx
+~/Views/Main/FixedAnswerTemplateForVotingPage.ascx
+~/Views/Shared/FixedAnswerTemplateForVotingPage.aspx
+~/Views/Shared/FixedAnswerTemplateForVotingPage.ascx
+~/Views/Main/FixedAnswerTemplateForVotingPage.cshtml
+~/Views/Main/FixedAnswerTemplateForVotingPage.vbhtml
+~/Views/Shared/FixedAnswerTemplateForVotingPage.cshtml
+~/Views/Shared/FixedAnswerTemplateForVotingPage.vbhtml
+   at System.Web.Mvc.PartialViewResult.FindView(ControllerContext context)
+   at System.Web.Mvc.ViewResultBase.ExecuteResult(ControllerContext context)
+   at System.Web.Mvc.ControllerActionInvoker.InvokeActionResult(ControllerContext controllerContext, ActionResult actionResult)
+   at System.Web.Mvc.ControllerActionInvoker.<>c__DisplayClass1a.<InvokeActionResultWithFilters>b__17()
+   at System.Web.Mvc.ControllerActionInvoker.InvokeActionResultFilter(IResultFilter filter, ResultExecutingContext preContext, Func`1 continuation)
+   at System.Web.Mvc.ControllerActionInvoker.<>c__DisplayClass1a.<>c__DisplayClass1c.<InvokeActionResultWithFilters>b__19()
+   at System.Web.Mvc.ControllerActionInvoker.InvokeActionResultWithFilters(ControllerContext controllerContext, IList`1 filters, ActionResult actionResult)
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass25.<>c__DisplayClass2a.<BeginInvokeAction>b__20()
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass25.<BeginInvokeAction>b__22(IAsyncResult asyncResult)
+   at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.End()
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeAction(IAsyncResult asyncResult)
+   at System.Web.Mvc.Controller.<>c__DisplayClass1d.<BeginExecuteCore>b__18(IAsyncResult asyncResult)
+   at System.Web.Mvc.Async.AsyncResultWrapper.<>c__DisplayClass4.<MakeVoidDelegate>b__3(IAsyncResult ar)
+   at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.End()
+   at System.Web.Mvc.Controller.EndExecuteCore(IAsyncResult asyncResult)
+   at System.Web.Mvc.Async.AsyncResultWrapper.<>c__DisplayClass4.<MakeVoidDelegate>b__3(IAsyncResult ar)
+   at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.End()
+   at System.Web.Mvc.Controller.EndExecute(IAsyncResult asyncResult)
+   at System.Web.Mvc.Controller.System.Web.Mvc.Async.IAsyncController.EndExecute(IAsyncResult asyncResult)
+   at System.Web.Mvc.MvcHandler.<>c__DisplayClass8.<BeginProcessRequest>b__3(IAsyncResult asyncResult)
+   at System.Web.Mvc.Async.AsyncResultWrapper.<>c__DisplayClass4.<MakeVoidDelegate>b__3(IAsyncResult ar)
+   at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.End()
+   at System.Web.Mvc.MvcHandler.EndProcessRequest(IAsyncResult asyncResult)
+   at System.Web.Mvc.MvcHandler.System.Web.IHttpAsyncHandler.EndProcessRequest(IAsyncResult result)
+   at System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   at System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+
+
+2014-07-10 16:08:08,431 ERROR default The partial view 'FixedAnswerTemplateForVotingPage' was not found or no view engine supports the searched locations. The following locations were searched:
+~/Views/Main/FixedAnswerTemplateForVotingPage.aspx
+~/Views/Main/FixedAnswerTemplateForVotingPage.ascx
+~/Views/Shared/FixedAnswerTemplateForVotingPage.aspx
+~/Views/Shared/FixedAnswerTemplateForVotingPage.ascx
+~/Views/Main/FixedAnswerTemplateForVotingPage.cshtml
+~/Views/Main/FixedAnswerTemplateForVotingPage.vbhtml
+~/Views/Shared/FixedAnswerTemplateForVotingPage.cshtml
+~/Views/Shared/FixedAnswerTemplateForVotingPage.vbhtml
+ Exception:
+System.InvalidOperationException: The partial view 'FixedAnswerTemplateForVotingPage' was not found or no view engine supports the searched locations. The following locations were searched:
+~/Views/Main/FixedAnswerTemplateForVotingPage.aspx
+~/Views/Main/FixedAnswerTemplateForVotingPage.ascx
+~/Views/Shared/FixedAnswerTemplateForVotingPage.aspx
+~/Views/Shared/FixedAnswerTemplateForVotingPage.ascx
+~/Views/Main/FixedAnswerTemplateForVotingPage.cshtml
+~/Views/Main/FixedAnswerTemplateForVotingPage.vbhtml
+~/Views/Shared/FixedAnswerTemplateForVotingPage.cshtml
+~/Views/Shared/FixedAnswerTemplateForVotingPage.vbhtml
+   at System.Web.Mvc.PartialViewResult.FindView(ControllerContext context)
+   at System.Web.Mvc.ViewResultBase.ExecuteResult(ControllerContext context)
+   at System.Web.Mvc.ControllerActionInvoker.InvokeActionResult(ControllerContext controllerContext, ActionResult actionResult)
+   at System.Web.Mvc.ControllerActionInvoker.<>c__DisplayClass1a.<InvokeActionResultWithFilters>b__17()
+   at System.Web.Mvc.ControllerActionInvoker.InvokeActionResultFilter(IResultFilter filter, ResultExecutingContext preContext, Func`1 continuation)
+   at System.Web.Mvc.ControllerActionInvoker.<>c__DisplayClass1a.<>c__DisplayClass1c.<InvokeActionResultWithFilters>b__19()
+   at System.Web.Mvc.ControllerActionInvoker.InvokeActionResultWithFilters(ControllerContext controllerContext, IList`1 filters, ActionResult actionResult)
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass25.<>c__DisplayClass2a.<BeginInvokeAction>b__20()
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass25.<BeginInvokeAction>b__22(IAsyncResult asyncResult)
+   at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.End()
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeAction(IAsyncResult asyncResult)
+   at System.Web.Mvc.Controller.<>c__DisplayClass1d.<BeginExecuteCore>b__18(IAsyncResult asyncResult)
+   at System.Web.Mvc.Async.AsyncResultWrapper.<>c__DisplayClass4.<MakeVoidDelegate>b__3(IAsyncResult ar)
+   at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.End()
+   at System.Web.Mvc.Controller.EndExecuteCore(IAsyncResult asyncResult)
+   at System.Web.Mvc.Async.AsyncResultWrapper.<>c__DisplayClass4.<MakeVoidDelegate>b__3(IAsyncResult ar)
+   at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.End()
+   at System.Web.Mvc.Controller.EndExecute(IAsyncResult asyncResult)
+   at System.Web.Mvc.Controller.System.Web.Mvc.Async.IAsyncController.EndExecute(IAsyncResult asyncResult)
+   at System.Web.Mvc.MvcHandler.<>c__DisplayClass8.<BeginProcessRequest>b__3(IAsyncResult asyncResult)
+   at System.Web.Mvc.Async.AsyncResultWrapper.<>c__DisplayClass4.<MakeVoidDelegate>b__3(IAsyncResult ar)
+   at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.End()
+   at System.Web.Mvc.MvcHandler.EndProcessRequest(IAsyncResult asyncResult)
+   at System.Web.Mvc.MvcHandler.System.Web.IHttpAsyncHandler.EndProcessRequest(IAsyncResult result)
+   at System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   at System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+

@@ -1,0 +1,70 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VotingSystem.DAL", "VotingSystem.DAL\VotingSystem.DAL.csproj", "{E93DAF0B-B464-4E03-ADA9-1F2FFA0981A5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VotingSystem.BLL", "VotingSystem.BLL\VotingSystem.BLL.csproj", "{DD7C3F5E-12CA-4BD8-82DE-0F13B4C6FB29}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VotingSystem.UnityDI", "VotingSystem.UnityDI\VotingSystem.UnityDI.csproj", "{979505BA-98B5-47BB-8503-58FC82EB76A6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VotingSystem.Web", "VotingSystem.Web\VotingSystem.Web.csproj", "{A606D668-7F89-4235-A515-AAB9939CE0A1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VotingSystem.BLL.Interfaces", "VotingSystem.BLL.Interfaces\VotingSystem.BLL.Interfaces.csproj", "{463CD2BC-F11E-48A1-AC77-269DBFB6A8CD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VotingSystem.Common", "VotingSystem.Common\VotingSystem.Common.csproj", "{1E4E11BB-1921-4593-B929-4E7173CACD4F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VotingSystem.Test", "VotingSystem.Test\VotingSystem.Test.csproj", "{3FD7A997-7840-499A-BE2D-249EC178F34C}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "BusinessLogic", "BusinessLogic", "{45390789-8ACC-4B18-88A2-C0A5ABBBEDCA}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{D2B1195A-37F3-4812-ADEA-ECBED558154A}"
+	ProjectSection(SolutionItems) = preProject
+		.nuget\packages.config = .nuget\packages.config
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{E93DAF0B-B464-4E03-ADA9-1F2FFA0981A5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E93DAF0B-B464-4E03-ADA9-1F2FFA0981A5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E93DAF0B-B464-4E03-ADA9-1F2FFA0981A5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E93DAF0B-B464-4E03-ADA9-1F2FFA0981A5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DD7C3F5E-12CA-4BD8-82DE-0F13B4C6FB29}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DD7C3F5E-12CA-4BD8-82DE-0F13B4C6FB29}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DD7C3F5E-12CA-4BD8-82DE-0F13B4C6FB29}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DD7C3F5E-12CA-4BD8-82DE-0F13B4C6FB29}.Release|Any CPU.Build.0 = Release|Any CPU
+		{979505BA-98B5-47BB-8503-58FC82EB76A6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{979505BA-98B5-47BB-8503-58FC82EB76A6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{979505BA-98B5-47BB-8503-58FC82EB76A6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{979505BA-98B5-47BB-8503-58FC82EB76A6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A606D668-7F89-4235-A515-AAB9939CE0A1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A606D668-7F89-4235-A515-AAB9939CE0A1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A606D668-7F89-4235-A515-AAB9939CE0A1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A606D668-7F89-4235-A515-AAB9939CE0A1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{463CD2BC-F11E-48A1-AC77-269DBFB6A8CD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{463CD2BC-F11E-48A1-AC77-269DBFB6A8CD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{463CD2BC-F11E-48A1-AC77-269DBFB6A8CD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{463CD2BC-F11E-48A1-AC77-269DBFB6A8CD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1E4E11BB-1921-4593-B929-4E7173CACD4F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1E4E11BB-1921-4593-B929-4E7173CACD4F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1E4E11BB-1921-4593-B929-4E7173CACD4F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1E4E11BB-1921-4593-B929-4E7173CACD4F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3FD7A997-7840-499A-BE2D-249EC178F34C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3FD7A997-7840-499A-BE2D-249EC178F34C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3FD7A997-7840-499A-BE2D-249EC178F34C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3FD7A997-7840-499A-BE2D-249EC178F34C}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{463CD2BC-F11E-48A1-AC77-269DBFB6A8CD} = {45390789-8ACC-4B18-88A2-C0A5ABBBEDCA}
+		{DD7C3F5E-12CA-4BD8-82DE-0F13B4C6FB29} = {45390789-8ACC-4B18-88A2-C0A5ABBBEDCA}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		EnterpriseLibraryConfigurationToolBinariesPath = packages\Unity.2.1.505.2\lib\NET35
+	EndGlobalSection
+EndGlobal

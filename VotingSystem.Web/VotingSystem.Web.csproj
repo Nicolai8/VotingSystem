@@ -763,7 +763,9 @@
     <Content Include="Scripts\user-defined\collections\backbone.collection.votings.js" />
     <Content Include="Scripts\user-defined\controllers\angular.controller.main.js" />
     <Content Include="Scripts\user-defined\controllers\angular.controllers.js" />
+    <Content Include="Scripts\user-defined\directives\angular.directive.focusOut.js" />
     <Content Include="Scripts\user-defined\directives\angular.directive.paginator.js" />
+    <Content Include="Scripts\user-defined\directives\angular.directive.validateform.js" />
     <Content Include="Scripts\user-defined\models\backbone.model.comment.js" />
     <Content Include="Scripts\user-defined\models\backbone.model.fixedanswer.js" />
     <Content Include="Scripts\user-defined\models\backbone.model.js" />

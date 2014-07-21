@@ -32,14 +32,15 @@
 	<div id="index">
 		<div class="container" ng-view>
 
-@*			@Html.Partial("_LoginPartial")
+		
+
+		</div>
+		@Html.Partial("_LoginPartial")
 			@Html.Partial("_ProfilePartial")
-			@Html.Partial("_403Partial")
+		@*		@Html.Partial("_403Partial")
 			@Html.Partial("_404Partial")
 			@Html.Partial("_500Partial")*@
 			@RenderBody()
-
-		</div>
 	</div>
 	<footer>
 		<div class="container">

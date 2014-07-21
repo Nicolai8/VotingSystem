@@ -1,5 +1,5 @@
-﻿define(["jquery", "angular", "bootstrap", "bootpag"],
-	function ($, angular) {
+﻿define(["jquery", "bootstrap", "bootpag"],
+	function ($) {
 		return function (module) {
 			module.directive("votingPaginator", function () {
 				return function (scope, elem, attrs) {

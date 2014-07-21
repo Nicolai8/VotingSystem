@@ -1,5 +1,5 @@
 ﻿<!DOCTYPE html>
-<html lang="en">
+<html lang="en"  ng-app="votingSystem">
 <head>
 	<meta charset="utf-8" />
 	<title>Voting System</title>
@@ -19,7 +19,7 @@
 		var loggedUserName = "@Html.Raw(Request.IsAuthenticated ? User.Identity.Name : "Account")";
 	</script>
 </head>
-<body>
+<body ng-controller="LayoutController">
 	<div id="preloader" hidden=""></div>
 	<header>
 		@Html.Partial("_NavbarPartial")
@@ -30,13 +30,13 @@
 	</header>
 
 	<div id="index">
-		<div class="container">
+		<div class="container" ng-view>
 
-			@Html.Partial("_LoginPartial")
+@*			@Html.Partial("_LoginPartial")
 			@Html.Partial("_ProfilePartial")
 			@Html.Partial("_403Partial")
 			@Html.Partial("_404Partial")
-			@Html.Partial("_500Partial")
+			@Html.Partial("_500Partial")*@
 			@RenderBody()
 
 		</div>
@@ -48,7 +48,14 @@
 			</div>
 		</div>
 	</footer>
-
+@*	@Scripts.Render("~/Scripts/libraries/jquery.js",
+		"~/Scripts/libraries/bootstrap.js",
+		"~/Scripts/libraries/angular/angular.js",
+		"~/Scripts/libraries/angular/angular-route.js",
+		"~/Scripts/user-defined/angular.app.js",
+		"~/Scripts/user-defined/controllers/angular.controller.layout.js",
+		"~/Scripts/user-defined/controllers/angular.controller.main.js"
+		)*@
 	@Scripts.Render("~/Scripts/libraries/require.js")
 	@Html.Partial("_UrlsPartial")
 	@Scripts.Render("~/Scripts/main.js")

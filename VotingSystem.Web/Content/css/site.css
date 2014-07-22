@@ -2,6 +2,9 @@ body {
   padding-top: 70px;
   padding-bottom: 40px;
 }
+a {
+  cursor: pointer;
+}
 .navbar a {
   /*font-size: 16px !important;
     font-family: "Raleway","Helvetica Neue",Helvetica,Arial,sans-serif !important;*/

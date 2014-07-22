@@ -5,6 +5,7 @@ requirejs.config({
 		"user-defined": "../user-defined",
 		"controllers": "../user-defined/controllers",
 		"directives": "../user-defined/directives",
+		"services": "../user-defined/services",
 		async: "async",
 		goog: "goog",
 		propertyParser: "propertyParser",
@@ -18,6 +19,7 @@ requirejs.config({
 		"templates": "../user-defined/templates",
 		"angular": "angular/angular",
 		"angular.route": "angular/angular-route",
+		"angular.resource": "angular/angular-resource",
 
 		//"router": "../user-defined/backbone.router.js?" + (cacheScripts ? "" : d.getTime()),
 
@@ -67,18 +69,11 @@ requirejs.config({
 			exports: "angular"
 		},
 		"angular.route": { deps: ["angular"] },
-		"bootstrap": {
-			deps: ["jquery"]
-		},
-		"bootstrapPaginator": {
-			deps: ["jquery", "bootstrap"]
-		},
-		"bootstrapValidator": {
-			deps: ["jquery", "bootstrap"]
-		},
-		"bootpag": {
-			deps: ["jquery"]
-		},
+		"angular.resource": { deps: ["angular"] },
+		"bootstrap": { deps: ["jquery"] },
+		"bootstrapPaginator": { deps: ["jquery", "bootstrap"] },
+		"bootstrapValidator": { deps: ["jquery", "bootstrap"] },
+		"bootpag": { deps: ["jquery"] },
 		"underscore": {
 			exports: "_"
 		},
@@ -86,12 +81,8 @@ requirejs.config({
 			deps: ["jquery"],
 			exports: "$.connection"
 		},
-		"signalr.hubs": {
-			deps: ["signalr"],
-		},
-		"icheck": {
-			deps: ["jquery"]
-		}
+		"signalr.hubs": { deps: ["signalr"], },
+		"icheck": { deps: ["jquery"] }
 	},
 	waitSeconds: 0
 });

@@ -1,5 +1,5 @@
 ﻿<!DOCTYPE html>
-<html lang="en"  ng-app="votingSystem">
+<html lang="en" data-ng-app="votingSystem">
 <head>
 	<meta charset="utf-8" />
 	<title>Voting System</title>
@@ -11,6 +11,7 @@
 	@Styles.Render("~/content/main")
 	@Styles.Render("~/bundles/less")
 	@Scripts.Render("~/scripts/libraries/gremlins.min.js")
+	@Scripts.Render("~/Scripts/libraries/require.js")
 
 	<script type="text/javascript">
 		var cacheScripts = true;
@@ -19,7 +20,7 @@
 		var loggedUserName = "@Html.Raw(Request.IsAuthenticated ? User.Identity.Name : "Account")";
 	</script>
 </head>
-<body ng-controller="LayoutController">
+<body data-ng-controller="LayoutController">
 	<div id="preloader" hidden=""></div>
 	<header>
 		@Html.Partial("_NavbarPartial")
@@ -30,17 +31,15 @@
 	</header>
 
 	<div id="index">
-		<div class="container" ng-view>
-
-		
-
+		<div class="container" data-ng-view>
 		</div>
 		@Html.Partial("_LoginPartial")
-			@Html.Partial("_ProfilePartial")
+		@Html.Partial("_ProfilePartial")
 		@*		@Html.Partial("_403Partial")
 			@Html.Partial("_404Partial")
 			@Html.Partial("_500Partial")*@
-			@RenderBody()
+		@RenderBody()
+		@Html.Partial("_UrlsPartial")
 	</div>
 	<footer>
 		<div class="container">
@@ -49,16 +48,6 @@
 			</div>
 		</div>
 	</footer>
-@*	@Scripts.Render("~/Scripts/libraries/jquery.js",
-		"~/Scripts/libraries/bootstrap.js",
-		"~/Scripts/libraries/angular/angular.js",
-		"~/Scripts/libraries/angular/angular-route.js",
-		"~/Scripts/user-defined/angular.app.js",
-		"~/Scripts/user-defined/controllers/angular.controller.layout.js",
-		"~/Scripts/user-defined/controllers/angular.controller.main.js"
-		)*@
-	@Scripts.Render("~/Scripts/libraries/require.js")
-	@Html.Partial("_UrlsPartial")
 	@Scripts.Render("~/Scripts/main.js")
 </body>
 </html>

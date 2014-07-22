@@ -776,6 +776,7 @@
     <Content Include="Scripts\user-defined\models\backbone.model.voting.js" />
     <Content Include="Scripts\user-defined\pages\backbone.page.collection.js" />
     <Content Include="Scripts\user-defined\pages\backbone.page.js" />
+    <Content Include="Scripts\user-defined\services\angular.service.votingstorage.js" />
     <Content Include="Scripts\user-defined\templates.js" />
     <Content Include="Scripts\user-defined\views\backbone.view.addquestion.js" />
     <Content Include="Scripts\user-defined\views\backbone.view.addvoting.js" />

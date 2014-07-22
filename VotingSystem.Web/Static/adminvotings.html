@@ -34,7 +34,7 @@
 							<a data-ng-if="voting.Status==1" data-ng-click="setThemeStatus(voting, 0)">Approve</a>
 							<a data-ng-if="voting.Status==2" data-ng-click="setThemeStatus(voting, 0)">Unblock</a>
 							<a data-ng-if="voting.Status!=2 && voting.Status!=3" data-ng-click="setThemeStatus(voting, 2)">Block</a>
-							<a data-ng-if="voting.Status!=3" data-ng-click="setThemeStatus(voting, 3)">Close</a><br />
+							<a data-ng-if="voting.Status!=3" data-ng-click="setThemeStatus(voting, 3)">Close</a>
 							<a data-ng-click="removeTheme(voting)">Remove</a>
 						</td>
 

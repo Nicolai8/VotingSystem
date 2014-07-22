@@ -1,5 +1,5 @@
-﻿define(["jquery", "angular", "Urls", "toastr", "constants", "angular.route", "bootstrap", "bootstrapValidator"],
-	function ($, angular, Urls, toastr, constants) {
+﻿define(["jquery", "angular", "Urls", "toastr", "constants","spin", "angular.route", "bootstrap", "bootstrapValidator"],
+	function ($, angular, Urls, toastr, constants, Spinner) {
 		return function (controllersModule) {
 			controllersModule
 				.controller('LayoutController', function ($scope, $route, $routeParams, $location) {
@@ -117,6 +117,15 @@
 							}
 						});
 					});
+					
+					var opts = {
+						lines: 10,
+						length: 15,
+						width: 8,
+						radius: 20,
+						trail: 60,
+					};
+					var spinner = new Spinner(opts).spin($("#preloader")[0]);
 				});
 		};
 	});

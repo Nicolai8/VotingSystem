@@ -1,15 +1,20 @@
 ﻿define(["jquery", "angular", "controllers/angular.controller.layout", "controllers/angular.controller.main"
-	, "controllers/angular.controller.adminvotings"
+	, "controllers/angular.controller.adminvotings", "controllers/angular.controller.users"
 	, "directives/angular.directive.paginator", "directives/angular.directive.validateform"
 	, "directives/angular.directive.focusout"
-	, "services/angular.service.votingstorage"
+	, "services/angular.service.votingstorage", "services/angular.service.userstorage"
 	, "angular.route"],
-	function ($, angular, layoutController, mainController, adminVotingsController,
-		paginatorDirective, validateFormDirective, focusOutDirective, votingStorageService) {
+	function ($, angular,
+		layoutController, mainController, adminVotingsController, usersController,
+		paginatorDirective, validateFormDirective, focusOutDirective, 
+		votingStorageService, userStorageService) {
+		
 		var votingsystemControllers = angular.module('votingsystemControllers', []);
+		
 		layoutController(votingsystemControllers);
 		mainController(votingsystemControllers);
 		adminVotingsController(votingsystemControllers);
+		usersController(votingsystemControllers);
 
 		var votingSystem = angular.module('votingSystem', [
 			'ngRoute',
@@ -18,6 +23,7 @@
 		]);
 
 		votingStorageService(votingSystem);
+		userStorageService(votingSystem);
 
 		votingSystem.config(['$routeProvider', '$httpProvider', function ($routeProvider, $httpProvider) {
 			$routeProvider.when('/mainpage/:pageNumber', {
@@ -29,6 +35,9 @@
 			}).when('/adminvotingspage/:pageNumber', {
 				controller: 'AdminVotingsController',
 				templateUrl: "static/adminvotings.html",
+			}).when("/userspage/:pageNumber/:suggested?", {
+				controller: "UsersController",
+				templateUrl: "static/users.html"
 			}).
 			otherwise({
 				redirectTo: '/mainpage/1'

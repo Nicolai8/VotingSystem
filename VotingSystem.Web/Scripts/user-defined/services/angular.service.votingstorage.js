@@ -3,23 +3,16 @@
 		return function (module) {
 			module.factory("votingStorage",
 				function ($resource) {
-					return $resource(Urls.Votings + "/:id",
-						{},
+					return $resource(Urls.Votings + "/:id", { id: "@VotingId" },
 						{
 							query: {
 								method: "GET",
 								url: Urls.Votings + "/:pageType/:page",
 								isArray: true
 							},
-							put: {
-								method: "PUT"
-							},
-							delete: {
-								method: "DELETE",
-							},
-							post: {
-								method: "POST"
-							},
+							update: { method: "PUT" },
+							remove: { method: "DELETE" },
+							save: { method: "POST" },
 							total: {
 								method: "GET",
 								url: Urls.Votings + "/:totalKind",

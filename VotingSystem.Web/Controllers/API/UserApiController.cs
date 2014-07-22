@@ -45,7 +45,7 @@ namespace VotingSystem.Web.Controllers.API
 			return users;
 		}
 
-		[Route("total", Name = "TotalUsers")]
+		[Route("total/users", Name = "TotalUsers")]
 		[HttpGet]
 		public int GetTotalUsers()
 		{
@@ -53,7 +53,7 @@ namespace VotingSystem.Web.Controllers.API
 			return membership.GetTotalUsers();
 		}
 
-		[Route("total/suggested", Name = "TotalSuggestedUsers", Order = 1)]
+		[Route("total/suggestedusers", Name = "TotalSuggestedUsers", Order = 1)]
 		[HttpGet]
 		public int GetTotalSuggestedUsers()
 		{

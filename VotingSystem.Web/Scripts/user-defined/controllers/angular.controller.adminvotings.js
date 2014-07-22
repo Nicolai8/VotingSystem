@@ -19,7 +19,7 @@
 							$scope.votings = data;
 							votingStorage.total(
 								{
-									 totalKind: "totaladmin"
+									totalKind: "totaladmin"
 								},
 								function (response) {
 									$scope.total = response.total;
@@ -27,26 +27,19 @@
 						});
 
 					$scope.setThemeStatus = function (voting, status) {
-						votingStorage.put(
-							{
-								 id: voting.VotingId
-							},
-							{
-								 "Status": status
-							},
+						var oldStatus = angular.copy(voting.Status);
+						voting.Status = status;
+						voting.$update().then(
 							function () {
 								toastr.success(constants("votingStatusChangedMessage"));
-								voting.Status = status;
 							}, function () {
+								voting.Status = oldStatus;
 								toastr.error(constants("errorOccurredDuringSavingProcessMessage"));
 							});
 					};
 
 					$scope.removeTheme = function (voting) {
-						votingStorage.delete(
-							{
-								id: voting.VotingId
-							},
+						voting.$remove(
 							function () {
 								$scope.votings.splice($scope.votings.indexOf(voting), 1);
 								toastr.success(constants("votingDeletedMessage"));

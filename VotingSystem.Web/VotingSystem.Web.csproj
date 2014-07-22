@@ -776,6 +776,7 @@
     <Content Include="Scripts\user-defined\models\backbone.model.voting.js" />
     <Content Include="Scripts\user-defined\pages\backbone.page.collection.js" />
     <Content Include="Scripts\user-defined\pages\backbone.page.js" />
+    <Content Include="Scripts\user-defined\services\angular.service.userstorage.js" />
     <Content Include="Scripts\user-defined\services\angular.service.votingstorage.js" />
     <Content Include="Scripts\user-defined\templates.js" />
     <Content Include="Scripts\user-defined\views\backbone.view.addquestion.js" />
@@ -802,6 +803,7 @@
     <Content Include="Scripts\user-defined\views\backbone.view.votingresult.js" />
     <Content Include="Static\adminvotings.html" />
     <Content Include="Static\main.html" />
+    <Content Include="Static\users.html" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -857,6 +859,7 @@
     <Content Include="Views\Shared\Templates\FixedQuestionTemplate.cshtml" />
     <Content Include="Views\Shared\Templates\NewQuestionTemplate.cshtml" />
     <Content Include="Scripts\libraries\angular\version.json" />
+    <Content Include="Scripts\user-defined\controllers\angular.controller.users.js" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

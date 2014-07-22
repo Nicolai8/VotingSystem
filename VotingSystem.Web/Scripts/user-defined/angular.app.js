@@ -2,12 +2,12 @@
 	, "controllers/angular.controller.adminvotings", "controllers/angular.controller.users"
 	, "directives/angular.directive.paginator", "directives/angular.directive.validateform"
 	, "directives/angular.directive.focusout"
-	, "services/angular.service.votingstorage", "services/angular.service.userstorage"
+	, "services/angular.service.votingstorage", "services/angular.service.userstorage", "services/angular.service.reload"
 	, "angular.route"],
 	function ($, angular,
 		layoutController, mainController, adminVotingsController, usersController,
 		paginatorDirective, validateFormDirective, focusOutDirective, 
-		votingStorageService, userStorageService) {
+		votingStorageService, userStorageService, reloadService) {
 		
 		var votingsystemControllers = angular.module('votingsystemControllers', []);
 		
@@ -24,6 +24,7 @@
 
 		votingStorageService(votingSystem);
 		userStorageService(votingSystem);
+		reloadService(votingSystem);
 
 		votingSystem.config(['$routeProvider', '$httpProvider', function ($routeProvider, $httpProvider) {
 			$routeProvider.when('/mainpage/:pageNumber', {

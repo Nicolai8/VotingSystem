@@ -2,16 +2,18 @@
 	function ($, angular, Urls, constants, toastr) {
 		return function (controllersModule) {
 			controllersModule
-				.controller('UsersController', function ($scope, userStorage, $http, $route, $routeParams, $location) {
+				.controller('UsersController', function ($scope, userStorage, $reload, $http, $route, $routeParams, $location) {
 					$scope.page = $routeParams.pageNumber;
 					$scope.isSuggested = angular.isDefined($routeParams.suggested) && $routeParams.suggested == "suggested";
 					$scope.pageName = "userspage";
 					$scope.pageType = $scope.isSuggested ? "SuggestedUsers" : "Users",
 					$scope.total = 1;
 					$scope.constants = constants;
+					$scope.$route = $route;
 					$scope.$location = $location;
 					$scope.$routeParams = $routeParams;
 					$scope.editUserRoles = [];
+					$scope.reload = $reload;
 
 					$http.get(Urls.UsersPage.GetAllRoles)
 						.success(function (roles) {
@@ -63,7 +65,7 @@
 								.then(function () {
 									$scope.users.splice($scope.users.indexOf(user), 1);
 									toastr.success(constants("userDeletedMessage"));
-									$scope.render();
+									$scope.reload($scope, "/userspage/{pageNumber}/" + $scope.$routeParams.suggested);
 								}, function () {
 									toastr.error(constants("errorOccurredDuringDeletingProcessMessage"));
 								});
@@ -75,7 +77,7 @@
 							.then(function () {
 								$scope.users.splice($scope.users.indexOf(user), 1);
 								toastr.success(constants("userUnSuggestMessage"));
-								$scope.render();
+								$scope.reload($scope, "/userspage/{pageNumber}/" + $scope.$routeParams.suggested);
 							}, function () {
 								toastr.error(constants("errorOccurredDuringSavingProcessMessage"));
 							});
@@ -88,20 +90,6 @@
 						}
 						else {
 							$scope.editUserRoles.push(roleName);
-						}
-					};
-
-					$scope.render = function () {
-						var pageNumber = $scope.page;
-						if (pageNumber != 1) {
-							if (votings.length == 0) {
-								pageNumber -= 1;
-							}
-						}
-						if (pageNumber != $scope.page) {
-							$scope.$location.path("/userspage/" + pageNumber + "/" + $scope.$routeParams.suggested);
-						} else {
-							$route.reload();
 						}
 					};
 				});

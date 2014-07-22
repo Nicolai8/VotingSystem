@@ -2,13 +2,14 @@
 	function (angular, Urls, constants, toastr) {
 		return function (controllersModule) {
 			controllersModule
-				.controller('AdminVotingsController', function ($scope, votingStorage, $http, $route, $routeParams, $location) {
+				.controller('AdminVotingsController', function ($scope, votingStorage, $reload, $http, $route, $routeParams, $location) {
 					$scope.page = $routeParams.pageNumber;
 					$scope.pageName = "adminvotingspage";
 					$scope.total = 1;
 					$scope.constants = constants;
 					$scope.$location = $location;
 					$scope.$route = $route;
+					$scope.reload = $reload;
 
 					votingStorage.query(
 						{
@@ -43,26 +44,14 @@
 							function () {
 								$scope.votings.splice($scope.votings.indexOf(voting), 1);
 								toastr.success(constants("votingDeletedMessage"));
-								$scope.render();
+								$scope.reload($scope, "/adminvotingspage/{pageNumber}");
 							},
 							function () {
 								toastr.error(constants("errorOccurredDuringDeletingProcessMessage"));
 							});
 					};
 
-					$scope.render = function () {
-						var pageNumber = $scope.page;
-						if (pageNumber != 1) {
-							if (votings.length == 0) {
-								pageNumber -= 1;
-							}
-						}
-						if (pageNumber != $scope.page) {
-							$scope.$location.path("/adminvotingspage/" + pageNumber);
-						} else {
-							$route.reload();
-						}
-					};
+					
 				});
 		};
 	});

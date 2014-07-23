@@ -753,6 +753,7 @@
     <Content Include="Scripts\main.js" />
     <Content Include="Scripts\libraries\toastr.js" />
     <Content Include="Scripts\user-defined\angular.app.js" />
+    <Content Include="Scripts\user-defined\controllers\angular.controller.comments.js" />
     <Content Include="Scripts\user-defined\controllers\angular.controller.layout.js" />
     <Content Include="Scripts\user-defined\backbone.router.js" />
     <Content Include="Scripts\user-defined\collections\backbone.collection.comments.js" />
@@ -776,6 +777,7 @@
     <Content Include="Scripts\user-defined\models\backbone.model.voting.js" />
     <Content Include="Scripts\user-defined\pages\backbone.page.collection.js" />
     <Content Include="Scripts\user-defined\pages\backbone.page.js" />
+    <Content Include="Scripts\user-defined\services\angular.service.commentstorage.js" />
     <Content Include="Scripts\user-defined\services\angular.service.reload.js" />
     <Content Include="Scripts\user-defined\services\angular.service.userstorage.js" />
     <Content Include="Scripts\user-defined\services\angular.service.votingstorage.js" />
@@ -803,6 +805,7 @@
     <Content Include="Scripts\user-defined\constants.js" />
     <Content Include="Scripts\user-defined\views\backbone.view.votingresult.js" />
     <Content Include="Static\adminvotings.html" />
+    <Content Include="Static\comments.html" />
     <Content Include="Static\main.html" />
     <Content Include="Static\users.html" />
     <Content Include="Web.config">

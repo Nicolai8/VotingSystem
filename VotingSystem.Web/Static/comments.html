@@ -1,0 +1,45 @@
+﻿<div class="col-xs-12" data-ng-controller="CommentsController">
+	<div id="commentsPage" class="page">
+		<div data-ng-hide="comments.length==0" data-voting-paginator="" data-total="{{total}}"></div>
+		<div class="row" data-ng-hide="comments.length==0">
+			<div class="comments-widget">
+				<ul class="list-group">
+					<li class="list-group-item" data-ng-repeat="comment in comments">
+						<div class="row">
+							<div class="col-xs-2 col-md-2">
+								<img src="{{comment.PictureUrl}}" class="img-responsive img-thumbnail" alt="" />
+							</div>
+							<div class="col-xs-10 col-md-10">
+								<div>
+									<h4><a href="#/votingpage/{{comment.VotingId}}">{{comment.VotingName}}</a></h4>
+									<div class="mic-info">
+										on {{comment.CreateDate}}
+									</div>
+								</div>
+								<div class="widget-text">
+									<p>{{comment.CommentText}}</p>
+								</div>
+								<div class="action">
+									<button type="button" class="btn btn-danger btn-xs" title="Delete" data-ng-click="removeComment(comment)">
+										<span class="glyphicon glyphicon-trash"></span>
+									</button>
+								</div>
+							</div>
+						</div>
+					</li>
+				</ul>
+			</div>
+		</div>
+		<div data-ng-hide="comments.length==0" data-voting-paginator="" data-total="{{total}}"></div>
+	</div>
+	<div data-ng-show="comments.length==0">
+		<div class="panel panel-primary">
+			<div class="panel-heading">
+				<h3 class="panel-title">No data</h3>
+			</div>
+			<div class="panel-body">
+				{{constants("dontHaveCommentsMessage")}}
+			</div>
+		</div>
+	</div>
+</div>

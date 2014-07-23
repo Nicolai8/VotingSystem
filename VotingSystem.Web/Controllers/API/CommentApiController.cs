@@ -21,9 +21,9 @@ namespace VotingSystem.Web.Controllers.API
 			_commentService = commentService;
 		}
 
-		[Route("")]
+		[Route("{page:int}")]
 		[HttpGet]
-		public IEnumerable<CommentModel> Get(int page, int size)
+		public IEnumerable<CommentModel> Get(int page, int size = 10)
 		{
 			List<Comment> comments = _commentService.GetByUserId(UserId, page, size);
 			return comments.Select(comment => comment.ToCommentModel(User.Identity.Name));

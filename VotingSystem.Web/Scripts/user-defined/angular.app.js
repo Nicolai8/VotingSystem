@@ -1,13 +1,15 @@
 ﻿define(["jquery", "angular", "controllers/angular.controller.layout", "controllers/angular.controller.main"
 	, "controllers/angular.controller.adminvotings", "controllers/angular.controller.users"
+	, "controllers/angular.controller.comments"
 	, "directives/angular.directive.paginator", "directives/angular.directive.validateform"
 	, "directives/angular.directive.focusout"
-	, "services/angular.service.votingstorage", "services/angular.service.userstorage", "services/angular.service.reload"
+	, "services/angular.service.votingstorage", "services/angular.service.userstorage"
+	, "services/angular.service.reload", "services/angular.service.commentstorage"
 	, "angular.route"],
 	function ($, angular,
-		layoutController, mainController, adminVotingsController, usersController,
+		layoutController, mainController, adminVotingsController, usersController, commentsController,
 		paginatorDirective, validateFormDirective, focusOutDirective, 
-		votingStorageService, userStorageService, reloadService) {
+		votingStorageService, userStorageService, reloadService, commentStorageService) {
 		
 		var votingsystemControllers = angular.module('votingsystemControllers', []);
 		
@@ -15,6 +17,7 @@
 		mainController(votingsystemControllers);
 		adminVotingsController(votingsystemControllers);
 		usersController(votingsystemControllers);
+		commentsController(votingsystemControllers);
 
 		var votingSystem = angular.module('votingSystem', [
 			'ngRoute',
@@ -25,6 +28,7 @@
 		votingStorageService(votingSystem);
 		userStorageService(votingSystem);
 		reloadService(votingSystem);
+		commentStorageService(votingSystem);
 
 		votingSystem.config(['$routeProvider', '$httpProvider', function ($routeProvider, $httpProvider) {
 			$routeProvider.when('/mainpage/:pageNumber', {
@@ -39,6 +43,9 @@
 			}).when("/userspage/:pageNumber/:suggested?", {
 				controller: "UsersController",
 				templateUrl: "static/users.html"
+			}).when("/commentspage/:pageNumber", {
+				controller: "CommentsController",
+				templateUrl: "static/comments.html"
 			}).
 			otherwise({
 				redirectTo: '/mainpage/1'

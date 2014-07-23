@@ -2,7 +2,7 @@
 	function ($, angular, Urls, constants, toastr) {
 		return function (controllersModule) {
 			controllersModule
-				.controller('UsersController', function ($scope, userStorage, $reload, $http, $route, $routeParams, $location) {
+				.controller("UsersController", function ($scope, userStorage, $reload, $http, $route, $routeParams, $location) {
 					$scope.page = $routeParams.pageNumber;
 					$scope.isSuggested = angular.isDefined($routeParams.suggested) && $routeParams.suggested == "suggested";
 					$scope.pageName = "userspage";

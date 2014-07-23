@@ -2,7 +2,7 @@
 	function (angular, Urls, constants, toastr) {
 		return function (controllersModule) {
 			controllersModule
-				.controller('CommentsController', function ($scope, commentStorage, $reload, $http, $route, $routeParams, $location) {
+				.controller("CommentsController", function ($scope, commentStorage, $reload, $http, $route, $routeParams, $location) {
 					$scope.page = $routeParams.pageNumber;
 					$scope.pageName = "commentspage";
 					$scope.total = 1;

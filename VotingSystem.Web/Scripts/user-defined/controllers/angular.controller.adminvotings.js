@@ -1,8 +1,8 @@
-﻿define(["angular", "Urls", "constants", "toastr", "bootpag", "angular.route"],
+﻿define(["angular", "Urls", "constants", "toastr", "angular.route"],
 	function (angular, Urls, constants, toastr) {
 		return function (controllersModule) {
 			controllersModule
-				.controller('AdminVotingsController', function ($scope, votingStorage, $reload, $http, $route, $routeParams, $location) {
+				.controller("AdminVotingsController", function ($scope, votingStorage, $reload, $http, $route, $routeParams, $location) {
 					$scope.page = $routeParams.pageNumber;
 					$scope.pageName = "adminvotingspage";
 					$scope.total = 1;

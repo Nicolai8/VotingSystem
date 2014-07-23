@@ -94,6 +94,8 @@ namespace VotingSystem.Web.Helpers
 			Mapper.CreateMap<Answer, AnswerModel>()
 				.ForMember(d => d.AnswerText, mo => mo.MapFrom(s => s.FixedAnswer == null ? s.AnswerText : s.FixedAnswer.AnswerText))
 				.ForMember(d => d.CreateDate, mo => mo.MapFrom(s => s.CreateDate.ToString("dd-MM-yy")))
+				.ForMember(d => d.VotingId, mo => mo.MapFrom(s => s.Question.ThemeId))
+				.ForMember(d => d.VotingName, mo => mo.MapFrom(s => s.Question.Theme.VotingName))
 				.AfterMap((s, d) => d.PictureUrl = pictureUrl);
 
 			return Mapper.Map<Answer, AnswerModel>(answer);

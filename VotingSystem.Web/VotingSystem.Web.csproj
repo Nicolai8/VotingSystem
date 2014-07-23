@@ -763,7 +763,7 @@
     <Content Include="Scripts\user-defined\collections\backbone.collection.votingresult.js" />
     <Content Include="Scripts\user-defined\collections\backbone.collection.votings.js" />
     <Content Include="Scripts\user-defined\controllers\angular.controller.main.js" />
-    <Content Include="Scripts\user-defined\controllers\angular.controllers.js" />
+    <Content Include="Scripts\user-defined\controllers\angular.controller.voices.js" />
     <Content Include="Scripts\user-defined\controllers\angular.controller.adminvotings.js" />
     <Content Include="Scripts\user-defined\directives\angular.directive.focusOut.js" />
     <Content Include="Scripts\user-defined\directives\angular.directive.paginator.js" />
@@ -780,6 +780,7 @@
     <Content Include="Scripts\user-defined\services\angular.service.commentstorage.js" />
     <Content Include="Scripts\user-defined\services\angular.service.reload.js" />
     <Content Include="Scripts\user-defined\services\angular.service.userstorage.js" />
+    <Content Include="Scripts\user-defined\services\angular.service.voicestorage.js" />
     <Content Include="Scripts\user-defined\services\angular.service.votingstorage.js" />
     <Content Include="Scripts\user-defined\templates.js" />
     <Content Include="Scripts\user-defined\views\backbone.view.addquestion.js" />
@@ -808,6 +809,7 @@
     <Content Include="Static\comments.html" />
     <Content Include="Static\main.html" />
     <Content Include="Static\users.html" />
+    <Content Include="Static\voices.html" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>

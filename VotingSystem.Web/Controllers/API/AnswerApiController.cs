@@ -42,7 +42,7 @@ namespace VotingSystem.Web.Controllers.API
 		{
 			int userId = User.Identity.IsAuthenticated ? UserId : -1;
 			Theme theme = _themeService.GetByThemeId(id);
-			return theme.Questions.Select(q=>q.ToQuestionModel(userId));
+			return theme.Questions.Select(q => q.ToQuestionModel(userId));
 		}
 
 		[Route("")]

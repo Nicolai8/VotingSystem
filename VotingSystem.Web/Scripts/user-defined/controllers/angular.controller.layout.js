@@ -2,7 +2,7 @@
 	function ($, angular, Urls, toastr, constants, Spinner) {
 		return function (controllersModule) {
 			controllersModule
-				.controller('LayoutController', function ($scope, $route, $routeParams, $location) {
+				.controller("LayoutController", function ($scope, $route, $routeParams, $location) {
 					$scope.accountName = window.loggedUserName;
 					$scope.roles = [];
 					$scope.authenticated = window.authenticated;

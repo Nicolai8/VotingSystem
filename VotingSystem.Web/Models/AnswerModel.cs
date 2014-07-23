@@ -7,5 +7,7 @@
 		public string PictureUrl { get; set; }
 		public int Count { get; set; }
 		public bool IsUserAnswer { get; set; }
+		public int VotingId { get; set; }
+		public string VotingName { get; set; }
 	}
 }

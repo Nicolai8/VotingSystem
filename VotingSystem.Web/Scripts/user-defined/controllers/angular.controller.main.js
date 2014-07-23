@@ -1,8 +1,8 @@
-﻿define(["angular", "Urls", "constants", "markdown", "bootpag", "angular.route"],
+﻿define(["angular", "Urls", "constants", "markdown", "angular.route"],
 	function (angular, Urls, constants) {
 		return function (controllersModule) {
 			controllersModule
-				.controller('MainController', function ($scope, votingStorage, $http, $route, $routeParams) {
+				.controller("MainController", function ($scope, votingStorage, $http, $route, $routeParams) {
 					$scope.page = $routeParams.pageNumber;
 					$scope.pageName = "mainpage";
 					$scope.total = 1;

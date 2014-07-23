@@ -10,6 +10,10 @@
 								url: Urls.Users + "/:pageType/:page",
 								isArray: true
 							},
+							get: {
+								method: "GET",
+								url: Urls.ProfilePage.GetProfile
+							},
 							update: { method: "PUT", },
 							remove: { method: "DELETE", },
 							total: {

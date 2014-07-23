@@ -1,27 +1,29 @@
 ﻿define(["jquery", "angular", "controllers/angular.controller.layout", "controllers/angular.controller.main"
 	, "controllers/angular.controller.adminvotings", "controllers/angular.controller.users"
 	, "controllers/angular.controller.comments", "controllers/angular.controller.voices"
+	, "controllers/angular.controller.userprofile"
 	, "directives/angular.directive.paginator", "directives/angular.directive.validateform"
-	, "directives/angular.directive.focusout"
+	, "directives/angular.directive.focusout", "directives/angular.directive.goback"
 	, "services/angular.service.votingstorage", "services/angular.service.userstorage"
 	, "services/angular.service.reload", "services/angular.service.commentstorage"
 	, "services/angular.service.voicestorage"
 	, "angular.route"],
 	function ($, angular,
 		layoutController, mainController, adminVotingsController, usersController, commentsController,
-		voicesController,
-		paginatorDirective, validateFormDirective, focusOutDirective, 
+		voicesController, userProfileController,
+		paginatorDirective, validateFormDirective, focusOutDirective, goBackDirective,
 		votingStorageService, userStorageService, reloadService, commentStorageService,
 		voiceStorageService) {
-		
+
 		var votingsystemControllers = angular.module("votingsystemControllers", []);
-		
+
 		layoutController(votingsystemControllers);
 		mainController(votingsystemControllers);
 		adminVotingsController(votingsystemControllers);
 		usersController(votingsystemControllers);
 		commentsController(votingsystemControllers);
 		voicesController(votingsystemControllers);
+		userProfileController(votingsystemControllers);
 
 		var votingSystem = angular.module("votingSystem", [
 			"ngRoute",
@@ -36,10 +38,7 @@
 		voiceStorageService(votingSystem);
 
 		votingSystem.config(["$routeProvider", "$httpProvider", function ($routeProvider, $httpProvider) {
-			$routeProvider.when("/mainpage/:pageNumber", {
-				controller: "MainController",
-				templateUrl: "static/main.html",
-			}).when("/mainpage/:pageNumber/:searchQuery", {
+			$routeProvider.when("/mainpage/:pageNumber/:searchQuery?", {
 				controller: "MainController",
 				templateUrl: "static/main.html",
 			}).when("/adminvotingspage/:pageNumber", {
@@ -54,6 +53,9 @@
 			}).when("/voicespage/:pageNumber", {
 				controller: "VoicesController",
 				templateUrl: "static/voices.html"
+			}).when("/profilepage/:userName?", {
+				controller: "UserProfileController",
+				templateUrl: "static/userprofile.html"
 			}).
 			otherwise({
 				redirectTo: "/mainpage/1"
@@ -80,4 +82,5 @@
 		paginatorDirective(votingSystem);
 		validateFormDirective(votingSystem);
 		focusOutDirective(votingSystem);
+		goBackDirective(votingSystem);
 	});

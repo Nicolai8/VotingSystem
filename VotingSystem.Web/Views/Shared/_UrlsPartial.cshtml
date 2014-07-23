@@ -8,40 +8,21 @@
 			Comments: "@Url.RouteUrl("DefaultApi", new { httproute = "", controller = "Comment" })",
 			Users: "@Url.RouteUrl("DefaultApi", new { httproute = "", controller = "User" })",
 			Voices: "@Url.RouteUrl("DefaultApi", new { httproute = "", controller = "Answer" })",
-			MainPage: {
-				GetTotal: "@Url.RouteUrl("TotalActive", new { httpRoute = true })"
-			},
-			MyVotingsPage: {
-				GetTotal: "@Url.RouteUrl("TotalUser", new { httpRoute = true })"
-						},
-			AdminPage: {
-				GetTotal: "@Url.RouteUrl("TotalAdmin", new { httpRoute = true })"
-			},
 			LoginPage: {
 				Login: "@Url.Action("Login", "Account")",
 				CheckUserName: "@Url.Action("UserNameExists", "Account")",
 				Register: "@Url.Action("Register", "Account")",
 				LogOff: "@Url.Action("LogOff", "Account")"
 			},
-			VotingPage: {
-				GetVoting: "@Url.RouteUrl("DefaultApi", new { httproute = "", controller = "Voting" })",
-			},
 			UsersPage: {
-				GetTotal: "@Url.RouteUrl("TotalUsers", new { httpRoute = true })",
-				GetTotalSuggestedUsers: "@Url.RouteUrl("TotalSuggestedUsers", new { httpRoute = true })",
 				GetAllRoles: "@Url.Action("GetAllRoles", "Account")"
 			},
 			ProfilePage: {
 				GetProfile: "@Url.Action("Profile", "Account")",
 				ChangePassword: "@Url.Action("ChangePassword", "Account")",
 				ChangePrivacy: "@Url.Action("ChangePrivacy", "Account")",
+				ChangePicture: "@Url.Action("UploadPicture", "Account")",
 			},
-			CommentsPage: {
-				GetTotal: "@Url.RouteUrl("TotalComments", new { httpRoute = true })",
-			},
-			VoicesPage: {
-				GetTotal: "@Url.RouteUrl("TotalAnswers", new { httpRoute = true })",
-			}
 		};
 		return urls;
 	});

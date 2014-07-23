@@ -110,7 +110,7 @@
 							$(this).attr("checked", "false");
 						});
 						$modal.find(".wmd-preview").empty();
-						$modal.find("form[data-validate-form=''], form[data-validate-form='false']").each(function () {
+						$modal.find("form[data-validate-form]").each(function () {
 							var validateForm = $(this).data("bootstrapValidator");
 							if (angular.isDefined(validateForm)) {
 								validateForm.resetForm();

@@ -10,7 +10,7 @@
 					$scope.searchQuery = $routeParams.searchQuery;
 					$scope.converter = new Markdown.getSanitizingConverter();
 					$scope.constants = constants;
-
+					
 					votingStorage.query(
 						{
 							pageType: "MainPage",

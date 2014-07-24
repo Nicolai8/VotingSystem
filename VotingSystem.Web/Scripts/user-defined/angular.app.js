@@ -1,17 +1,20 @@
 ﻿define(["jquery", "angular", "controllers/angular.controller.layout", "controllers/angular.controller.main"
 	, "controllers/angular.controller.adminvotings", "controllers/angular.controller.users"
 	, "controllers/angular.controller.comments", "controllers/angular.controller.voices"
-	, "controllers/angular.controller.userprofile"
+	, "controllers/angular.controller.userprofile", "controllers/angular.controller.voting"
 	, "directives/angular.directive.paginator", "directives/angular.directive.validateform"
 	, "directives/angular.directive.focusout", "directives/angular.directive.goback"
+	, "directives/angular.directive.piechart"
 	, "services/angular.service.votingstorage", "services/angular.service.userstorage"
 	, "services/angular.service.reload", "services/angular.service.commentstorage"
 	, "services/angular.service.voicestorage"
-	, "angular.route"],
+	, "angular.route"//, "goog!visualization,1,packages:[corechart]"
+	],
 	function ($, angular,
 		layoutController, mainController, adminVotingsController, usersController, commentsController,
-		voicesController, userProfileController,
+		voicesController, userProfileController, votingController,
 		paginatorDirective, validateFormDirective, focusOutDirective, goBackDirective,
+		pieChartDirective,
 		votingStorageService, userStorageService, reloadService, commentStorageService,
 		voiceStorageService) {
 
@@ -24,6 +27,7 @@
 		commentsController(votingsystemControllers);
 		voicesController(votingsystemControllers);
 		userProfileController(votingsystemControllers);
+		votingController(votingsystemControllers);
 
 		var votingSystem = angular.module("votingSystem", [
 			"ngRoute",
@@ -39,27 +43,23 @@
 
 		votingSystem.config(["$routeProvider", "$httpProvider", function ($routeProvider, $httpProvider) {
 			$routeProvider.when("/mainpage/:pageNumber/:searchQuery?", {
-				controller: "MainController",
 				templateUrl: "static/main.html",
 			}).when("/adminvotingspage/:pageNumber", {
-				controller: "AdminVotingsController",
 				templateUrl: "static/adminvotings.html",
 			}).when("/userspage/:pageNumber/:suggested?", {
-				controller: "UsersController",
 				templateUrl: "static/users.html"
 			}).when("/commentspage/:pageNumber", {
-				controller: "CommentsController",
 				templateUrl: "static/comments.html"
 			}).when("/voicespage/:pageNumber", {
-				controller: "VoicesController",
 				templateUrl: "static/voices.html"
 			}).when("/profilepage/:userName?", {
-				controller: "UserProfileController",
 				templateUrl: "static/userprofile.html"
-			}).
-			otherwise({
+			}).when("/votingpage/:votingId?", {
+				templateUrl: "static/voting.html"
+			}).otherwise({
 				redirectTo: "/mainpage/1"
 			});
+
 			$httpProvider.responseInterceptors.push("myHttpInterceptor");
 			var spinnerFunction = function (data) {
 				$("#preloader").show();
@@ -83,4 +83,5 @@
 		validateFormDirective(votingSystem);
 		focusOutDirective(votingSystem);
 		goBackDirective(votingSystem);
+		pieChartDirective(votingSystem);
 	});

@@ -12,7 +12,7 @@
 						var userName = $("#userName").val();
 						var password = $("#password").val();
 
-						if ($("#loginForm form[data-validate-form='']").data("bootstrapValidator").isValid()) {
+						if ($("#loginForm form[data-validate-form]").data("bootstrapValidator").isValid()) {
 							$.ajax({
 								url: Urls.LoginPage.Login,
 								type: "POST",

@@ -14,7 +14,7 @@
 				</thead>
 				<tbody>
 					<tr data-ng-repeat="user in users">
-						<td><a href="#/profilepage/{{user.UserName}}">{{user.UserName}}</a></td>
+						<td><a data-ng-href="#/profilepage/{{user.UserName}}">{{user.UserName}}</a></td>
 						<td>{{user.Roles.join(",")}}</td>
 						<td>{{user.Email}}</td>
 						<td>{{user.CreateDate}}</td>

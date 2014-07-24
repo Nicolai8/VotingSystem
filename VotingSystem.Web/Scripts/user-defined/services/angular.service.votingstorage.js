@@ -10,6 +10,7 @@
 								url: Urls.Votings + "/:pageType/:page",
 								isArray: true
 							},
+							get: { method: "GET" },
 							update: { method: "PUT" },
 							remove: { method: "DELETE" },
 							save: { method: "POST" },

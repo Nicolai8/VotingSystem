@@ -17,10 +17,10 @@
 				<tbody>
 					<tr data-ng-repeat="voting in votings">
 						<td>
-							<a href="#/votingpage/{{voting.VotingId}}">{{voting.VotingName.substr(0,50)+(voting.VotingName.length>50?"...":"")}}
+							<a data-ng-href="#/votingpage/{{voting.VotingId}}">{{voting.VotingName.substr(0,50)+(voting.VotingName.length>50?"...":"")}}
 							</a>
 						</td>
-						<td><a href="#/profilepage/{{voting.CreatedBy}}">{{voting.CreatedBy}}</a></td>
+						<td><a data-ng-href="#/profilepage/{{voting.CreatedBy}}">{{voting.CreatedBy}}</a></td>
 						<td>{{voting.AnswersCount}}</td>
 						<td>{{voting.CommentsCount}}</td>
 						<td>{{voting.CreateDate}}</td>

@@ -43,7 +43,7 @@ namespace VotingSystem.Web.Helpers
 				.AfterMap((s, d) =>
 					{
 						d.IsAnswered = isAnswered;
-						d.Comments = s.Comments.OrderByDescending(c => c.CreateDate)
+						d.Comments = s.Comments.OrderByDescending(c => c.CreateDate).ToList()
 							.Select(comment => comment.ToCommentModel(userName)).ToList();
 						d.TimeLeft = s.FinishTime.Date >= DateTime.Today && s.StartDate.Date <= DateTime.Today
 							? String.Format(Resources.Resource.TimeLeftFormatString, s.FinishTime.Subtract(DateTime.Now))

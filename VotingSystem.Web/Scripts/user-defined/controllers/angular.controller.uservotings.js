@@ -61,6 +61,7 @@
 								toastr.success(constants("votingCreatedMessage"));
 								$scope.reload($scope, "/" + $scope.pageName + "/{pageNumber}");
 							}, function () {
+								angular.element($event.currentTarget).closest(".modal").modal("hide");
 								toastr.error(constants("errorOccurredDuringSavingProcessMessage"));
 							});
 					};

@@ -1,7 +1,7 @@
-﻿define([],
-	function () {
-		return function (module) {
-			module.factory("$reload", function () {
+﻿define(["angular"], function (angular) {
+	return function () {
+		angular.module("votingSystem")
+			.factory("$reload", function () {
 				return function (scope, path) {
 					var pageNumber = scope.page;
 					if (pageNumber != 1) {
@@ -16,6 +16,6 @@
 					}
 				};
 			});
-		};
-	});
+	};
+});
 

@@ -879,6 +879,9 @@
     <Content Include="Scripts\libraries\angular\version.json" />
     <Content Include="Scripts\user-defined\controllers\angular.controller.users.js" />
     <Content Include="Static\breadcrumb.html" />
+    <Content Include="Static\403.html" />
+    <Content Include="Static\404.html" />
+    <Content Include="Static\500.html" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

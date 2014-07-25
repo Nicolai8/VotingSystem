@@ -1,8 +1,8 @@
-﻿define(["Urls", "angular.resource"],
-	function (Urls) {
-		return function (module) {
-			module.factory("votingStorage",
-				function ($resource) {
+﻿define(["angular", "Urls", "angular.resource"],
+	function (angular, Urls) {
+		return function () {
+			angular.module("votingSystem")
+				.factory("votingStorage", function ($resource) {
 					return $resource(Urls.Votings + "/:id", { id: "@VotingId" },
 						{
 							query: {
@@ -24,6 +24,6 @@
 						}
 					);
 				});
-		};
+		}
 	});
 

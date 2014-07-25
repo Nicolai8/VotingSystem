@@ -38,17 +38,20 @@
 		var votingSystem = angular.module("votingSystem", [
 			"ngRoute",
 			"ngResource",
-			"votingsystemControllers"
+			"votingsystemControllers",
+			"votingSystem.Directives"
 		]);
 
-		votingStorageService(votingSystem);
-		userStorageService(votingSystem);
-		reloadService(votingSystem);
-		commentStorageService(votingSystem);
-		voiceStorageService(votingSystem);
+		votingStorageService();
+		userStorageService();
+		reloadService();
+		commentStorageService();
+		voiceStorageService();
 
 		votingSystem.config(["$routeProvider", "$httpProvider", function ($routeProvider, $httpProvider) {
-			$routeProvider.when("/mainpage/:pageNumber/:searchQuery?", {
+			$routeProvider.when("/", {
+				redirectTo: "/mainpage/1"
+			}).when("/mainpage/:pageNumber/:searchQuery?", {
 				templateUrl: "static/main.html",
 				controller: "MainController"
 			}).when("/uservotingspage/:pageNumber", {
@@ -77,8 +80,12 @@
 						return votingStorage.get({ id: $route.current.params.votingId }).$promise;
 					}
 				}
+			}).when("/error:errorType", {
+				templateUrl: function (params) {
+					return "static/" + params.errorType + ".html";
+				}
 			}).otherwise({
-				redirectTo: "/mainpage/1"
+				redirectTo: "/error404"
 			});
 
 			$httpProvider.responseInterceptors.push("myHttpInterceptor");
@@ -95,6 +102,16 @@
 
 				}, function (response) {
 					$("#preloader").hide();
+					switch (response.status) {
+						case 404:
+							window.location.hash = "#/error404";
+							break;
+						case 403:
+							window.location.hash = "#/error403";
+							break;
+						default:
+							window.location.hash = "#/error500";
+					}
 					return $q.reject(response);
 				});
 			};
@@ -105,7 +122,7 @@
 		focusOutDirective(votingSystem);
 		goBackDirective(votingSystem);
 		pieChartDirective(votingSystem);
-		bootstrapMarkdownDirective(votingSystem);
+		//bootstrapMarkdownDirective(votingSystem);
 		dateTimePickerDirective(votingSystem);
 		trustHtmlDirective(votingSystem);
 		breadCrumbDirective(votingSystem);

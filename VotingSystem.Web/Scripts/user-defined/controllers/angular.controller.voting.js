@@ -2,7 +2,8 @@
 	function ($, angular, Urls, constants, toastr) {
 		return function (controllersModule) {
 			controllersModule
-				.controller("VotingController", function ($scope, votingStorage, voiceStorage, commentStorage, $http, $route, $routeParams, $location) {
+				.controller("VotingController", function ($scope, voting, votingStorage, voiceStorage, commentStorage, $http, $route, $routeParams, $location) {
+					$scope.voting = voting;
 					$scope.votingId = $routeParams.votingId;
 					$scope.pageName = "votingpage";
 					$scope.$route = $route;
@@ -11,20 +12,26 @@
 					$scope.captchaUrl = Urls.Captcha;
 					$scope.newCommentText = "";
 					$scope.isAnswered = false;
-
-					votingStorage.get({ id: $routeParams.votingId },
-						function (voting) {
-							$scope.voting = voting;
-							$scope.checkIfAnswered();
-							$scope.getResults();
-							$scope.loaded = true;
-						});
-
+					
 					$scope.checkIfAnswered = function () {
 						$scope.isAnswered = $scope.voting.IsAnswered
 							|| (!$scope.$parent.authenticated
 								&& localStorage["VotingSystem.Vote#" + $scope.voting.VotingId] == "true");
 					};
+
+					$scope.getResults = function () {
+						if ($scope.isAnswered || $scope.voting.Status == 3) {
+							voiceStorage.getResults({ votingId: $scope.voting.VotingId },
+								function (results) {
+									preprocessResults(results);
+									$scope.results = results;
+								}
+							);
+						}
+					};
+					
+					$scope.checkIfAnswered();
+					$scope.getResults();
 
 					$scope.addNewComment = function () {
 						commentStorage.save(
@@ -40,18 +47,7 @@
 								toastr.error(constants("errorOccurredDuringSavingProcessMessage"));
 							});
 					};
-
-					$scope.getResults = function () {
-						if ($scope.isAnswered || $scope.voting.Status == 3) {
-							voiceStorage.getResults({ votingId: $scope.voting.VotingId },
-								function (results) {
-									preprocessResults(results);
-									$scope.results = results;
-								}
-							);
-						}
-					};
-
+					
 					$scope.newCommentKeyPressHandler = function ($event) {
 						if (($event.which == 13 || $event.which == 10) && $event.ctrlKey) {
 							$scope.addNewComment();

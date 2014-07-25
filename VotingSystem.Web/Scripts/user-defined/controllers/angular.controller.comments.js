@@ -25,7 +25,7 @@
 							.then(function () {
 								$scope.comments.splice($scope.comments.indexOf(comment), 1);
 								toastr.success(constants("commentDeletedMessage"));
-								$scope.reload($scope, "/commentspage/{pageNumber}");
+								$scope.reload($scope, "/" + $scope.pageName + "/{pageNumber}");
 							}, function() {
 								toastr.error(constants("errorOccurredDuringDeletingProcessMessage"));
 							});

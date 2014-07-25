@@ -9,9 +9,7 @@
 					</h2>
 					<hr />
 					<div class="padding-left-right-x2">
-						<p>
-							{{converter.makeHtml(voting.Description ? voting.Description : "").substr(0,1000)}}...
-						</p>
+						<p data-trust-html="{{voting.Description}}"></p>
 						<a class="margin-bottom-x2 btn btn-primary" href="#/votingpage/{{voting.VotingId}}">Read More<i class="glyphicon glyphicon-chevron-right"></i></a>
 					</div>
 					<div class="well well-sm">

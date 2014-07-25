@@ -44,7 +44,7 @@
 							function () {
 								$scope.votings.splice($scope.votings.indexOf(voting), 1);
 								toastr.success(constants("votingDeletedMessage"));
-								$scope.reload($scope, "/adminvotingspage/{pageNumber}");
+								$scope.reload($scope, "/" + $scope.pageName + "/{pageNumber}");
 							},
 							function () {
 								toastr.error(constants("errorOccurredDuringDeletingProcessMessage"));

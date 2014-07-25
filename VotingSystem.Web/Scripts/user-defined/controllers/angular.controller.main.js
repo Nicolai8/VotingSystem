@@ -1,4 +1,4 @@
-﻿define(["angular", "Urls", "constants", "markdown", "angular.route"],
+﻿define(["angular", "Urls", "constants", "angular.route"],
 	function (angular, Urls, constants) {
 		return function (controllersModule) {
 			controllersModule
@@ -8,9 +8,8 @@
 					$scope.total = 1;
 					$routeParams.searchQuery = $routeParams.searchQuery ? $routeParams.searchQuery : "";
 					$scope.searchQuery = $routeParams.searchQuery;
-					$scope.converter = new Markdown.getSanitizingConverter();
 					$scope.constants = constants;
-					
+
 					votingStorage.query(
 						{
 							pageType: "MainPage",

@@ -764,13 +764,17 @@
     <Content Include="Scripts\user-defined\collections\backbone.collection.votings.js" />
     <Content Include="Scripts\user-defined\controllers\angular.controller.main.js" />
     <Content Include="Scripts\user-defined\controllers\angular.controller.userprofile.js" />
+    <Content Include="Scripts\user-defined\controllers\angular.controller.uservotings.js" />
     <Content Include="Scripts\user-defined\controllers\angular.controller.voices.js" />
     <Content Include="Scripts\user-defined\controllers\angular.controller.adminvotings.js" />
     <Content Include="Scripts\user-defined\controllers\angular.controller.voting.js" />
+    <Content Include="Scripts\user-defined\directives\angular.directive.bootstrapmarkdown.js" />
+    <Content Include="Scripts\user-defined\directives\angular.directive.datetimepicker.js" />
     <Content Include="Scripts\user-defined\directives\angular.directive.focusOut.js" />
     <Content Include="Scripts\user-defined\directives\angular.directive.goback.js" />
     <Content Include="Scripts\user-defined\directives\angular.directive.paginator.js" />
     <Content Include="Scripts\user-defined\directives\angular.directive.piechart.js" />
+    <Content Include="Scripts\user-defined\directives\angular.directive.trusthtml.js" />
     <Content Include="Scripts\user-defined\directives\angular.directive.validateform.js" />
     <Content Include="Scripts\user-defined\models\backbone.model.comment.js" />
     <Content Include="Scripts\user-defined\models\backbone.model.fixedanswer.js" />
@@ -814,6 +818,7 @@
     <Content Include="Static\main.html" />
     <Content Include="Static\userprofile.html" />
     <Content Include="Static\users.html" />
+    <Content Include="Static\uservotings.html" />
     <Content Include="Static\voices.html" />
     <Content Include="Static\voting.html" />
     <Content Include="Web.config">

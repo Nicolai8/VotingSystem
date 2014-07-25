@@ -1,5 +1,4 @@
-﻿var d = new Date();
-requirejs.config({
+﻿requirejs.config({
 	"baseUrl": "/VotingSystem.Web/scripts/libraries",
 	"paths": {
 		"user-defined": "../user-defined",

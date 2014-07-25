@@ -2,19 +2,22 @@
 	, "controllers/angular.controller.adminvotings", "controllers/angular.controller.users"
 	, "controllers/angular.controller.comments", "controllers/angular.controller.voices"
 	, "controllers/angular.controller.userprofile", "controllers/angular.controller.voting"
+	, "controllers/angular.controller.uservotings"
 	, "directives/angular.directive.paginator", "directives/angular.directive.validateform"
 	, "directives/angular.directive.focusout", "directives/angular.directive.goback"
-	, "directives/angular.directive.piechart"
+	, "directives/angular.directive.piechart", "directives/angular.directive.bootstrapmarkdown"
+	, "directives/angular.directive.datetimepicker", "directives/angular.directive.trusthtml"
 	, "services/angular.service.votingstorage", "services/angular.service.userstorage"
 	, "services/angular.service.reload", "services/angular.service.commentstorage"
 	, "services/angular.service.voicestorage"
 	, "angular.route"//, "goog!visualization,1,packages:[corechart]"
-	],
+],
 	function ($, angular,
-		layoutController, mainController, adminVotingsController, usersController, commentsController,
-		voicesController, userProfileController, votingController,
+		layoutController, mainController, adminVotingsController, usersController,
+		commentsController, voicesController, userProfileController, votingController,
+		userVotingsController,
 		paginatorDirective, validateFormDirective, focusOutDirective, goBackDirective,
-		pieChartDirective,
+		pieChartDirective, bootstrapMarkdownDirective, dateTimePickerDirective, trustHtmlDirective,
 		votingStorageService, userStorageService, reloadService, commentStorageService,
 		voiceStorageService) {
 
@@ -28,6 +31,7 @@
 		voicesController(votingsystemControllers);
 		userProfileController(votingsystemControllers);
 		votingController(votingsystemControllers);
+		userVotingsController(votingsystemControllers);
 
 		var votingSystem = angular.module("votingSystem", [
 			"ngRoute",
@@ -44,6 +48,8 @@
 		votingSystem.config(["$routeProvider", "$httpProvider", function ($routeProvider, $httpProvider) {
 			$routeProvider.when("/mainpage/:pageNumber/:searchQuery?", {
 				templateUrl: "static/main.html",
+			}).when("/uservotingspage/:pageNumber", {
+				templateUrl: "static/uservotings.html"
 			}).when("/adminvotingspage/:pageNumber", {
 				templateUrl: "static/adminvotings.html",
 			}).when("/userspage/:pageNumber/:suggested?", {
@@ -53,9 +59,21 @@
 			}).when("/voicespage/:pageNumber", {
 				templateUrl: "static/voices.html"
 			}).when("/profilepage/:userName?", {
-				templateUrl: "static/userprofile.html"
+				templateUrl: "static/userprofile.html",
+				controller: "UserProfileController",
+				resolve: {
+					user: function (userStorage, $route) {
+						return userStorage.get({ userName: $route.current.params.userName }).$promise;
+					}
+				}
 			}).when("/votingpage/:votingId?", {
-				templateUrl: "static/voting.html"
+				templateUrl: "static/voting.html",
+				controller: "VotingController",
+				resolve: {
+					voting: function (votingStorage, $route) {
+						return votingStorage.get({ id: $route.current.params.votingId }).$promise;
+					}
+				}
 			}).otherwise({
 				redirectTo: "/mainpage/1"
 			});
@@ -84,4 +102,7 @@
 		focusOutDirective(votingSystem);
 		goBackDirective(votingSystem);
 		pieChartDirective(votingSystem);
+		bootstrapMarkdownDirective(votingSystem);
+		dateTimePickerDirective(votingSystem);
+		trustHtmlDirective(votingSystem);
 	});

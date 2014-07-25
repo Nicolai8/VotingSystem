@@ -2,18 +2,14 @@
 	function ($, angular, Urls, constants, toastr) {
 		return function (controllersModule) {
 			controllersModule
-				.controller("UserProfileController", function ($scope, userStorage, $http, $route, $routeParams, $location) {
+				.controller("UserProfileController", function ($scope, user, userStorage, $http, $route, $routeParams, $location) {
 					$scope.userName = $routeParams.userName;
 					$scope.isMyPage = angular.isUndefined($scope.userName);
 					$scope.pageName = "profilepage";
 					$scope.$route = $route;
 					$scope.$location = $location;
 					$scope.$routeParams = $routeParams;
-
-					userStorage.get({ userName: $scope.userName },
-						function (user) {
-							$scope.user = user;
-						});
+					$scope.user = user;
 
 					$scope.toggleLockUser = function () {
 						var oldValue = angular.copy($scope.user.IsBlocked);

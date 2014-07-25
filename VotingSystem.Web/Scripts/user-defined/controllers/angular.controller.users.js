@@ -65,7 +65,7 @@
 								.then(function () {
 									$scope.users.splice($scope.users.indexOf(user), 1);
 									toastr.success(constants("userDeletedMessage"));
-									$scope.reload($scope, "/userspage/{pageNumber}/" + $scope.$routeParams.suggested);
+									$scope.reload($scope, "/" + $scope.pageName + "/{pageNumber}/" + $scope.$routeParams.suggested);
 								}, function () {
 									toastr.error(constants("errorOccurredDuringDeletingProcessMessage"));
 								});
@@ -77,7 +77,7 @@
 							.then(function () {
 								$scope.users.splice($scope.users.indexOf(user), 1);
 								toastr.success(constants("userUnSuggestMessage"));
-								$scope.reload($scope, "/userspage/{pageNumber}/" + $scope.$routeParams.suggested);
+								$scope.reload($scope, "/" + $scope.pageName + "/{pageNumber}/" + $scope.$routeParams.suggested);
 							}, function () {
 								toastr.error(constants("errorOccurredDuringSavingProcessMessage"));
 							});

@@ -7,6 +7,7 @@
 	, "directives/angular.directive.focusout", "directives/angular.directive.goback"
 	, "directives/angular.directive.piechart", "directives/angular.directive.bootstrapmarkdown"
 	, "directives/angular.directive.datetimepicker", "directives/angular.directive.trusthtml"
+	, "directives/angular.directive.breadcrumb"
 	, "services/angular.service.votingstorage", "services/angular.service.userstorage"
 	, "services/angular.service.reload", "services/angular.service.commentstorage"
 	, "services/angular.service.voicestorage"
@@ -18,6 +19,7 @@
 		userVotingsController,
 		paginatorDirective, validateFormDirective, focusOutDirective, goBackDirective,
 		pieChartDirective, bootstrapMarkdownDirective, dateTimePickerDirective, trustHtmlDirective,
+		breadCrumbDirective,
 		votingStorageService, userStorageService, reloadService, commentStorageService,
 		voiceStorageService) {
 
@@ -48,6 +50,7 @@
 		votingSystem.config(["$routeProvider", "$httpProvider", function ($routeProvider, $httpProvider) {
 			$routeProvider.when("/mainpage/:pageNumber/:searchQuery?", {
 				templateUrl: "static/main.html",
+				controller: "MainController"
 			}).when("/uservotingspage/:pageNumber", {
 				templateUrl: "static/uservotings.html"
 			}).when("/adminvotingspage/:pageNumber", {
@@ -105,4 +108,5 @@
 		bootstrapMarkdownDirective(votingSystem);
 		dateTimePickerDirective(votingSystem);
 		trustHtmlDirective(votingSystem);
+		breadCrumbDirective(votingSystem);
 	});

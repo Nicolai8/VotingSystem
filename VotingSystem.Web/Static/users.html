@@ -1,4 +1,5 @@
 ﻿<div class="col-xs-12" data-ng-controller="UsersController">
+	<div data-breadcrumb="" />
 	<div id="usersPage" class="page">
 		<div data-ng-hide="users.length==0" data-voting-paginator="" data-total="{{total}}"></div>
 		<div class="table-responsive" data-ng-hide="users.length==0">
@@ -26,7 +27,7 @@
 							<a data-ng-click="removeUser(user)">Remove</a> |
 							<a data-ng-if="isSuggested" data-ng-click="unsuggestUser(user)">Unsuggest</a>
 							<a data-ng-if="!isSuggested" data-ng-click="changeUserRoles(user)"
-								data-toggle="modal" data-target="#changeRolesModal">Change Roles
+							   data-toggle="modal" data-target="#changeRolesModal">Change Roles
 							</a>
 						</td>
 					</tr>
@@ -59,14 +60,14 @@
 							<div id="roles" class="col-xs-offset-1">
 								<div class="checkbox hidden">
 									<input type="checkbox" data-default="true" name="roles[]" value="-1"
-										data-bv-choice="true" data-bv-choice-min="1" data-bv-choice-message="At least one role should be selected." />
+									       data-bv-choice="true" data-bv-choice-min="1" data-bv-choice-message="At least one role should be selected." />
 								</div>
 								<div class="checkbox" data-ng-repeat="roleName in roles">
 									<label>
 										<input type="checkbox" name="roles[]" value="{{roleName}}"
-											data-bv-choice="true" data-bv-choice-min="1" data-bv-choice-message="At least one role should be selected."
-											data-ng-checked="editUserRoles.indexOf(roleName)>-1" data-i-check=""
-											data-ng-click="toggleRoleSelection(roleName)" />
+										       data-bv-choice="true" data-bv-choice-min="1" data-bv-choice-message="At least one role should be selected."
+										       data-ng-checked="editUserRoles.indexOf(roleName)>-1" data-i-check=""
+										       data-ng-click="toggleRoleSelection(roleName)" />
 										{{roleName}}
 									</label>
 								</div>

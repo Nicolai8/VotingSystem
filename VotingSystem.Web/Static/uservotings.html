@@ -1,6 +1,7 @@
-﻿<div class="col-xs-12" data-ng-controller="UserVotingsController">
+﻿<div class="col-xs-12" data-ng-controller="UserVotingsController" data-ng-init="breadCrumbItemName='Votings'">
+	<div data-breadcrumb="" />
 	<button type="button" class="btn btn-default btn-primary"
-		data-toggle="modal" href="#addNewVotingModal" data-ng-click="newVoting = { Questions: [] }">
+	        data-toggle="modal" href="#addNewVotingModal" data-ng-click="newVoting = { Questions: [] }">
 		<i class="glyphicon glyphicon-plus"></i>Add New
 	</button>
 	<br />
@@ -84,10 +85,10 @@
 							<label class="col-sm-2 control-label" for="newVotingStartDate">* Start date:</label>
 							<div class="col-sm-4">
 								<div class="input-group date" id="newVotingStartDate" data-datetime-picker="" data-validate="true"
-									data-is-depend="true" data-depend-on="#newVotingFinishDate" data-depend-on-min="true">
+								     data-is-depend="true" data-depend-on="#newVotingFinishDate" data-depend-on-min="true">
 									<input type="text" class="form-control" name="StartDate" data-format="MM/DD/YYYY"
-										required data-bv-date="true" data-bv-date-format="MM/DD/YYYY"
-										data-bv-date-message="The value is not a valid date." />
+									       required data-bv-date="true" data-bv-date-format="MM/DD/YYYY"
+									       data-bv-date-message="The value is not a valid date." />
 									<span class="input-group-addon">
 										<span class="glyphicon glyphicon-calendar"></span>
 									</span>
@@ -98,10 +99,10 @@
 							<label class="col-sm-2 control-label" for="newVotingFinishDate">* Finish date:</label>
 							<div class="col-sm-4">
 								<div class="input-group date" id="newVotingFinishDate" data-datetime-picker="" data-validate="true"
-									data-is-depend="true" data-depend-on="#newVotingStartDate" data-depend-on-min="false">
+								     data-is-depend="true" data-depend-on="#newVotingStartDate" data-depend-on-min="false">
 									<input type="text" class="form-control" name="FinishDate" data-format="MM/DD/YYYY"
-										required data-bv-date="true" data-bv-date-format="MM/DD/YYYY"
-										data-bv-date-message="The value is not a valid date." />
+									       required data-bv-date="true" data-bv-date-format="MM/DD/YYYY"
+									       data-bv-date-message="The value is not a valid date." />
 									<span class="input-group-addon">
 										<span class="glyphicon glyphicon-calendar"></span>
 									</span>
@@ -112,7 +113,7 @@
 							<label class="col-sm-2 control-label" for="">Description:</label>
 							<div class="col-sm-10">
 								<textarea class="form-control" rows="8" name="Description"
-									data-ng-model="newVoting.Description" data-bootstrap-markdown=""></textarea>
+								          data-ng-model="newVoting.Description" data-bootstrap-markdown=""></textarea>
 							</div>
 						</div>
 					</form>
@@ -143,11 +144,11 @@
 							<a data-ng-repeat="question in newVoting.Questions" data-ng-click="openQuestion(question)" class="list-group-item">{{question.Text}}
 								<i class="pull-right fa fa-minus" data-ng-click="removeQuestion(question)"></i>
 								<label class="label-primary-question pull-right"
-									data-ng-if="question.Type==0">
+								       data-ng-if="question.Type==0">
 									(Open Question)
 								</label>
 								<label class="label-primary-question pull-right"
-									data-ng-if="question.Type==1">
+								       data-ng-if="question.Type==1">
 									(Choice Question)
 								</label>
 							</a>
@@ -181,15 +182,15 @@
 								<div class="radio">
 									<label>
 										<input type="radio" data-ng-model="newQuestion.Type"
-											data-ng-click="newQuestion.FixedAnswers=[]"
-											value="0" name="Type" checked="checked" required="">
+										       data-ng-click="newQuestion.FixedAnswers=[]"
+										       value="0" name="Type" checked="checked" required="">
 										Open Question
 									</label>
 								</div>
 								<div class="radio">
 									<label>
 										<input type="radio" data-ng-model="newQuestion.Type" value="1"
-											name="Type" required="">
+										       name="Type" required="">
 										Choice Question
 									</label>
 								</div>
@@ -204,7 +205,7 @@
 						<div class="form-group" data-ng-show="newQuestion.Type==1">
 							<div class="col-sm-10 col-sm-offset-2">
 								<button type="button" class="btn btn-default btn-primary btn-sm"
-									data-toggle="modal" href="#defineAnswersModal">
+								        data-toggle="modal" href="#defineAnswersModal">
 									<i class="glyphicon glyphicon-plus"></i>Define Answers
 								</button>
 							</div>

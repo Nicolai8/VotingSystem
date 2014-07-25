@@ -1,205 +1,202 @@
-﻿<div class="col-xs-12">
-	<div class="row clearfix">
-		<div class="col-sm-9 col-xs-12">
-			<div id="votingPage" class="page">
-				<div id="votingPageContent">
-					<h1>{{voting.VotingName}}</h1>
-					<p class="lead">
-						by <a data-ng-href="#/profilepage/{{voting.CreatedBy}}">{{voting.CreatedBy}}</a>
-					</p>
-					<hr>
-					<p>
-						<i class="glyphicon glyphicon-time"></i>Posted on {{voting.CreateDate}}
-					</p>
-					<div class="row clearfix">
-						<div class="col-md-6">
-							<b>Start Date: </b>{{voting.StartDate}}
-						</div>
-						<div class="col-md-6">
-							<b>Time Left: </b>{{voting.TimeLeft}}
-						</div>
-					</div>
-					<div class="row clearfix">
-						<div class="col-md-6">
-							<b>Total Votes: </b>{{voting.TotalVotes}}
-						</div>
-					</div>
-					<br />
-					<p><strong>Description:</strong></p>
-					<p data-trust-html="{{voting.Description}}"></p>
-					<br />
-					<div class="row">
-						<div class="col-xs-6">
-							<button class="btn btn-default text-center margin-bottom-x2" data-toggle="collapse" data-target="#votingResults"
-								data-ng-show="isAnswered || voting.Status==3">
-								Toggle results</button>
-						</div>
-						<div class="col-xs-12 col-sm-6">
-							<span data-ng-show="isAnswered">You already answered on this voting.
-							</span>
-							<button class="btn btn-primary" data-toggle="modal" data-target="#votingModal"
-								data-ng-if="!isAnswered && voting.Status!=3">
-								Vote
-							</button>
-						</div>
-						<div id="votingResults" class="row collapse">
-							<div class="col-xs-12">
-								<ul class="nav nav-tabs" role="tablist">
-									<li class="active"><a href=".result-table" role="tab" data-toggle="tab">Grid View</a></li>
-									<li><a href=".result-chart" role="tab" data-toggle="tab">Chart View</a></li>
-								</ul>
-								<div class="tab-content">
-									<div class="tab-pane active result-table">
-										<div class="col-xs-12" data-ng-repeat="result in results">
-											<div class="table-responsive panel panel-default">
-												<div class="panel-heading">{{result.Text}}</div>
-												<table class="table table-hover table-striped table-bordered table-condensed">
-													<thead>
-														<tr>
-															<th class="col-xs-10">Answer</th>
-															<th class="col-xs-2">Count</th>
-														</tr>
-													</thead>
-													<tbody>
-														<tr data-ng-repeat="answer in result.Answers" data-ng-class="{true: 'text-danger'}[$index == result.AnswerIndex]">
-															<td>{{answer[0]}}</td>
-															<td>{{answer[1]}}</td>
-														</tr>
-													</tbody>
-												</table>
-											</div>
-										</div>
-									</div>
-									<div class="tab-pane result-chart">
-										<div data-ng-repeat="result in results">
-											<div data-pie-chart=""
-												data-answers="{{result.Answers}}"
-												data-answer-index="{{result.AnswerIndex}}"
-												data-title="{{result.Text}}">
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-					<br />
-
-					<div class="modal" id="votingModal" tabindex="-1" role="dialog" aria-hidden="true">
-						<div class="modal-dialog">
-							<div class="modal-content">
-								<div class="modal-header">
-									<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-									<h4 class="modal-title">{{voting.VotingName}}</h4>
-								</div>
-								<div class="modal-body">
-									<div class="alert alert-warning">
-										<strong>Please be careful!</strong> After posting your vote you will not be able to change or delete it.
-									</div>
-									<form role="form" class="form-horizontal">
-										<div id="questions" data-ng-repeat="question in voting.Questions">
-											<div class="form-group" data-ng-if="question.Type==0" data-ng-init="question.AnswerText=''">
-												<div>
-													<label for="" class="col-xs-5 control-label">{{question.Text}}</label>
-													<div class="col-xs-7">
-														<input type="text" data-ng-model="question.AnswerText" class="form-control" required="" name="{{question.QuestionId}}" />
-													</div>
-												</div>
-											</div>
-											<div class="form-group" data-ng-if="question.Type==1">
-												<div>
-													<label for="" class="col-xs-5 control-label">{{question.Text}}</label>
-													<div class="col-xs-7">
-														<div class="well well-sm">
-															<div class="radio" data-ng-repeat="answer in question.FixedAnswers">
-																<label>
-																	<input type="radio" data-ng-model="question.FixedAnswerId" data-ng-change="question.AnswerText=answer.AnswerText"
-																		name="Question{{question.QuestionId}}" value="{{answer.Id}}"
-																		required="" data-bv-notempty="true" data-bv-notempty-message="Select" />
-																	{{answer.AnswerText}}
-																</label>
-															</div>
-														</div>
-													</div>
-												</div>
-											</div>
-										</div>
-										<div class="form-group" data-ng-hide="authenticated">
-											<label class="col-xs-5 control-label">
-												<img alt="Captcha" id="captchaImage" data-ng-src="{{captchaUrl}}" />
-											</label>
-											<div class="col-xs-7">
-												<input type="text" data-ng-model="captcha" class="form-control" required name="captchaText" />
-											</div>
-										</div>
-
-									</form>
-								</div>
-								<div class="modal-footer">
-									<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-									<button type="button" data-ng-click="vote()" class="btn btn-primary">Vote</button>
-								</div>
-							</div>
-						</div>
-					</div>
+﻿<div class="col-sm-9 col-xs-12">
+	<div data-breadcrumb="" />
+	<div id="votingPage" class="page">
+		<div id="votingPageContent">
+			<h1>{{voting.VotingName}}</h1>
+			<p class="lead">
+				by <a data-ng-href="#/profilepage/{{voting.CreatedBy}}">{{voting.CreatedBy}}</a>
+			</p>
+			<hr>
+			<p>
+				<i class="glyphicon glyphicon-time"></i>Posted on {{voting.CreateDate}}
+			</p>
+			<div class="row clearfix">
+				<div class="col-md-6">
+					<b>Start Date: </b>{{voting.StartDate}}
 				</div>
-
-				<div class="row" data-ng-show="authenticated">
-					<div class="well">
-						<h4>Leave a Comment:</h4>
-						<form role="form" data-validate-form="">
-							<div class="form-group">
-								<textarea class="form-control" rows="3" name="newCommentText"
-									data-ng-keypress="newCommentKeyPressHandler($event)"
-									required data-bv-stringlength="true" data-ng-model="newCommentText"
-									data-bv-stringlength-min="4" data-bv-stringlength-message="Comment lenght can't be less than 4 characters."></textarea>
-							</div>
-							<button class="btn btn-primary" data-ng-click="addNewComment()"><i class="glyphicon glyphicon-plus"></i>Add comment</button>
-						</form>
-					</div>
+				<div class="col-md-6">
+					<b>Time Left: </b>{{voting.TimeLeft}}
 				</div>
-				<hr />
-				<div class="row">
-					<div class="comments-widget">
-						<ul class="list-group">
-							<li class=" list-group-item" data-ng-repeat="comment in voting.Comments">
-								<div class="row">
-									<div class="col-xs-2 col-md-2">
-										<img data-ng-src="{{comment.PictureUrl}}" class="img-responsive img-thumbnail" alt="" />
-									</div>
-									<div class="col-xs-10 col-md-10">
-										<div>
-											<div class="mic-info">
-												By: <a data-ng-href="#/profilepage/{{comment.CreatedBy}}">{{comment.CreatedBy}}</a> on {{comment.CreateDate}}
-											</div>
-										</div>
-										<div>
-											<p>{{comment.CommentText}}</p>
-										</div>
-										<div class="action" data-ng-show="comment.Own">
-											<button type="button" class="btn btn-danger btn-xs" title="Delete" data-ng-click="removeComment(comment)">
-												<span class="glyphicon glyphicon-trash"></span>
-											</button>
-										</div>
-									</div>
-								</div>
-							</li>
+			</div>
+			<div class="row clearfix">
+				<div class="col-md-6">
+					<b>Total Votes: </b>{{voting.TotalVotes}}
+				</div>
+			</div>
+			<br />
+			<p><strong>Description:</strong></p>
+			<p data-trust-html="{{voting.Description}}"></p>
+			<br />
+			<div class="row">
+				<div class="col-xs-6">
+					<button class="btn btn-default text-center margin-bottom-x2" data-toggle="collapse" data-target="#votingResults"
+						data-ng-show="isAnswered || voting.Status==3">
+						Toggle results</button>
+				</div>
+				<div class="col-xs-12 col-sm-6">
+					<span data-ng-show="isAnswered">You already answered on this voting.
+					</span>
+					<button class="btn btn-primary" data-toggle="modal" data-target="#votingModal"
+						data-ng-if="!isAnswered && voting.Status!=3">
+						Vote
+					</button>
+				</div>
+				<div id="votingResults" class="row collapse">
+					<div class="col-xs-12">
+						<ul class="nav nav-tabs" role="tablist">
+							<li class="active"><a href=".result-table" role="tab" data-toggle="tab">Grid View</a></li>
+							<li><a href=".result-chart" role="tab" data-toggle="tab">Chart View</a></li>
 						</ul>
+						<div class="tab-content">
+							<div class="tab-pane active result-table">
+								<div class="col-xs-12" data-ng-repeat="result in results">
+									<div class="table-responsive panel panel-default">
+										<div class="panel-heading">{{result.Text}}</div>
+										<table class="table table-hover table-striped table-bordered table-condensed">
+											<thead>
+												<tr>
+													<th class="col-xs-10">Answer</th>
+													<th class="col-xs-2">Count</th>
+												</tr>
+											</thead>
+											<tbody>
+												<tr data-ng-repeat="answer in result.Answers" data-ng-class="{true: 'text-danger'}[$index == result.AnswerIndex]">
+													<td>{{answer[0]}}</td>
+													<td>{{answer[1]}}</td>
+												</tr>
+											</tbody>
+										</table>
+									</div>
+								</div>
+							</div>
+							<div class="tab-pane result-chart">
+								<div data-ng-repeat="result in results">
+									<div data-pie-chart=""
+										data-answers="{{result.Answers}}"
+										data-answer-index="{{result.AnswerIndex}}"
+										data-title="{{result.Text}}">
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<br />
+
+			<div class="modal" id="votingModal" tabindex="-1" role="dialog" aria-hidden="true">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+							<h4 class="modal-title">{{voting.VotingName}}</h4>
+						</div>
+						<div class="modal-body">
+							<div class="alert alert-warning">
+								<strong>Please be careful!</strong> After posting your vote you will not be able to change or delete it.
+							</div>
+							<form role="form" class="form-horizontal">
+								<div id="questions" data-ng-repeat="question in voting.Questions">
+									<div class="form-group" data-ng-if="question.Type==0" data-ng-init="question.AnswerText=''">
+										<div>
+											<label for="" class="col-xs-5 control-label">{{question.Text}}</label>
+											<div class="col-xs-7">
+												<input type="text" data-ng-model="question.AnswerText" class="form-control" required="" name="{{question.QuestionId}}" />
+											</div>
+										</div>
+									</div>
+									<div class="form-group" data-ng-if="question.Type==1">
+										<div>
+											<label for="" class="col-xs-5 control-label">{{question.Text}}</label>
+											<div class="col-xs-7">
+												<div class="well well-sm">
+													<div class="radio" data-ng-repeat="answer in question.FixedAnswers">
+														<label>
+															<input type="radio" data-ng-model="question.FixedAnswerId" data-ng-change="question.AnswerText=answer.AnswerText"
+																name="Question{{question.QuestionId}}" value="{{answer.Id}}"
+																required="" data-bv-notempty="true" data-bv-notempty-message="Select" />
+															{{answer.AnswerText}}
+														</label>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="form-group" data-ng-hide="authenticated">
+									<label class="col-xs-5 control-label">
+										<img alt="Captcha" id="captchaImage" data-ng-src="{{captchaUrl}}" />
+									</label>
+									<div class="col-xs-7">
+										<input type="text" data-ng-model="captcha" class="form-control" required name="captchaText" />
+									</div>
+								</div>
+
+							</form>
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+							<button type="button" data-ng-click="vote()" class="btn btn-primary">Vote</button>
+						</div>
 					</div>
 				</div>
 			</div>
 		</div>
-		<div class="col-sm-3 hidden-xs page">
-			<div class="well well-sm sidebar">
-				<div class="input-group">
-					<input type="text" placeholder="search" class="form-control" data-ng-model="searchQuery">
-					<span class="input-group-btn">
-						<a class="btn btn-default" data-ng-href="#/mainpage/1/{{searchQuery}}">
-							<span class="glyphicon glyphicon-search"></span>
-						</a>
-					</span>
-				</div>
+
+		<div class="row" data-ng-show="authenticated">
+			<div class="well">
+				<h4>Leave a Comment:</h4>
+				<form role="form" data-validate-form="">
+					<div class="form-group">
+						<textarea class="form-control" rows="3" name="newCommentText"
+							data-ng-keypress="newCommentKeyPressHandler($event)"
+							required data-bv-stringlength="true" data-ng-model="newCommentText"
+							data-bv-stringlength-min="4" data-bv-stringlength-message="Comment lenght can't be less than 4 characters."></textarea>
+					</div>
+					<button class="btn btn-primary" data-ng-click="addNewComment()"><i class="glyphicon glyphicon-plus"></i>Add comment</button>
+				</form>
 			</div>
+		</div>
+		<hr />
+		<div class="row">
+			<div class="comments-widget">
+				<ul class="list-group">
+					<li class=" list-group-item" data-ng-repeat="comment in voting.Comments">
+						<div class="row">
+							<div class="col-xs-2 col-md-2">
+								<img data-ng-src="{{comment.PictureUrl}}" class="img-responsive img-thumbnail" alt="" />
+							</div>
+							<div class="col-xs-10 col-md-10">
+								<div>
+									<div class="mic-info">
+										By: <a data-ng-href="#/profilepage/{{comment.CreatedBy}}">{{comment.CreatedBy}}</a> on {{comment.CreateDate}}
+									</div>
+								</div>
+								<div>
+									<p>{{comment.CommentText}}</p>
+								</div>
+								<div class="action" data-ng-show="comment.Own">
+									<button type="button" class="btn btn-danger btn-xs" title="Delete" data-ng-click="removeComment(comment)">
+										<span class="glyphicon glyphicon-trash"></span>
+									</button>
+								</div>
+							</div>
+						</div>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="col-sm-3 hidden-xs page">
+	<div class="well well-sm sidebar">
+		<div class="input-group">
+			<input type="text" placeholder="search" class="form-control" data-ng-model="searchQuery">
+			<span class="input-group-btn">
+				<a class="btn btn-default" data-ng-href="#/mainpage/1/{{searchQuery}}">
+					<span class="glyphicon glyphicon-search"></span>
+				</a>
+			</span>
 		</div>
 	</div>
 </div>

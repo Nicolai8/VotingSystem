@@ -768,6 +768,7 @@
     <Content Include="Scripts\user-defined\controllers\angular.controller.voices.js" />
     <Content Include="Scripts\user-defined\controllers\angular.controller.adminvotings.js" />
     <Content Include="Scripts\user-defined\controllers\angular.controller.voting.js" />
+    <Content Include="Scripts\user-defined\directives\angular.directive.breadcrumb.js" />
     <Content Include="Scripts\user-defined\directives\angular.directive.bootstrapmarkdown.js" />
     <Content Include="Scripts\user-defined\directives\angular.directive.datetimepicker.js" />
     <Content Include="Scripts\user-defined\directives\angular.directive.focusOut.js" />
@@ -877,6 +878,7 @@
     <Content Include="Views\Shared\Templates\NewQuestionTemplate.cshtml" />
     <Content Include="Scripts\libraries\angular\version.json" />
     <Content Include="Scripts\user-defined\controllers\angular.controller.users.js" />
+    <Content Include="Static\breadcrumb.html" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

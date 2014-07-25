@@ -7,6 +7,7 @@
 					$scope.isSuggested = angular.isDefined($routeParams.suggested) && $routeParams.suggested == "suggested";
 					$scope.pageName = "userspage";
 					$scope.pageType = $scope.isSuggested ? "SuggestedUsers" : "Users",
+					$scope.breadCrumbItemName = "Admin" + ($scope.isSuggested ? " Suggested" : "") + " Users",
 					$scope.total = 1;
 					$scope.constants = constants;
 					$scope.$route = $route;

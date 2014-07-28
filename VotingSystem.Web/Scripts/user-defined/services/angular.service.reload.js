@@ -2,10 +2,10 @@
 	return function () {
 		angular.module("votingSystem")
 			.factory("$reload", function () {
-				return function (scope, path) {
+				return function (scope, arrayLength, path) {
 					var pageNumber = scope.page;
 					if (pageNumber != 1) {
-						if (scope.votings.length == 0) {
+						if (arrayLength == 0) {
 							pageNumber -= 1;
 						}
 					}

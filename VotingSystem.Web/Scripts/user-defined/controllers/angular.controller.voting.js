@@ -46,9 +46,9 @@
 								function (comment) {
 									$scope.voting.Comments.unshift(comment);
 									$scope.newCommentText = "";
-									$form.reset();
 									toastr.success(constants("commentSavedMessage"));
 									$scope.$parent.commentsHub.server.createComment(comment);
+									$form.resetForm();
 								}, function () {
 									toastr.error(constants("errorOccurredDuringSavingProcessMessage"));
 								});
@@ -59,7 +59,7 @@
 
 					$scope.newCommentKeyPressHandler = function ($event) {
 						if (($event.which == 13 || $event.which == 10) && $event.ctrlKey) {
-							$scope.addNewComment();
+							$scope.addNewComment($event);
 						}
 					};
 

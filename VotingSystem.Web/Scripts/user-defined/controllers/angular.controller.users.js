@@ -45,10 +45,10 @@
 						var $form = $modal.find("form[data-validate-form]").data("bootstrapValidator");
 						if ($form.isValid()) {
 							$scope.editUser.$update()
-								.then(function() {
+								.then(function () {
 									$modal.modal("hide");
 									toastr.success(constants("userRolesChangedMessage"));
-								}, function() {
+								}, function () {
 									$scope.editUser.Roles = oldRoles;
 									toastr.error(constants("errorOccurredDuringSavingProcessMessage"));
 								});
@@ -73,7 +73,7 @@
 								.then(function () {
 									$scope.users.splice($scope.users.indexOf(user), 1);
 									toastr.success(constants("userDeletedMessage"));
-									$scope.reload($scope, "/" + $scope.pageName + "/{pageNumber}/" + $scope.$routeParams.suggested);
+									$scope.reload($scope, $scope.users.length, "/" + $scope.pageName + "/{pageNumber}/" + $scope.$routeParams.suggested);
 								}, function () {
 									toastr.error(constants("errorOccurredDuringDeletingProcessMessage"));
 								});
@@ -85,7 +85,7 @@
 							.then(function () {
 								$scope.users.splice($scope.users.indexOf(user), 1);
 								toastr.success(constants("userUnSuggestMessage"));
-								$scope.reload($scope, "/" + $scope.pageName + "/{pageNumber}/" + $scope.$routeParams.suggested);
+								$scope.reload($scope, $scope.users.length, "/" + $scope.pageName + "/{pageNumber}/" + $scope.$routeParams.suggested);
 							}, function () {
 								toastr.error(constants("errorOccurredDuringSavingProcessMessage"));
 							});

@@ -10,7 +10,7 @@
 					$scope.$location = $location;
 					$scope.$route = $route;
 					$scope.reload = $reload;
-					
+
 					$scope.$parent.changePageOnHub();
 
 					commentStorage.query({ page: $scope.page },
@@ -22,13 +22,13 @@
 								});
 						});
 
-					$scope.removeComment = function(comment) {
+					$scope.removeComment = function (comment) {
 						comment.$remove()
 							.then(function () {
 								$scope.comments.splice($scope.comments.indexOf(comment), 1);
 								toastr.success(constants("commentDeletedMessage"));
-								$scope.reload($scope, "/" + $scope.pageName + "/{pageNumber}");
-							}, function() {
+								$scope.reload($scope, $scope.comments.length, "/" + $scope.pageName + "/{pageNumber}");
+							}, function () {
 								toastr.error(constants("errorOccurredDuringDeletingProcessMessage"));
 							});
 					};

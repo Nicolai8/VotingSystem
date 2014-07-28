@@ -47,7 +47,7 @@
 							function () {
 								$scope.votings.splice($scope.votings.indexOf(voting), 1);
 								toastr.success(constants("votingDeletedMessage"));
-								$scope.reload($scope, "/" + $scope.pageName + "/{pageNumber}");
+								$scope.reload($scope, $scope.votings.length, "/" + $scope.pageName + "/{pageNumber}");
 							},
 							function () {
 								toastr.error(constants("errorOccurredDuringDeletingProcessMessage"));
@@ -62,7 +62,7 @@
 							function () {
 								angular.element($event.currentTarget).closest(".modal").modal("hide");
 								toastr.success(constants("votingCreatedMessage"));
-								$scope.reload($scope, "/" + $scope.pageName + "/{pageNumber}");
+								$scope.reload($scope, $scope.votings.length, "/" + $scope.pageName + "/{pageNumber}");
 							}, function () {
 								angular.element($event.currentTarget).closest(".modal").modal("hide");
 								toastr.error(constants("errorOccurredDuringSavingProcessMessage"));
@@ -82,6 +82,7 @@
 						if ($scope.newVoting.Questions.indexOf(newQuestion) == -1) {
 							$scope.newVoting.Questions.push(angular.copy(newQuestion));
 						}
+						$scope.newQuestion = { FixedAnswers: [] };
 						angular.element($event.currentTarget).closest(".modal").modal("hide");
 					};
 

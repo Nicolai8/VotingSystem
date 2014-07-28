@@ -9,6 +9,8 @@
 					$routeParams.searchQuery = $routeParams.searchQuery ? $routeParams.searchQuery : "";
 					$scope.searchQuery = $routeParams.searchQuery;
 					$scope.constants = constants;
+					
+					$scope.$parent.changePageOnHub();
 
 					votingStorage.query(
 						{

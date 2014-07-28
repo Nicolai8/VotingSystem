@@ -17,6 +17,8 @@
 					$scope.editUserRoles = [];
 					$scope.reload = $reload;
 
+					$scope.$parent.changePageOnHub();
+
 					$http.get(Urls.UsersPage.GetAllRoles)
 						.success(function (roles) {
 							$scope.roles = roles;

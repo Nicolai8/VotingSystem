@@ -12,6 +12,8 @@
 					$scope.reload = $reload;
 					$scope.votings = [];
 
+					$scope.$parent.changePageOnHub();
+
 					votingStorage.query(
 						{
 							pageType: "UserVotings",

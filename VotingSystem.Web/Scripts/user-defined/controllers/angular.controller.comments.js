@@ -10,6 +10,8 @@
 					$scope.$location = $location;
 					$scope.$route = $route;
 					$scope.reload = $reload;
+					
+					$scope.$parent.changePageOnHub();
 
 					commentStorage.query({ page: $scope.page },
 						function (data) {

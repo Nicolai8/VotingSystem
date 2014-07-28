@@ -11,6 +11,8 @@
 					$scope.$routeParams = $routeParams;
 					$scope.user = user;
 
+					$scope.$parent.changePageOnHub();
+
 					$scope.toggleLockUser = function () {
 						var oldValue = angular.copy($scope.user.IsBlocked);
 						$scope.user.IsBlocked = !$scope.user.IsBlocked;

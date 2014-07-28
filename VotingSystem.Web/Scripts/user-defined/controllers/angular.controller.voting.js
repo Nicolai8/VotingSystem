@@ -13,6 +13,8 @@
 					$scope.newCommentText = "";
 					$scope.isAnswered = false;
 
+					$scope.$parent.changePageOnHub($scope.votingId);
+
 					$scope.checkIfAnswered = function () {
 						$scope.isAnswered = $scope.voting.IsAnswered
 							|| (!$scope.$parent.authenticated
@@ -43,6 +45,7 @@
 								$scope.voting.Comments.unshift(comment);
 								$scope.newCommentText = "";
 								toastr.success(constants("commentSavedMessage"));
+								$scope.$parent.commentsHub.server.createComment(comment);
 							}, function () {
 								toastr.error(constants("errorOccurredDuringSavingProcessMessage"));
 							});
@@ -65,6 +68,7 @@
 							function () {
 								$scope.voting.Comments.splice($scope.voting.Comments.indexOf(comment), 1);
 								toastr.success(constants("commentDeletedMessage"));
+								$scope.$parent.commentsHub.server.deleteComment(comment.CommentId, comment.VotingId);
 							}, function () {
 								toastr.error(constants("errorOccurredDuringDeletingProcessMessage"));
 							});

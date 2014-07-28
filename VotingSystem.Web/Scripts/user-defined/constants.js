@@ -1,7 +1,7 @@
 ﻿define(["underi18n"], function () {
 	var constants = {
 		"answerSavedMessage": "Your answer was saved.",
-
+		
 		"canUseLoginMessage": "You can use this username.",
 		"commentSavedMessage": "Comment was successfully added.",
 		"commentLengthMessage": "Comment lenght can't be less than 4 characters.",
@@ -17,6 +17,8 @@
 		"emptyFixedAnswerMessage": "Please specify answer text for this predefined answer.",
 		"errorOccurredDuringDeletingProcessMessage": "An error occurred during deleting process.",
 		"errorOccurredDuringSavingProcessMessage": "An error occurred during saving process.",
+
+		"invalidAnswerMessage": "Please fill all fields and continue.",
 
 		"loadResultFailedMessage": "Failed to load voting results.",
 		"loginAlreadyExistsMessage": "This username already exists.",

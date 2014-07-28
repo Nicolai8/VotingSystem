@@ -13,6 +13,7 @@
 					$scope.$route = $route;
 					$scope.$location = $location;
 					$scope.$routeParams = $routeParams;
+					$scope.roles = [];
 					$scope.editUserRoles = [];
 					$scope.reload = $reload;
 

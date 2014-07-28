@@ -317,7 +317,6 @@
     <Content Include="Content\css\jquery.fileupload.min.css">
       <DependentUpon>jquery.fileupload.css</DependentUpon>
     </Content>
-    <Content Include="Content\css\icheck.css" />
     <Content Include="Content\css\site.min.css" />
     <Content Include="Content\css\toastr.min.css" />
     <Content Include="Content\fonts\fontawesome-webfont.svg" />
@@ -627,7 +626,6 @@
     <Content Include="Scripts\libraries\angular\i18n\angular-locale_zu-za.js" />
     <Content Include="Scripts\libraries\angular\i18n\angular-locale_zu.js" />
     <Content Include="Scripts\libraries\async.js" />
-    <Content Include="Scripts\libraries\icheck.js" />
     <Content Include="Scripts\libraries\jquery.signalR-2.1.0.js" />
     <Content Include="Scripts\libraries\jquery.signalR-2.1.0.min.js" />
     <Content Include="Content\fonts\glyphicons-halflings-regular.eot" />
@@ -771,11 +769,12 @@
     <Content Include="Scripts\user-defined\directives\angular.directive.breadcrumb.js" />
     <Content Include="Scripts\user-defined\directives\angular.directive.bootstrapmarkdown.js" />
     <Content Include="Scripts\user-defined\directives\angular.directive.datetimepicker.js" />
-    <Content Include="Scripts\user-defined\directives\angular.directive.focusOut.js" />
+    <Content Include="Scripts\user-defined\directives\angular.directive.focusout.js" />
     <Content Include="Scripts\user-defined\directives\angular.directive.goback.js" />
     <Content Include="Scripts\user-defined\directives\angular.directive.paginator.js" />
     <Content Include="Scripts\user-defined\directives\angular.directive.piechart.js" />
     <Content Include="Scripts\user-defined\directives\angular.directive.trusthtml.js" />
+    <Content Include="Scripts\user-defined\directives\angular.directive.validatefield.js" />
     <Content Include="Scripts\user-defined\directives\angular.directive.validateform.js" />
     <Content Include="Scripts\user-defined\models\backbone.model.comment.js" />
     <Content Include="Scripts\user-defined\models\backbone.model.fixedanswer.js" />

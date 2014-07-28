@@ -27,7 +27,7 @@
 							<a data-ng-click="removeUser(user)">Remove</a> |
 							<a data-ng-if="isSuggested" data-ng-click="unsuggestUser(user)">Unsuggest</a>
 							<a data-ng-if="!isSuggested" data-ng-click="changeUserRoles(user)"
-							   data-toggle="modal" data-target="#changeRolesModal">Change Roles
+								data-toggle="modal" data-target="#changeRolesModal">Change Roles
 							</a>
 						</td>
 					</tr>
@@ -55,21 +55,18 @@
 					</h4>
 				</div>
 				<div class="modal-body">
-					<form class="form-horizontal" data-validate-form="true">
+					<form class="form-horizontal" data-validate-form="">
 						<div class="form-group">
-							<div id="roles" class="col-xs-offset-1">
-								<div class="checkbox hidden">
-									<input type="checkbox" data-default="true" name="roles[]" value="-1"
-									       data-bv-choice="true" data-bv-choice-min="1" data-bv-choice-message="At least one role should be selected." />
-								</div>
+							<div class="col-xs-offset-1">
 								<div class="checkbox" data-ng-repeat="roleName in roles">
 									<label>
 										<input type="checkbox" name="roles[]" value="{{roleName}}"
-										       data-bv-choice="true" data-bv-choice-min="1" data-bv-choice-message="At least one role should be selected."
-										       data-ng-checked="editUserRoles.indexOf(roleName)>-1" data-i-check=""
-										       data-ng-click="toggleRoleSelection(roleName)" />
-										{{roleName}}
+											data-bv-choice="true" data-bv-choice-min="1" data-bv-choice-message="At least one role should be selected."
+											data-ng-checked="editUser.Roles.indexOf(roleName)>-1"
+											data-validate-field=""
+											data-ng-click="toggleRoleSelection(roleName)" />
 									</label>
+									{{roleName}}
 								</div>
 							</div>
 						</div>

@@ -95,13 +95,14 @@
 							<div class="alert alert-warning">
 								<strong>Please be careful!</strong> After posting your vote you will not be able to change or delete it.
 							</div>
-							<form role="form" class="form-horizontal">
+							<form role="form" class="form-horizontal" data-validate-form="">
 								<div id="questions" data-ng-repeat="question in voting.Questions">
 									<div class="form-group" data-ng-if="question.Type==0" data-ng-init="question.AnswerText=''">
 										<div>
 											<label for="" class="col-xs-5 control-label">{{question.Text}}</label>
 											<div class="col-xs-7">
-												<input type="text" data-ng-model="question.AnswerText" class="form-control" required="" name="{{question.QuestionId}}" />
+												<input type="text" data-ng-model="question.AnswerText"
+													class="form-control" required="" data-validate-field="Question{{question.QuestionId}}" />
 											</div>
 										</div>
 									</div>
@@ -112,9 +113,10 @@
 												<div class="well well-sm">
 													<div class="radio" data-ng-repeat="answer in question.FixedAnswers">
 														<label>
-															<input type="radio" data-ng-model="question.FixedAnswerId" data-ng-change="question.AnswerText=answer.AnswerText"
-																name="Question{{question.QuestionId}}" value="{{answer.Id}}"
-																required="" data-bv-notempty="true" data-bv-notempty-message="Select" />
+															<input type="radio" data-ng-model="question.FixedAnswerId"
+																data-ng-value="{{answer.Id}}" data-ng-change="question.AnswerText=answer.AnswerText"
+																required="" data-bv-notempty="true" data-bv-notempty-message="Select"
+																data-validate-field="Question{{question.QuestionId}}" />
 															{{answer.AnswerText}}
 														</label>
 													</div>
@@ -123,15 +125,15 @@
 										</div>
 									</div>
 								</div>
-								<div class="form-group" data-ng-hide="authenticated">
+								<div class="form-group" data-ng-if="!authenticated">
 									<label class="col-xs-5 control-label">
 										<img alt="Captcha" id="captchaImage" data-ng-src="{{captchaUrl}}" />
 									</label>
 									<div class="col-xs-7">
-										<input type="text" data-ng-model="captcha" class="form-control" required name="captchaText" />
+										<input type="text" data-bv-integer="true" data-bv-integer-message="Captcha must be an integer"
+											data-ng-model="captcha" class="form-control" required name="captchaText" data-validate-field="" />
 									</div>
 								</div>
-
 							</form>
 						</div>
 						<div class="modal-footer">

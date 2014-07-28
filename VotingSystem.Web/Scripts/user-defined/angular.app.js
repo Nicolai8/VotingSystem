@@ -5,12 +5,13 @@
 	, "controllers/angular.controller.uservotings"
 	, "directives/angular.directive.paginator", "directives/angular.directive.validateform"
 	, "directives/angular.directive.focusout", "directives/angular.directive.goback"
-	, "directives/angular.directive.piechart", "directives/angular.directive.bootstrapmarkdown"
+	, "directives/angular.directive.piechart"
 	, "directives/angular.directive.datetimepicker", "directives/angular.directive.trusthtml"
 	, "directives/angular.directive.breadcrumb"
 	, "services/angular.service.votingstorage", "services/angular.service.userstorage"
 	, "services/angular.service.reload", "services/angular.service.commentstorage"
-	, "services/angular.service.voicestorage"
+	, "services/angular.service.voicestorage", "directives/angular.directive.bootstrapmarkdown"
+	, "directives/angular.directive.validatefield"
 	, "angular.route"//, "goog!visualization,1,packages:[corechart]"
 ],
 	function ($, angular,
@@ -18,12 +19,12 @@
 		commentsController, voicesController, userProfileController, votingController,
 		userVotingsController,
 		paginatorDirective, validateFormDirective, focusOutDirective, goBackDirective,
-		pieChartDirective, bootstrapMarkdownDirective, dateTimePickerDirective, trustHtmlDirective,
+		pieChartDirective, dateTimePickerDirective, trustHtmlDirective,
 		breadCrumbDirective,
 		votingStorageService, userStorageService, reloadService, commentStorageService,
 		voiceStorageService) {
 
-		var votingsystemControllers = angular.module("votingsystemControllers", []);
+		var votingsystemControllers = angular.module("votingSystem.Controllers", []);
 
 		layoutController(votingsystemControllers);
 		mainController(votingsystemControllers);
@@ -38,8 +39,9 @@
 		var votingSystem = angular.module("votingSystem", [
 			"ngRoute",
 			"ngResource",
-			"votingsystemControllers",
-			"votingSystem.Directives"
+			"votingSystem.Controllers",
+			"votingSystem.Directives",
+			"votingSystem.directives.validateField"
 		]);
 
 		votingStorageService();

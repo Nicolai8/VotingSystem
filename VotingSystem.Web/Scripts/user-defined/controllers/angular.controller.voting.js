@@ -12,7 +12,7 @@
 					$scope.captchaUrl = Urls.Captcha;
 					$scope.newCommentText = "";
 					$scope.isAnswered = false;
-					
+
 					$scope.checkIfAnswered = function () {
 						$scope.isAnswered = $scope.voting.IsAnswered
 							|| (!$scope.$parent.authenticated
@@ -29,7 +29,7 @@
 							);
 						}
 					};
-					
+
 					$scope.checkIfAnswered();
 					$scope.getResults();
 
@@ -47,7 +47,7 @@
 								toastr.error(constants("errorOccurredDuringSavingProcessMessage"));
 							});
 					};
-					
+
 					$scope.newCommentKeyPressHandler = function ($event) {
 						if (($event.which == 13 || $event.which == 10) && $event.ctrlKey) {
 							$scope.addNewComment();
@@ -71,30 +71,37 @@
 					};
 
 					$scope.vote = function () {
-						var voices = $scope.voting.Questions.map(function (question) {
-							var answer = {};
-							answer.AnswerText = question.AnswerText;
-							answer.FixedAnswerId = question.FixedAnswerId;
-							answer.QuestionId = question.QuestionId;
-							return answer;
-						});
-						voiceStorage.save({ captcha: $scope.captcha }, voices).$promise
-							.then(function (response) {
-								if (!$scope.$parent.authenticated) {
-									localStorage["VotingSystem.Vote#" + $scope.voting.VotingId] = "true";
-									localStorage["VotingSystem.Vote#" + $scope.voting.VotingId + ".Answers"] = JSON.stringify(voices);
-								}
-								$("#votingModal").modal("hide");
-
-								$scope.isAnswered = $scope.voting.IsAnswered = true;
-								$scope.voting.TotalVotes = response.total;
-								$scope.getResults();
-								toastr.success(constants("answerSavedMessage"));
-							}, function () {
-								toastr.error(constants("errorOccurredDuringSavingProcessMessage"));
-							}).then(function () {
-								$scope.updateCaptcha();
+						var $modal = $("#votingModal");
+						var $form = $modal.find("form[data-validate-form]").data("bootstrapValidator");
+						if ($form.isValid()) {
+							var voices = $scope.voting.Questions.map(function(question) {
+								var answer = {};
+								answer.AnswerText = question.AnswerText;
+								answer.FixedAnswerId = question.FixedAnswerId;
+								answer.QuestionId = question.QuestionId;
+								return answer;
 							});
+							voiceStorage.save({ captcha: $scope.captcha }, voices).$promise
+								.then(function(response) {
+									if (!$scope.$parent.authenticated) {
+										localStorage["VotingSystem.Vote#" + $scope.voting.VotingId] = "true";
+										localStorage["VotingSystem.Vote#" + $scope.voting.VotingId + ".Answers"] = JSON.stringify(voices);
+									}
+									$modal.modal("hide");
+
+									$scope.isAnswered = $scope.voting.IsAnswered = true;
+									$scope.voting.TotalVotes = response.total;
+									$scope.getResults();
+									toastr.success(constants("answerSavedMessage"));
+								}, function() {
+									toastr.error(constants("errorOccurredDuringSavingProcessMessage"));
+								}).then(function() {
+									$scope.updateCaptcha();
+								});
+						} else {
+							$form.validate();
+							toastr.info(constants("invalidAnswerMessage"));
+						}
 					};
 
 					function preprocessResults(results) {

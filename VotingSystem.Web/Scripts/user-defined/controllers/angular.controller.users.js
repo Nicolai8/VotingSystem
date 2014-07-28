@@ -41,16 +41,20 @@
 					$scope.changeRoles = function () {
 						var oldRoles = angular.copy($scope.editUser.Roles);
 						$scope.editUser.Roles = $scope.editUserRoles;
-						$scope.editUser.$update()
-							.then(function () {
-								$("#changeRolesModal").modal("hide");
-								toastr.success(constants("userRolesChangedMessage"));
-							}, function () {
-								$scope.editUser.Roles = oldRoles;
-								toastr.error(constants("errorOccurredDuringSavingProcessMessage"));
-							}
-						);
-
+						var $modal = $("#changeRolesModal");
+						var $form = $modal.find("form[data-validate-form]").data("bootstrapValidator");
+						if ($form.isValid()) {
+							$scope.editUser.$update()
+								.then(function() {
+									$modal.modal("hide");
+									toastr.success(constants("userRolesChangedMessage"));
+								}, function() {
+									$scope.editUser.Roles = oldRoles;
+									toastr.error(constants("errorOccurredDuringSavingProcessMessage"));
+								});
+						} else {
+							$form.validate();
+						}
 					};
 
 					$scope.toggleLockUser = function (user) {

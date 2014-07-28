@@ -35,20 +35,26 @@
 					$scope.checkIfAnswered();
 					$scope.getResults();
 
-					$scope.addNewComment = function () {
-						commentStorage.save(
-							{
-								CommentText: $scope.newCommentText,
-								ThemeId: $scope.voting.VotingId
-							},
-							function (comment) {
-								$scope.voting.Comments.unshift(comment);
-								$scope.newCommentText = "";
-								toastr.success(constants("commentSavedMessage"));
-								$scope.$parent.commentsHub.server.createComment(comment);
-							}, function () {
-								toastr.error(constants("errorOccurredDuringSavingProcessMessage"));
-							});
+					$scope.addNewComment = function (e) {
+						var $form = $(e.currentTarget).closest("form[data-validate-form]").data("bootstrapValidator");
+						if ($form.isValid()) {
+							commentStorage.save(
+								{
+									CommentText: $scope.newCommentText,
+									ThemeId: $scope.voting.VotingId
+								},
+								function (comment) {
+									$scope.voting.Comments.unshift(comment);
+									$scope.newCommentText = "";
+									$form.reset();
+									toastr.success(constants("commentSavedMessage"));
+									$scope.$parent.commentsHub.server.createComment(comment);
+								}, function () {
+									toastr.error(constants("errorOccurredDuringSavingProcessMessage"));
+								});
+						} else {
+							$form.validate();
+						}
 					};
 
 					$scope.newCommentKeyPressHandler = function ($event) {
@@ -78,7 +84,7 @@
 						var $modal = $("#votingModal");
 						var $form = $modal.find("form[data-validate-form]").data("bootstrapValidator");
 						if ($form.isValid()) {
-							var voices = $scope.voting.Questions.map(function(question) {
+							var voices = $scope.voting.Questions.map(function (question) {
 								var answer = {};
 								answer.AnswerText = question.AnswerText;
 								answer.FixedAnswerId = question.FixedAnswerId;
@@ -86,7 +92,7 @@
 								return answer;
 							});
 							voiceStorage.save({ captcha: $scope.captcha }, voices).$promise
-								.then(function(response) {
+								.then(function (response) {
 									if (!$scope.$parent.authenticated) {
 										localStorage["VotingSystem.Vote#" + $scope.voting.VotingId] = "true";
 										localStorage["VotingSystem.Vote#" + $scope.voting.VotingId + ".Answers"] = JSON.stringify(voices);
@@ -97,9 +103,9 @@
 									$scope.voting.TotalVotes = response.total;
 									$scope.getResults();
 									toastr.success(constants("answerSavedMessage"));
-								}, function() {
+								}, function () {
 									toastr.error(constants("errorOccurredDuringSavingProcessMessage"));
-								}).then(function() {
+								}).then(function () {
 									$scope.updateCaptcha();
 								});
 						} else {

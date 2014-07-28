@@ -57,8 +57,9 @@
 					$scope.addNewVoting = function ($event, newVoting) {
 						newVoting.StartDate = $("#newVotingStartDate :text").val();
 						newVoting.FinishTime = $("#newVotingFinishDate :text").val();
-						votingStorage.save({}, newVoting).$promise
-							.then(function () {
+						votingStorage.save(
+							{}, newVoting,
+							function () {
 								angular.element($event.currentTarget).closest(".modal").modal("hide");
 								toastr.success(constants("votingCreatedMessage"));
 								$scope.reload($scope, "/" + $scope.pageName + "/{pageNumber}");

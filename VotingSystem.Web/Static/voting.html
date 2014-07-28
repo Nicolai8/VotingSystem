@@ -1,6 +1,6 @@
 ﻿<div class="col-sm-9 col-xs-12" data-ng-init="breadCrumbItemName='Voting'">
-	<div data-breadcrumb="" />
-	<div id="votingPage" class="page">
+	<div data-ng-include="'static/breadcrumb.html'" />
+	<div id="votingPage">
 		<div id="votingPageContent">
 			<h1>{{voting.VotingName}}</h1>
 			<p class="lead">
@@ -190,15 +190,6 @@
 		</div>
 	</div>
 </div>
-<div class="col-sm-3 hidden-xs page">
-	<div class="well well-sm sidebar">
-		<div class="input-group">
-			<input type="text" placeholder="search" class="form-control" data-ng-model="searchQuery">
-			<span class="input-group-btn">
-				<a class="btn btn-default" data-ng-href="#/mainpage/1/{{searchQuery}}">
-					<span class="glyphicon glyphicon-search"></span>
-				</a>
-			</span>
-		</div>
-	</div>
+<div class="col-sm-3 hidden-xs">
+	<div data-ng-include="'static/sidebar.html'" />
 </div>

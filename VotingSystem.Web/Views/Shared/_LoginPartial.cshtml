@@ -1,4 +1,4 @@
-﻿<div class="modal fade" id="loginForm" tabindex="-1" role="dialog" aria-hidden="true">
+﻿<div class="modal fade" id="loginForm" tabindex="-1" role="dialog" aria-hidden="true" data-on-enter-press="logIn">
 	<div class="modal-dialog modal-md">
 		<div class="modal-content">
 			<div class="modal-header">
@@ -20,8 +20,7 @@
 						<div class="col-md-7">
 							<input id="password" name="password" type="password" placeholder="Password" class="form-control"
 								required data-bv-stringlength="true"
-							       data-bv-stringlength-min="6" data-bv-stringlength-message="Password must be at least 6 characters length."
-								data-ng-keypress="logInOnEnter($event)" />
+								data-bv-stringlength-min="6" data-bv-stringlength-message="Password must be at least 6 characters length." />
 						</div>
 					</div>
 				</form>
@@ -35,7 +34,7 @@
 	</div>
 </div>
 
-<div class="modal fade" id="registerForm" tabindex="-1" role="dialog" aria-hidden="true">
+<div class="modal fade" id="registerForm" tabindex="-1" role="dialog" aria-hidden="true" data-on-enter-press="register">
 	<div class="modal-dialog modal-md">
 		<div class="modal-content">
 			<div class="modal-header">
@@ -51,7 +50,7 @@
 							<div class="col-md-7">
 								<input id="registerUserName" name="userName" type="text" placeholder="Username" class="form-control"
 									required data-bv-stringlength="true" data-focus-out="checkUserName" data-ng-model="registerUserName"
-									data-bv-stringlength-min="5" data-bv-stringlength-message="Login must be at least 5 characters length."/>
+									data-bv-stringlength-min="5" data-bv-stringlength-message="Login must be at least 5 characters length." />
 							</div>
 						</div>
 						<div class="form-group">

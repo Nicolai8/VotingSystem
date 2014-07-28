@@ -759,13 +759,14 @@
     <Content Include="Scripts\user-defined\controllers\angular.controller.voices.js" />
     <Content Include="Scripts\user-defined\controllers\angular.controller.adminvotings.js" />
     <Content Include="Scripts\user-defined\controllers\angular.controller.voting.js" />
-    <Content Include="Scripts\user-defined\directives\angular.directive.breadcrumb.js" />
     <Content Include="Scripts\user-defined\directives\angular.directive.bootstrapmarkdown.js" />
     <Content Include="Scripts\user-defined\directives\angular.directive.datetimepicker.js" />
     <Content Include="Scripts\user-defined\directives\angular.directive.focusout.js" />
     <Content Include="Scripts\user-defined\directives\angular.directive.goback.js" />
+    <Content Include="Scripts\user-defined\directives\angular.directive.onenterpress.js" />
     <Content Include="Scripts\user-defined\directives\angular.directive.paginator.js" />
     <Content Include="Scripts\user-defined\directives\angular.directive.piechart.js" />
+    <Content Include="Scripts\user-defined\directives\angular.directive.notfound.js" />
     <Content Include="Scripts\user-defined\directives\angular.directive.trusthtml.js" />
     <Content Include="Scripts\user-defined\directives\angular.directive.validatefield.js" />
     <Content Include="Scripts\user-defined\directives\angular.directive.validateform.js" />
@@ -783,6 +784,8 @@
     <Content Include="Static\adminvotings.html" />
     <Content Include="Static\comments.html" />
     <Content Include="Static\main.html" />
+    <Content Include="Static\notfound.html" />
+    <Content Include="Static\sidebar.html" />
     <Content Include="Static\userprofile.html" />
     <Content Include="Static\users.html" />
     <Content Include="Static\uservotings.html" />

@@ -1,5 +1,5 @@
 ﻿<div class="col-xs-12" data-ng-controller="UserVotingsController" data-ng-init="breadCrumbItemName='Votings'">
-	<div data-breadcrumb="" />
+	<div data-ng-include="'static/breadcrumb.html'" />
 	<button type="button" class="btn btn-default btn-primary"
 	        data-toggle="modal" href="#addNewVotingModal" data-ng-click="newVoting = { Questions: [] }">
 		<i class="glyphicon glyphicon-plus"></i>Add New
@@ -48,16 +48,7 @@
 		</div>
 		<div data-ng-hide="votings.length==0" data-voting-paginator="" data-total="{{total}}"></div>
 	</div>
-	<div data-ng-show="votings.length==0">
-		<div class="panel panel-primary">
-			<div class="panel-heading">
-				<h3 class="panel-title">No data</h3>
-			</div>
-			<div class="panel-body">
-				{{constants("votingsNotFoundMessage")}}
-			</div>
-		</div>
-	</div>
+	<div data-ng-show="votings.length==0" data-not-found="votingsNotFoundMessage" />
 
 	<div class="modal" id="addNewVotingModal" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 		<div class="modal-dialog modal-lg">

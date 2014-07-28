@@ -13,16 +13,16 @@
 					$scope.logIn = function () {
 						var userName = $("#userName").val();
 						var password = $("#password").val();
-
-						if ($("#loginForm form[data-validate-form]").data("bootstrapValidator").isValid()) {
+						var $form = $("#loginForm form[data-validate-form]").data("bootstrapValidator");
+						if ($form.isValid()) {
 							$.ajax({
 								url: Urls.LoginPage.Login,
 								type: "POST",
 								data: { userName: userName, password: password, rememberMe: false },
-								beforeSend: function () {
+								beforeSend: function() {
 									$scope.stopCommentsHub();
 								}
-							}).done(function (data) {
+							}).done(function(data) {
 								if (data && data.result) {
 									$scope.authenticated = true;
 									$scope.accountName = userName;
@@ -32,12 +32,14 @@
 								} else {
 									toastr.error(constants("loginFailedMessage"));
 								}
-							}).fail(function () {
+							}).fail(function() {
 								toastr.error(constants("loginFailedMessage"));
-							}).always(function () {
+							}).always(function() {
 								$scope.startCommentsHub();
 								$("#password").val("");
 							});
+						} else {
+							$form.validate();
 						}
 					};
 
@@ -49,12 +51,6 @@
 							});
 						}
 					});
-
-					$scope.logInOnEnter = function ($event) {
-						if ($event.which == 13) {
-							$scope.logIn();
-						}
-					};
 
 					$scope.checkUserName = function () {
 						$.get(Urls.LoginPage.CheckUserName, { userName: $scope.registerUserName })
@@ -70,16 +66,19 @@
 					};
 
 					$scope.register = function () {
-						if ($("#registerInnerForm").data("bootstrapValidator").isValid()) {
+						var $form = $("#registerInnerForm").data("bootstrapValidator");
+						if ($form.isValid()) {
 							var userName = $scope.registerUserName;
 							var email = $scope.registerEmail;
 							$.post(Urls.LoginPage.Register, { newUserName: userName, email: email })
-								.done(function () {
+								.done(function() {
 									$("#registerForm").modal("hide");
 									toastr.success(constants("registrationSucceedMessage"));
-								}).fail(function () {
+								}).fail(function() {
 									toastr.error(constants("registrationFailedMessage"));
 								});
+						} else {
+							$form.validate();
 						}
 					};
 

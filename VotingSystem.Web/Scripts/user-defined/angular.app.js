@@ -7,11 +7,11 @@
 	, "directives/angular.directive.focusout", "directives/angular.directive.goback"
 	, "directives/angular.directive.piechart"
 	, "directives/angular.directive.datetimepicker", "directives/angular.directive.trusthtml"
-	, "directives/angular.directive.breadcrumb"
 	, "services/angular.service.votingstorage", "services/angular.service.userstorage"
 	, "services/angular.service.reload", "services/angular.service.commentstorage"
 	, "services/angular.service.voicestorage", "directives/angular.directive.bootstrapmarkdown"
-	, "directives/angular.directive.validatefield"
+	, "directives/angular.directive.validatefield", "directives/angular.directive.onenterpress"
+	, "directives/angular.directive.notfound"
 	, "angular.route"//, "goog!visualization,1,packages:[corechart]"
 ],
 	function ($, angular,
@@ -20,7 +20,6 @@
 		userVotingsController,
 		paginatorDirective, validateFormDirective, focusOutDirective, goBackDirective,
 		pieChartDirective, dateTimePickerDirective, trustHtmlDirective,
-		breadCrumbDirective,
 		votingStorageService, userStorageService, reloadService, commentStorageService,
 		voiceStorageService) {
 
@@ -41,7 +40,9 @@
 			"ngResource",
 			"votingSystem.Controllers",
 			"votingSystem.Directives",
-			"votingSystem.directives.validateField"
+			"votingSystem.directives.validateField",
+			"votingSystem.directives.onEnterPress",
+			"votingSystem.directives.notFound"
 		]);
 
 		votingStorageService();
@@ -127,5 +128,4 @@
 		//bootstrapMarkdownDirective(votingSystem);
 		dateTimePickerDirective(votingSystem);
 		trustHtmlDirective(votingSystem);
-		breadCrumbDirective(votingSystem);
 	});

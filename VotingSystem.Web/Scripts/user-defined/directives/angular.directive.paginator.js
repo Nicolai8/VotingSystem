@@ -1,7 +1,7 @@
-﻿define(["jquery", "bootstrap", "bootpag"],
-	function ($) {
-		return function (module) {
-			module.directive("votingPaginator", function () {
+﻿define(["jquery", "angular", "bootstrap", "bootpag"],
+	function ($, angular) {
+		angular.module("votingSystem.directives.votingPaginator", [])
+			.directive("votingPaginator", function () {
 				return function (scope, elem, attrs) {
 					attrs.$observe("total", function () {
 						if (scope.total == 0) {
@@ -15,8 +15,7 @@
 							maxVisible: 10,
 							page: scope.page
 						});
-					})
+					});
 				};
 			});
-		};
 	});

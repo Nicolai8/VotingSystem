@@ -1,55 +1,15 @@
-﻿define(["jquery", "angular", "controllers/angular.controller.layout", "controllers/angular.controller.main"
-	, "controllers/angular.controller.adminvotings", "controllers/angular.controller.users"
-	, "controllers/angular.controller.comments", "controllers/angular.controller.voices"
-	, "controllers/angular.controller.userprofile", "controllers/angular.controller.voting"
-	, "controllers/angular.controller.uservotings"
-	, "directives/angular.directive.paginator", "directives/angular.directive.validateform"
-	, "directives/angular.directive.focusout", "directives/angular.directive.goback"
-	, "directives/angular.directive.piechart"
-	, "directives/angular.directive.datetimepicker", "directives/angular.directive.trusthtml"
-	, "services/angular.service.votingstorage", "services/angular.service.userstorage"
-	, "services/angular.service.reload", "services/angular.service.commentstorage"
-	, "services/angular.service.voicestorage", "directives/angular.directive.bootstrapmarkdown"
-	, "directives/angular.directive.validatefield", "directives/angular.directive.onenterpress"
-	, "directives/angular.directive.notfound"
-	, "angular.route"//, "goog!visualization,1,packages:[corechart]"
+﻿define(["jquery", "angular", "angular.route", "angular.resource",
+		"services/angular.services", "controllers/angular.controllers", "directives/angular.directives"
 ],
-	function ($, angular,
-		layoutController, mainController, adminVotingsController, usersController,
-		commentsController, voicesController, userProfileController, votingController,
-		userVotingsController,
-		paginatorDirective, validateFormDirective, focusOutDirective, goBackDirective,
-		pieChartDirective, dateTimePickerDirective, trustHtmlDirective,
-		votingStorageService, userStorageService, reloadService, commentStorageService,
-		voiceStorageService) {
-
-		var votingsystemControllers = angular.module("votingSystem.Controllers", []);
-
-		layoutController(votingsystemControllers);
-		mainController(votingsystemControllers);
-		adminVotingsController(votingsystemControllers);
-		usersController(votingsystemControllers);
-		commentsController(votingsystemControllers);
-		voicesController(votingsystemControllers);
-		userProfileController(votingsystemControllers);
-		votingController(votingsystemControllers);
-		userVotingsController(votingsystemControllers);
+	function ($, angular) {
 
 		var votingSystem = angular.module("votingSystem", [
 			"ngRoute",
 			"ngResource",
-			"votingSystem.Controllers",
-			"votingSystem.Directives",
-			"votingSystem.directives.validateField",
-			"votingSystem.directives.onEnterPress",
-			"votingSystem.directives.notFound"
+			"votingSystem.controllers",
+			"votingSystem.directives",
+			"votingSystem.services"
 		]);
-
-		votingStorageService();
-		userStorageService();
-		reloadService();
-		commentStorageService();
-		voiceStorageService();
 
 		votingSystem.config(["$routeProvider", "$httpProvider", function ($routeProvider, $httpProvider) {
 			$routeProvider.when("/", {
@@ -119,13 +79,4 @@
 				});
 			};
 		});
-
-		paginatorDirective(votingSystem);
-		validateFormDirective(votingSystem);
-		focusOutDirective(votingSystem);
-		goBackDirective(votingSystem);
-		pieChartDirective(votingSystem);
-		//bootstrapMarkdownDirective(votingSystem);
-		dateTimePickerDirective(votingSystem);
-		trustHtmlDirective(votingSystem);
 	});

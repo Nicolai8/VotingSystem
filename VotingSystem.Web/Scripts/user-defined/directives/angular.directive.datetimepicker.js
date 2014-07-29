@@ -1,10 +1,10 @@
-﻿define(["jquery", "bootstrap", "bootstrapDatePicker"],
-	function ($) {
-		return function (module) {
-			module.directive("datetimePicker", function () {
+﻿define(["jquery", "angular", "bootstrap", "bootstrapDatePicker"],
+	function ($, angular) {
+		angular.module("votingSystem.directives.datetimePicker", [])
+			.directive("datetimePicker", function () {
 				return function (scope, elem, attrs) {
 					var $elem = $(elem);
-					
+
 					var options = {
 						validate: attrs.validate == "true",
 						validateField: $elem.find("input").attr("name"),
@@ -31,5 +31,4 @@
 					});
 				};
 			});
-		};
 	});

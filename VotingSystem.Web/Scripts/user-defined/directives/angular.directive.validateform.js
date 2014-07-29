@@ -1,7 +1,7 @@
-﻿define(["jquery", "bootstrap", "bootstrapValidator"],
-	function ($) {
-		return function (module) {
-			module.directive("validateForm", function () {
+﻿define(["jquery", "angular", "bootstrap", "bootstrapValidator"],
+	function ($, angular) {
+		angular.module("votingSystem.directives.validateForm", [])
+			.directive("validateForm", function () {
 				return function (scope, elem, attrs) {
 					if (attrs.validateForm != "false") {
 						$(elem).bootstrapValidator({
@@ -16,5 +16,4 @@
 					}
 				};
 			});
-		};
 	});

@@ -759,6 +759,7 @@
     <Content Include="Scripts\user-defined\controllers\angular.controller.voices.js" />
     <Content Include="Scripts\user-defined\controllers\angular.controller.adminvotings.js" />
     <Content Include="Scripts\user-defined\controllers\angular.controller.voting.js" />
+    <Content Include="Scripts\user-defined\controllers\angular.controllers.js" />
     <Content Include="Scripts\user-defined\directives\angular.directive.bootstrapmarkdown.js" />
     <Content Include="Scripts\user-defined\directives\angular.directive.datetimepicker.js" />
     <Content Include="Scripts\user-defined\directives\angular.directive.focusout.js" />
@@ -770,6 +771,7 @@
     <Content Include="Scripts\user-defined\directives\angular.directive.trusthtml.js" />
     <Content Include="Scripts\user-defined\directives\angular.directive.validatefield.js" />
     <Content Include="Scripts\user-defined\directives\angular.directive.validateform.js" />
+    <Content Include="Scripts\user-defined\directives\angular.directives.js" />
     <Content Include="Scripts\user-defined\services\angular.service.commentstorage.js" />
     <Content Include="Scripts\user-defined\services\angular.service.reload.js" />
     <Content Include="Scripts\user-defined\services\angular.service.userstorage.js" />
@@ -781,6 +783,7 @@
     <Content Include="Scripts\libraries\jquery-ui-1.10.3.js" />
     <Content Include="Scripts\libraries\underscore.js" />
     <Content Include="Scripts\user-defined\constants.js" />
+    <Content Include="Scripts\user-defined\services\angular.services.js" />
     <Content Include="Static\adminvotings.html" />
     <Content Include="Static\comments.html" />
     <Content Include="Static\main.html" />

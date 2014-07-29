@@ -1,7 +1,7 @@
-﻿define(["angular", "Urls", "angular.resource"],
+﻿define(["angular", "Urls"],
 	function (angular, Urls) {
-		return function () {
-			angular.module("votingSystem").factory("voiceStorage",
+		angular.module("votingSystem.services.voiceStorage", [])
+			.factory("voiceStorage",
 				function ($resource) {
 					return $resource(Urls.Voices, {},
 						{
@@ -31,6 +31,5 @@
 						}
 					);
 				});
-		};
 	});
 

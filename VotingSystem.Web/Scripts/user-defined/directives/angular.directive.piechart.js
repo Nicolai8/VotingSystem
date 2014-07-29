@@ -1,6 +1,6 @@
-﻿define([], function () {
-	return function (module) {
-		module.directive("pieChart", function () {
+﻿define(["angular"], function (angular) {
+	angular.module("votingSystem.directives.pieChart", [])
+		.directive("pieChart", function () {
 			return function (scope, elem, attrs) {
 				var arrayOfResults = JSON.parse(attrs.answers);
 				arrayOfResults.unshift(["Answer", "Count"]);
@@ -24,5 +24,4 @@
 				new google.visualization.PieChart(angular.element(elem)[0]).draw(data, options);
 			};
 		});
-	};
 });

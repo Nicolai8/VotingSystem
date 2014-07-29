@@ -1,10 +1,9 @@
-﻿define(["jquery"],
-	function ($) {
-		return function (module) {
-			module.directive("focusOut", function () {
+﻿define(["jquery", "angular"],
+	function ($, angular) {
+		angular.module("votingSystem.directives.focusOut", [])
+			.directive("focusOut", function () {
 				return function (scope, elem, attrs) {
 					$(elem).focusout(scope[attrs.focusOut]);
 				};
 			});
-		};
 	});

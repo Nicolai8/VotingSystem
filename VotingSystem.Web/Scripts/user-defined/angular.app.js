@@ -15,20 +15,20 @@
 			$routeProvider.when("/", {
 				redirectTo: "/mainpage/1"
 			}).when("/mainpage/:pageNumber/:searchQuery?", {
-				templateUrl: "static/main.html",
+				templateUrl: "views/templates/main.html",
 				controller: "MainController"
 			}).when("/uservotingspage/:pageNumber", {
-				templateUrl: "static/uservotings.html"
+				templateUrl: "views/templates/uservotings.html"
 			}).when("/adminvotingspage/:pageNumber", {
-				templateUrl: "static/adminvotings.html",
+				templateUrl: "views/templates/adminvotings.html",
 			}).when("/userspage/:pageNumber/:suggested?", {
-				templateUrl: "static/users.html"
+				templateUrl: "views/templates/users.html"
 			}).when("/commentspage/:pageNumber", {
-				templateUrl: "static/comments.html"
+				templateUrl: "views/templates/comments.html"
 			}).when("/voicespage/:pageNumber", {
-				templateUrl: "static/voices.html"
+				templateUrl: "views/templates/voices.html"
 			}).when("/profilepage/:userName?", {
-				templateUrl: "static/userprofile.html",
+				templateUrl: "views/templates/userprofile.html",
 				controller: "UserProfileController",
 				resolve: {
 					user: function (userStorage, $route) {
@@ -36,7 +36,7 @@
 					}
 				}
 			}).when("/votingpage/:votingId?", {
-				templateUrl: "static/voting.html",
+				templateUrl: "views/templates/voting.html",
 				controller: "VotingController",
 				resolve: {
 					voting: function (votingStorage, $route) {
@@ -45,7 +45,7 @@
 				}
 			}).when("/error:errorType", {
 				templateUrl: function (params) {
-					return "static/" + params.errorType + ".html";
+					return "views/templates/" + params.errorType + ".html";
 				}
 			}).otherwise({
 				redirectTo: "/error404"

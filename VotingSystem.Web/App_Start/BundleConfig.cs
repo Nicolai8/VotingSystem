@@ -12,8 +12,7 @@ namespace VotingSystem.Web
 			bundles.Add(new StyleBundle("~/bundles/css").Include(
 				"~/Content/css/bootstrap.min.css",
 				"~/Content/css/bootstrapValidator.min.css",
-				 "~/Content/css/jquery.fileupload.min.css",
-				 "~/Content/css/icheck.css"
+				 "~/Content/css/jquery.fileupload.min.css"
 				 ));
 
 			bundles.Add(new LessBundle("~/content/main").Include(

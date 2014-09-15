@@ -784,16 +784,16 @@
     <Content Include="Scripts\libraries\underscore.js" />
     <Content Include="Scripts\user-defined\constants.js" />
     <Content Include="Scripts\user-defined\services\angular.services.js" />
-    <Content Include="Static\adminvotings.html" />
-    <Content Include="Static\comments.html" />
-    <Content Include="Static\main.html" />
-    <Content Include="Static\notfound.html" />
-    <Content Include="Static\sidebar.html" />
-    <Content Include="Static\userprofile.html" />
-    <Content Include="Static\users.html" />
-    <Content Include="Static\uservotings.html" />
-    <Content Include="Static\voices.html" />
-    <Content Include="Static\voting.html" />
+    <Content Include="Views\Templates\adminvotings.html" />
+    <Content Include="Views\Templates\comments.html" />
+    <Content Include="Views\Templates\main.html" />
+    <Content Include="Views\Templates\notfound.html" />
+    <Content Include="Views\Templates\sidebar.html" />
+    <Content Include="Views\Templates\userprofile.html" />
+    <Content Include="Views\Templates\users.html" />
+    <Content Include="Views\Templates\uservotings.html" />
+    <Content Include="Views\Templates\voices.html" />
+    <Content Include="Views\Templates\voting.html" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -815,10 +815,10 @@
     <Content Include="Views\Shared\_NavbarPartial.cshtml" />
     <Content Include="Scripts\libraries\angular\version.json" />
     <Content Include="Scripts\user-defined\controllers\angular.controller.users.js" />
-    <Content Include="Static\breadcrumb.html" />
-    <Content Include="Static\403.html" />
-    <Content Include="Static\404.html" />
-    <Content Include="Static\500.html" />
+    <Content Include="Views\Templates\breadcrumb.html" />
+    <Content Include="Views\Templates\403.html" />
+    <Content Include="Views\Templates\404.html" />
+    <Content Include="Views\Templates\500.html" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

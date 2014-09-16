@@ -1,7 +1,7 @@
 ﻿define(["angular", "Urls", "constants", "angular.route"],
 	function (angular, Urls, constants) {
 		angular.module("votingSystem.controllers.main", [])
-			.controller("MainController", function ($scope, votingStorage, $http, $route, $routeParams) {
+			.controller("MainCtrl", function ($scope, $http, $route, $routeParams, VotingStorage) {
 				$scope.page = $routeParams.pageNumber;
 				$scope.pageName = "mainpage";
 				$scope.total = 1;
@@ -11,7 +11,7 @@
 
 				$scope.$parent.changePageOnHub();
 
-				votingStorage.query(
+				VotingStorage.query(
 					{
 						pageType: "MainPage",
 						page: $routeParams.pageNumber,
@@ -19,7 +19,7 @@
 					},
 					function (data) {
 						$scope.votings = data;
-						votingStorage.total(
+						VotingStorage.total(
 							{
 								totalKind: "totalactive",
 								query: $routeParams.searchQuery

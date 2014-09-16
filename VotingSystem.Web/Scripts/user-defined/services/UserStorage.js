@@ -1,7 +1,7 @@
 ﻿define(["angular", "Urls"],
 	function (angular, Urls) {
 		angular.module("votingSystem.services.userStorage", [])
-			.factory("userStorage", function ($resource) {
+			.factory("UserStorage", function ($resource) {
 				return $resource(Urls.Users + "/:id", { id: "@UserName" },
 					{
 						query: {

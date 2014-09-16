@@ -1,7 +1,7 @@
 ﻿define(["jquery", "angular", "Urls"],
 	function ($, angular, Urls, toastr, constants) {
 		angular.module("votingSystem.services.votingStorage", [])
-			.factory("votingStorage", function ($resource) {
+			.factory("VotingStorage", function ($resource) {
 				var resource = $resource(Urls.Votings + "/:id", { id: "@VotingId" },
 					{
 						query: {

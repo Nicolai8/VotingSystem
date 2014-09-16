@@ -1,5 +1,5 @@
 ﻿define(["jquery", "angular", "angular.route", "angular.resource",
-		"services/angular.services", "controllers/angular.controllers", "directives/angular.directives"
+		"services/ServicesModule", "controllers/ControllersModule", "directives/DirectivesModule"
 ],
 	function ($, angular) {
 
@@ -16,7 +16,7 @@
 				redirectTo: "/mainpage/1"
 			}).when("/mainpage/:pageNumber/:searchQuery?", {
 				templateUrl: "views/templates/main.html",
-				controller: "MainController"
+				controller: "MainCtrl"
 			}).when("/uservotingspage/:pageNumber", {
 				templateUrl: "views/templates/uservotings.html"
 			}).when("/adminvotingspage/:pageNumber", {
@@ -29,18 +29,18 @@
 				templateUrl: "views/templates/voices.html"
 			}).when("/profilepage/:userName?", {
 				templateUrl: "views/templates/userprofile.html",
-				controller: "UserProfileController",
+				controller: "UserProfileCtrl",
 				resolve: {
-					user: function (userStorage, $route) {
-						return userStorage.get({ userName: $route.current.params.userName }).$promise;
+					User: function (UserStorage, $route) {
+						return UserStorage.get({ userName: $route.current.params.userName }).$promise;
 					}
 				}
 			}).when("/votingpage/:votingId?", {
 				templateUrl: "views/templates/voting.html",
-				controller: "VotingController",
+				controller: "VotingCtrl",
 				resolve: {
-					voting: function (votingStorage, $route) {
-						return votingStorage.get({ id: $route.current.params.votingId }).$promise;
+					Voting: function (VotingStorage, $route) {
+						return VotingStorage.get({ id: $route.current.params.votingId }).$promise;
 					}
 				}
 			}).when("/error:errorType", {

@@ -1,6 +1,6 @@
 ﻿define(["angular"], function (angular) {
 	angular.module("votingSystem.services.reload", [])
-		.factory("$reload", function () {
+		.service("reload", function () {
 			return function (scope, arrayLength, path) {
 				var pageNumber = scope.page;
 				if (pageNumber != 1) {

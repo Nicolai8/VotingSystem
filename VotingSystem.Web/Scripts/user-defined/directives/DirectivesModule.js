@@ -1,15 +1,15 @@
 ﻿define(["angular",
-	"directives/angular.directive.bootstrapmarkdown",
-	"directives/angular.directive.datetimepicker",
-	"directives/angular.directive.focusout",
-	"directives/angular.directive.goback",
-	"directives/angular.directive.notfound",
-	"directives/angular.directive.onenterpress",
-	"directives/angular.directive.paginator",
-	"directives/angular.directive.piechart",
-	"directives/angular.directive.trusthtml",
-	"directives/angular.directive.validatefield",
-	"directives/angular.directive.validateform"
+	"directives/bootstrapmarkdown",
+	"directives/datetimepicker",
+	"directives/focusout",
+	"directives/goback",
+	"directives/notfound",
+	"directives/onenterpress",
+	"directives/paginator",
+	"directives/piechart",
+	"directives/trusthtml",
+	"directives/validatefield",
+	"directives/validateform"
 	],
 	function (angular) {
 		angular.module("votingSystem.directives", [
@@ -25,5 +25,4 @@
 			"votingSystem.directives.validateField",
 			"votingSystem.directives.validateForm"
 		]);
-
 	});

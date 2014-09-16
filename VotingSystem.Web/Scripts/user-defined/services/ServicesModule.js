@@ -1,9 +1,9 @@
 ﻿define(["angular",
-	"services/angular.service.commentstorage",
-	"services/angular.service.reload",
-	"services/angular.service.userstorage",
-	"services/angular.service.voicestorage",
-	"services/angular.service.votingstorage"
+	"services/commentstorage",
+	"services/reload",
+	"services/userstorage",
+	"services/voicestorage",
+	"services/votingstorage"
 ],
 	function (angular) {
 		angular.module("votingSystem.services", [

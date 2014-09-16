@@ -1,4 +1,4 @@
-﻿<div class="modal fade" id="loginForm" tabindex="-1" role="dialog" aria-hidden="true" data-on-enter-press="logIn">
+﻿<div class="modal fade" id="loginForm" tabindex="-1" role="dialog" aria-hidden="true" data-on-enter-press="logIn()">
 	<div class="modal-dialog modal-md">
 		<div class="modal-content">
 			<div class="modal-header">
@@ -34,7 +34,7 @@
 	</div>
 </div>
 
-<div class="modal fade" id="registerForm" tabindex="-1" role="dialog" aria-hidden="true" data-on-enter-press="register">
+<div class="modal fade" id="registerForm" tabindex="-1" role="dialog" aria-hidden="true" data-on-enter-press="register()">
 	<div class="modal-dialog modal-md">
 		<div class="modal-content">
 			<div class="modal-header">
@@ -49,7 +49,7 @@
 							<label class="col-md-4 control-label" for="userName">Username</label>
 							<div class="col-md-7">
 								<input id="registerUserName" name="userName" type="text" placeholder="Username" class="form-control"
-									required data-bv-stringlength="true" data-focus-out="checkUserName" data-ng-model="registerUserName"
+									required data-bv-stringlength="true" data-focus-out="" data-on-focus-out="checkUserName()" data-ng-model="registerUserName"
 									data-bv-stringlength-min="5" data-bv-stringlength-message="Login must be at least 5 characters length." />
 							</div>
 						</div>

@@ -1,7 +1,7 @@
 ﻿define(["angular", "Urls"],
 	function (angular, Urls) {
 		angular.module("votingSystem.services.voiceStorage", [])
-			.factory("voiceStorage",
+			.factory("VoiceStorage",
 				function ($resource) {
 					return $resource(Urls.Voices, {},
 						{

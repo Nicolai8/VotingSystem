@@ -42,4 +42,4 @@
 	waitSeconds: 0
 });
 
-require(["user-defined/angular.app"]);
+require(["user-defined/app"]);

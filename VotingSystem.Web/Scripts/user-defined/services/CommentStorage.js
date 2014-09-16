@@ -1,7 +1,7 @@
 ﻿define(["angular", "Urls"],
 	function (angular, Urls) {
 		angular.module("votingSystem.services.commentStorage", [])
-			.factory("commentStorage", function ($resource) {
+			.factory("CommentStorage", function ($resource) {
 				return $resource(Urls.Comments + "/:id", { id: "@CommentId" },
 					{
 						query: {

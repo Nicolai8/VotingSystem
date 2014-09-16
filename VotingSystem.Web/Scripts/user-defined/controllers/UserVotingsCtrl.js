@@ -1,26 +1,26 @@
 ﻿define(["angular", "Urls", "constants", "toastr", "angular.route", "bootstrap"],
 	function (angular, Urls, constants, toastr) {
 		angular.module("votingSystem.controllers.userVotings", [])
-			.controller("UserVotingsController", function ($scope, votingStorage, $reload, $http, $route, $routeParams, $location) {
+			.controller("UserVotingsCtrl", function ($scope, $http, $route, $routeParams, $location, reload, VotingStorage) {
 				$scope.page = $routeParams.pageNumber;
 				$scope.pageName = "uservotingspage";
 				$scope.total = 1;
 				$scope.constants = constants;
 				$scope.$location = $location;
 				$scope.$route = $route;
-				$scope.reload = $reload;
+				$scope.reload = reload;
 				$scope.votings = [];
 
 				$scope.$parent.changePageOnHub();
 
-				votingStorage.query(
+				VotingStorage.query(
 					{
 						pageType: "UserVotings",
 						page: $scope.page
 					},
 					function (data) {
 						$scope.votings = data;
-						votingStorage.total(
+						VotingStorage.total(
 							{
 								totalKind: "totaluser"
 							},
@@ -56,7 +56,7 @@
 				$scope.addNewVoting = function ($event, newVoting) {
 					newVoting.StartDate = $("#newVotingStartDate :text").val();
 					newVoting.FinishTime = $("#newVotingFinishDate :text").val();
-					votingStorage.save(
+					VotingStorage.save(
 						{}, newVoting,
 						function () {
 							angular.element($event.currentTarget).closest(".modal").modal("hide");

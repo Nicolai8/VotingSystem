@@ -1,14 +1,14 @@
 ﻿define(["jquery", "angular", "Urls", "constants", "toastr", "bootstrap", "bootstrapValidator", "angular.route", "jquery.fileUpload"],
 	function ($, angular, Urls, constants, toastr) {
 		angular.module("votingSystem.controllers.userProfile", [])
-			.controller("UserProfileController", function ($scope, user, userStorage, $http, $route, $routeParams, $location) {
+			.controller("UserProfileCtrl", function ($scope, $http, $route, $routeParams, $location, User) {
 				$scope.userName = $routeParams.userName;
 				$scope.isMyPage = angular.isUndefined($scope.userName);
 				$scope.pageName = "profilepage";
 				$scope.$route = $route;
 				$scope.$location = $location;
 				$scope.$routeParams = $routeParams;
-				$scope.user = user;
+				$scope.user = User;
 
 				$scope.$parent.changePageOnHub();
 

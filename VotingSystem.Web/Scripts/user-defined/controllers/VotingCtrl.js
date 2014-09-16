@@ -1,8 +1,8 @@
 ﻿define(["jquery", "angular", "Urls", "constants", "toastr", "angular.route", "bootstrap"],
 	function($, angular, Urls, constants, toastr) {
 		angular.module("votingSystem.controllers.voting", [])
-			.controller("VotingController", function($scope, voting, votingStorage, voiceStorage, commentStorage, $http, $route, $routeParams, $location) {
-				$scope.voting = voting;
+			.controller("VotingCtrl", function ($scope, $http, $route, $routeParams, $location, Voting, VotingStorage, VoiceStorage, CommentStorage) {
+				$scope.voting = Voting;
 				$scope.votingId = $routeParams.votingId;
 				$scope.pageName = "votingpage";
 				$scope.$route = $route;
@@ -22,7 +22,7 @@
 
 				$scope.getResults = function() {
 					if ($scope.isAnswered || $scope.voting.Status == 3) {
-						voiceStorage.getResults({ votingId: $scope.voting.VotingId },
+						VoiceStorage.getResults({ votingId: $scope.voting.VotingId },
 							function(results) {
 								preprocessResults(results);
 								$scope.results = results;
@@ -37,7 +37,7 @@
 				$scope.addNewComment = function(e) {
 					var $form = $(e.currentTarget).closest("form[data-validate-form]").data("bootstrapValidator");
 					if ($form.isValid()) {
-						commentStorage.save(
+						CommentStorage.save(
 							{
 								CommentText: $scope.newCommentText,
 								ThemeId: $scope.voting.VotingId
@@ -69,7 +69,7 @@
 				};
 
 				$scope.removeComment = function(comment) {
-					commentStorage.remove({ id: comment.CommentId },
+					CommentStorage.remove({ id: comment.CommentId },
 						function() {
 							$scope.voting.Comments.splice($scope.voting.Comments.indexOf(comment), 1);
 							toastr.success(constants("commentDeletedMessage"));
@@ -90,7 +90,7 @@
 							answer.QuestionId = question.QuestionId;
 							return answer;
 						});
-						voiceStorage.save({ captcha: $scope.captcha }, voices).$promise
+						VoiceStorage.save({ captcha: $scope.captcha }, voices).$promise
 							.then(function(response) {
 								if (!$scope.$parent.authenticated) {
 									localStorage["VotingSystem.Vote#" + $scope.voting.VotingId] = "true";

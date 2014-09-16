@@ -2,8 +2,11 @@
 	function ($, angular) {
 		angular.module("votingSystem.directives.focusOut", [])
 			.directive("focusOut", function () {
-				return function (scope, elem, attrs) {
-					$(elem).focusout(scope[attrs.focusOut]);
+				return {
+					scope: {onFocusOut:"&onFocusOut"},
+					link: function(scope, elem, attrs) {
+						$(elem).focusout(scope.onFocusOut);
+					}
 				};
 			});
 	});

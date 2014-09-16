@@ -1,25 +1,25 @@
 ﻿define(["angular", "Urls", "constants", "toastr", "angular.route"],
 	function (angular, Urls, constants, toastr) {
 		angular.module("votingSystem.controllers.adminVotings", [])
-			.controller("AdminVotingsController", function ($scope, votingStorage, $reload, $http, $route, $routeParams, $location) {
+			.controller("AdminVotingsCtrl", function ($scope, $http, $route, $routeParams, $location,reload, VotingStorage) {
 				$scope.page = $routeParams.pageNumber;
 				$scope.pageName = "adminvotingspage";
 				$scope.total = 1;
 				$scope.constants = constants;
 				$scope.$location = $location;
 				$scope.$route = $route;
-				$scope.reload = $reload;
+				$scope.reload = reload;
 
 				$scope.$parent.changePageOnHub();
 
-				votingStorage.query(
+				VotingStorage.query(
 					{
 						pageType: "AdminVotings",
 						page: $scope.page
 					},
 					function (data) {
 						$scope.votings = data;
-						votingStorage.total(
+						VotingStorage.total(
 							{
 								totalKind: "totaladmin"
 							},

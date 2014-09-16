@@ -2,7 +2,7 @@
 		"angular.route", "bootstrap", "bootstrapValidator", "signalr", "signalr.hubs"],
 	function ($, angular, Urls, toastr, constants, Spinner) {
 		angular.module("votingSystem.controllers.layout", [])
-			.controller("LayoutController", function ($scope, $route, $routeParams, $location) {
+			.controller("LayoutCtrl", function ($scope, $route, $routeParams, $location) {
 				$scope.accountName = window.loggedUserName;
 				$scope.roles = [];
 				$scope.authenticated = window.authenticated;

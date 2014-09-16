@@ -11,12 +11,12 @@
 	@Styles.Render("~/content/main")
 	@Styles.Render("~/bundles/less")
 	<script type="text/javascript">
-		var cacheScripts = true;
+		var cacheScripts = false;
 		var authenticated = @Html.Raw(Request.IsAuthenticated ? "true" : "false");
 		var loggedUserName = "@Html.Raw(Request.IsAuthenticated ? User.Identity.Name : "Account")";
 	</script>
 </head>
-<body data-ng-controller="LayoutController">
+<body data-ng-controller="LayoutCtrl">
 	<div id="preloader" hidden=""></div>
 	<header>
 		@Html.Partial("_NavbarPartial")

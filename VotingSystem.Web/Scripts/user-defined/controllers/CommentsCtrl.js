@@ -5,6 +5,7 @@
 				$scope.page = $routeParams.pageNumber;
 				$scope.pageName = "commentspage";
 				$scope.total = 1;
+				$scope.breadCrumbItemName = "Comments";
 				$scope.constants = constants;
 				$scope.$location = $location;
 				$scope.$route = $route;

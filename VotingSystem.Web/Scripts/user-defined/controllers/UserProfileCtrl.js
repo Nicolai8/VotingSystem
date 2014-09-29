@@ -1,7 +1,7 @@
 ﻿define(["jquery", "angular", "Urls", "constants", "toastr", "bootstrap", "bootstrapValidator", "angular.route", "jquery.fileUpload"],
 	function ($, angular, Urls, constants, toastr) {
 		angular.module("votingSystem.controllers.userProfile", [])
-			.controller("UserProfileCtrl", function ($scope, $http, $route, $routeParams, $location, User) {
+			.controller("UserProfileCtrl", function ($scope, $http, $route, $routeParams, $location, User, commentsHub) {
 				$scope.userName = $routeParams.userName;
 				$scope.isMyPage = angular.isUndefined($scope.userName);
 				$scope.pageName = "profilepage";
@@ -10,7 +10,7 @@
 				$scope.$routeParams = $routeParams;
 				$scope.user = User;
 
-				$scope.$parent.changePageOnHub();
+				commentsHub.changePageOnHub();
 
 				$scope.toggleLockUser = function () {
 					var oldValue = angular.copy($scope.user.IsBlocked);

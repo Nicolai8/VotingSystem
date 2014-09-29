@@ -1,17 +1,18 @@
 ﻿define(["angular", "Urls", "constants", "toastr", "angular.route", "bootstrap"],
 	function (angular, Urls, constants, toastr) {
 		angular.module("votingSystem.controllers.userVotings", [])
-			.controller("UserVotingsCtrl", function ($scope, $http, $route, $routeParams, $location, reload, VotingStorage) {
+			.controller("UserVotingsCtrl", function ($scope, $http, $route, $routeParams, $location, reload, VotingStorage, commentsHub) {
 				$scope.page = $routeParams.pageNumber;
 				$scope.pageName = "uservotingspage";
 				$scope.total = 1;
 				$scope.constants = constants;
+				$scope.breadCrumbItemName = "Votings";
 				$scope.$location = $location;
 				$scope.$route = $route;
 				$scope.reload = reload;
 				$scope.votings = [];
 
-				$scope.$parent.changePageOnHub();
+				commentsHub.changePageOnHub();
 
 				VotingStorage.query(
 					{

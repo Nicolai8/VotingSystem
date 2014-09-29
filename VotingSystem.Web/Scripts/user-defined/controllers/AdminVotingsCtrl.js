@@ -3,6 +3,7 @@
 		angular.module("votingSystem.controllers.adminVotings", [])
 			.controller("AdminVotingsCtrl", function ($scope, $http, $route, $routeParams, $location,reload, VotingStorage) {
 				$scope.page = $routeParams.pageNumber;
+				$scope.breadCrumbItemName = "Admin Votings";
 				$scope.pageName = "adminvotingspage";
 				$scope.total = 1;
 				$scope.constants = constants;

@@ -1,7 +1,7 @@
 ﻿define(["angular", "Urls", "constants", "angular.route"],
 	function (angular, Urls, constants) {
 		angular.module("votingSystem.controllers.voices", [])
-			.controller("VoicesCtrl", function ($scope, $http, $route, $routeParams, $location, reload, VoiceStorage) {
+			.controller("VoicesCtrl", function ($scope, $http, $route, $routeParams, $location, reload, VoiceStorage, commentsHub) {
 				$scope.page = $routeParams.pageNumber;
 				$scope.pageName = "voicespage";
 				$scope.total = 1;
@@ -9,8 +9,9 @@
 				$scope.$location = $location;
 				$scope.$route = $route;
 				$scope.reload = reload;
+				$scope.breadCrumbItemName = "Voices";
 
-				$scope.$parent.changePageOnHub();
+				commentsHub.changePageOnHub();
 
 				VoiceStorage.query({ page: $scope.page },
 					function (voices) {

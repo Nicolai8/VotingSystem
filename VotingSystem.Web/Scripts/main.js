@@ -28,6 +28,7 @@
 		"bootstrap": { deps: ["jquery"] },
 		"bootstrapPaginator": { deps: ["jquery", "bootstrap"] },
 		"bootstrapValidator": { deps: ["jquery", "bootstrap"] },
+		"bootstrapDatePicker": { deps: ["jquery", "bootstrap"] },
 		"bootpag": { deps: ["jquery"] },
 		"underscore": {
 			exports: "_"

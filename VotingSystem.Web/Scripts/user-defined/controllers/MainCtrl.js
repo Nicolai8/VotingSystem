@@ -1,15 +1,16 @@
 ﻿define(["angular", "Urls", "constants", "angular.route"],
 	function (angular, Urls, constants) {
 		angular.module("votingSystem.controllers.main", [])
-			.controller("MainCtrl", function ($scope, $http, $route, $routeParams, VotingStorage) {
+			.controller("MainCtrl", function ($scope, $http, $route, $routeParams, VotingStorage, commentsHub) {
 				$scope.page = $routeParams.pageNumber;
+				$scope.breadCrumbItemName = '';
 				$scope.pageName = "mainpage";
 				$scope.total = 1;
 				$routeParams.searchQuery = $routeParams.searchQuery ? $routeParams.searchQuery : "";
 				$scope.searchQuery = $routeParams.searchQuery;
 				$scope.constants = constants;
 
-				$scope.$parent.changePageOnHub();
+				commentsHub.changePageOnHub("");
 
 				VotingStorage.query(
 					{

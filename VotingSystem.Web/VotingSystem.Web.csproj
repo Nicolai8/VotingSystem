@@ -772,6 +772,7 @@
     <Content Include="Scripts\user-defined\directives\validateField.js" />
     <Content Include="Scripts\user-defined\directives\validateForm.js" />
     <Content Include="Scripts\user-defined\directives\DirectivesModule.js" />
+    <Content Include="Scripts\user-defined\services\commentsHub.js" />
     <Content Include="Scripts\user-defined\services\CommentStorage.js" />
     <Content Include="Scripts\user-defined\services\reload.js" />
     <Content Include="Scripts\user-defined\services\UserStorage.js" />

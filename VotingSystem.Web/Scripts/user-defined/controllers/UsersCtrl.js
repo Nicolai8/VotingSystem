@@ -1,7 +1,7 @@
 ﻿define(["jquery", "angular", "Urls", "constants", "toastr", "bootpag", "angular.route"],
 	function ($, angular, Urls, constants, toastr) {
 		angular.module("votingSystem.controllers.users", [])
-			.controller("UsersCtrl", function ($scope, $http, $route, $routeParams, $location, reload, UserStorage) {
+			.controller("UsersCtrl", function ($scope, $http, $route, $routeParams, $location, reload, UserStorage, commentsHub) {
 				$scope.page = $routeParams.pageNumber;
 				$scope.isSuggested = angular.isDefined($routeParams.suggested) && $routeParams.suggested == "suggested";
 				$scope.pageName = "userspage";
@@ -16,7 +16,7 @@
 				$scope.editUserRoles = [];
 				$scope.reload = reload;
 
-				$scope.$parent.changePageOnHub();
+				commentsHub.changePageOnHub();
 
 				$http.get(Urls.UsersPage.GetAllRoles)
 					.success(function (roles) {

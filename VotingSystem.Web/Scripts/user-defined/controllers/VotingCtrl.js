@@ -155,21 +155,21 @@
 				}
 
 				commentsHub.setCreateCommentHandler(function (comment) {
-					comment.Own = comment.CreatedBy == $scope.accountName;
+					var scope = angular.element("#votingPage").scope();
+					comment.Own = comment.CreatedBy == scope.accountName;
 					toastr.info(constants("commentAddedMessage"));
-					console.info($scope.voting.Comments.length);
-					$scope.voting.Comments.unshift(comment);
-					$scope.$apply();
-					console.info($scope.voting.Comments.length);
+					scope.voting.Comments.unshift(comment);
+					scope.$apply();
 				});
 
 				commentsHub.setDeleteCommentHandler(function (commentId) {
-					var comment = $.grep($scope.voting.Comments, function (item) {
+					var scope = angular.element("#votingPage").scope();
+					var comment = $.grep(scope.voting.Comments, function (item) {
 						return item.CommentId == commentId;
 					})[0];
 					if (angular.isDefined(comment)) {
-						$scope.voting.Comments.splice($scope.voting.Comments.indexOf(comment), 1);
-						$scope.$apply();
+						scope.voting.Comments.splice(scope.voting.Comments.indexOf(comment), 1);
+						scope.$apply();
 						toastr.info(constants("commentDeletedTemplateMessage").replace("{0}", comment.CommentText));
 					}
 				});

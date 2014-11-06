@@ -173,10 +173,5 @@
 						toastr.info(constants("commentDeletedTemplateMessage").replace("{0}", comment.CommentText));
 					}
 				});
-
-				$scope.refresh = function() {
-					$scope.$apply();
-					console.info($scope.voting.Comments.length);
-				};
 			});
 	});

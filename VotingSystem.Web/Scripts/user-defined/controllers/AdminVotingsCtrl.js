@@ -1,7 +1,7 @@
 ﻿define(["angular", "Urls", "constants", "toastr", "angular.route"],
 	function (angular, Urls, constants, toastr) {
 		angular.module("votingSystem.controllers.adminVotings", [])
-			.controller("AdminVotingsCtrl", function ($scope, $http, $route, $routeParams, $location,reload, VotingStorage) {
+			.controller("AdminVotingsCtrl", function ($scope, $http, $route, $routeParams, $location, reload, VotingStorage, commentsHub) {
 				$scope.page = $routeParams.pageNumber;
 				$scope.breadCrumbItemName = "Admin Votings";
 				$scope.pageName = "adminvotingspage";
@@ -11,7 +11,7 @@
 				$scope.$route = $route;
 				$scope.reload = reload;
 
-				$scope.$parent.changePageOnHub();
+				commentsHub.changePageOnHub();
 
 				VotingStorage.query(
 					{

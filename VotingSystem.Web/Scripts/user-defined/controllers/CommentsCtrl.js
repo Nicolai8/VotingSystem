@@ -1,7 +1,7 @@
 ﻿define(["angular", "Urls", "constants", "toastr", "bootpag", "angular.route"],
 	function (angular, Urls, constants, toastr) {
 		angular.module("votingSystem.controllers.comments", [])
-			.controller("CommentsCtrl", function ($scope, $http, $route, $routeParams, $location, reload, CommentStorage) {
+			.controller("CommentsCtrl", function ($scope, $http, $route, $routeParams, $location, reload, CommentStorage, commentsHub) {
 				$scope.page = $routeParams.pageNumber;
 				$scope.pageName = "commentspage";
 				$scope.total = 1;
@@ -11,7 +11,7 @@
 				$scope.$route = $route;
 				$scope.reload = reload;
 
-				$scope.$parent.changePageOnHub();
+				commentsHub.changePageOnHub();
 
 				CommentStorage.query({ page: $scope.page },
 					function (data) {

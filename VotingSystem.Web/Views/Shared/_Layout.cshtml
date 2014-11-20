@@ -5,11 +5,13 @@
 	<title>Voting System</title>
 	<link href="~/Content/images/favicon.ico" rel="shortcut icon" type="image/x-icon" />
 	<meta name="viewport" content="width=device-width" />
-	<link rel="stylesheet/css" href="~/Content/css/jquery.fileupload.css" />
-
-	@Styles.Render("~/bundles/css")
-	@Styles.Render("~/content/main")
-	@Styles.Render("~/bundles/less")
+	
+    @Styles.Render("~/content/bootstrap")    	
+    <link href="@Url.Content("~/Content/less/toastr.less")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/Content/less/font-awesome.less")" rel="stylesheet" type="text/css" />
+    @Styles.Render("~/bundles/css")
+    @Styles.Render("~/content/main")    
+    
 	<script type="text/javascript">
 		var cacheScripts = false;
 		var authenticated = @Html.Raw(Request.IsAuthenticated ? "true" : "false");

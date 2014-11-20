@@ -9,19 +9,16 @@ namespace VotingSystem.Web
 			bundles.Add(new ScriptBundle("~/bundles/jqueryui").Include(
 						"~/Scripts/jquery-ui-{version}.js"));
 
-			bundles.Add(new StyleBundle("~/bundles/css").Include(
-				"~/Content/css/bootstrap.min.css",
-				"~/Content/css/bootstrapValidator.min.css",
+            bundles.Add(new StyleBundle("~/bundles/css").Include(	
 				 "~/Content/css/jquery.fileupload.min.css"
 				 ));
 
-			bundles.Add(new LessBundle("~/content/main").Include(
-				"~/Content/site.less"
-				));
+            bundles.Add(new LessBundle("~/content/bootstrap").Include(
+                 "~/Content/less/bootstrap.less"
+                ));
 
-			bundles.Add(new LessBundle("~/bundles/less").Include(
-				"~/Content/toastr.less",
-				"~/Content/font-awesome.less"
+			bundles.Add(new LessBundle("~/content/main").Include(
+				"~/Content/less/main.less"
 				));
 
 			BundleTable.EnableOptimizations = true;

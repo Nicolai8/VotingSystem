@@ -1,5 +1,4 @@
-﻿using System;
-using Microsoft.Practices.Unity;
+﻿using Microsoft.Practices.Unity;
 using VotingSystem.DAL.Entities;
 using VotingSystem.DAL.Repositories;
 

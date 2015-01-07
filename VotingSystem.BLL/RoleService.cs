@@ -49,6 +49,13 @@ namespace VotingSystem.BLL
 			if (role == null) return;
 			UnitOfWork.RoleRepository.Delete(role);
 			UnitOfWork.Save();
+			//REVIEW: Better to rewrite like this:
+			//Role role = GetRole(roleName);
+			//if (role != null)
+			//{
+			//	UnitOfWork.RoleRepository.Delete(role);
+			//	UnitOfWork.Save();
+			//}
 		}
 	}
 }

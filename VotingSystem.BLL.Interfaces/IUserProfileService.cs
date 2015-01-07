@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using VotingSystem.DAL.Entities;
+﻿using VotingSystem.DAL.Entities;
 
 namespace VotingSystem.BLL.Interfaces
 {

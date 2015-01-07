@@ -73,6 +73,7 @@ namespace VotingSystem.Web.Controllers.API
 		#endregion
 
 		#region Private methods
+
 		private int Vote(IEnumerable<Answer> answers, int? userId)
 		{
 			int themeId = _themeService.GetByQuestionId(answers.First().QuestionId).Id;
@@ -88,6 +89,7 @@ namespace VotingSystem.Web.Controllers.API
 			}
 			throw new VotingSystemException("Voting is closed or blocked.");
 		}
+
 		#endregion
 	}
 }

@@ -53,8 +53,8 @@ namespace VotingSystem.BLL
 		public Theme GetByQuestionId(int questionId)
 		{
 			return UnitOfWork.ThemeRepository.Query()
-			    .Filter(t => t.Questions.Any(q => q.Id == questionId))
-			    .Get().FirstOrDefault();
+				.Filter(t => t.Questions.Any(q => q.Id == questionId))
+				.Get().FirstOrDefault();
 		}
 
 		public List<Theme> GetByUserId(string query, int userId, Func<IQueryable<Theme>, IOrderedQueryable<Theme>> orderBy = null,
@@ -63,11 +63,13 @@ namespace VotingSystem.BLL
 			return Get(t => t.UserId == userId && t.VotingName.Contains(query), orderBy, page, pageSize).ToList();
 		}
 
+		//REVIEW: Possible need to create generic Filter class which will contain Func<IQueryable<Theme>, IOrderedQueryable<Theme>> orderBy = null, int page = 1, int pageSize = 10
 		public List<Theme> GetAll(string query, Func<IQueryable<Theme>, IOrderedQueryable<Theme>> orderBy = null, int page = 1, int pageSize = 10)
 		{
 			return Get(t => t.VotingName.Contains(query), orderBy, page, pageSize);
 		}
 
+		//REVIEW: Possible need to create generic Filter class which will contain Func<IQueryable<Theme>, IOrderedQueryable<Theme>> orderBy = null, int page = 1, int pageSize = 10
 		public List<Theme> GetAllActive(string query, Func<IQueryable<Theme>, IOrderedQueryable<Theme>> orderBy = null, int page = 1, int pageSize = 10)
 		{
 			return Get(t => (t.Status == StatusType.Active || t.Status == StatusType.NotApproved) &&
@@ -75,6 +77,8 @@ namespace VotingSystem.BLL
 				&& t.VotingName.Contains(query), orderBy, page, pageSize);
 		}
 
+		//REVIEW: Possible need to create generic Filter class which will contain Func<IQueryable<Theme>, IOrderedQueryable<Theme>> orderBy = null, int page = 1, int pageSize = 10
+		//REVIEW: Move to the end of the class. Pls, check : http://stackoverflow.com/a/150540/710014
 		private List<Theme> Get(Expression<Func<Theme, bool>> filter = null, Func<IQueryable<Theme>, IOrderedQueryable<Theme>> orderBy = null,
 			int page = 1, int pageSize = 10)
 		{

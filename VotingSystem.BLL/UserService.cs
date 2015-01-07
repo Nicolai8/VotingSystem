@@ -78,11 +78,13 @@ namespace VotingSystem.BLL
 		public void UpdateUser(string userName, string email = null, bool? isApproved = null, string password = null, string passwordQuestion = null, string passwordAnswer = null)
 		{
 			User currentUser = GetUser(userName);
+
 			currentUser.Email = SetValueIfNotNull(currentUser.Email, email);
 			currentUser.Password = SetValueIfNotNull(currentUser.Password, password);
 			currentUser.IsApproved = Convert.ToBoolean(SetValueIfNotNull(currentUser.IsApproved, isApproved));
 			currentUser.PasswordQuestion = SetValueIfNotNull(currentUser.PasswordQuestion, passwordQuestion);
 			currentUser.PasswordAnswer = SetValueIfNotNull(currentUser.PasswordAnswer, passwordAnswer);
+
 			UnitOfWork.Save();
 		}
 
@@ -112,8 +114,10 @@ namespace VotingSystem.BLL
 			return user.IsLocked;
 		}
 
+		//REVIEW: Move to the end of the class. Pls, check : http://stackoverflow.com/a/150540/710014
 		private T SetValueIfNotNull<T>(T currentValue, T newValue)
 		{
+			//REVIEW: use there ?? operator
 			return newValue == null ? currentValue : newValue;
 		}
 

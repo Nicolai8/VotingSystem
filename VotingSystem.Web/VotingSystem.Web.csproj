@@ -470,7 +470,6 @@
     <Content Include="Scripts\libraries\bootstrapValidator.min.js">
       <DependentUpon>bootstrapValidator.js</DependentUpon>
     </Content>
-    <Content Include="Scripts\libraries\gremlins.min.js" />
     <Content Include="Scripts\libraries\jquery-ui-1.10.3.min.js">
       <DependentUpon>jquery-ui-1.10.3.js</DependentUpon>
     </Content>

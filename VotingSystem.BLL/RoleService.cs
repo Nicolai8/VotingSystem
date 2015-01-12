@@ -14,7 +14,7 @@ namespace VotingSystem.BLL
 		{
 		}
 
-		public List<Role> GetRoles()
+		public List<Role> GetAllRoles()
 		{
 			return UnitOfWork.RoleRepository.Query()
 				.OrderBy(r => r.OrderBy(role => role.RoleName))
@@ -37,25 +37,14 @@ namespace VotingSystem.BLL
 			UnitOfWork.Save();
 		}
 
-		public void UpdateRole(Role role)
-		{
-			UnitOfWork.RoleRepository.Update(role);
-			UnitOfWork.Save();
-		}
-
 		public void DeleteRole(string roleName)
 		{
 			Role role = GetRole(roleName);
-			if (role == null) return;
-			UnitOfWork.RoleRepository.Delete(role);
-			UnitOfWork.Save();
-			//REVIEW: Better to rewrite like this:
-			//Role role = GetRole(roleName);
-			//if (role != null)
-			//{
-			//	UnitOfWork.RoleRepository.Delete(role);
-			//	UnitOfWork.Save();
-			//}
+			if (role != null)
+			{
+				UnitOfWork.RoleRepository.Delete(role);
+				UnitOfWork.Save();
+			}
 		}
 	}
 }

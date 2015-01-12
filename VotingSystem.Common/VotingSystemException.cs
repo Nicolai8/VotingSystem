@@ -14,7 +14,7 @@ namespace VotingSystem.Common
 		}
 
 		public VotingSystemException(string format, params object[] args)
-			: base(string.Format(format, args))
+			: base(String.Format(format, args))
 		{
 		}
 	}

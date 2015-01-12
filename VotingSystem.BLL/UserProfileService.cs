@@ -16,7 +16,7 @@ namespace VotingSystem.BLL
 			return UnitOfWork.UserProfileRepository.GetById(userId);
 		}
 
-		public void Update(UserProfile userProfile)
+		public void UpdateUserProfile(UserProfile userProfile)
 		{
 			UnitOfWork.UserProfileRepository.Update(userProfile);
 			UnitOfWork.Save();

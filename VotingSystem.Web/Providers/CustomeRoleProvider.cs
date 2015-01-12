@@ -89,7 +89,7 @@ namespace VotingSystem.Web.Providers
 
 		public override string[] GetAllRoles()
 		{
-			return _roleService.GetRoles().Select(r => r.RoleName).ToArray();
+			return _roleService.GetAllRoles().Select(r => r.RoleName).ToArray();
 		}
 
 		public override string[] FindUsersInRole(string roleName, string usernameToMatch)
@@ -101,7 +101,7 @@ namespace VotingSystem.Web.Providers
 
 		public void RemoveUserFromRoles(string username)
 		{
-			_userService.RemoveUserFromRoles(username);
+			_userService.RemoveUserFromAllRoles(username);
 		}
 	}
 }

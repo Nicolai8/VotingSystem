@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using VotingSystem.DAL.Structures;
 
 namespace VotingSystem.DAL.Entities
 {
@@ -8,9 +9,10 @@ namespace VotingSystem.DAL.Entities
 		[Required]
 		public string Text { get; set; }
 		public QuestionType Type { get; set; }
+
 		public int ThemeId { get; set; }
-		
 		public virtual Theme Theme { get; set; }
+	
 		public virtual ICollection<Answer> Answers { get; set; }
 		public virtual ICollection<FixedAnswer> FixedAnswers { get; set; }
 

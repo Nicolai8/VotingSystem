@@ -13,19 +13,19 @@ namespace VotingSystem.BLL
 		{
 		}
 
-		public void Insert(Comment comment)
+		public void InsertComment(Comment comment)
 		{
 			UnitOfWork.CommentRepository.Insert(comment);
 			UnitOfWork.Save();
 		}
 
-		public void Delete(int commentId)
+		public void DeleteComment(int commentId)
 		{
 			UnitOfWork.CommentRepository.Delete(UnitOfWork.CommentRepository.GetById(commentId));
 			UnitOfWork.Save();
 		}
 
-		public List<Comment> GetByUserId(int userId, int page = 1, int pageSize = 10)
+		public List<Comment> GetCommentByUserId(int userId, int page = 1, int pageSize = 10)
 		{
 			return UnitOfWork.CommentRepository.Query()
 				.Filter(c => c.UserId == userId)
@@ -41,12 +41,12 @@ namespace VotingSystem.BLL
 				.GetPage(page, pageSize).ToList();
 		}
 
-		public Comment GetByCommentId(int commentId)
+		public Comment GetCommentById(int commentId)
 		{
 			return UnitOfWork.CommentRepository.GetById(commentId);
 		}
 
-		public int GetMyTotal(int userId)
+		public int GetNumberOfUserComments(int userId)
 		{
 			return UnitOfWork.CommentRepository.GetTotal(c => c.UserId == userId);
 		}

@@ -1,4 +1,5 @@
 ﻿using VotingSystem.DAL.Entities;
+using VotingSystem.DAL.Structures;
 
 namespace VotingSystem.Web.Models
 {

@@ -25,7 +25,7 @@ namespace VotingSystem.Web.Controllers.API
 		[HttpGet]
 		public IEnumerable<CommentModel> Get(int page, int size = 10)
 		{
-			List<Comment> comments = _commentService.GetByUserId(UserId, page, size);
+			List<Comment> comments = _commentService.GetCommentByUserId(UserId, page, size);
 			return comments.Select(comment => comment.ToCommentModel(User.Identity.Name));
 		}
 
@@ -33,7 +33,7 @@ namespace VotingSystem.Web.Controllers.API
 		[HttpGet]
 		public int GetTotal()
 		{
-			return _commentService.GetMyTotal(UserId);
+			return _commentService.GetNumberOfUserComments(UserId);
 		}
 
 		[Route("")]
@@ -42,7 +42,7 @@ namespace VotingSystem.Web.Controllers.API
 		{
 			comment.UserId = UserId;
 			comment.CreateDate = DateTime.UtcNow;
-			_commentService.Insert(comment);
+			_commentService.InsertComment(comment);
 			return comment.ToCommentModel(User.Identity.Name);
 		}
 
@@ -51,7 +51,7 @@ namespace VotingSystem.Web.Controllers.API
 		[HttpDelete]
 		public void Delete(int id)
 		{
-			_commentService.Delete(id);
+			_commentService.DeleteComment(id);
 		}
 	}
 }

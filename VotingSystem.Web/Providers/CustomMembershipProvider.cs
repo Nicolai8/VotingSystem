@@ -7,6 +7,7 @@ using System.Web.Security;
 using VotingSystem.BLL.Interfaces;
 using VotingSystem.Common;
 using VotingSystem.DAL.Entities;
+using VotingSystem.DAL.Structures;
 
 namespace VotingSystem.Web.Providers
 {
@@ -264,7 +265,7 @@ namespace VotingSystem.Web.Providers
 		{
 			try
 			{
-				_userService.DeleteUser(username, deleteAllRelatedData);
+				_userService.DeleteUser(username);
 				return true;
 			}
 			catch (Exception e)

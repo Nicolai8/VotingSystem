@@ -49,6 +49,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\VotingSystem.Common\VotingSystem.Common.csproj">
+      <Project>{1E4E11BB-1921-4593-B929-4E7173CACD4F}</Project>
+      <Name>VotingSystem.Common</Name>
+    </ProjectReference>
     <ProjectReference Include="..\VotingSystem.DAL\VotingSystem.DAL.csproj">
       <Project>{e93daf0b-b464-4e03-ada9-1f2ffa0981a5}</Project>
       <Name>VotingSystem.DAL</Name>

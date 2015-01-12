@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using VotingSystem.BLL.Interfaces;
+using VotingSystem.Common;
 using VotingSystem.DAL;
 using VotingSystem.DAL.Entities;
+using VotingSystem.DAL.Structures;
 
 namespace VotingSystem.BLL
 {
@@ -15,7 +17,7 @@ namespace VotingSystem.BLL
 		{
 		}
 
-		public void Insert(Theme theme)
+		public void InsertTheme(Theme theme)
 		{
 			theme.StartDate = theme.StartDate.Date;
 			theme.FinishTime = theme.FinishTime.Date;
@@ -23,7 +25,7 @@ namespace VotingSystem.BLL
 			UnitOfWork.Save();
 		}
 
-		public void Delete(int themeId)
+		public void DeleteTheme(int themeId)
 		{
 			UnitOfWork.ThemeRepository.Delete(themeId);
 			UnitOfWork.Save();
@@ -36,7 +38,7 @@ namespace VotingSystem.BLL
 				|| theme.StartDate.Date > DateTime.Today || theme.FinishTime.Date < DateTime.Today;
 		}
 
-		public Theme GetByThemeId(int themeId)
+		public Theme GetThemeById(int themeId)
 		{
 			return UnitOfWork.ThemeRepository.Query()
 				.Filter(theme => theme.Id == themeId)
@@ -50,72 +52,51 @@ namespace VotingSystem.BLL
 				.Get().SingleOrDefault();
 		}
 
-		public Theme GetByQuestionId(int questionId)
+		public Theme GetThemeByQuestionId(int questionId)
 		{
 			return UnitOfWork.ThemeRepository.Query()
 				.Filter(t => t.Questions.Any(q => q.Id == questionId))
 				.Get().FirstOrDefault();
 		}
 
-		public List<Theme> GetByUserId(string query, int userId, Func<IQueryable<Theme>, IOrderedQueryable<Theme>> orderBy = null,
-			int page = 1, int pageSize = 10)
+		public List<Theme> GetThemesByUserId(string query, int userId, Filter<Theme> filter)
 		{
-			return Get(t => t.UserId == userId && t.VotingName.Contains(query), orderBy, page, pageSize).ToList();
+			return GetThemes(filter, t => t.UserId == userId && t.VotingName.Contains(query)).ToList();
 		}
 
-		//REVIEW: Possible need to create generic Filter class which will contain Func<IQueryable<Theme>, IOrderedQueryable<Theme>> orderBy = null, int page = 1, int pageSize = 10
-		public List<Theme> GetAll(string query, Func<IQueryable<Theme>, IOrderedQueryable<Theme>> orderBy = null, int page = 1, int pageSize = 10)
+		public List<Theme> GetAllThemes(string query, Filter<Theme> filter)
 		{
-			return Get(t => t.VotingName.Contains(query), orderBy, page, pageSize);
+			return GetThemes(filter, t => t.VotingName.Contains(query));
 		}
 
-		//REVIEW: Possible need to create generic Filter class which will contain Func<IQueryable<Theme>, IOrderedQueryable<Theme>> orderBy = null, int page = 1, int pageSize = 10
-		public List<Theme> GetAllActive(string query, Func<IQueryable<Theme>, IOrderedQueryable<Theme>> orderBy = null, int page = 1, int pageSize = 10)
+		public List<Theme> GetAllActiveThemes(string query, Filter<Theme> filter)
 		{
-			return Get(t => (t.Status == StatusType.Active || t.Status == StatusType.NotApproved) &&
+			return GetThemes(filter, t => (t.Status == StatusType.Active || t.Status == StatusType.NotApproved) &&
 				(t.FinishTime >= DateTime.Today && t.StartDate <= DateTime.Today)
-				&& t.VotingName.Contains(query), orderBy, page, pageSize);
+				&& t.VotingName.Contains(query));
 		}
 
-		//REVIEW: Possible need to create generic Filter class which will contain Func<IQueryable<Theme>, IOrderedQueryable<Theme>> orderBy = null, int page = 1, int pageSize = 10
-		//REVIEW: Move to the end of the class. Pls, check : http://stackoverflow.com/a/150540/710014
-		private List<Theme> Get(Expression<Func<Theme, bool>> filter = null, Func<IQueryable<Theme>, IOrderedQueryable<Theme>> orderBy = null,
-			int page = 1, int pageSize = 10)
+		public int GetNumberOfThemesByThemeName(string partOfThemeName)
 		{
-			if (orderBy == null)
-			{
-				orderBy = t => t.OrderByDescending(theme => theme.CreateDate);
-			}
-			return UnitOfWork.ThemeRepository.Query()
-				.Filter(filter)
-				.OrderBy(orderBy)
-				.Include(t => t.Comments)
-				.Include(t => t.Questions)
-				.Include(t => t.Questions.Select(q=>q.Answers))
-				.GetPage(page, pageSize).ToList();
+			return UnitOfWork.ThemeRepository.GetTotal(t => t.VotingName.Contains(partOfThemeName));
 		}
 
-		public int GetTotal(string query)
-		{
-			return UnitOfWork.ThemeRepository.GetTotal(t => t.VotingName.Contains(query));
-		}
-
-		public int GetTotalActive(string query)
+		public int GetNumberOfActiveThemesByThemeName(string partOfThemeName)
 		{
 			return UnitOfWork.ThemeRepository.GetTotal(
 				t => (t.Status == StatusType.Active || t.Status == StatusType.NotApproved) &&
 					(t.FinishTime >= DateTime.Today && t.StartDate <= DateTime.Today)
-					&& t.VotingName.Contains(query));
+					&& t.VotingName.Contains(partOfThemeName));
 		}
 
-		public int GetTotal(int userId, string query)
+		public int GetNumberOfUserThemes(int userId, string partOfThemeName)
 		{
-			return UnitOfWork.ThemeRepository.GetTotal(t => t.UserId == userId && t.VotingName.Contains(query));
+			return UnitOfWork.ThemeRepository.GetTotal(t => t.UserId == userId && t.VotingName.Contains(partOfThemeName));
 		}
 
-		public void UpdateStatus(int votingId, StatusType status)
+		public void UpdateStatus(int themeId, StatusType status)
 		{
-			Theme theme = GetByThemeId(votingId);
+			Theme theme = GetThemeById(themeId);
 			if (theme != null)
 			{
 				theme.Status = status;
@@ -123,6 +104,21 @@ namespace VotingSystem.BLL
 				UnitOfWork.ThemeRepository.Update(theme);
 				UnitOfWork.Save();
 			}
+		}
+
+		private List<Theme> GetThemes(Filter<Theme> filter, Expression<Func<Theme, bool>> expression = null)
+		{
+			if (filter.OrderBy == null)
+			{
+				filter.OrderBy = t => t.OrderByDescending(theme => theme.CreateDate);
+			}
+			return UnitOfWork.ThemeRepository.Query()
+				.Filter(expression)
+				.OrderBy(filter.OrderBy)
+				.Include(t => t.Comments)
+				.Include(t => t.Questions)
+				.Include(t => t.Questions.Select(q => q.Answers))
+				.GetPage(filter.Page, filter.PageSize).ToList();
 		}
 	}
 }

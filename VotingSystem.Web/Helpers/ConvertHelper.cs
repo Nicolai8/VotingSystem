@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web.Security;
 using AutoMapper;
 using VotingSystem.DAL.Entities;
+using VotingSystem.DAL.Structures;
 using VotingSystem.Web.Models;
 
 namespace VotingSystem.Web.Helpers

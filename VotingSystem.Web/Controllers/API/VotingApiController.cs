@@ -7,6 +7,7 @@ using System.Web.Security;
 using VotingSystem.BLL.Interfaces;
 using VotingSystem.Common;
 using VotingSystem.DAL.Entities;
+using VotingSystem.DAL.Structures;
 using VotingSystem.Web.Filters;
 using VotingSystem.Web.Helpers;
 using VotingSystem.Web.Models;
@@ -28,7 +29,7 @@ namespace VotingSystem.Web.Controllers.API
 		[Route("{id:int}")]
 		public VotingPageModel Get(int id)
 		{
-			Theme theme = _themeService.GetByThemeId(id);
+			Theme theme = _themeService.GetThemeById(id);
 			if (theme != null)
 			{
 				string userName = string.Empty;
@@ -36,7 +37,7 @@ namespace VotingSystem.Web.Controllers.API
 				if (User.Identity.IsAuthenticated)
 				{
 					userName = User.Identity.Name;
-					isAnswered = _answerService.IsAnswered(id, UserId);
+					isAnswered = _answerService.IsThemeAnswered(id, UserId);
 				}
 
 				return theme.ToVotingPageModel(isAnswered, userName);
@@ -53,20 +54,22 @@ namespace VotingSystem.Web.Controllers.API
 				query = "";
 			}
 			List<Theme> themes;
+			Filter<Theme> filter = new Filter<Theme>(null, page, size); 
+
 			switch (pageType)
 			{
 				case PageType.UserVotings:
-					themes = _themeService.GetByUserId(query, UserId, null, page, size);
+					themes = _themeService.GetThemesByUserId(query, UserId, filter);
 					break;
 				case PageType.AdminVotings:
 					if (!User.IsInRole(RoleType.Admin.ToString()) && !User.IsInRole(RoleType.Moderator.ToString()))
 					{
 						throw new AuthenticationException();
 					}
-					themes = _themeService.GetAll(query, null, page, size);
+					themes = _themeService.GetAllThemes(query, filter);
 					break;
 				default:
-					themes = _themeService.GetAllActive(query, null, page, size);
+					themes = _themeService.GetAllActiveThemes(query, filter);
 					break;
 			}
 
@@ -79,17 +82,17 @@ namespace VotingSystem.Web.Controllers.API
 		}
 
 		[Route("totalactive", Name = "TotalActive")]
-		[HttpGet]
+		[System.Web.Http.HttpGet]
 		public int GetTotalActiveVotings(string query = "")
 		{
 			if (String.IsNullOrEmpty(query))
 			{
 				query = "";
 			}
-			return _themeService.GetTotalActive(query);
+			return _themeService.GetNumberOfActiveThemesByThemeName(query);
 		}
 
-		[HttpGet]
+		[System.Web.Http.HttpGet]
 		[Route("totaluser", Name = "TotalUser")]
 		[CustomAuthorizeApi]
 		public int GetTotalUserVotings(string query = "")
@@ -98,10 +101,10 @@ namespace VotingSystem.Web.Controllers.API
 			{
 				query = "";
 			}
-			return _themeService.GetTotal(UserId, query);
+			return _themeService.GetNumberOfUserThemes(UserId, query);
 		}
 
-		[HttpGet]
+		[System.Web.Http.HttpGet]
 		[Route("totaladmin", Name = "TotalAdmin")]
 		[CustomAuthorizeApi(Roles = new[] { RoleType.Admin, RoleType.Moderator })]
 		public int GetTotalAdminVotings(string query = "")
@@ -110,7 +113,7 @@ namespace VotingSystem.Web.Controllers.API
 			{
 				query = "";
 			}
-			return _themeService.GetTotal(query);
+			return _themeService.GetNumberOfThemesByThemeName(query);
 		}
 
 		[CustomAuthorizeApi]
@@ -122,7 +125,7 @@ namespace VotingSystem.Web.Controllers.API
 				theme.UserId = UserId;
 				theme.CreateDate = DateTime.Now;
 				theme.Status = StatusType.NotApproved;
-				_themeService.Insert(theme);
+				_themeService.InsertTheme(theme);
 
 				return;
 			}
@@ -141,7 +144,7 @@ namespace VotingSystem.Web.Controllers.API
 		[OwnsApi(OwnsParameter = OwnsType.Theme)]
 		public void Delete(int id)
 		{
-			_themeService.Delete(id);
+			_themeService.DeleteTheme(id);
 		}
 	}
 }

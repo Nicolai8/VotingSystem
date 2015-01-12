@@ -61,12 +61,12 @@
     <Compile Include="Entities\Comment.cs" />
     <Compile Include="Entities\FixedAnswer.cs" />
     <Compile Include="Entities\Log.cs" />
-    <Compile Include="Entities\PrivacyType.cs" />
+    <Compile Include="Structures\PrivacyType.cs" />
     <Compile Include="Entities\Question.cs" />
     <Compile Include="Entities\Role.cs" />
-    <Compile Include="Entities\StatusType.cs" />
+    <Compile Include="Structures\StatusType.cs" />
     <Compile Include="Entities\Theme.cs" />
-    <Compile Include="Entities\QuestionType.cs" />
+    <Compile Include="Structures\QuestionType.cs" />
     <Compile Include="Entities\User.cs" />
     <Compile Include="Entities\UserProfile.cs" />
     <Compile Include="IUnitOfWork.cs" />

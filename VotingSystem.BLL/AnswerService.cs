@@ -14,19 +14,7 @@ namespace VotingSystem.BLL
 		{
 		}
 
-		public void Insert(Answer answer)
-		{
-			UnitOfWork.AnswerRepository.Insert(answer);
-			UnitOfWork.Save();
-		}
-
-		public void Delete(int answerId)
-		{
-			UnitOfWork.AnswerRepository.Delete(answerId);
-			UnitOfWork.Save();
-		}
-
-		public List<Answer> GetByUserId(int userId, int page = 1, int pageSize = 10)
+	    public List<Answer> GetByUserId(int userId, int page = 1, int pageSize = 10)
 		{
 			return UnitOfWork.AnswerRepository.Query()
 				.Filter(a => a.UserId == userId)
@@ -45,31 +33,37 @@ namespace VotingSystem.BLL
 				.GetPage(page, pageSize).ToList();
 		}
 
-		public bool IsAnswered(int themeId, int userId)
+		public bool IsThemeAnswered(int themeId, int userId)
 		{
 			return UnitOfWork.AnswerRepository.Query()
 				.Filter(answer => answer.Question.ThemeId == themeId && answer.UserId == userId)
 				.Get().Any();
 		}
 
-		public void Answer(Answer answer, int? userId = null)
+		public void AddAnswer(Answer answer, int? userId = null)
 		{
 			answer.UserId = userId;
 			answer.CreateDate = DateTime.Now;
 			Insert(answer);
 		}
 
-		public void Answer(IEnumerable<Answer> answers, int? userId = null)
+		public void AddAnswer(IEnumerable<Answer> answers, int? userId = null)
 		{
 			foreach (Answer answer in answers)
 			{
-				Answer(answer, userId);
+				AddAnswer(answer, userId);
 			}
 		}
 
-		public int GetMyTotal(int userId)
+		public int GetNumberOfUserAnswers(int userId)
 		{
 			return UnitOfWork.AnswerRepository.GetTotal(a => a.UserId == userId);
+		}
+
+		private void Insert(Answer answer)
+		{
+			UnitOfWork.AnswerRepository.Insert(answer);
+			UnitOfWork.Save();
 		}
 	}
 }

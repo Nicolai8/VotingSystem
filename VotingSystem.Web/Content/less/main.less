@@ -168,21 +168,21 @@ i.glyphicon, i.fa {
     display: none !important;
 }
 
-input.ng-invalid {
+input.ng-invalid:not(.ignore-validation)  {
     color: @brand-primary;
     border-color: @brand-primary;
 }
 
-    input.ng-invalid:focus {
+    input.ng-invalid:focus:not(.ignore-validation)  {
         border-color: @brand-primary;
     }
 
-input.ng-valid {
+input.ng-valid:not(.ignore-validation) {
     color: @brand-success;
     border-color: @brand-success;
 }
 
-    input.ng-valid:focus {
+    input.ng-valid:focus:not(.ignore-validation)  {
         border-color: @brand-success;
     }
 

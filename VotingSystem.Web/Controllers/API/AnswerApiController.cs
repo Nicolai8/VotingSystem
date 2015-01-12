@@ -41,7 +41,7 @@ namespace VotingSystem.Web.Controllers.API
 		public IEnumerable<QuestionModel> Get(int id)
 		{
 			int userId = User.Identity.IsAuthenticated ? UserId : -1;
-			Theme theme = _themeService.GetByThemeId(id);
+			Theme theme = _themeService.GetThemeById(id);
 			return theme.Questions.Select(q => q.ToQuestionModel(userId));
 		}
 
@@ -57,7 +57,7 @@ namespace VotingSystem.Web.Controllers.API
 		[CustomAuthorizeApi]
 		public int GetTotalAnswers()
 		{
-			return _answerService.GetMyTotal(UserId);
+			return _answerService.GetNumberOfUserAnswers(UserId);
 		}
 
 		[Route("")]
@@ -76,14 +76,14 @@ namespace VotingSystem.Web.Controllers.API
 
 		private int Vote(IEnumerable<Answer> answers, int? userId)
 		{
-			int themeId = _themeService.GetByQuestionId(answers.First().QuestionId).Id;
-			if (userId != null && _answerService.IsAnswered(themeId, userId.Value))
+			int themeId = _themeService.GetThemeByQuestionId(answers.First().QuestionId).Id;
+			if (userId != null && _answerService.IsThemeAnswered(themeId, userId.Value))
 			{
 				throw new VotingSystemException("You already answered on this voting.");
 			}
 			if (!_themeService.IsClosed(themeId))
 			{
-				_answerService.Answer(answers, userId);
+				_answerService.AddAnswer(answers, userId);
 				List<Answer> answersToTheme = _answerService.GetByThemeId(themeId, 1, int.MaxValue);
 				return answersToTheme.Count(a => a.QuestionId == answersToTheme.First().QuestionId);
 			}

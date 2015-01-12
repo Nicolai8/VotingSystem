@@ -1,4 +1,5 @@
 ﻿using System;
+using VotingSystem.DAL.Structures;
 
 namespace VotingSystem.DAL.Entities
 {

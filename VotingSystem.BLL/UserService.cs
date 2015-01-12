@@ -88,7 +88,7 @@ namespace VotingSystem.BLL
 			UnitOfWork.Save();
 		}
 
-		public void DeleteUser(string userName, bool deleteAllRelatedData)
+		public void DeleteUser(string userName)
 		{
 			UnitOfWork.UserRepository.Delete(GetUser(userName).Id);
 			UnitOfWork.Save();
@@ -114,19 +114,12 @@ namespace VotingSystem.BLL
 			return user.IsLocked;
 		}
 
-		//REVIEW: Move to the end of the class. Pls, check : http://stackoverflow.com/a/150540/710014
-		private T SetValueIfNotNull<T>(T currentValue, T newValue)
-		{
-			//REVIEW: use there ?? operator
-			return newValue == null ? currentValue : newValue;
-		}
-
 		public int GetTotal(Expression<Func<User, bool>> filter = null)
 		{
 			return UnitOfWork.UserRepository.GetTotal(filter);
 		}
 
-		public void RemoveUserFromRoles(string username)
+		public void RemoveUserFromAllRoles(string username)
 		{
 			User user = GetUser(username);
 			user.Roles = new Collection<Role>();
@@ -156,6 +149,11 @@ namespace VotingSystem.BLL
 			user.Roles = new List<Role>();
 			roles.ForEach(user.Roles.Add);
 			UnitOfWork.Save();
+		}
+		
+		private T SetValueIfNotNull<T>(T currentValue, T newValue)
+		{
+			return newValue == null ? currentValue : newValue;
 		}
 	}
 }

@@ -9,15 +9,12 @@ namespace VotingSystem.DAL.Entities
 		[DatabaseGenerated(DatabaseGeneratedOption.Computed)]
 		public DateTime CreateDate { get; set; }
 
-		//REVIEW: Combine Id and reference properties
 		public int? UserId { get; set; }
 		public virtual User User { get; set; }
 
-		//REVIEW: Combine Id and reference properties
 		public int QuestionId { get; set; }
 		public virtual Question Question { get; set; }
 
-		//REVIEW: Combine Id and reference properties
 		public int? FixedAnswerId { get; set; }
 		public virtual FixedAnswer FixedAnswer { get; set; }
 	}

@@ -26,10 +26,10 @@ namespace VotingSystem.Web.Filters
 			switch (OwnsParameter)
 			{
 				case OwnsType.Theme:
-					isAuthorized = AuthorizeAttributeHelper.Owns(id, _themeService.GetByThemeId, AuthorizeAttributeHelper.GetUserIdFromTheme);
+					isAuthorized = AuthorizeAttributeHelper.Owns(id, themeId => _themeService.GetThemeById(themeId), AuthorizeAttributeHelper.GetUserIdFromTheme);
 					break;
 				case OwnsType.Comment:
-					isAuthorized = AuthorizeAttributeHelper.Owns(id, _commentService.GetByCommentId, AuthorizeAttributeHelper.GetUserIdFromComment);
+					isAuthorized = AuthorizeAttributeHelper.Owns(id, _commentService.GetCommentById, AuthorizeAttributeHelper.GetUserIdFromComment);
 					break;
 			}
 			return AuthorizeAttributeHelper.IsAuthorizedLog(isAuthorized);

@@ -46,6 +46,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Filter.cs" />
     <Compile Include="VotingSystemException.cs" />
     <Compile Include="Logger.cs" />
     <Compile Include="SecurityHelper.cs" />

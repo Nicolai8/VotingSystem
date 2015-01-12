@@ -8,6 +8,7 @@ using System.Web.Security;
 using VotingSystem.BLL.Interfaces;
 using VotingSystem.Common;
 using VotingSystem.DAL.Entities;
+using VotingSystem.DAL.Structures;
 using VotingSystem.Web.Filters;
 using VotingSystem.Web.Helpers;
 using VotingSystem.Web.Models;
@@ -23,6 +24,28 @@ namespace VotingSystem.Web.Controllers
 		{
 			_userProfileService = userProfileService;
 		}
+
+        #region Private methods
+        private void HideFieldsAccordingToPrivacy(UserModel user)
+        {
+            switch (user.Privacy)
+            {
+                case PrivacyType.Users:
+                    if (!Request.IsAuthenticated)
+                    {
+                        user.Privacy = null;
+                        user.Email = "Hidden";
+                    }
+                    break;
+                case PrivacyType.WholeWorld:
+                    break;
+                default:
+                    user.Privacy = null;
+                    user.Email = "Hidden";
+                    break;
+            }
+        }
+        #endregion
 
 		[HttpPost]
 		[AllowAnonymous]
@@ -128,7 +151,7 @@ namespace VotingSystem.Web.Controllers
 			FileHelper.DeletePicture(Server, oldPicture);
 			string pictureUrl = FileHelper.SavePicture(Server, picture);
 			userProfile.PictureUrl = pictureUrl;
-			_userProfileService.Update(userProfile);
+			_userProfileService.UpdateUserProfile(userProfile);
 			return pictureUrl;
 		}
 
@@ -137,7 +160,7 @@ namespace VotingSystem.Web.Controllers
 		{
 			UserProfile userProfile = _userProfileService.GetByUserId(UserId);
 			userProfile.Privacy = privacy;
-			_userProfileService.Update(userProfile);
+			_userProfileService.UpdateUserProfile(userProfile);
 		}
 
 		[CustomAuthorizeMvc(Roles = new[] { RoleType.Admin })]
@@ -145,27 +168,5 @@ namespace VotingSystem.Web.Controllers
 		{
 			return Json(Roles.GetAllRoles(), JsonRequestBehavior.AllowGet);
 		}
-
-		#region Private methods
-		private void HideFieldsAccordingToPrivacy(UserModel user)
-		{
-			switch (user.Privacy)
-			{
-				case PrivacyType.Users:
-					if (!Request.IsAuthenticated)
-					{
-						user.Privacy = null;
-						user.Email = "Hidden";
-					}
-					break;
-				case PrivacyType.WholeWorld:
-					break;
-				default:
-					user.Privacy = null;
-					user.Email = "Hidden";
-					break;
-			}
-		}
-		#endregion
 	}
 }

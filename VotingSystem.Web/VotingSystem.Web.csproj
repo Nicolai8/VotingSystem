@@ -257,6 +257,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="App_Start\AsIsBundleOrderer.cs" />
     <Compile Include="App_Start\AuthConfig.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
@@ -345,7 +346,6 @@
     <Content Include="Scripts\libraries\angular\angular-touch.min.js" />
     <Content Include="Scripts\libraries\angular\angular.js" />
     <Content Include="Scripts\libraries\angular\angular.min.js" />
-    <Content Include="Scripts\libraries\async.js" />
     <Content Include="Scripts\libraries\jquery.signalR-2.1.0.js" />
     <Content Include="Scripts\libraries\jquery.signalR-2.1.0.min.js" />
     <Content Include="Content\fonts\glyphicons-halflings-regular.eot" />
@@ -482,24 +482,11 @@
     <Content Include="Scripts\libraries\jquery.iframe-transport.js" />
     <Content Include="Scripts\libraries\jquery.pagedown-bootstrap.combined.js" />
     <Content Include="Scripts\libraries\jquery.ui.widget.js" />
-    <Content Include="Scripts\libraries\less.js" />
-    <Content Include="Scripts\libraries\less.min.js">
-      <DependentUpon>less.js</DependentUpon>
-    </Content>
     <Content Include="Scripts\libraries\moment-2.4.0.js" />
-    <Content Include="Scripts\libraries\r.js" />
-    <Content Include="Scripts\libraries\require.js" />
-    <Content Include="Scripts\libraries\goog.js" />
-    <Content Include="Scripts\libraries\propertyParser.js" />
     <Content Include="Scripts\libraries\spin.js" />
     <Content Include="Scripts\libraries\toastr.min.js">
       <DependentUpon>toastr.js</DependentUpon>
     </Content>
-    <Content Include="Scripts\libraries\underi18n.js" />
-    <Content Include="Scripts\libraries\underscore.min.js">
-      <DependentUpon>underscore.js</DependentUpon>
-    </Content>
-    <Content Include="Scripts\main.js" />
     <Content Include="Scripts\libraries\toastr.js" />
     <Content Include="Scripts\user-defined\app.js" />
     <Content Include="Scripts\user-defined\controllers\CommentsCtrl.js" />
@@ -533,7 +520,6 @@
     <Content Include="Scripts\libraries\jquery.js" />
     <Content Include="Scripts\libraries\jquery.min.js" />
     <Content Include="Scripts\libraries\jquery-ui-1.10.3.js" />
-    <Content Include="Scripts\libraries\underscore.js" />
     <Content Include="Scripts\user-defined\constants.js" />
     <Content Include="Scripts\user-defined\services\ServicesModule.js" />
     <Content Include="Views\Templates\adminvotings.html" />

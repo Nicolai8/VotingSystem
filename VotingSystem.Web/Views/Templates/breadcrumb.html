@@ -1,5 +1,7 @@
 ﻿<ol class="breadcrumb">
-    <li data-ng-if="breadCrumbItemName.length>0"><a href="#/mainpage/1">Home</a></li>
+	<li data-ng-if="breadCrumbItemName.length>0">
+		<a href="#/main/1">Home</a>
+	</li>
 	<li data-ng-if="breadCrumbItemName.length>0" class="active">{{breadCrumbItemName}}</li>
-    <li data-ng-if="breadCrumbItemName.length==0" class="active">Home</li>
+	<li data-ng-if="breadCrumbItemName.length==0" class="active">Home</li>
 </ol>

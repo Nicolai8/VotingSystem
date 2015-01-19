@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using VotingSystem.DAL.Structures;
+using VotingSystem.DAL.Enums;
 
 namespace VotingSystem.DAL.Entities
 {

@@ -1,8 +1,8 @@
 ﻿using System.Web.Http.Controllers;
 using System.Web.Mvc;
 using VotingSystem.BLL.Interfaces;
+using VotingSystem.Web.Enums;
 using VotingSystem.Web.Helpers;
-using VotingSystem.Web.Models;
 using AuthorizeAttribute = System.Web.Http.AuthorizeAttribute;
 
 namespace VotingSystem.Web.Filters

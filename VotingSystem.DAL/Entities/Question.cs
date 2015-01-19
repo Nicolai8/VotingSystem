@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using VotingSystem.DAL.Structures;
+using VotingSystem.DAL.Enums;
 
 namespace VotingSystem.DAL.Entities
 {

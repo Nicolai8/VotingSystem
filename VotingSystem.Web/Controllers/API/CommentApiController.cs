@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web.Http;
 using VotingSystem.BLL.Interfaces;
+using VotingSystem.Common;
 using VotingSystem.DAL.Entities;
+using VotingSystem.Web.Enums;
 using VotingSystem.Web.Filters;
 using VotingSystem.Web.Helpers;
 using VotingSystem.Web.Models;
@@ -21,23 +23,23 @@ namespace VotingSystem.Web.Controllers.API
 			_commentService = commentService;
 		}
 
-		[Route("{page:int}")]
 		[HttpGet]
+		[Route("{page:int}")]
 		public IEnumerable<CommentModel> Get(int page, int size = 10)
 		{
-			List<Comment> comments = _commentService.GetCommentByUserId(UserId, page, size);
+			List<Comment> comments = _commentService.GetCommentByUserId(UserId, new Filter(page, size));
 			return comments.Select(comment => comment.ToCommentModel(User.Identity.Name));
 		}
 
-		[Route("total", Name = "TotalComments")]
 		[HttpGet]
+		[Route("total")]
 		public int GetTotal()
 		{
 			return _commentService.GetNumberOfUserComments(UserId);
 		}
 
-		[Route("")]
 		[HttpPost]
+		[Route("")]
 		public CommentModel Post([FromBody]Comment comment)
 		{
 			comment.UserId = UserId;
@@ -46,9 +48,9 @@ namespace VotingSystem.Web.Controllers.API
 			return comment.ToCommentModel(User.Identity.Name);
 		}
 
+		[HttpDelete]
 		[Route("{id:int}")]
 		[OwnsApi(OwnsParameter = OwnsType.Comment)]
-		[HttpDelete]
 		public void Delete(int id)
 		{
 			_commentService.DeleteComment(id);

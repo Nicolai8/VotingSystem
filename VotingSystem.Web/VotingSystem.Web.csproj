@@ -56,13 +56,13 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\dotless.1.4.1.0\lib\dotless.Core.dll</HintPath>
     </Reference>
-    <Reference Include="EntityFramework">
-      <HintPath>..\packages\EntityFramework.6.0.2\lib\net45\EntityFramework.dll</HintPath>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <Private>True</Private>
+      <HintPath>..\packages\EntityFramework.6.0.2\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
-    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
+    <Reference Include="EntityFramework.SqlServer">
       <HintPath>..\packages\EntityFramework.6.0.2\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.AspNet.SignalR.Core">
       <HintPath>..\packages\Microsoft.AspNet.SignalR.Core.2.1.0\lib\net45\Microsoft.AspNet.SignalR.Core.dll</HintPath>
@@ -258,9 +258,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\AsIsBundleOrderer.cs" />
-    <Compile Include="App_Start\AuthConfig.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
-    <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.cs" />
     <Compile Include="App_Start\UnityWebActivator.cs" />
@@ -273,7 +271,6 @@
     <Compile Include="Controllers\API\CommentApiController.cs" />
     <Compile Include="Controllers\MainController.cs" />
     <Compile Include="Controllers\API\VotingApiController.cs" />
-    <Compile Include="Filters\OwnsHubAttribute.cs" />
     <Compile Include="Filters\CustomAuthorizeHubAttribute.cs" />
     <Compile Include="Filters\CustomAuthorizeApiAttribute.cs" />
     <Compile Include="Filters\CustomAuthorizeMvcAttribute.cs" />
@@ -294,10 +291,10 @@
     <Compile Include="Models\ConnectionMapping.cs" />
     <Compile Include="Models\FixedAnswerModel.cs" />
     <Compile Include="Models\MainPageModel.cs" />
-    <Compile Include="Models\OwnsType.cs" />
-    <Compile Include="Models\PageType.cs" />
+    <Compile Include="Enums\OwnsType.cs" />
+    <Compile Include="Enums\PageType.cs" />
     <Compile Include="Models\QuestionModel.cs" />
-    <Compile Include="Models\RoleType.cs" />
+    <Compile Include="Enums\RoleType.cs" />
     <Compile Include="Models\UserModel.cs" />
     <Compile Include="Models\VotingModel.cs" />
     <Compile Include="Models\VotingPageModel.cs" />
@@ -499,6 +496,7 @@
     <Content Include="Scripts\user-defined\controllers\VotingCtrl.js" />
     <Content Include="Scripts\user-defined\controllers\ControllersModule.js" />
     <Content Include="Scripts\user-defined\directives\bootstrapMarkdown.js" />
+    <Content Include="Scripts\user-defined\directives\cleanUp.js" />
     <Content Include="Scripts\user-defined\directives\dateTimePicker.js" />
     <Content Include="Scripts\user-defined\directives\focusOut.js" />
     <Content Include="Scripts\user-defined\directives\goBack.js" />
@@ -522,6 +520,7 @@
     <Content Include="Scripts\libraries\jquery-ui-1.10.3.js" />
     <Content Include="Scripts\user-defined\constants.js" />
     <Content Include="Scripts\user-defined\services\ServicesModule.js" />
+    <Content Include="Scripts\user-defined\services\spinner.js" />
     <Content Include="Views\Templates\adminvotings.html" />
     <Content Include="Views\Templates\comments.html" />
     <Content Include="Views\Templates\main.html" />

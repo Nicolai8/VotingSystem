@@ -4,8 +4,7 @@ namespace VotingSystem.BLL.Interfaces
 {
 	public interface IUserProfileService
 	{
-		//REVIEW: Possibly need to be renamed
-		UserProfile GetByUserId(int userId);
+		UserProfile GetUserProfileByUserId(int userId);
 
 		void UpdateUserProfile(UserProfile userProfile);
 	}

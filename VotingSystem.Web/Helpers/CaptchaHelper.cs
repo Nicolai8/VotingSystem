@@ -26,12 +26,15 @@ namespace VotingSystem.Web.Helpers
 
 		private static ActionResult CreateCaptcha(Random rand, string captcha, bool noisy)
 		{
-			//REVIEW: Pls, check guidelines how to define multiple usings
 			using (MemoryStream mem = new MemoryStream())
-			using (Bitmap bmp = new Bitmap(130, 30))
-			using (Graphics gfx = Graphics.FromImage(bmp))
 			{
-				return DrawCaptcha(gfx, bmp, mem, rand, captcha, noisy);
+				using (Bitmap bmp = new Bitmap(130, 30))
+				{
+					using (Graphics gfx = Graphics.FromImage(bmp))
+					{
+						return DrawCaptcha(gfx, bmp, mem, rand, captcha, noisy);
+					}
+				}
 			}
 		}
 
@@ -51,19 +54,17 @@ namespace VotingSystem.Web.Helpers
 
 		private static void DrawEllipses(Graphics gfx, Random rand)
 		{
-			//REVIEW: Pls, check guidelines how to define multiple variables
-			int i, r, x, y;
 			Pen pen = new Pen(Color.Yellow);
-			for (i = 1; i < 10; i++)
+			for (int i = 1; i < 10; i++)
 			{
 				pen.Color = Color.FromArgb(
 				(rand.Next(0, 255)),
 				(rand.Next(0, 255)),
 				(rand.Next(0, 255)));
 
-				r = rand.Next(0, (130 / 3));
-				x = rand.Next(0, 130);
-				y = rand.Next(0, 30);
+				int r = rand.Next(0, (130 / 3));
+				int x = rand.Next(0, 130);
+				int y = rand.Next(0, 30);
 
 				gfx.DrawEllipse(pen, x - r, y - r, r, r);
 			}

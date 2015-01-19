@@ -1,28 +1,28 @@
 ﻿<div class="col-sm-9 col-xs-12">
-	<div data-ng-include="'views/templates/breadcrumb.html'" />
+	<div data-ng-include="'views/templates/breadcrumb.html'"/>
 	<div id="mainPage">
 		<div data-ng-hide="votings.length==0" data-voting-paginator="" data-total="{{total}}"></div>
 		<div data-ng-repeat="voting in votings">
 			<h2 class="padding-left-right-x2">
-				<a data-ng-href="#/votingpage/{{voting.VotingId}}">{{voting.VotingName}}</a>
+				<a data-ng-href="#/voting/{{voting.VotingId}}">{{voting.VotingName}}</a>
 			</h2>
-			<hr />
+			<hr/>
 			<div class="padding-left-right-x2">
 				<p data-trust-html="{{voting.Description}}"></p>
-				<a class="margin-bottom-x2 btn btn-primary" data-ng-href="#/votingpage/{{voting.VotingId}}">Read More<i class="glyphicon glyphicon-chevron-right"></i></a>
+				<a class="margin-bottom-x2 btn btn-primary" data-ng-href="#/voting/{{voting.VotingId}}">Read More<i class="glyphicon glyphicon-chevron-right"></i></a>
 			</div>
 			<div class="well well-sm">
-				<i class="glyphicon glyphicon-user"></i>by 
-						<a data-ng-href="#/profilepage/{{voting.CreatedBy}}">{{voting.CreatedBy}}</a>
-				|<i class="glyphicon glyphicon-calendar"></i>{{voting.CreateDate}} 
-						|<i class="glyphicon glyphicon-comment"></i>{{voting.CommentsCount}} Comments 
-						|<i class="glyphicon glyphicon-book"></i>{{voting.AnswersCount}} Answers
+				<i class="glyphicon glyphicon-user"></i>by
+				<a data-ng-href="#/profile/{{voting.CreatedBy}}">{{voting.CreatedBy}}</a>
+				|<i class="glyphicon glyphicon-calendar"></i>{{voting.CreateDate}}
+				|<i class="glyphicon glyphicon-comment"></i>{{voting.CommentsCount}} Comments
+				|<i class="glyphicon glyphicon-book"></i>{{voting.AnswersCount}} Answers
 			</div>
 		</div>
 		<div data-ng-hide="votings.length==0" data-voting-paginator="" data-total="{{total}}"></div>
 	</div>
-	<div data-ng-show="votings.length==0" data-not-found="votingsNotFoundMessage" />
+	<div data-ng-show="votings.length==0" data-not-found="votingsNotFoundMessage"/>
 </div>
 <div class="col-sm-3 hidden-xs">
-	<div data-ng-include="'views/templates/sidebar.html'" />
+	<div data-ng-include="'views/templates/sidebar.html'"/>
 </div>

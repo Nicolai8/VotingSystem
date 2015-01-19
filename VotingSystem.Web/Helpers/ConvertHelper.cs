@@ -1,10 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
+using System.Security.Policy;
 using System.Web.Security;
 using AutoMapper;
 using VotingSystem.DAL.Entities;
-using VotingSystem.DAL.Structures;
+using VotingSystem.DAL.Enums;
 using VotingSystem.Web.Models;
 
 namespace VotingSystem.Web.Helpers
@@ -18,8 +18,8 @@ namespace VotingSystem.Web.Helpers
 				.ForMember(d => d.VotingId, mo => mo.MapFrom(s => s.Id))
 				.ForMember(d => d.AnswersCount, mo => mo.MapFrom(s => s.Questions.First().Answers.Count))
 				.ForMember(d => d.CommentsCount, mo => mo.MapFrom(s => s.Comments.Count))
-				.ForMember(d => d.StartDate, mo => mo.MapFrom(s => s.StartDate.ToString("dd-MM-yy")))
-				.ForMember(d => d.EndDate, mo => mo.MapFrom(s => s.FinishTime.ToString("dd-MM-yy")))
+				.ForMember(d => d.StartDate, mo => mo.MapFrom(s => s.StartDate.ToDefaultFormatString()))
+				.ForMember(d => d.EndDate, mo => mo.MapFrom(s => s.FinishTime.ToDefaultFormatString()))
 				.ForMember(d => d.CreateDate, mo => mo.MapFrom(s => s.CreateDate.ToString("f")))
 				.ForMember(d => d.Status,
 					mo => mo.MapFrom(s =>
@@ -37,7 +37,7 @@ namespace VotingSystem.Web.Helpers
 				.ForMember(d => d.VotingId, mo => mo.MapFrom(s => s.Id))
 				.ForMember(d => d.TotalVotes, mo => mo.MapFrom(s => s.Questions.First().Answers.Count))
 				.ForMember(d => d.Comments, mo => mo.Ignore())
-				.ForMember(d => d.StartDate, mo => mo.MapFrom(s => s.StartDate.ToString("dd-MM-yy")))
+				.ForMember(d => d.StartDate, mo => mo.MapFrom(s => s.StartDate.ToDefaultFormatString()))
 				.ForMember(d => d.CreateDate, mo => mo.MapFrom(s => s.CreateDate.ToString("f")))
 				.ForMember(d => d.Status, mo => mo.MapFrom(s => s.StartDate.Date <= DateTime.Today && s.FinishTime.Date >= DateTime.Today ? s.Status : StatusType.Closed))
 				.ForMember(d => d.CreatedBy, mo => mo.MapFrom(s => s.User != null ? s.User.UserName : string.Empty))
@@ -59,7 +59,7 @@ namespace VotingSystem.Web.Helpers
 		{
 			Mapper.CreateMap<MembershipUser, UserModel>()
 				.ForMember(d => d.UserId, mo => mo.MapFrom(s => (int)s.ProviderUserKey))
-				.ForMember(d => d.CreateDate, mo => mo.MapFrom(s => s.CreationDate.ToString("dd-MM-yy")))
+				.ForMember(d => d.CreateDate, mo => mo.MapFrom(s => s.CreationDate.ToDefaultFormatString()))
 				.ForMember(d => d.Roles, mo => mo.MapFrom(s => Roles.GetRolesForUser(s.UserName)))
 				.ForMember(d => d.IsBlocked, mo => mo.MapFrom(s => s.IsLockedOut))
 				.AfterMap((s, d) =>
@@ -85,7 +85,7 @@ namespace VotingSystem.Web.Helpers
 				.ForMember(d => d.CreatedBy, mo => mo.MapFrom(s => s.User.UserName))
 				.ForMember(d => d.PictureUrl, mo => mo.MapFrom(s => s.User.UserProfile.PictureUrl ?? GlobalVariables.DefaultImagePath))
 				.ForMember(d => d.Own, mo => mo.Ignore())
-				.ForMember(d => d.CreateDate, mo => mo.MapFrom(s => s.CreateDate.ToString("dd-MM-yy hh:mm")))
+				.ForMember(d => d.CreateDate, mo => mo.MapFrom(s => s.CreateDate.ToFullDefaultFormatString()))
 				.AfterMap((s, d) => d.Own = s.User.UserName.Equals(currentUserName));
 
 			return Mapper.Map<Comment, CommentModel>(comment);
@@ -95,7 +95,7 @@ namespace VotingSystem.Web.Helpers
 		{
 			Mapper.CreateMap<Answer, AnswerModel>()
 				.ForMember(d => d.AnswerText, mo => mo.MapFrom(s => s.FixedAnswer == null ? s.AnswerText : s.FixedAnswer.AnswerText))
-				.ForMember(d => d.CreateDate, mo => mo.MapFrom(s => s.CreateDate.ToString("dd-MM-yy")))
+				.ForMember(d => d.CreateDate, mo => mo.MapFrom(s => s.CreateDate.ToDefaultFormatString()))
 				.ForMember(d => d.VotingId, mo => mo.MapFrom(s => s.Question.ThemeId))
 				.ForMember(d => d.VotingName, mo => mo.MapFrom(s => s.Question.Theme.VotingName))
 				.AfterMap((s, d) => d.PictureUrl = pictureUrl);
@@ -152,6 +152,16 @@ namespace VotingSystem.Web.Helpers
 		{
 			Mapper.CreateMap<FixedAnswer, FixedAnswerModel>();
 			return Mapper.Map<FixedAnswer, FixedAnswerModel>(answer);
+		}
+
+		public static string ToDefaultFormatString(this DateTime date)
+		{
+			return date.ToString(Resources.Resource.DateStringFormat);
+		}
+
+		public static string ToFullDefaultFormatString(this DateTime date)
+		{
+			return date.ToString(Resources.Resource.FullDateStringFormat);
 		}
 	}
 }

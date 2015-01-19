@@ -4,7 +4,7 @@ using System.Web;
 using System.Web.Security;
 using VotingSystem.Common;
 using VotingSystem.DAL.Entities;
-using VotingSystem.Web.Models;
+using VotingSystem.Web.Enums;
 
 namespace VotingSystem.Web.Helpers
 {

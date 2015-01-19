@@ -18,18 +18,17 @@ namespace VotingSystem.Web
 				"~/Content/less/main.less"
 				));
 
-			//REVIEW: What about using {version} ?
 			bundles.Add(new ScriptBundle("~/bundles/externals").Include(
 				"~/Scripts/libraries/jquery.min.js",
 				"~/Scripts/libraries/toastr.js",
 				"~/Scripts/libraries/spin.js",
-				"~/Scripts/libraries/jquery.signalR-2.1.0.min.js",
+				"~/Scripts/libraries/jquery.signalR-{version}.js",
 				"~/Scripts/libraries/bootstrap.js",
 				"~/Scripts/libraries/bootstrapValidator.js",
 				"~/Scripts/libraries/jquery.ui.widget.js",
 				"~/Scripts/libraries/jquery.iframe-transport.js",
 				"~/Scripts/libraries/jquery.fileupload.js",
-				"~/Scripts/libraries/moment-2.4.0.js",
+				"~/Scripts/libraries/moment-{version}.js",
 				"~/Scripts/libraries/bootstrap-datetimepicker.js",
 				"~/Scripts/libraries/jquery.bootpag.js",
 				"~/Scripts/libraries/jquery.pagedown-bootstrap.combined.js"
@@ -43,6 +42,7 @@ namespace VotingSystem.Web
 
 			bundles.Add(new ScriptBundle("~/bundles/client/directives").Include(
 				"~/Scripts/user-defined/directives/bootstrapMarkdown.js",
+				"~/Scripts/user-defined/directives/cleanUp.js",
 				"~/Scripts/user-defined/directives/dateTimePicker.js",
 				"~/Scripts/user-defined/directives/focusOut.js",
 				"~/Scripts/user-defined/directives/goBack.js",
@@ -53,31 +53,31 @@ namespace VotingSystem.Web
 				"~/Scripts/user-defined/directives/trustHtml.js",
 				"~/Scripts/user-defined/directives/validateField.js",
 				"~/Scripts/user-defined/directives/validateForm.js",
-				"~/Scripts/user-defined/directives/DirectivesModule.js"
+				"~/Scripts/user-defined/directives/directivesModule.js"
 				).ForceOrdered());
 
-			//REVIEW: Better to name all JS files from lower character
 			bundles.Add(new ScriptBundle("~/bundles/client/controllers").Include(
-				"~/Scripts/user-defined/controllers/AdminVotingsCtrl.js",
-				"~/Scripts/user-defined/controllers/CommentsCtrl.js",
-				"~/Scripts/user-defined/controllers/LayoutCtrl.js",
-				"~/Scripts/user-defined/controllers/MainCtrl.js",
-				"~/Scripts/user-defined/controllers/UserProfileCtrl.js",
-				"~/Scripts/user-defined/controllers/UsersCtrl.js",
-				"~/Scripts/user-defined/controllers/UserVotingsCtrl.js",
-				"~/Scripts/user-defined/controllers/VoicesCtrl.js",
-				"~/Scripts/user-defined/controllers/VotingCtrl.js",
-				"~/Scripts/user-defined/controllers/ControllersModule.js"
+				"~/Scripts/user-defined/controllers/adminVotingsCtrl.js",
+				"~/Scripts/user-defined/controllers/commentsCtrl.js",
+				"~/Scripts/user-defined/controllers/layoutCtrl.js",
+				"~/Scripts/user-defined/controllers/mainCtrl.js",
+				"~/Scripts/user-defined/controllers/userProfileCtrl.js",
+				"~/Scripts/user-defined/controllers/usersCtrl.js",
+				"~/Scripts/user-defined/controllers/userVotingsCtrl.js",
+				"~/Scripts/user-defined/controllers/voicesCtrl.js",
+				"~/Scripts/user-defined/controllers/votingCtrl.js",
+				"~/Scripts/user-defined/controllers/controllersModule.js"
 			).ForceOrdered());
 
 			bundles.Add(new ScriptBundle("~/bundles/client/services").Include(
 				"~/Scripts/user-defined/services/commentsHub.js",
 				"~/Scripts/user-defined/services/reload.js",
-				"~/Scripts/user-defined/services/CommentStorage.js",
-				"~/Scripts/user-defined/services/UserStorage.js",
-				"~/Scripts/user-defined/services/VoiceStorage.js",
-				"~/Scripts/user-defined/services/VotingStorage.js",
-				"~/Scripts/user-defined/services/ServicesModule.js"
+				"~/Scripts/user-defined/services/commentStorage.js",
+				"~/Scripts/user-defined/services/userStorage.js",
+				"~/Scripts/user-defined/services/voiceStorage.js",
+				"~/Scripts/user-defined/services/votingStorage.js",
+				"~/Scripts/user-defined/services/servicesModule.js",
+				"~/Scripts/user-defined/services/spinner.js"
 			).ForceOrdered());
 
 			bundles.Add(new ScriptBundle("~/bundles/client/app").Include(

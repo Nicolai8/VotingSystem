@@ -7,7 +7,8 @@ using System.Web.Security;
 using VotingSystem.BLL.Interfaces;
 using VotingSystem.Common;
 using VotingSystem.DAL.Entities;
-using VotingSystem.DAL.Structures;
+using VotingSystem.DAL.Enums;
+using VotingSystem.Web.Enums;
 using VotingSystem.Web.Filters;
 using VotingSystem.Web.Helpers;
 using VotingSystem.Web.Models;
@@ -54,22 +55,22 @@ namespace VotingSystem.Web.Controllers.API
 				query = "";
 			}
 			List<Theme> themes;
-			Filter<Theme> filter = new Filter<Theme>(null, page, size); 
+			FilterExtended<Theme> filterExtended = new FilterExtended<Theme>(null, page, size); 
 
 			switch (pageType)
 			{
 				case PageType.UserVotings:
-					themes = _themeService.GetThemesByUserId(query, UserId, filter);
+					themes = _themeService.GetThemesByUserId(query, UserId, filterExtended);
 					break;
 				case PageType.AdminVotings:
 					if (!User.IsInRole(RoleType.Admin.ToString()) && !User.IsInRole(RoleType.Moderator.ToString()))
 					{
 						throw new AuthenticationException();
 					}
-					themes = _themeService.GetAllThemes(query, filter);
+					themes = _themeService.GetAllThemes(query, filterExtended);
 					break;
 				default:
-					themes = _themeService.GetAllActiveThemes(query, filter);
+					themes = _themeService.GetAllActiveThemes(query, filterExtended);
 					break;
 			}
 
@@ -81,9 +82,8 @@ namespace VotingSystem.Web.Controllers.API
 			return model;
 		}
 
-		//REVIEW: Why we add Name to the route?
-		[Route("totalActive", Name = "TotalActive")]
 		[HttpGet]
+		[Route("totalActive")]
 		public int GetTotalActiveVotings(string query = "")
 		{
 			if (String.IsNullOrEmpty(query))
@@ -93,10 +93,8 @@ namespace VotingSystem.Web.Controllers.API
 			return _themeService.GetNumberOfActiveThemesByThemeName(query);
 		}
 
-		//REVIEW: Why we add Name to the route?
-		//REVIEW: totaluser -> totalUser
 		[HttpGet]
-		[Route("totaluser", Name = "TotalUser")]
+		[Route("totalUser")]
 		[CustomAuthorizeApi]
 		public int GetTotalUserVotings(string query = "")
 		{
@@ -107,10 +105,8 @@ namespace VotingSystem.Web.Controllers.API
 			return _themeService.GetNumberOfUserThemes(UserId, query);
 		}
 
-		//REVIEW: Why we add Name to the route?
-		//REVIEW: totaladmin -> totalAdmin
 		[HttpGet]
-		[Route("totalAdmin", Name = "TotalAdmin")]
+		[Route("totalAdmin")]
 		[CustomAuthorizeApi(Roles = new[] { RoleType.Admin, RoleType.Moderator })]
 		public int GetTotalAdminVotings(string query = "")
 		{
@@ -121,9 +117,8 @@ namespace VotingSystem.Web.Controllers.API
 			return _themeService.GetNumberOfThemesByThemeName(query);
 		}
 
-		//REVIEW: Why we add Name to the route?
-		[CustomAuthorizeApi]
 		[Route("")]
+		[CustomAuthorizeApi]
 		public void Post([FromBody]Theme theme)
 		{
 			if (ModelState.IsValid)

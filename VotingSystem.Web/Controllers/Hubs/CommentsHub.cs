@@ -29,8 +29,8 @@ namespace VotingSystem.Web.Controllers.Hubs
 			return base.OnReconnected();
 		}
 
-		[CustomAuthorizeHub]
 		[HttpPost]
+		[CustomAuthorizeHub]
 		public void CreateComment(CommentModel comment)
 		{
 			IList<string> clients= Connections.GetConnections(comment.VotingId.ToString());

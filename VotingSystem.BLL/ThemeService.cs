@@ -6,7 +6,7 @@ using VotingSystem.BLL.Interfaces;
 using VotingSystem.Common;
 using VotingSystem.DAL;
 using VotingSystem.DAL.Entities;
-using VotingSystem.DAL.Structures;
+using VotingSystem.DAL.Enums;
 
 namespace VotingSystem.BLL
 {
@@ -31,7 +31,7 @@ namespace VotingSystem.BLL
 			UnitOfWork.Save();
 		}
 
-		public bool IsClosed(int themeId)
+		public bool IsThemeClosed(int themeId)
 		{
 			Theme theme = UnitOfWork.ThemeRepository.GetById(themeId);
 			return theme.Status == StatusType.Closed || theme.Status == StatusType.Blocked
@@ -59,19 +59,19 @@ namespace VotingSystem.BLL
 				.Get().FirstOrDefault();
 		}
 
-		public List<Theme> GetThemesByUserId(string query, int userId, Filter<Theme> filter)
+		public List<Theme> GetThemesByUserId(string query, int userId, FilterExtended<Theme> filterExtended)
 		{
-			return GetThemes(filter, t => t.UserId == userId && t.VotingName.Contains(query)).ToList();
+			return GetThemes(filterExtended, t => t.UserId == userId && t.VotingName.Contains(query)).ToList();
 		}
 
-		public List<Theme> GetAllThemes(string query, Filter<Theme> filter)
+		public List<Theme> GetAllThemes(string query, FilterExtended<Theme> filterExtended)
 		{
-			return GetThemes(filter, t => t.VotingName.Contains(query));
+			return GetThemes(filterExtended, t => t.VotingName.Contains(query));
 		}
 
-		public List<Theme> GetAllActiveThemes(string query, Filter<Theme> filter)
+		public List<Theme> GetAllActiveThemes(string query, FilterExtended<Theme> filterExtended)
 		{
-			return GetThemes(filter, t => (t.Status == StatusType.Active || t.Status == StatusType.NotApproved) &&
+			return GetThemes(filterExtended, t => (t.Status == StatusType.Active || t.Status == StatusType.NotApproved) &&
 				(t.FinishTime >= DateTime.Today && t.StartDate <= DateTime.Today)
 				&& t.VotingName.Contains(query));
 		}
@@ -106,19 +106,19 @@ namespace VotingSystem.BLL
 			}
 		}
 
-		private List<Theme> GetThemes(Filter<Theme> filter, Expression<Func<Theme, bool>> expression = null)
+		private List<Theme> GetThemes(FilterExtended<Theme> filterExtended, Expression<Func<Theme, bool>> expression = null)
 		{
-			if (filter.OrderBy == null)
+			if (filterExtended.OrderBy == null)
 			{
-				filter.OrderBy = t => t.OrderByDescending(theme => theme.CreateDate);
+				filterExtended.OrderBy = t => t.OrderByDescending(theme => theme.CreateDate);
 			}
 			return UnitOfWork.ThemeRepository.Query()
 				.Filter(expression)
-				.OrderBy(filter.OrderBy)
+				.OrderBy(filterExtended.OrderBy)
 				.Include(t => t.Comments)
 				.Include(t => t.Questions)
 				.Include(t => t.Questions.Select(q => q.Answers))
-				.GetPage(filter.Page, filter.PageSize).ToList();
+				.GetPage(filterExtended.Page, filterExtended.PageSize).ToList();
 		}
 	}
 }

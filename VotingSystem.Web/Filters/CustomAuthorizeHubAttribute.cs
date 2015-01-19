@@ -1,6 +1,7 @@
-﻿using Microsoft.AspNet.SignalR;
+﻿using System.Security.Principal;
+using Microsoft.AspNet.SignalR;
+using VotingSystem.Web.Enums;
 using VotingSystem.Web.Helpers;
-using VotingSystem.Web.Models;
 
 namespace VotingSystem.Web.Filters
 {
@@ -13,7 +14,7 @@ namespace VotingSystem.Web.Filters
 			Roles = new RoleType[] { };
 		}
 
-		protected override bool UserAuthorized(System.Security.Principal.IPrincipal user)
+		protected override bool UserAuthorized(IPrincipal user)
 		{
 			return AuthorizeAttributeHelper.IsAuthorizedLog(AuthorizeAttributeHelper.IsAuthorized(Roles));
 		}

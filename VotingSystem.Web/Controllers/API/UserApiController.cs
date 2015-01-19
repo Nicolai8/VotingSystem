@@ -4,6 +4,7 @@ using System.Web.Http;
 using System.Web.Security;
 using VotingSystem.BLL.Interfaces;
 using VotingSystem.DAL.Entities;
+using VotingSystem.Web.Enums;
 using VotingSystem.Web.Filters;
 using VotingSystem.Web.Helpers;
 using VotingSystem.Web.Models;
@@ -22,7 +23,67 @@ namespace VotingSystem.Web.Controllers.API
 			_userProfileService = userProfileService;
 		}
 
-		//REVIEW: position of privates methods in classes...
+		[Route("total/users")]
+		[HttpGet]
+		public int GetTotalUsers()
+		{
+			CustomMembershipProvider membership = (CustomMembershipProvider)Membership.Provider;
+			return membership.GetTotalUsers();
+		}
+
+		[Route("total/suggestedUsers", Order = 1)]
+		[HttpGet]
+		public int GetTotalSuggestedUsers()
+		{
+			CustomMembershipProvider membership = (CustomMembershipProvider)Membership.Provider;
+			return membership.GetTotalSuggestedUsers();
+		}
+
+		[Route("{id}")]
+		[HttpPut]
+		public void Put(string id, [FromBody]UserModel user)
+		{
+			MembershipUser membershipUser = Membership.GetUser(user.UserName);
+			if (membershipUser != null && membershipUser.IsLockedOut == user.IsBlocked)
+			{
+				ChangeUserRoles(id, user.Roles);
+				return;
+			}
+			ToggleLock(id);
+
+		}
+
+		[Route("{id}")]
+		[HttpDelete]
+		public void Delete(string id)
+		{
+			Membership.DeleteUser(id);
+		}
+
+		[Route("{id}/unsuggest")]
+		[HttpPost]
+		public void UnsuggestUserToBlock(string id)
+		{
+			MembershipUser user = Membership.GetUser(id);
+			if (user != null && user.ProviderUserKey != null)
+			{
+				UserProfile userProfile = _userProfileService.GetUserProfileByUserId((int)user.ProviderUserKey);
+				userProfile.SuggestedToBlock = false;
+				_userProfileService.UpdateUserProfile(userProfile);
+			}
+		}
+
+		[Route("{id}/suggest")]
+		[HttpPost]
+		public void SuggestUserToBlock(string id)
+		{
+			UserProfile userProfile = _userProfileService.GetUserProfileByUserId(UserId);
+			userProfile.SuggestedToBlock = true;
+			_userProfileService.UpdateUserProfile(userProfile);
+		}
+
+		#region Private methods
+
 		private void ChangeUserRoles(string userName, string[] roleNames)
 		{
 			string[] userRoles = Roles.GetRolesForUser(userName);
@@ -39,7 +100,6 @@ namespace VotingSystem.Web.Controllers.API
 			}
 		}
 
-		//REVIEW: position of privates methods in classes...
 		private void ToggleLock(string userName)
 		{
 			CustomMembershipProvider membership = (CustomMembershipProvider)Membership.Provider;
@@ -69,67 +129,6 @@ namespace VotingSystem.Web.Controllers.API
 			return users;
 		}
 
-		//REVIEW: Why we add Name to the route?
-		[Route("total/users", Name = "TotalUsers")]
-		[HttpGet]
-		public int GetTotalUsers()
-		{
-			CustomMembershipProvider membership = (CustomMembershipProvider)Membership.Provider;
-			return membership.GetTotalUsers();
-		}
-
-		//REVIEW: Why we add Name to the route?
-		[Route("total/suggestedUsers", Name = "TotalSuggestedUsers", Order = 1)]
-		[HttpGet]
-		public int GetTotalSuggestedUsers()
-		{
-			CustomMembershipProvider membership = (CustomMembershipProvider)Membership.Provider;
-			return membership.GetTotalSuggestedUsers();
-		}
-
-		[Route("{id}")]
-		[HttpPut]
-		public void Put(string id, [FromBody]UserModel user)
-		{
-			MembershipUser membershipUser = Membership.GetUser(user.UserName);
-			if (membershipUser != null && membershipUser.IsLockedOut == user.IsBlocked)
-			{
-				ChangeUserRoles(id, user.Roles);
-				return;
-			}
-			ToggleLock(id);
-
-		}
-
-		[Route("{id}")]
-		[HttpDelete]
-		public void Delete(string id)
-		{
-			Membership.DeleteUser(id);
-		}
-
-		//REVIEW: Why we add Name to the route?
-		[Route("{id}/unsuggest", Name = "UnsuggestUser")]
-		[HttpPost]
-		public void UnsuggestUserToBlock(string id)
-		{
-			MembershipUser user = Membership.GetUser(id);
-			if (user != null && user.ProviderUserKey != null)
-			{
-				UserProfile userProfile = _userProfileService.GetByUserId((int)user.ProviderUserKey);
-				userProfile.SuggestedToBlock = false;
-				_userProfileService.UpdateUserProfile(userProfile);
-			}
-		}
-
-		//REVIEW: Why we add Name to the route?
-		[Route("{id}/suggest", Name = "SuggestUser")]
-		[HttpPost]
-		public void SuggestUserToBlock(string id)
-		{
-			UserProfile userProfile = _userProfileService.GetByUserId(UserId);
-			userProfile.SuggestedToBlock = true;
-			_userProfileService.UpdateUserProfile(userProfile);
-		}
+		#endregion
 	}
 }

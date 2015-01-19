@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using VotingSystem.BLL.Interfaces;
+using VotingSystem.Common;
 using VotingSystem.DAL;
 using VotingSystem.DAL.Entities;
 
@@ -14,7 +15,7 @@ namespace VotingSystem.BLL
 		{
 		}
 
-		public List<Answer> GetByUserId(int userId, int page = 1, int pageSize = 10)
+		public List<Answer> GetByUserId(int userId, Filter filter)
 		{
 			return UnitOfWork.AnswerRepository.Query()
 				.Filter(a => a.UserId == userId)
@@ -22,15 +23,15 @@ namespace VotingSystem.BLL
 				.Include(a => a.Question)
 				.Include(a => a.Question.Theme)
 				.Include(a => a.FixedAnswer)
-				.GetPage(page, pageSize).ToList();
+				.GetPage(filter.Page, filter.PageSize).ToList();
 		}
 
-		public List<Answer> GetByThemeId(int themeId, int page = 1, int pageSize = 10)
+		public List<Answer> GetByThemeId(int themeId, Filter filter)
 		{
 			return UnitOfWork.AnswerRepository.Query()
 				.Filter(a => a.Question.ThemeId == themeId)
 				.OrderBy(an => an.OrderByDescending(ans => ans.CreateDate))
-				.GetPage(page, pageSize).ToList();
+				.GetPage(filter.Page, filter.PageSize).ToList();
 		}
 
 		public bool IsThemeAnswered(int themeId, int userId)

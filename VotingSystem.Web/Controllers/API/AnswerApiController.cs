@@ -31,8 +31,8 @@ namespace VotingSystem.Web.Controllers.API
 		[CustomAuthorizeApi]
 		public IEnumerable<AnswerModel> Get(int page, int size)
 		{
-			List<Answer> answers = _answerService.GetByUserId(UserId, page, size);
-			UserProfile userProfile = _userProfileService.GetByUserId(UserId);
+			List<Answer> answers = _answerService.GetByUserId(UserId, new Filter(page, size));
+			UserProfile userProfile = _userProfileService.GetUserProfileByUserId(UserId);
 			string pictureUrl = userProfile != null && !String.IsNullOrEmpty(userProfile.PictureUrl) ?
 				userProfile.PictureUrl : GlobalVariables.DefaultImagePath;
 			return answers.Select(a => a.ToAnswerModel(pictureUrl));
@@ -53,8 +53,8 @@ namespace VotingSystem.Web.Controllers.API
 			return Vote(answers, UserId);
 		}
 
-		[Route("total", Name = "TotalAnswers")]
 		[HttpGet]
+		[Route("total")]
 		[CustomAuthorizeApi]
 		public int GetTotalAnswers()
 		{
@@ -83,10 +83,10 @@ namespace VotingSystem.Web.Controllers.API
 			{
 				throw new VotingSystemException("You already answered on this voting.");
 			}
-			if (!_themeService.IsClosed(themeId))
+			if (!_themeService.IsThemeClosed(themeId))
 			{
 				_answerService.AddAnswer(answers, userId);
-				List<Answer> answersToTheme = _answerService.GetByThemeId(themeId, 1, int.MaxValue);
+				List<Answer> answersToTheme = _answerService.GetByThemeId(themeId, new Filter(1, int.MaxValue));
 				return answersToTheme.Count(a => a.QuestionId == answersToTheme.First().QuestionId);
 			}
 			throw new VotingSystemException("Voting is closed or blocked.");

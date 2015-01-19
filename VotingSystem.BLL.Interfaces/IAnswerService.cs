@@ -1,15 +1,14 @@
 ﻿using System.Collections.Generic;
+using VotingSystem.Common;
 using VotingSystem.DAL.Entities;
 
 namespace VotingSystem.BLL.Interfaces
 {
 	public interface IAnswerService
 	{
-		//REVIEW: Could Filter functionality be applied there?
-		List<Answer> GetByUserId(int userId, int page = 1, int pageSize = 10);
+		List<Answer> GetByUserId(int userId, Filter filter);
 
-		//REVIEW: Could Filter functionality be applied there?
-		List<Answer> GetByThemeId(int themeId, int page = 1, int pageSize = 10);
+		List<Answer> GetByThemeId(int themeId, Filter filter);
 
 		bool IsThemeAnswered(int themeId, int userId);
 

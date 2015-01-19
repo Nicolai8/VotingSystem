@@ -8,7 +8,8 @@ using System.Web.Security;
 using VotingSystem.BLL.Interfaces;
 using VotingSystem.Common;
 using VotingSystem.DAL.Entities;
-using VotingSystem.DAL.Structures;
+using VotingSystem.DAL.Enums;
+using VotingSystem.Web.Enums;
 using VotingSystem.Web.Filters;
 using VotingSystem.Web.Helpers;
 using VotingSystem.Web.Models;
@@ -24,31 +25,6 @@ namespace VotingSystem.Web.Controllers
 		{
 			_userProfileService = userProfileService;
 		}
-
-		#region Private methods
-
-		//REVIEW: Position of private methods... 
-		private void HideFieldsAccordingToPrivacy(UserModel user)
-		{
-			switch (user.Privacy)
-			{
-				case PrivacyType.Users:
-					if (!Request.IsAuthenticated)
-					{
-						user.Privacy = null;
-						user.Email = "Hidden";
-					}
-					break;
-				case PrivacyType.WholeWorld:
-					break;
-				default:
-					user.Privacy = null;
-					user.Email = "Hidden";
-					break;
-			}
-		}
-
-		#endregion
 
 		[HttpPost]
 		[AllowAnonymous]
@@ -131,7 +107,7 @@ namespace VotingSystem.Web.Controllers
 			MembershipUser membershipUser = string.IsNullOrEmpty(userName) ? Membership.GetUser() : Membership.GetUser(userName);
 			if (membershipUser != null)
 			{
-				user = membershipUser.ToUserModel(_userProfileService.GetByUserId((int)membershipUser.ProviderUserKey));
+				user = membershipUser.ToUserModel(_userProfileService.GetUserProfileByUserId((int)membershipUser.ProviderUserKey));
 				if (String.IsNullOrEmpty(userName))
 				{
 					user.Privacy = PrivacyType.WholeWorld;
@@ -149,7 +125,7 @@ namespace VotingSystem.Web.Controllers
 			{
 				throw new ArgumentException("Picture not found");
 			}
-			UserProfile userProfile = _userProfileService.GetByUserId(UserId);
+			UserProfile userProfile = _userProfileService.GetUserProfileByUserId(UserId);
 			string oldPicture = userProfile.PictureUrl;
 			FileHelper.DeletePicture(Server, oldPicture);
 			string pictureUrl = FileHelper.SavePicture(Server, picture);
@@ -161,7 +137,7 @@ namespace VotingSystem.Web.Controllers
 		[HttpPost]
 		public void ChangePrivacy(PrivacyType privacy)
 		{
-			UserProfile userProfile = _userProfileService.GetByUserId(UserId);
+			UserProfile userProfile = _userProfileService.GetUserProfileByUserId(UserId);
 			userProfile.Privacy = privacy;
 			_userProfileService.UpdateUserProfile(userProfile);
 		}
@@ -171,5 +147,29 @@ namespace VotingSystem.Web.Controllers
 		{
 			return Json(Roles.GetAllRoles(), JsonRequestBehavior.AllowGet);
 		}
+		
+		#region Private methods
+
+		private void HideFieldsAccordingToPrivacy(UserModel user)
+		{
+			switch (user.Privacy)
+			{
+				case PrivacyType.Users:
+					if (!Request.IsAuthenticated)
+					{
+						user.Privacy = null;
+						user.Email = "Hidden";
+					}
+					break;
+				case PrivacyType.WholeWorld:
+					break;
+				default:
+					user.Privacy = null;
+					user.Email = "Hidden";
+					break;
+			}
+		}
+
+		#endregion
 	}
 }

@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using VotingSystem.DAL.Structures;
+using VotingSystem.DAL.Enums;
 
 namespace VotingSystem.Web.Models
 {

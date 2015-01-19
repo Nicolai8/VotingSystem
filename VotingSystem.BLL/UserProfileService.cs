@@ -11,7 +11,7 @@ namespace VotingSystem.BLL
 		{
 		}
 
-		public UserProfile GetByUserId(int userId)
+		public UserProfile GetUserProfileByUserId(int userId)
 		{
 			return UnitOfWork.UserProfileRepository.GetById(userId);
 		}

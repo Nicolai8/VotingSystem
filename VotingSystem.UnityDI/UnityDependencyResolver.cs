@@ -11,9 +11,10 @@ namespace VotingSystem.UnityDI
 
 		public UnityDependencyResolver(IUnityContainer container)
 		{
-			//REVIEW: everywhere we need to use { }. Pls, review all code
 			if (container == null)
+			{
 				throw new ArgumentNullException("container");
+			}
 
 			Container = container;
 		}

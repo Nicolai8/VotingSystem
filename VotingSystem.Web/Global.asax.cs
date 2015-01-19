@@ -17,10 +17,8 @@ namespace VotingSystem.Web
 			AreaRegistration.RegisterAllAreas();
 			GlobalConfiguration.Configure(WebApiConfig.Register);
 			GlobalConfiguration.Configuration.Filters.Add(new CustomExceptionApiAttribute());
-			FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
 			RouteConfig.RegisterRoutes(RouteTable.Routes);
 			BundleConfig.RegisterBundles(BundleTable.Bundles);
-			AuthConfig.RegisterAuth();
 		}
 
 		protected void Application_Error(object sender, EventArgs e)

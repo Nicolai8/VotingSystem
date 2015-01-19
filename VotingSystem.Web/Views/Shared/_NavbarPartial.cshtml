@@ -8,21 +8,22 @@
 				<span class="icon-bar"></span>
 			</button>
 			<a href="@Url.Action("Index", "Main")" class="navbar-brand">
-				<img src="~/Content/images/vote_logo.png" class="logo" alt="Logo" /></a>
+				<img src="~/Content/images/vote_logo.png" class="logo" alt="Logo" />
+			</a>
 		</div>
 		<div class="collapse navbar-collapse" id="navbar-collapse-part">
 			<ul class="nav navbar-nav">
 				<li class="dropdown">
-					<a href="#/mainpage/1" id="menu-allvotings">All votings</a>
+					<a href="#/main/1" id="menu-allvotings">All votings</a>
 				</li>
 			</ul>
 			<ul class="nav navbar-nav" data-ng-show="authenticated">
 				<li class="dropdown">
 					<a class="dropdown-toggle" data-toggle="dropdown">My Activity <b class="caret"></b></a>
 					<ul class="dropdown-menu">
-						<li><a href="#/uservotingspage/1">Votings</a></li>
-						<li><a href="#/voicespage/1">Voices</a></li>
-						<li><a href="#/commentspage/1">Comments</a></li>
+						<li><a href="#/userVotings/1">Votings</a></li>
+						<li><a href="#/voices/1">Voices</a></li>
+						<li><a href="#/comments/1">Comments</a></li>
 					</ul>
 				</li>
 			</ul>
@@ -30,9 +31,9 @@
 				<li class="dropdown">
 					<a class="dropdown-toggle" data-toggle="dropdown">Administration Panel <b class="caret"></b></a>
 					<ul class="dropdown-menu">
-						<li><a href="#/adminvotingspage/1">Votings</a></li>
-						<li data-ng-show="roles.indexOf('admin')!=-1"><a href="#/userspage/1">Users</a></li>
-						<li data-ng-show="roles.indexOf('admin')!=-1"><a href="#/userspage/1/suggested">Suggested to Block Users</a></li>
+						<li><a href="#/adminVotings/1">Votings</a></li>
+						<li data-ng-show="roles.indexOf('admin')!=-1"><a href="#/users/1">Users</a></li>
+						<li data-ng-show="roles.indexOf('admin')!=-1"><a href="#/users/1/suggested">Suggested to Block Users</a></li>
 					</ul>
 				</li>
 			</ul>
@@ -41,7 +42,7 @@
 					<a class="dropdown-toggle" data-toggle="dropdown"><i class="glyphicon glyphicon-user"></i><span data-ng-bind="accountName">Account</span> <b class="caret"></b></a>
 					<ul class="dropdown-menu">
 						<li><a data-toggle="modal" data-ng-hide="authenticated" data-target="#loginForm"><i class="glyphicon glyphicon-log-in"></i>Sign In</a></li>
-						<li><a data-ng-show="authenticated" href="#/profilepage"><i class="glyphicon glyphicon-user"></i>Account</a></li>
+						<li><a data-ng-show="authenticated" href="#/profile"><i class="glyphicon glyphicon-user"></i>Account</a></li>
 						<li><a data-ng-show="authenticated" data-ng-click="signOut($event)"><i class="glyphicon glyphicon-log-out"></i>Sign Out</a></li>
 					</ul>
 				</li>

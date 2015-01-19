@@ -1,4 +1,4 @@
-﻿namespace VotingSystem.DAL.Structures
+﻿namespace VotingSystem.DAL.Enums
 {
 	public enum PrivacyType
 	{

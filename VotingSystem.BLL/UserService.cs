@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Linq.Expressions;
 using VotingSystem.BLL.Interfaces;
+using VotingSystem.Common;
 using VotingSystem.DAL;
 using VotingSystem.DAL.Entities;
 
@@ -19,7 +20,7 @@ namespace VotingSystem.BLL
 			_roleService = roleService;
 		}
 
-		public User GetUser(string userName)
+		public User GetUserByUserName(string userName)
 		{
 			return UnitOfWork.UserRepository.Query()
 				.Filter(u => u.UserName.Equals(userName))
@@ -27,20 +28,20 @@ namespace VotingSystem.BLL
 				.Get().SingleOrDefault();
 		}
 
-		public List<User> GetUsers(out int total, int page = 1, int pageSize = 10)
+		public List<User> GetUsers(out int total, Filter filter)
 		{
 			total = UnitOfWork.UserRepository.GetTotal();
 			return UnitOfWork.UserRepository.Query()
 				.OrderBy(u => u.OrderBy(us => us.UserName))
-				.GetPage(page, pageSize).ToList();
+				.GetPage(filter.Page, filter.PageSize).ToList();
 		}
 
-		public List<User> GetSuggestedUsers(int page = 1, int pageSize = 10)
+		public List<User> GetSuggestedUsers(Filter filter)
 		{
 			return UnitOfWork.UserRepository.Query()
 				.Filter(u => u.UserProfile.SuggestedToBlock)
 				.OrderBy(u => u.OrderBy(us => us.UserName))
-				.GetPage(page, pageSize).ToList();
+				.GetPage(filter.Page, filter.PageSize).ToList();
 		}
 
 		public User GetUserByEmail(string email)
@@ -57,27 +58,27 @@ namespace VotingSystem.BLL
 
 		public string[] GetUserRoles(string userName)
 		{
-			return GetUser(userName).Roles.Select(r => r.RoleName).ToArray();
+			return GetUserByUserName(userName).Roles.Select(r => r.RoleName).ToArray();
 		}
 
 		public List<User> GetUsersByName(string userName)
 		{
 			return UnitOfWork.UserRepository.Query()
-				.Filter(u => u.UserName.Equals(userName))
+				.Filter(u => u.UserName.Contains(userName))
 				.OrderBy(u => u.OrderBy(us => us.UserName))
 				.Get().ToList();
 		}
 
 		public void UpdateUser(User user)
 		{
-			User currentUser = GetUser(user.UserName);
+			User currentUser = GetUserByUserName(user.UserName);
 			currentUser.Roles = user.Roles;
 			UnitOfWork.Save();
 		}
 
 		public void UpdateUser(string userName, string email = null, bool? isApproved = null, string password = null, string passwordQuestion = null, string passwordAnswer = null)
 		{
-			User currentUser = GetUser(userName);
+			User currentUser = GetUserByUserName(userName);
 
 			currentUser.Email = SetValueIfNotNull(currentUser.Email, email);
 			currentUser.Password = SetValueIfNotNull(currentUser.Password, password);
@@ -90,7 +91,7 @@ namespace VotingSystem.BLL
 
 		public void DeleteUser(string userName)
 		{
-			UnitOfWork.UserRepository.Delete(GetUser(userName).Id);
+			UnitOfWork.UserRepository.Delete(GetUserByUserName(userName).Id);
 			UnitOfWork.Save();
 		}
 
@@ -102,26 +103,26 @@ namespace VotingSystem.BLL
 
 		public bool IsUserInRole(string userName, string roleName)
 		{
-			User user = GetUser(userName);
+			User user = GetUserByUserName(userName);
 			return user != null && user.Roles.Any(r => r.RoleName.Equals(roleName, StringComparison.InvariantCultureIgnoreCase));
 		}
 
 		public bool ToggleLock(string userName)
 		{
-			User user = GetUser(userName);
+			User user = GetUserByUserName(userName);
 			user.IsLocked = !user.IsLocked;
 			UnitOfWork.Save();
 			return user.IsLocked;
 		}
 
-		public int GetTotal(Expression<Func<User, bool>> filter = null)
+		public int GetNumberOfUsers(Expression<Func<User, bool>> filter = null)
 		{
 			return UnitOfWork.UserRepository.GetTotal(filter);
 		}
 
 		public void RemoveUserFromAllRoles(string username)
 		{
-			User user = GetUser(username);
+			User user = GetUserByUserName(username);
 			user.Roles = new Collection<Role>();
 			UnitOfWork.Save();
 		}
@@ -129,7 +130,7 @@ namespace VotingSystem.BLL
 		public void RemoveUserFromRoles(string username, string[] roleNames)
 		{
 			List<Role> roles = roleNames.Select(roleName => _roleService.GetRole(roleName)).ToList();
-			User user = GetUser(username);
+			User user = GetUserByUserName(username);
 			if (user.Roles != null)
 			{
 				user.Roles = user.Roles.Except(roles).ToList();
@@ -140,7 +141,7 @@ namespace VotingSystem.BLL
 		public void AddUserToRoles(string username, string[] roleNames)
 		{
 			List<Role> roles = roleNames.Select(roleName => _roleService.GetRole(roleName)).ToList();
-			User user = GetUser(username);
+			User user = GetUserByUserName(username);
 			if (user.Roles != null)
 			{
 				roles.AddRange(user.Roles);

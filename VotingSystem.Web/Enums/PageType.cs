@@ -1,4 +1,4 @@
-﻿namespace VotingSystem.Web.Models
+﻿namespace VotingSystem.Web.Enums
 {
 	public enum PageType
 	{

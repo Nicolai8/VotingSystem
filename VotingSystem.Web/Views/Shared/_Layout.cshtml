@@ -1,60 +1,60 @@
 ﻿<!DOCTYPE html>
 <html lang="en" data-ng-app="votingSystem">
 <head>
-    <meta charset="utf-8" />
-    <title>Voting System</title>
-    <link href="~/Content/images/favicon.ico" rel="shortcut icon" type="image/x-icon" />
-    <meta name="viewport" content="width=device-width" />
+	<meta charset="utf-8" />
+	<title>Voting System</title>
+	<link href="~/Content/images/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+	<meta name="viewport" content="width=device-width" />
 
-    <style type="text/css">
-        @@import url("//fonts.googleapis.com/css?family=News+Cycle:400,700");
-    </style>
-    @Styles.Render("~/content/bootstrap")
-    <link href="@Url.Content("~/Content/less/toastr.less")" rel="stylesheet" type="text/css" />
-    <link href="@Url.Content("~/Content/less/font-awesome.less")" rel="stylesheet" type="text/css" />
-    @Styles.Render("~/bundles/css")
-    @Styles.Render("~/content/main")
+	<style type="text/css">
+		@@import url("//fonts.googleapis.com/css?family=News+Cycle:400,700");
+	</style>
+	@Styles.Render("~/content/bootstrap")
+	<link href="@Url.Content("~/Content/less/toastr.less")" rel="stylesheet" type="text/css" />
+	<link href="@Url.Content("~/Content/less/font-awesome.less")" rel="stylesheet" type="text/css" />
+	@Styles.Render("~/bundles/css")
+	@Styles.Render("~/content/main")
 
-    <script type="text/javascript">
-        var cacheScripts = false;
-        var authenticated = @Html.Raw(Request.IsAuthenticated ? "true" : "false");
-        var loggedUserName = "@Html.Raw(Request.IsAuthenticated ? User.Identity.Name : "Account")";
-    </script>
+	<script type="text/javascript">
+		var cacheScripts = false;
+		var authenticated = @Html.Raw(Request.IsAuthenticated ? "true" : "false");
+		var loggedUserName = "@Html.Raw(Request.IsAuthenticated ? User.Identity.Name : "Account")";
+	</script>
 </head>
-<body data-ng-controller="LayoutCtrl">
-    <div id="preloader" hidden=""></div>
-    <header>
-        @Html.Partial("_NavbarPartial")
-        <div class="container">
-            <div class="row clearfix" id="breadcrumb">
-            </div>
-        </div>
-    </header>
+<body data-ng-controller="LayoutCtrl" data-clean-up>
+	<div id="preloader" hidden=""></div>
+	<header>
+		@Html.Partial("_NavbarPartial")
+		<div class="container">
+			<div class="row clearfix" id="breadcrumb">
+			</div>
+		</div>
+	</header>
 
-    <div id="index">
-        <div class="container" data-ng-view>
-        </div>
-        @Html.Partial("_LoginPartial")
-        @RenderBody()
-    </div>
-    <footer>
-        <div class="container">
-            <div class="col-xs-12 footer">
-                <p>&copy; @DateTime.Now.Year - Voting System</p>
-            </div>
-        </div>
-    </footer>
-    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
-    <script type="text/javascript">
-        google.load("visualization", "1", { packages: ["corechart"] });
-    </script>
-    @Scripts.Render("~/bundles/externals")
-    <script type="text/javascript" src="@Url.Content("~/signalr/hubs?")"></script>
-    @Scripts.Render("~/bundles/angular")
-    @Scripts.Render("~/bundles/client/directives")
-    @Scripts.Render("~/bundles/client/controllers")
-    @Scripts.Render("~/bundles/client/services")
-    @Html.Partial("_UrlsPartial")
-    @Scripts.Render("~/bundles/client/app")
+	<div id="index">
+		<div class="container" data-ng-view>
+		</div>
+		@Html.Partial("_LoginPartial")
+		@RenderBody()
+	</div>
+	<footer>
+		<div class="container">
+			<div class="col-xs-12 footer">
+				<p>&copy; @DateTime.Now.Year - Voting System</p>
+			</div>
+		</div>
+	</footer>
+	<script type="text/javascript" src="https://www.google.com/jsapi"></script>
+	<script type="text/javascript">
+		google.load("visualization", "1", { packages: ["corechart"] });
+	</script>
+	@Scripts.Render("~/bundles/externals")
+	<script type="text/javascript" src="@Url.Content("~/signalr/hubs?")"></script>
+	@Scripts.Render("~/bundles/angular")
+	@Scripts.Render("~/bundles/client/directives")
+	@Scripts.Render("~/bundles/client/controllers")
+	@Scripts.Render("~/bundles/client/services")
+	@Html.Partial("_UrlsPartial")
+	@Scripts.Render("~/bundles/client/app")
 </body>
 </html>

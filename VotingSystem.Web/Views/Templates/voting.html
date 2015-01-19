@@ -3,7 +3,7 @@
 	<div id="votingPageContent">
 		<h1>{{voting.VotingName}}</h1>
 		<p class="lead">
-			by <a data-ng-href="#/profilepage/{{voting.CreatedBy}}">{{voting.CreatedBy}}</a>
+			by <a data-ng-href="#/profile/{{voting.CreatedBy}}">{{voting.CreatedBy}}</a>
 		</p>
 		<hr>
 		<p>
@@ -23,28 +23,36 @@
 			</div>
 		</div>
 		<br />
-		<p><strong>Description:</strong></p>
+		<p>
+			<strong>Description:</strong>
+		</p>
 		<p data-trust-html="{{voting.Description}}"></p>
 		<br />
 		<div class="row">
 			<div class="col-xs-6">
 				<button class="btn btn-default text-center margin-bottom-x2" data-toggle="collapse" data-target="#votingResults"
-					data-ng-show="isAnswered || voting.Status==3">
-					Toggle results</button>
+						data-ng-show="isAnswered || voting.Status==3">
+					Toggle results
+				</button>
 			</div>
 			<div class="col-xs-12 col-sm-6">
-				<span data-ng-show="isAnswered">You already answered on this voting.
+				<span data-ng-show="isAnswered">
+					You already answered on this voting.
 				</span>
 				<button class="btn btn-primary" data-toggle="modal" data-target="#votingModal"
-					data-ng-if="!isAnswered && voting.Status!=3">
+						data-ng-if="!isAnswered && voting.Status!=3">
 					Vote
 				</button>
 			</div>
 			<div id="votingResults" class="row collapse">
 				<div class="col-xs-12">
 					<ul class="nav nav-tabs" role="tablist">
-						<li class="active"><a href=".result-table" role="tab" data-toggle="tab">Grid View</a></li>
-						<li><a href=".result-chart" role="tab" data-toggle="tab">Chart View</a></li>
+						<li class="active">
+							<a href=".result-table" role="tab" data-toggle="tab">Grid View</a>
+						</li>
+						<li>
+							<a href=".result-chart" role="tab" data-toggle="tab">Chart View</a>
+						</li>
 					</ul>
 					<div class="tab-content">
 						<div class="tab-pane active result-table">
@@ -71,9 +79,9 @@
 						<div class="tab-pane result-chart">
 							<div data-ng-repeat="result in results">
 								<div data-pie-chart=""
-									data-answers="result.Answers"
-									data-answer-index="result.AnswerIndex"
-									data-title="result.Text">
+									 data-answers="result.Answers"
+									 data-answer-index="result.AnswerIndex"
+									 data-title="result.Text">
 								</div>
 							</div>
 						</div>
@@ -101,7 +109,7 @@
 										<label for="" class="col-xs-5 control-label">{{question.Text}}</label>
 										<div class="col-xs-7">
 											<input type="text" data-ng-model="question.AnswerText"
-												class="form-control" required="" data-validate-field="Question{{question.QuestionId}}" />
+												   class="form-control" required="" data-validate-field="Question{{question.QuestionId}}" />
 										</div>
 									</div>
 								</div>
@@ -113,9 +121,9 @@
 												<div class="radio" data-ng-repeat="answer in question.FixedAnswers">
 													<label>
 														<input type="radio" data-ng-model="question.FixedAnswerId"
-															data-ng-value="{{answer.Id}}" data-ng-change="question.AnswerText=answer.AnswerText"
-															required="" data-bv-notempty="true" data-bv-notempty-message="Select"
-															data-validate-field="Question{{question.QuestionId}}" />
+															   data-ng-value="{{answer.Id}}" data-ng-change="question.AnswerText=answer.AnswerText"
+															   required="" data-bv-notempty="true" data-bv-notempty-message="Select"
+															   data-validate-field="Question{{question.QuestionId}}" />
 														{{answer.AnswerText}}
 													</label>
 												</div>
@@ -130,7 +138,7 @@
 								</label>
 								<div class="col-xs-7">
 									<input type="text" data-bv-integer="true" data-bv-integer-message="Captcha must be an integer"
-										data-ng-model="captcha" class="form-control" required name="captchaText" data-validate-field="" />
+										   data-ng-model="captcha" class="form-control" required name="captchaText" data-validate-field="" />
 								</div>
 							</div>
 						</form>
@@ -150,9 +158,9 @@
 			<form role="form" data-validate-form="">
 				<div class="form-group">
 					<textarea class="form-control" rows="3" name="newCommentText"
-						data-ng-keypress="newCommentKeyPressHandler($event)"
-						required data-bv-stringlength="true" data-ng-model="newCommentText"
-						data-bv-stringlength-min="4" data-bv-stringlength-message="Comment lenght can't be less than 4 characters."></textarea>
+							  data-ng-keypress="newCommentKeyPressHandler($event)"
+							  required data-bv-stringlength="true" data-ng-model="newCommentText"
+							  data-bv-stringlength-min="4" data-bv-stringlength-message="Comment lenght can't be less than 4 characters."></textarea>
 				</div>
 				<button class="btn btn-primary" data-ng-click="addNewComment($event)"><i class="glyphicon glyphicon-plus"></i>Add comment</button>
 			</form>
@@ -170,7 +178,7 @@
 						<div class="col-xs-10 col-md-10">
 							<div>
 								<div class="mic-info">
-									By: <a data-ng-href="#/profilepage/{{comment.CreatedBy}}">{{comment.CreatedBy}}</a> on {{comment.CreateDate}}
+									By: <a data-ng-href="#/profile/{{comment.CreatedBy}}">{{comment.CreatedBy}}</a> on {{comment.CreateDate}}
 								</div>
 							</div>
 							<div>

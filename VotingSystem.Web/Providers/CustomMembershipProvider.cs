@@ -56,6 +56,7 @@ namespace VotingSystem.Web.Providers
 		#region Properties
 
 		private const int NewPasswordLength = 8;
+
 		private IUserService _userService
 		{
 			get
@@ -63,6 +64,7 @@ namespace VotingSystem.Web.Providers
 				return DependencyResolver.Current.GetService<IUserService>();
 			}
 		}
+
 		private string _applicationName;
 		private bool _enablePasswordReset;
 		private bool _requiresQuestionAndAnswer;
@@ -165,6 +167,7 @@ namespace VotingSystem.Web.Providers
 		#endregion
 
 		#region MembershipMethods
+
 		public override bool ChangePassword(string username, string oldPwd, string newPwd)
 		{
 			if (!ValidateUser(username, oldPwd))
@@ -503,6 +506,7 @@ namespace VotingSystem.Web.Providers
 		#endregion
 
 		#region Helpers
+
 		private T GetConfigValue<T>(string configValue, T defaultValue)
 		{
 			if (String.IsNullOrEmpty(configValue))
@@ -512,6 +516,7 @@ namespace VotingSystem.Web.Providers
 			return (T)Convert.ChangeType(configValue, typeof(T));
 		}
 
+		//REVIEW: Remove unused methods
 		private void UpdateFailureCount(string username, string failureType)
 		{
 			throw new NotImplementedException();

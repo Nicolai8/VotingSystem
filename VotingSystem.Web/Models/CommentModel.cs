@@ -1,6 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
-
-namespace VotingSystem.Web.Models
+﻿namespace VotingSystem.Web.Models
 {
 	public class CommentModel
 	{

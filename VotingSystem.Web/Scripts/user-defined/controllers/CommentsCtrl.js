@@ -1,7 +1,8 @@
 ﻿angular.module("votingSystem.controllers.comments", [])
     .controller("CommentsCtrl", ["$scope", "$http", "$route", "$routeParams", "$location", "constants", "reload", "CommentStorage", "commentsHub",
         function ($scope, $http, $route, $routeParams, $location, constants, reload, CommentStorage, commentsHub) {
-            $scope.page = $routeParams.pageNumber;
+        	$scope.page = $routeParams.pageNumber;
+			//REVIEW: Page name
             $scope.pageName = "commentspage";
             $scope.total = 1;
             $scope.breadCrumbItemName = "Comments";

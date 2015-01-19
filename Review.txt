@@ -1,0 +1,19 @@
+1. Ќ≈обходимо определитьс€ с пор€дком атрибутов на экшенах и придерживатьс€ его повсеместно
+
+		[HttpGet]
+		[Route("totaluser", Name = "TotalUser")]
+		[CustomAuthorizeApi]
+		
+		[Route("totaluser", Name = "TotalUser")]
+		[HttpGet]
+		[CustomAuthorizeApi]
+
+		или как угодно, но одинаково :)
+		
+2. VotingSystem.Web\Models\OwnsType.cs - enums было бы хорошо разместить в отдельной подпапке
+
+3. VotingSystem.DAL.Structures почему structures а не enums? :)
+
+4. Tab instead spaces everywhere
+
+5. 

@@ -14,7 +14,7 @@ namespace VotingSystem.BLL
 		{
 		}
 
-	    public List<Answer> GetByUserId(int userId, int page = 1, int pageSize = 10)
+		public List<Answer> GetByUserId(int userId, int page = 1, int pageSize = 10)
 		{
 			return UnitOfWork.AnswerRepository.Query()
 				.Filter(a => a.UserId == userId)

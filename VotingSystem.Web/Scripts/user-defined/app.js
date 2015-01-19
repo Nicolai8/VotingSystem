@@ -8,6 +8,7 @@
     "votingSystem.services"
 ]);
 
+//REVIEW: routes should be word1Word2Word3... mainpage -> mainPage better main, uservotingspage -> userVotings. page word is rudiment.
 votingSystem.config(["$routeProvider", "$httpProvider", function ($routeProvider, $httpProvider) {
     $routeProvider.when("/", {
         redirectTo: "/mainpage/1"
@@ -49,6 +50,7 @@ votingSystem.config(["$routeProvider", "$httpProvider", function ($routeProvider
     });
 
     $httpProvider.interceptors.push("myHttpInterceptor");
+	//REVIEW: spinner need to be moved to separate module
     var spinnerFunction = function (data) {
         $("#preloader").show();
         return data;
@@ -56,11 +58,13 @@ votingSystem.config(["$routeProvider", "$httpProvider", function ($routeProvider
     $httpProvider.defaults.transformRequest.push(spinnerFunction);
 }]).factory("myHttpInterceptor", function ($q) {
     return {
-        response: function (response) {
+    	response: function (response) {
+    		//REVIEW: spinner need to be moved to separate module
             $("#preloader").hide();
             return response;
         },
-        responseError: function (response) {
+    	responseError: function (response) {
+    		//REVIEW: spinner need to be moved to separate module
             $("#preloader").hide();
             switch (response.status) {
                 case 404:

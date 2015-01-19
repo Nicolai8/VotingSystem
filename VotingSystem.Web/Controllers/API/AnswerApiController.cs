@@ -26,6 +26,7 @@ namespace VotingSystem.Web.Controllers.API
 		}
 
 		#region Public Methods
+
 		[Route("")]
 		[CustomAuthorizeApi]
 		public IEnumerable<AnswerModel> Get(int page, int size)
@@ -70,6 +71,7 @@ namespace VotingSystem.Web.Controllers.API
 			}
 			throw new VotingSystemException("Captcha is invalid");
 		}
+
 		#endregion
 
 		#region Private methods

@@ -25,27 +25,30 @@ namespace VotingSystem.Web.Controllers
 			_userProfileService = userProfileService;
 		}
 
-        #region Private methods
-        private void HideFieldsAccordingToPrivacy(UserModel user)
-        {
-            switch (user.Privacy)
-            {
-                case PrivacyType.Users:
-                    if (!Request.IsAuthenticated)
-                    {
-                        user.Privacy = null;
-                        user.Email = "Hidden";
-                    }
-                    break;
-                case PrivacyType.WholeWorld:
-                    break;
-                default:
-                    user.Privacy = null;
-                    user.Email = "Hidden";
-                    break;
-            }
-        }
-        #endregion
+		#region Private methods
+
+		//REVIEW: Position of private methods... 
+		private void HideFieldsAccordingToPrivacy(UserModel user)
+		{
+			switch (user.Privacy)
+			{
+				case PrivacyType.Users:
+					if (!Request.IsAuthenticated)
+					{
+						user.Privacy = null;
+						user.Email = "Hidden";
+					}
+					break;
+				case PrivacyType.WholeWorld:
+					break;
+				default:
+					user.Privacy = null;
+					user.Email = "Hidden";
+					break;
+			}
+		}
+
+		#endregion
 
 		[HttpPost]
 		[AllowAnonymous]

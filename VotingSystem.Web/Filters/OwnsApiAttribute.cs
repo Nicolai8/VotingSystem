@@ -23,6 +23,7 @@ namespace VotingSystem.Web.Filters
 		{
 			bool isAuthorized = false;
 			string id = filterContext.ControllerContext.RouteData.Values["id"].ToString();
+
 			switch (OwnsParameter)
 			{
 				case OwnsType.Theme:
@@ -32,6 +33,7 @@ namespace VotingSystem.Web.Filters
 					isAuthorized = AuthorizeAttributeHelper.Owns(id, _commentService.GetCommentById, AuthorizeAttributeHelper.GetUserIdFromComment);
 					break;
 			}
+
 			return AuthorizeAttributeHelper.IsAuthorizedLog(isAuthorized);
 		}
 	}

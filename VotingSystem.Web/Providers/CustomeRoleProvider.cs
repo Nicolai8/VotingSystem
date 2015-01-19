@@ -1,18 +1,29 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Configuration.Provider;
 using System.Linq;
 using System.Web.Mvc;
 using System.Web.Security;
 using VotingSystem.BLL.Interfaces;
-using VotingSystem.DAL.Entities;
 
 namespace VotingSystem.Web.Providers
 {
 	public class CustomeRoleProvider : RoleProvider
 	{
-		private IRoleService _roleService { get { return DependencyResolver.Current.GetService<IRoleService>(); } }
-		private IUserService _userService { get { return DependencyResolver.Current.GetService<IUserService>(); } }
+		private IRoleService _roleService
+		{
+			get
+			{
+				return DependencyResolver.Current.GetService<IRoleService>();
+			}
+		}
+
+		private IUserService _userService
+		{
+			get
+			{
+				return DependencyResolver.Current.GetService<IUserService>();
+			}
+		}
 
 		public override bool IsUserInRole(string username, string roleName)
 		{

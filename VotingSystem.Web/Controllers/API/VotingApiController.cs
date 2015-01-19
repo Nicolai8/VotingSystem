@@ -81,8 +81,9 @@ namespace VotingSystem.Web.Controllers.API
 			return model;
 		}
 
-		[Route("totalactive", Name = "TotalActive")]
-		[System.Web.Http.HttpGet]
+		//REVIEW: Why we add Name to the route?
+		[Route("totalActive", Name = "TotalActive")]
+		[HttpGet]
 		public int GetTotalActiveVotings(string query = "")
 		{
 			if (String.IsNullOrEmpty(query))
@@ -92,7 +93,9 @@ namespace VotingSystem.Web.Controllers.API
 			return _themeService.GetNumberOfActiveThemesByThemeName(query);
 		}
 
-		[System.Web.Http.HttpGet]
+		//REVIEW: Why we add Name to the route?
+		//REVIEW: totaluser -> totalUser
+		[HttpGet]
 		[Route("totaluser", Name = "TotalUser")]
 		[CustomAuthorizeApi]
 		public int GetTotalUserVotings(string query = "")
@@ -104,8 +107,10 @@ namespace VotingSystem.Web.Controllers.API
 			return _themeService.GetNumberOfUserThemes(UserId, query);
 		}
 
-		[System.Web.Http.HttpGet]
-		[Route("totaladmin", Name = "TotalAdmin")]
+		//REVIEW: Why we add Name to the route?
+		//REVIEW: totaladmin -> totalAdmin
+		[HttpGet]
+		[Route("totalAdmin", Name = "TotalAdmin")]
 		[CustomAuthorizeApi(Roles = new[] { RoleType.Admin, RoleType.Moderator })]
 		public int GetTotalAdminVotings(string query = "")
 		{
@@ -116,6 +121,7 @@ namespace VotingSystem.Web.Controllers.API
 			return _themeService.GetNumberOfThemesByThemeName(query);
 		}
 
+		//REVIEW: Why we add Name to the route?
 		[CustomAuthorizeApi]
 		[Route("")]
 		public void Post([FromBody]Theme theme)

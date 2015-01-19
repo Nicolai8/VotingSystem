@@ -32,6 +32,7 @@ namespace VotingSystem.Web.Filters
 			{
 				Logger.Error(exception.Message, exception);
 			}
+
 			if (exception.InnerException != null)
 			{
 				HandleException(exception.InnerException);

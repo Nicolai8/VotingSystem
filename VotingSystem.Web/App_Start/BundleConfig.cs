@@ -18,6 +18,7 @@ namespace VotingSystem.Web
 				"~/Content/less/main.less"
 				));
 
+			//REVIEW: What about using {version} ?
 			bundles.Add(new ScriptBundle("~/bundles/externals").Include(
 				"~/Scripts/libraries/jquery.min.js",
 				"~/Scripts/libraries/toastr.js",
@@ -55,6 +56,7 @@ namespace VotingSystem.Web
 				"~/Scripts/user-defined/directives/DirectivesModule.js"
 				).ForceOrdered());
 
+			//REVIEW: Better to name all JS files from lower character
 			bundles.Add(new ScriptBundle("~/bundles/client/controllers").Include(
 				"~/Scripts/user-defined/controllers/AdminVotingsCtrl.js",
 				"~/Scripts/user-defined/controllers/CommentsCtrl.js",

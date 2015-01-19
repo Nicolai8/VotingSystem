@@ -1,5 +1,6 @@
 ﻿using System.Web.Mvc;
 
+//REVIEW: REmove unused functionality
 namespace VotingSystem.Web
 {
     public class FilterConfig

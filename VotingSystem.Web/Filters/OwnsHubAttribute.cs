@@ -26,6 +26,7 @@ namespace VotingSystem.Web.Filters
 			string id = HttpContext.Current.Request.Form["data"];
 			if (!string.IsNullOrEmpty(id))
 			{
+				//REVIEW: need to be commented to understand what is this
 				id = Regex.Match(id, @"\""A\"":\[\""(\d+)\""\]").Groups[1].Value;
 				switch (OwnsParameter)
 				{

@@ -1,5 +1,6 @@
 ﻿namespace VotingSystem.Web
 {
+	//REVIEW: Remove unused functionality
     public static class AuthConfig
     {
         public static void RegisterAuth()

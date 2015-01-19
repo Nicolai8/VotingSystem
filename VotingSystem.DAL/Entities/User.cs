@@ -6,8 +6,10 @@ namespace VotingSystem.DAL.Entities
 {
 	public class User : BaseEntity
 	{
+		//REVIEW: What about adding unique constraint there?
 		public string UserName { get; set; }
 		public string Password { get; set; }
+		//REVIEW: What about adding unique constraint there?
 		public string Email { get; set; }
 		public string PasswordQuestion { get; set; }
 		public string PasswordAnswer { get; set; }

@@ -1,4 +1,6 @@
-﻿angular.module("votingSystem.services.commentStorage", [])
+﻿//REVIEW: file name commentStorage
+
+angular.module("votingSystem.services.commentStorage", [])
     .factory("CommentStorage", ["$resource", "urls", function ($resource, urls) {
         return $resource(urls.Comments + "/:id", { id: "@CommentId" },
             {

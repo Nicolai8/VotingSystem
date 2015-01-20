@@ -2,7 +2,7 @@
 {
 	public enum OwnsType
 	{
-		Theme = 0,
-		Comment = 1
+		Theme = 1,
+		Comment = 2
 	}
 }

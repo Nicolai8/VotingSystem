@@ -1132,3 +1132,11 @@ System.Configuration.Provider.ProviderException: An error occurred while updatin
    at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
    at System.Web.Http.ApiController.<InvokeActionWithExceptionFilters>d__1.MoveNext()
 
+
+2015-01-20 17:05:53,099 WARN  default Voting is closed or blocked.
+ Exception:
+
+
+2015-01-20 17:08:55,715 WARN  default Voting is closed or blocked.
+ Exception:
+

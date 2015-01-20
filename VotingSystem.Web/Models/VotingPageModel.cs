@@ -10,7 +10,7 @@ namespace VotingSystem.Web.Models
 		public string VotingName { get; set; }
 		public int UserId { get; set; }
 		public string CreatedBy { get; set; }
-		public StatusType? Status { get; set; }
+		public VotingStatusType? Status { get; set; }
 		public string StartDate { get; set; }
 		public string TimeLeft { get; set; }
 		public string Description { get; set; }

@@ -33,13 +33,13 @@
 				<td>{{voting.StartDate}}</td>
 				<td>{{voting.EndDate}}</td>
 				<td data-ng-switch="voting.Status">
-					<span data-ng-switch-when="0">Active</span>
-					<span data-ng-switch-when="1">Active, Not approved</span>
-					<span data-ng-switch-when="2">Blocked</span>
-					<span data-ng-switch-when="3">Closed</span>
+					<span data-ng-switch-when="1">Active</span>
+					<span data-ng-switch-when="2">Active, Not approved</span>
+					<span data-ng-switch-when="3">Blocked</span>
+					<span data-ng-switch-when="4">Closed</span>
 				</td>
 				<td>
-					<a data-ng-if="voting.Status!=3" data-ng-click="setThemeStatus(voting, 3)">Close</a>
+					<a data-ng-if="voting.Status!=4" data-ng-click="setThemeStatus(voting, 4)">Close</a>
 					<a data-ng-click="removeTheme(voting)">Remove</a>
 				</td>
 
@@ -156,11 +156,11 @@
 							{{question.Text}}
 							<i class="pull-right fa fa-minus" data-ng-click="removeQuestion(question)"></i>
 							<label class="label-primary-question pull-right"
-							       data-ng-if="question.Type==0">
+							       data-ng-if="question.Type==1">
 								(Open Question)
 							</label>
 							<label class="label-primary-question pull-right"
-							       data-ng-if="question.Type==1">
+							       data-ng-if="question.Type==2">
 								(Choice Question)
 							</label>
 						</a>
@@ -210,13 +210,13 @@
 								<label>
 									<input type="radio" data-ng-model="newQuestion.Type"
 									       data-ng-click="newQuestion.FixedAnswers=[]"
-									       value="0" name="Type" checked="checked" required="">
+									       value="1" name="Type" checked="checked" required="">
 									Open Question
 								</label>
 							</div>
 							<div class="radio">
 								<label>
-									<input type="radio" data-ng-model="newQuestion.Type" value="1"
+									<input type="radio" data-ng-model="newQuestion.Type" value="2"
 									       name="Type" required="">
 									Choice Question
 								</label>

@@ -127,7 +127,7 @@ namespace VotingSystem.Web.Controllers.API
 			{
 				theme.UserId = UserId;
 				theme.CreateDate = DateTime.Now;
-				theme.Status = StatusType.NotApproved;
+				theme.Status = VotingStatusType.NotApproved;
 				_themeService.InsertTheme(theme);
 
 				return;

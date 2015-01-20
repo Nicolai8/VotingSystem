@@ -19,7 +19,7 @@ namespace VotingSystem.DAL.Entities
 		[Column(TypeName = "date")]
 		public DateTime FinishTime { get; set; }
 		public string Description { get; set; }
-		public StatusType? Status { get; set; }
+		public VotingStatusType? Status { get; set; }
 
 		public int? UserId { get; set; }
 		public virtual User User { get; set; }

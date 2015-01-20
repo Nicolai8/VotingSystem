@@ -25,7 +25,7 @@
 			};
 
 			$scope.getResults = function () {
-				if ($scope.isAnswered || $scope.voting.Status == 3) {
+				if ($scope.isAnswered || $scope.voting.Status == 4 || $scope.voting.Status == 3) {
 					VoiceStorage.getResults({ votingId: $scope.voting.VotingId },
 					function (results) {
 						preprocessResults(results);

@@ -35,7 +35,7 @@ namespace VotingSystem.BLL
 		public bool IsThemeClosed(int themeId)
 		{
 			Theme theme = UnitOfWork.ThemeRepository.GetById(themeId);
-			return theme.Status == StatusType.Closed || theme.Status == StatusType.Blocked
+			return theme.Status == VotingStatusType.Closed || theme.Status == VotingStatusType.Blocked
 				|| theme.StartDate.Date > DateTime.Today || theme.FinishTime.Date < DateTime.Today;
 		}
 
@@ -72,7 +72,7 @@ namespace VotingSystem.BLL
 
 		public List<Theme> GetAllActiveThemes(string query, Filter<Theme> filterExtended)
 		{
-			return GetThemes(filterExtended, t => (t.Status == StatusType.Active || t.Status == StatusType.NotApproved) &&
+			return GetThemes(filterExtended, t => (t.Status == VotingStatusType.Active || t.Status == VotingStatusType.NotApproved) &&
 				(t.FinishTime >= DateTime.Today && t.StartDate <= DateTime.Today)
 				&& t.VotingName.Contains(query));
 		}
@@ -85,7 +85,7 @@ namespace VotingSystem.BLL
 		public int GetNumberOfActiveThemesByThemeName(string partOfThemeName)
 		{
 			return UnitOfWork.ThemeRepository.GetTotal(
-				t => (t.Status == StatusType.Active || t.Status == StatusType.NotApproved) &&
+				t => (t.Status == VotingStatusType.Active || t.Status == VotingStatusType.NotApproved) &&
 					(t.FinishTime >= DateTime.Today && t.StartDate <= DateTime.Today)
 					&& t.VotingName.Contains(partOfThemeName));
 		}
@@ -95,7 +95,7 @@ namespace VotingSystem.BLL
 			return UnitOfWork.ThemeRepository.GetTotal(t => t.UserId == userId && t.VotingName.Contains(partOfThemeName));
 		}
 
-		public void UpdateStatus(int themeId, StatusType status)
+		public void UpdateStatus(int themeId, VotingStatusType status)
 		{
 			Theme theme = GetThemeById(themeId);
 			if (theme != null)

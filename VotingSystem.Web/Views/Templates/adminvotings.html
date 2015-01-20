@@ -29,16 +29,16 @@
 					<td>{{voting.CommentsCount}}</td>
 					<td>{{voting.CreateDate}}</td>
 					<td data-ng-switch="voting.Status">
-						<span data-ng-switch-when="0">Active</span>
-						<span data-ng-switch-when="1">Active, Not approved</span>
-						<span data-ng-switch-when="2">Blocked</span>
-						<span data-ng-switch-when="3">Closed</span>
+						<span data-ng-switch-when="1">Active</span>
+						<span data-ng-switch-when="2">Active, Not approved</span>
+						<span data-ng-switch-when="3">Blocked</span>
+						<span data-ng-switch-when="4">Closed</span>
 					</td>
 					<td>
-						<a data-ng-if="voting.Status==1" data-ng-click="setThemeStatus(voting, 0)">Approve</a>
-						<a data-ng-if="voting.Status==2" data-ng-click="setThemeStatus(voting, 0)">Unblock</a>
-						<a data-ng-if="voting.Status!=2 && voting.Status!=3" data-ng-click="setThemeStatus(voting, 2)">Block</a>
-						<a data-ng-if="voting.Status!=3" data-ng-click="setThemeStatus(voting, 3)">Close</a>
+						<a data-ng-if="voting.Status==2" data-ng-click="setThemeStatus(voting, 1)">Approve</a>
+						<a data-ng-if="voting.Status==3" data-ng-click="setThemeStatus(voting, 1)">Unblock</a>
+						<a data-ng-if="voting.Status!=3 && voting.Status!=4" data-ng-click="setThemeStatus(voting, 3)">Block</a>
+						<a data-ng-if="voting.Status!=4" data-ng-click="setThemeStatus(voting, 4)">Close</a>
 						<a data-ng-click="removeTheme(voting)">Remove</a>
 					</td>
 

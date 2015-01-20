@@ -31,7 +31,7 @@
 		<div class="row">
 			<div class="col-xs-6">
 				<button class="btn btn-default text-center margin-bottom-x2" data-toggle="collapse" data-target="#votingResults"
-						data-ng-show="isAnswered || voting.Status==3">
+						data-ng-show="isAnswered || voting.Status==4 || voting.Status==3">
 					Toggle results
 				</button>
 			</div>
@@ -40,7 +40,7 @@
 					You already answered on this voting.
 				</span>
 				<button class="btn btn-primary" data-toggle="modal" data-target="#votingModal"
-						data-ng-if="!isAnswered && voting.Status!=3">
+						data-ng-if="!isAnswered && voting.Status!=4 && voting.Status!=3">
 					Vote
 				</button>
 			</div>
@@ -104,7 +104,7 @@
 						</div>
 						<form role="form" class="form-horizontal" data-validate-form="">
 							<div id="questions" data-ng-repeat="question in voting.Questions">
-								<div class="form-group" data-ng-if="question.Type==0" data-ng-init="question.AnswerText=''">
+								<div class="form-group" data-ng-if="question.Type==1" data-ng-init="question.AnswerText=''">
 									<div>
 										<label for="" class="col-xs-5 control-label">{{question.Text}}</label>
 										<div class="col-xs-7">
@@ -113,7 +113,7 @@
 										</div>
 									</div>
 								</div>
-								<div class="form-group" data-ng-if="question.Type==1">
+								<div class="form-group" data-ng-if="question.Type==2">
 									<div>
 										<label for="" class="col-xs-5 control-label">{{question.Text}}</label>
 										<div class="col-xs-7">

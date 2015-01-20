@@ -24,7 +24,7 @@ namespace VotingSystem.Web.Helpers
 					mo => mo.MapFrom(s =>
 						s.StartDate.Date <= DateTime.Today && s.FinishTime.Date >= DateTime.Today
 							? s.Status
-							: StatusType.Closed))
+							: VotingStatusType.Closed))
 				.AfterMap((t, vm) => vm.CreatedBy = userName);
 
 			return Mapper.Map<Theme, VotingModel>(theme);
@@ -38,7 +38,7 @@ namespace VotingSystem.Web.Helpers
 				.ForMember(d => d.Comments, mo => mo.Ignore())
 				.ForMember(d => d.StartDate, mo => mo.MapFrom(s => s.StartDate.ToDefaultFormatString()))
 				.ForMember(d => d.CreateDate, mo => mo.MapFrom(s => s.CreateDate.ToString("f")))
-				.ForMember(d => d.Status, mo => mo.MapFrom(s => s.StartDate.Date <= DateTime.Today && s.FinishTime.Date >= DateTime.Today ? s.Status : StatusType.Closed))
+				.ForMember(d => d.Status, mo => mo.MapFrom(s => s.StartDate.Date <= DateTime.Today && s.FinishTime.Date >= DateTime.Today ? s.Status : VotingStatusType.Closed))
 				.ForMember(d => d.CreatedBy, mo => mo.MapFrom(s => s.User != null ? s.User.UserName : string.Empty))
 				.ForMember(d => d.Questions, mo => mo.MapFrom(s => s.Questions.Select(q => q.ToQuestionModel())))
 				.AfterMap((s, d) =>

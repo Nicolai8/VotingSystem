@@ -12,7 +12,7 @@ namespace VotingSystem.Web.Models
 		public int CommentsCount { get; set; }
 		public string StartDate { get; set; }
 		public string EndDate { get; set; }
-		public StatusType? Status { get; set; }
+		public VotingStatusType? Status { get; set; }
 		public string CreateDate { get; set; }
 		public string Description { get; set; }
 	}

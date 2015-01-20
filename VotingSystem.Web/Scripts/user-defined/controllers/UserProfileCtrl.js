@@ -80,6 +80,7 @@
 			});
 
 			$scope.changePrivacy = function () {
+				//review: replace with data-ng-model=privacy on template
 				var privacyValue = $("#changePrivacyModal form :radio:checked").val();
 				$.post(urls.ProfilePage.ChangePrivacy, { privacy: privacyValue })
 				.done(function () {

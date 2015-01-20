@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using VotingSystem.Common;
 using VotingSystem.Common.Filters;
 using VotingSystem.DAL.Entities;
 using VotingSystem.DAL.Enums;
@@ -30,6 +29,6 @@ namespace VotingSystem.BLL.Interfaces
 
 		int GetNumberOfUserThemes(int userId, string partOfThemeName);
 
-		void UpdateStatus(int themeId, StatusType status);
+		void UpdateStatus(int themeId, VotingStatusType status);
 	}
 }

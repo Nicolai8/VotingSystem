@@ -20,7 +20,7 @@ namespace VotingSystem.DAL.Entities
 		{
 			if (Type == QuestionType.ChoiceQuestion && FixedAnswers.Count < 2)
 			{
-				yield return new ValidationResult("Questions of \"ChoiceQuestion\" type should contain at least 2 predefined answeres.");
+				yield return new ValidationResult("Questions of \"ChoiceQuestion\" type should contain at least 2 predefined answers.");
 			}
 		}
 	}

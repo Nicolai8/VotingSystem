@@ -3,10 +3,10 @@ using VotingSystem.Common;
 
 namespace VotingSystem.DAL.Migrations
 {
-    public partial class AddQuestions : DbMigration
-    {
-        public override void Up()
-        {
+	public partial class AddQuestions : DbMigration
+	{
+		public override void Up()
+		{
 			Sql(@"DELETE FROM Theme
 	DELETE FROM [User]
 	DELETE FROM Answer
@@ -14,33 +14,33 @@ namespace VotingSystem.DAL.Migrations
 	DELETE FROM UserProfile
 	DELETE FROM [Role]");
 
-            DropForeignKey("dbo.Answer", "ThemeId", "dbo.Theme");
-            DropForeignKey("dbo.FixedAnswer", "ThemeId", "dbo.Theme");
-            DropIndex("dbo.Answer", new[] { "ThemeId" });
-            DropIndex("dbo.FixedAnswer", new[] { "ThemeId" });
-            CreateTable(
-                "dbo.Question",
-                c => new
-                    {
-                        Id = c.Int(nullable: false, identity: true),
-                        Text = c.String(nullable: false),
-                        Type = c.Int(nullable: false),
-                        ThemeId = c.Int(nullable: false),
-                    })
-                .PrimaryKey(t => t.Id)
-                .ForeignKey("dbo.Theme", t => t.ThemeId, cascadeDelete: true)
-                .Index(t => t.ThemeId);
-            
-            AddColumn("dbo.Answer", "QuestionId", c => c.Int(nullable: false));
-            AddColumn("dbo.FixedAnswer", "QuestionId", c => c.Int(nullable: false));
-            CreateIndex("dbo.Answer", "QuestionId");
-            CreateIndex("dbo.FixedAnswer", "QuestionId");
-            AddForeignKey("dbo.Answer", "QuestionId", "dbo.Question", "Id", cascadeDelete: true);
-            AddForeignKey("dbo.FixedAnswer", "QuestionId", "dbo.Question", "Id", cascadeDelete: true);
-            DropColumn("dbo.Answer", "ThemeId");
-            DropColumn("dbo.FixedAnswer", "ThemeId");
-            DropColumn("dbo.Theme", "VotingText");
-            DropColumn("dbo.Theme", "Type");
+			DropForeignKey("dbo.Answer", "ThemeId", "dbo.Theme");
+			DropForeignKey("dbo.FixedAnswer", "ThemeId", "dbo.Theme");
+			DropIndex("dbo.Answer", new[] { "ThemeId" });
+			DropIndex("dbo.FixedAnswer", new[] { "ThemeId" });
+			CreateTable(
+				"dbo.Question",
+				c => new
+					{
+						Id = c.Int(nullable: false, identity: true),
+						Text = c.String(nullable: false),
+						Type = c.Int(nullable: false),
+						ThemeId = c.Int(nullable: false),
+					})
+				.PrimaryKey(t => t.Id)
+				.ForeignKey("dbo.Theme", t => t.ThemeId, cascadeDelete: true)
+				.Index(t => t.ThemeId);
+
+			AddColumn("dbo.Answer", "QuestionId", c => c.Int(nullable: false));
+			AddColumn("dbo.FixedAnswer", "QuestionId", c => c.Int(nullable: false));
+			CreateIndex("dbo.Answer", "QuestionId");
+			CreateIndex("dbo.FixedAnswer", "QuestionId");
+			AddForeignKey("dbo.Answer", "QuestionId", "dbo.Question", "Id", cascadeDelete: true);
+			AddForeignKey("dbo.FixedAnswer", "QuestionId", "dbo.Question", "Id", cascadeDelete: true);
+			DropColumn("dbo.Answer", "ThemeId");
+			DropColumn("dbo.FixedAnswer", "ThemeId");
+			DropColumn("dbo.Theme", "VotingText");
+			DropColumn("dbo.Theme", "Type");
 
 			Sql(@"IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[SeedTables]') AND type in (N'P', N'PC'))
 DROP PROCEDURE [dbo].[SeedTables]");
@@ -740,27 +740,27 @@ DROP PROCEDURE [dbo].[SeedTables]");
 
 			Sql("EXEC SeedTables");
 
-        }
-        
-        public override void Down()
-        {
-            AddColumn("dbo.Theme", "Type", c => c.Int(nullable: false));
-            AddColumn("dbo.Theme", "VotingText", c => c.String(nullable: false));
-            AddColumn("dbo.FixedAnswer", "ThemeId", c => c.Int(nullable: false));
-            AddColumn("dbo.Answer", "ThemeId", c => c.Int(nullable: false));
-            DropForeignKey("dbo.Question", "ThemeId", "dbo.Theme");
-            DropForeignKey("dbo.FixedAnswer", "QuestionId", "dbo.Question");
-            DropForeignKey("dbo.Answer", "QuestionId", "dbo.Question");
-            DropIndex("dbo.Question", new[] { "ThemeId" });
-            DropIndex("dbo.FixedAnswer", new[] { "QuestionId" });
-            DropIndex("dbo.Answer", new[] { "QuestionId" });
-            DropColumn("dbo.FixedAnswer", "QuestionId");
-            DropColumn("dbo.Answer", "QuestionId");
-            DropTable("dbo.Question");
-            CreateIndex("dbo.FixedAnswer", "ThemeId");
-            CreateIndex("dbo.Answer", "ThemeId");
-            AddForeignKey("dbo.FixedAnswer", "ThemeId", "dbo.Theme", "Id", cascadeDelete: true);
-            AddForeignKey("dbo.Answer", "ThemeId", "dbo.Theme", "Id", cascadeDelete: true);
-        }
-    }
+		}
+
+		public override void Down()
+		{
+			AddColumn("dbo.Theme", "Type", c => c.Int(nullable: false));
+			AddColumn("dbo.Theme", "VotingText", c => c.String(nullable: false));
+			AddColumn("dbo.FixedAnswer", "ThemeId", c => c.Int(nullable: false));
+			AddColumn("dbo.Answer", "ThemeId", c => c.Int(nullable: false));
+			DropForeignKey("dbo.Question", "ThemeId", "dbo.Theme");
+			DropForeignKey("dbo.FixedAnswer", "QuestionId", "dbo.Question");
+			DropForeignKey("dbo.Answer", "QuestionId", "dbo.Question");
+			DropIndex("dbo.Question", new[] { "ThemeId" });
+			DropIndex("dbo.FixedAnswer", new[] { "QuestionId" });
+			DropIndex("dbo.Answer", new[] { "QuestionId" });
+			DropColumn("dbo.FixedAnswer", "QuestionId");
+			DropColumn("dbo.Answer", "QuestionId");
+			DropTable("dbo.Question");
+			CreateIndex("dbo.FixedAnswer", "ThemeId");
+			CreateIndex("dbo.Answer", "ThemeId");
+			AddForeignKey("dbo.FixedAnswer", "ThemeId", "dbo.Theme", "Id", cascadeDelete: true);
+			AddForeignKey("dbo.Answer", "ThemeId", "dbo.Theme", "Id", cascadeDelete: true);
+		}
+	}
 }

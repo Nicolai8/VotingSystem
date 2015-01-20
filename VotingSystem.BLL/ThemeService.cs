@@ -4,6 +4,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using VotingSystem.BLL.Interfaces;
 using VotingSystem.Common;
+using VotingSystem.Common.Filters;
 using VotingSystem.DAL;
 using VotingSystem.DAL.Entities;
 using VotingSystem.DAL.Enums;
@@ -59,17 +60,17 @@ namespace VotingSystem.BLL
 				.Get().FirstOrDefault();
 		}
 
-		public List<Theme> GetThemesByUserId(string query, int userId, FilterExtended<Theme> filterExtended)
+		public List<Theme> GetThemesByUserId(string query, int userId, Filter<Theme> filterExtended)
 		{
 			return GetThemes(filterExtended, t => t.UserId == userId && t.VotingName.Contains(query)).ToList();
 		}
 
-		public List<Theme> GetAllThemes(string query, FilterExtended<Theme> filterExtended)
+		public List<Theme> GetAllThemes(string query, Filter<Theme> filterExtended)
 		{
 			return GetThemes(filterExtended, t => t.VotingName.Contains(query));
 		}
 
-		public List<Theme> GetAllActiveThemes(string query, FilterExtended<Theme> filterExtended)
+		public List<Theme> GetAllActiveThemes(string query, Filter<Theme> filterExtended)
 		{
 			return GetThemes(filterExtended, t => (t.Status == StatusType.Active || t.Status == StatusType.NotApproved) &&
 				(t.FinishTime >= DateTime.Today && t.StartDate <= DateTime.Today)
@@ -106,7 +107,7 @@ namespace VotingSystem.BLL
 			}
 		}
 
-		private List<Theme> GetThemes(FilterExtended<Theme> filterExtended, Expression<Func<Theme, bool>> expression = null)
+		private List<Theme> GetThemes(Filter<Theme> filterExtended, Expression<Func<Theme, bool>> expression = null)
 		{
 			if (filterExtended.OrderBy == null)
 			{

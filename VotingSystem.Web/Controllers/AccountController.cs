@@ -107,6 +107,8 @@ namespace VotingSystem.Web.Controllers
 			MembershipUser membershipUser = string.IsNullOrEmpty(userName) ? Membership.GetUser() : Membership.GetUser(userName);
 			if (membershipUser != null)
 			{
+				//REVIEW: why not use UserId?
+				//REVIEW: could be introduced common property CurrentUserProfile for this controller
 				user = membershipUser.ToUserModel(_userProfileService.GetUserProfileByUserId((int)membershipUser.ProviderUserKey));
 				if (String.IsNullOrEmpty(userName))
 				{
@@ -125,11 +127,15 @@ namespace VotingSystem.Web.Controllers
 			{
 				throw new ArgumentException("Picture not found");
 			}
+
 			UserProfile userProfile = _userProfileService.GetUserProfileByUserId(UserId);
+
 			string oldPicture = userProfile.PictureUrl;
 			FileHelper.DeletePicture(Server, oldPicture);
+
 			string pictureUrl = FileHelper.SavePicture(Server, picture);
 			userProfile.PictureUrl = pictureUrl;
+
 			_userProfileService.UpdateUserProfile(userProfile);
 			return pictureUrl;
 		}

@@ -6,6 +6,7 @@ using System.Web.Http;
 using System.Web.Security;
 using VotingSystem.BLL.Interfaces;
 using VotingSystem.Common;
+using VotingSystem.Common.Filters;
 using VotingSystem.DAL.Entities;
 using VotingSystem.DAL.Enums;
 using VotingSystem.Web.Enums;
@@ -55,7 +56,7 @@ namespace VotingSystem.Web.Controllers.API
 				query = "";
 			}
 			List<Theme> themes;
-			FilterExtended<Theme> filterExtended = new FilterExtended<Theme>(null, page, size); 
+			Filter<Theme> filterExtended = new Filter<Theme>(null, page, size); 
 
 			switch (pageType)
 			{
@@ -117,6 +118,7 @@ namespace VotingSystem.Web.Controllers.API
 			return _themeService.GetNumberOfThemesByThemeName(query);
 		}
 
+		[HttpPost]
 		[Route("")]
 		[CustomAuthorizeApi]
 		public void Post([FromBody]Theme theme)

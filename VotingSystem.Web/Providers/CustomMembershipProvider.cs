@@ -9,7 +9,7 @@ using VotingSystem.BLL.Interfaces;
 using VotingSystem.Common;
 using VotingSystem.DAL.Entities;
 using VotingSystem.DAL.Enums;
-using Filter = VotingSystem.Common.Filter;
+using Filter = VotingSystem.Common.Filters.Filter;
 
 namespace VotingSystem.Web.Providers
 {
@@ -480,7 +480,7 @@ namespace VotingSystem.Web.Providers
 		/// <summary>
 		/// Toggle user lock field
 		/// </summary>
-		/// <param name="userName">username of user</param>
+		/// <param name="userName">User name of user</param>
 		/// <returns>New value of lock field</returns>
 		public bool ToggleLockUser(string userName)
 		{

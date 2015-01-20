@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using VotingSystem.Common;
+using VotingSystem.Common.Filters;
 using VotingSystem.DAL.Entities;
 using VotingSystem.DAL.Enums;
 
@@ -17,11 +18,11 @@ namespace VotingSystem.BLL.Interfaces
 
 		Theme GetThemeByQuestionId(int questionId);
 
-		List<Theme> GetThemesByUserId(string query, int userId, FilterExtended<Theme> filter);
+		List<Theme> GetThemesByUserId(string query, int userId, Filter<Theme> filter);
 
-		List<Theme> GetAllThemes(string query, FilterExtended<Theme> filterExtended);
+		List<Theme> GetAllThemes(string query, Filter<Theme> filterExtended);
 
-		List<Theme> GetAllActiveThemes(string query, FilterExtended<Theme> filter);
+		List<Theme> GetAllActiveThemes(string query, Filter<Theme> filter);
 
 		int GetNumberOfThemesByThemeName(string partOfThemeName);
 

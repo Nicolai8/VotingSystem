@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using VotingSystem.Common;
+using VotingSystem.Common.Filters;
 using VotingSystem.DAL.Entities;
 
 namespace VotingSystem.BLL.Interfaces

@@ -8,7 +8,6 @@ namespace VotingSystem.DAL.Entities
 {
 	public class Theme : BaseEntity
 	{
-		public int? UserId { get; set; }
 		[Required]
 		public string VotingName { get; set; }
 		[DatabaseGenerated(DatabaseGeneratedOption.Computed)]
@@ -22,7 +21,9 @@ namespace VotingSystem.DAL.Entities
 		public string Description { get; set; }
 		public StatusType? Status { get; set; }
 
+		public int? UserId { get; set; }
 		public virtual User User { get; set; }
+
 		public virtual ICollection<Comment> Comments { get; set; }
 		public virtual ICollection<Question> Questions { get; set; }
 	}

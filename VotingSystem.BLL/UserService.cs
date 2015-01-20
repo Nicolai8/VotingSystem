@@ -5,6 +5,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using VotingSystem.BLL.Interfaces;
 using VotingSystem.Common;
+using VotingSystem.Common.Filters;
 using VotingSystem.DAL;
 using VotingSystem.DAL.Entities;
 

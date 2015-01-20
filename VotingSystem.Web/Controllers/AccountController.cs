@@ -13,6 +13,7 @@ using VotingSystem.Web.Enums;
 using VotingSystem.Web.Filters;
 using VotingSystem.Web.Helpers;
 using VotingSystem.Web.Models;
+using VotingSystem.Web.Providers;
 
 namespace VotingSystem.Web.Controllers
 {
@@ -86,7 +87,8 @@ namespace VotingSystem.Web.Controllers
 		[HttpGet]
 		public JsonResult IsInRole()
 		{
-			List<string> roles = Roles.GetRolesForUser(User.Identity.Name).ToList();
+			CustomRoleProvider roleProvider = (CustomRoleProvider)Roles.Provider;
+			List<string> roles = roleProvider.GetRolesForUser(UserId).ToList();
 			return Json(string.Join(",", roles), JsonRequestBehavior.AllowGet);
 		}
 
@@ -101,16 +103,14 @@ namespace VotingSystem.Web.Controllers
 		[HttpGet]
 		[ActionName("Profile")]
 		[AllowAnonymous]
-		public JsonResult UserProfile(string userName)
+		public JsonResult UserProfile(int? userId)
 		{
 			UserModel user = new UserModel();
-			MembershipUser membershipUser = string.IsNullOrEmpty(userName) ? Membership.GetUser() : Membership.GetUser(userName);
+			MembershipUser membershipUser = userId.HasValue ? Membership.GetUser(userId): Membership.GetUser();
 			if (membershipUser != null)
 			{
-				//REVIEW: why not use UserId?
-				//REVIEW: could be introduced common property CurrentUserProfile for this controller
-				user = membershipUser.ToUserModel(_userProfileService.GetUserProfileByUserId((int)membershipUser.ProviderUserKey));
-				if (String.IsNullOrEmpty(userName))
+				user = membershipUser.ToUserModel(_userProfileService.GetUserProfileByUserId((int) membershipUser.ProviderUserKey));
+				if (!userId.HasValue)
 				{
 					user.Privacy = PrivacyType.WholeWorld;
 				}

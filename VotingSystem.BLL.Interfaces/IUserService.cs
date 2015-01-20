@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
-using VotingSystem.Common;
 using VotingSystem.Common.Filters;
 using VotingSystem.DAL.Entities;
 
@@ -17,13 +16,15 @@ namespace VotingSystem.BLL.Interfaces
 
 		List<User> GetSuggestedUsers(Filter filter);
 
-		string[] GetUserRoles(string userName);
+		string[] GetUserRolesByUserName(string username);
+
+		string[] GetUserRolesByUserId(int userId);
 
 		User GetUserByEmail(string email);
 
 		User GetUserById(int id);
 
-		bool ToggleLock(string userName);
+		bool ToggleLock(int userId);
 
 		void UpdateUser(User user);
 
@@ -32,9 +33,13 @@ namespace VotingSystem.BLL.Interfaces
 
 		void AddUserToRoles(string username, string[] roleNames);
 
-		void RemoveUserFromAllRoles(string username);
+		void AddUserToRoles(int userId, string[] roleNames);
+
+		void RemoveUserFromAllRoles(int userId);
 
 		void RemoveUserFromRoles(string username, string[] roleNames);
+
+		void DeleteUser(int userId);
 
 		void DeleteUser(string userName);
 

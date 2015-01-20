@@ -13,7 +13,6 @@ namespace VotingSystem.Web.Helpers
 	{
 		public static VotingModel ToVotingModel(this Theme theme, string userName)
 		{
-			//REVIEW: should be constant or better separate formatter helper
 			Mapper.CreateMap<Theme, VotingModel>()
 				.ForMember(d => d.VotingId, mo => mo.MapFrom(s => s.Id))
 				.ForMember(d => d.AnswersCount, mo => mo.MapFrom(s => s.Questions.First().Answers.Count))

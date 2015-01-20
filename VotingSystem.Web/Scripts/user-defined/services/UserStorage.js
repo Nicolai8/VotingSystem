@@ -1,7 +1,7 @@
 ﻿angular.module("votingSystem.services.userStorage", [])
 	.factory("UserStorage", ["$resource", "urls",
 		function ($resource, urls) {
-			return $resource(urls.Users + "/:id", { id: "@UserName" },
+			return $resource(urls.Users + "/:id", { id: "@UserId" },
 				{
 					query: {
 						method: "GET",

@@ -279,6 +279,19 @@ namespace VotingSystem.Web.Providers
 			}
 		}
 
+		public bool DeleteUser(int userId)
+		{
+			try
+			{
+				_userService.DeleteUser(userId);
+				return true;
+			}
+			catch (Exception e)
+			{
+				throw new ProviderException(e.Message);
+			}
+		}
+
 		public override MembershipUserCollection GetAllUsers(int pageIndex, int pageSize, out int totalRecords)
 		{
 			MembershipUserCollection users = new MembershipUserCollection();
@@ -288,7 +301,7 @@ namespace VotingSystem.Web.Providers
 				List<User> usersInDb = _userService.GetUsers(out totalRecords, new Filter(pageIndex, pageSize));
 				foreach (User user in usersInDb)
 				{
-					users.Add(ConvertUsertToMembershipUser(user));
+					users.Add(ConvertUserToMembershipUser(user));
 				}
 			}
 			catch (Exception e)
@@ -306,7 +319,7 @@ namespace VotingSystem.Web.Providers
 				List<User> usersInDb = _userService.GetSuggestedUsers(new Filter(pageIndex, pageSize));
 				foreach (User user in usersInDb)
 				{
-					users.Add(ConvertUsertToMembershipUser(user));
+					users.Add(ConvertUserToMembershipUser(user));
 				}
 			}
 			catch (Exception e)
@@ -330,7 +343,7 @@ namespace VotingSystem.Web.Providers
 		{
 			try
 			{
-				return ConvertUsertToMembershipUser(_userService.GetUserByUserName(username));
+				return ConvertUserToMembershipUser(_userService.GetUserByUserName(username));
 			}
 			catch (Exception e)
 			{
@@ -342,7 +355,7 @@ namespace VotingSystem.Web.Providers
 		{
 			try
 			{
-				return ConvertUsertToMembershipUser(_userService.GetUserById((int)providerUserKey));
+				return ConvertUserToMembershipUser(_userService.GetUserById((int)providerUserKey));
 			}
 			catch (Exception e)
 			{
@@ -462,7 +475,7 @@ namespace VotingSystem.Web.Providers
 				List<User> usersInDb = _userService.GetUsersByName(usernameToMatch);
 				foreach (User user in usersInDb)
 				{
-					users.Add(ConvertUsertToMembershipUser(user));
+					users.Add(ConvertUserToMembershipUser(user));
 				}
 				return users;
 			}
@@ -480,11 +493,11 @@ namespace VotingSystem.Web.Providers
 		/// <summary>
 		/// Toggle user lock field
 		/// </summary>
-		/// <param name="userName">User name of user</param>
+		/// <param name="userId">User Id of user</param>
 		/// <returns>New value of lock field</returns>
-		public bool ToggleLockUser(string userName)
+		public bool ToggleLockUser(int userId)
 		{
-			return _userService.ToggleLock(userName);
+			return _userService.ToggleLock(userId);
 		}
 
 		public int GetTotalUsers()
@@ -535,7 +548,7 @@ namespace VotingSystem.Web.Providers
 			return encodedPassword;
 		}
 
-		private MembershipUser ConvertUsertToMembershipUser(User user)
+		private MembershipUser ConvertUserToMembershipUser(User user)
 		{
 			return user == null ? null : new MembershipUser(
 						Name, user.UserName,

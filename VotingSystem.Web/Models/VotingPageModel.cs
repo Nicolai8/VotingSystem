@@ -8,6 +8,7 @@ namespace VotingSystem.Web.Models
 		public int VotingId { get; set; }
 		public int TotalVotes { get; set; }
 		public string VotingName { get; set; }
+		public int UserId { get; set; }
 		public string CreatedBy { get; set; }
 		public StatusType? Status { get; set; }
 		public string StartDate { get; set; }

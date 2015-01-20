@@ -3,7 +3,7 @@
 	<div id="votingPageContent">
 		<h1>{{voting.VotingName}}</h1>
 		<p class="lead">
-			by <a data-ng-href="#/profile/{{voting.CreatedBy}}">{{voting.CreatedBy}}</a>
+			by <a data-ng-href="#/profile/{{voting.UserId}}">{{voting.CreatedBy}}</a>
 		</p>
 		<hr>
 		<p>
@@ -178,7 +178,7 @@
 						<div class="col-xs-10 col-md-10">
 							<div>
 								<div class="mic-info">
-									By: <a data-ng-href="#/profile/{{comment.CreatedBy}}">{{comment.CreatedBy}}</a> on {{comment.CreateDate}}
+									By: <a data-ng-href="#/profile/{{comment.UserId}}">{{comment.CreatedBy}}</a> on {{comment.CreateDate}}
 								</div>
 							</div>
 							<div>

@@ -25,12 +25,12 @@ votingSystem.config(["$routeProvider", "$httpProvider","spinnerProvider", functi
 		templateUrl: "views/templates/comments.html"
 	}).when("/voices/:pageNumber", {
 		templateUrl: "views/templates/voices.html"
-	}).when("/profile/:userName?", {
+	}).when("/profile/:userId?", {
 		templateUrl: "views/templates/userProfile.html",
 		controller: "UserProfileCtrl",
 		resolve: {
 			User: function (UserStorage, $route) {
-				return UserStorage.get({ userName: $route.current.params.userName }).$promise;
+				return UserStorage.get({ userId: $route.current.params.userId }).$promise;
 			}
 		}
 	}).when("/voting/:votingId?", {

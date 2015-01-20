@@ -23,87 +23,59 @@ namespace VotingSystem.Web.Controllers.API
 			_userProfileService = userProfileService;
 		}
 
-		[Route("total/users")]
 		[HttpGet]
+		[Route("total/users")]
 		public int GetTotalUsers()
 		{
 			CustomMembershipProvider membership = (CustomMembershipProvider)Membership.Provider;
 			return membership.GetTotalUsers();
 		}
 
-		[Route("total/suggestedUsers", Order = 1)]
 		[HttpGet]
+		[Route("total/suggestedUsers", Order = 1)]
 		public int GetTotalSuggestedUsers()
 		{
 			CustomMembershipProvider membership = (CustomMembershipProvider)Membership.Provider;
 			return membership.GetTotalSuggestedUsers();
 		}
 
-		[Route("{id}")]
 		[HttpPut]
-		public void Put(string id, [FromBody]UserModel user)
+		[Route("{id}")]
+		public void Put(int id, [FromBody]UserModel user)
 		{
-			MembershipUser membershipUser = Membership.GetUser(user.UserName);
+			MembershipUser membershipUser = Membership.GetUser(id);
 			if (membershipUser != null && membershipUser.IsLockedOut == user.IsBlocked)
 			{
 				ChangeUserRoles(id, user.Roles);
 				return;
 			}
 			ToggleLock(id);
-
 		}
 
-		[Route("{id}")]
 		[HttpDelete]
-		public void Delete(string id)
+		[Route("{id}")]
+		public void Delete(int id)
 		{
-			Membership.DeleteUser(id);
+			CustomMembershipProvider membership = (CustomMembershipProvider)Membership.Provider;
+			membership.DeleteUser(id);
 		}
 
+		[HttpPost]
 		[Route("{id}/unsuggest")]
-		[HttpPost]
-		public void UnsuggestUserToBlock(string id)
+		public void UnsuggestUserToBlock(int id)
 		{
-			MembershipUser user = Membership.GetUser(id);
-			if (user != null && user.ProviderUserKey != null)
-			{
-				UserProfile userProfile = _userProfileService.GetUserProfileByUserId((int)user.ProviderUserKey);
-				userProfile.SuggestedToBlock = false;
-				_userProfileService.UpdateUserProfile(userProfile);
-			}
-		}
-
-		[Route("{id}/suggest")]
-		[HttpPost]
-		public void SuggestUserToBlock(string id)
-		{
-			UserProfile userProfile = _userProfileService.GetUserProfileByUserId(UserId);
-			userProfile.SuggestedToBlock = true;
+			UserProfile userProfile = _userProfileService.GetUserProfileByUserId(id);
+			userProfile.SuggestedToBlock = false;
 			_userProfileService.UpdateUserProfile(userProfile);
 		}
 
-		#region Private methods
-
-		private void ChangeUserRoles(string userName, string[] roleNames)
+		[HttpPost]
+		[Route("{id}/suggest")]
+		public void SuggestUserToBlock(int id)
 		{
-			string[] userRoles = Roles.GetRolesForUser(userName);
-			CustomeRoleProvider roleProvider = (CustomeRoleProvider)Roles.Provider;
-			roleProvider.RemoveUserFromRoles(userName);
-			try
-			{
-				Roles.AddUserToRoles(userName, roleNames);
-			}
-			catch (Exception)
-			{
-				Roles.AddUserToRoles(userName, userRoles);
-				throw;
-			}
-		}
-
-		private void ToggleLock(string userName)
-		{
-			CustomMembershipProvider membership = (CustomMembershipProvider)Membership.Provider;
-			membership.ToggleLockUser(userName);
+			UserProfile userProfile = _userProfileService.GetUserProfileByUserId(id);
+			userProfile.SuggestedToBlock = true;
+			_userProfileService.UpdateUserProfile(userProfile);
 		}
 
 		[Route("{pageType}/{page:int}")]
@@ -127,6 +99,30 @@ namespace VotingSystem.Web.Controllers.API
 				users.Add(user.ToUserModel());
 			}
 			return users;
+		}
+
+		#region Private methods
+
+		private void ChangeUserRoles(int userId, string[] roleNames)
+		{
+			CustomRoleProvider roleProvider = (CustomRoleProvider)Roles.Provider;
+			string[] userRoles = roleProvider.GetRolesForUser(userId);
+			roleProvider.RemoveUserFromRoles(userId);
+			try
+			{
+				roleProvider.AddUserToRoles(userId, roleNames);
+			}
+			catch (Exception)
+			{
+				roleProvider.AddUserToRoles(userId, userRoles);
+				throw;
+			}
+		}
+
+		private void ToggleLock(int userId)
+		{
+			CustomMembershipProvider membership = (CustomMembershipProvider)Membership.Provider;
+			membership.ToggleLockUser(userId);
 		}
 
 		#endregion

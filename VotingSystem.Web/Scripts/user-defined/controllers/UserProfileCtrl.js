@@ -1,8 +1,8 @@
 ﻿angular.module("votingSystem.controllers.userProfile", [])
 	.controller("UserProfileCtrl", ["$scope", "$http", "$route", "$routeParams", "$location", "urls", "constants", "User", "commentsHub",
 		function ($scope, $http, $route, $routeParams, $location, urls, constants, User, commentsHub) {
-			$scope.userName = $routeParams.userName;
-			$scope.isMyPage = angular.isUndefined($scope.userName);
+			$scope.userId = $routeParams.userId;
+			$scope.isMyPage = angular.isUndefined($scope.userId);
 			$scope.pageName = "profile";
 			$scope.$route = $route;
 			$scope.$location = $location;

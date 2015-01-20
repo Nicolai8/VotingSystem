@@ -7,7 +7,7 @@ using VotingSystem.BLL.Interfaces;
 
 namespace VotingSystem.Web.Providers
 {
-	public class CustomeRoleProvider : RoleProvider
+	public class CustomRoleProvider : RoleProvider
 	{
 		private IRoleService _roleService
 		{
@@ -32,7 +32,12 @@ namespace VotingSystem.Web.Providers
 
 		public override string[] GetRolesForUser(string username)
 		{
-			return _userService.GetUserRoles(username);
+			return _userService.GetUserRolesByUserName(username);
+		}
+
+		public string[] GetRolesForUser(int userId)
+		{
+			return _userService.GetUserRolesByUserId(userId);
 		}
 
 		public override void CreateRole(string roleName)
@@ -85,6 +90,11 @@ namespace VotingSystem.Web.Providers
 			}
 		}
 
+		public void AddUserToRoles(int userId, string[] roleNames)
+		{
+			_userService.AddUserToRoles(userId, roleNames);
+		}
+
 		public override void RemoveUsersFromRoles(string[] usernames, string[] roleNames)
 		{
 			foreach (string username in usernames)
@@ -110,9 +120,9 @@ namespace VotingSystem.Web.Providers
 
 		public override string ApplicationName { get; set; }
 
-		public void RemoveUserFromRoles(string username)
+		public void RemoveUserFromRoles(int userId)
 		{
-			_userService.RemoveUserFromAllRoles(username);
+			_userService.RemoveUserFromAllRoles(userId);
 		}
 	}
 }

@@ -6,6 +6,7 @@ namespace VotingSystem.Web.Models
 	{
 		public int VotingId { get; set; }
 		public string VotingName { get; set; }
+		public int UserId { get; set; }
 		public string CreatedBy { get; set; }
 		public int AnswersCount { get; set; }
 		public int CommentsCount { get; set; }

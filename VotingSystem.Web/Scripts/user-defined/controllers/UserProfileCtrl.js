@@ -37,10 +37,8 @@
 
 			$scope.changePassword = function () {
 				var $modal = $("#changePasswordModal");
-				var oldPassword = $modal.find("#oldPassword").val();
-				var newPassword = $modal.find("#newPassword").val();
 				if ($modal.find("form[data-validate-form]").data("bootstrapValidator").isValid()) {
-					$.post(urls.ProfilePage.ChangePassword, { oldPassword: oldPassword, newPassword: newPassword })
+					$.post(urls.ProfilePage.ChangePassword, { oldPassword: $scope.oldPassword, newPassword: $scope.newPassword })
 					.done(function () {
 						toastr.success(constants["passwordChangedMessage"]);
 						$modal.modal("hide");
@@ -57,37 +55,13 @@
 				});
 			};
 
-			var $progress = $("#progress");
-			$("#pictureUpload").fileupload({
-				url: urls.ProfilePage.ChangePicture,
-				done: function (e, data) {
-					$progress.hide();
-					toastr.success(constants["userImageUpdatedMessage"]);
-					$scope.user.PictureUrl = data.result;
-				},
-				progressall: function (e, data) {
-					$progress.show();
-					var progress = parseInt(data.loaded / data.total * 100, 10);
-					$progress.find(".progress-bar").css(
-					"width",
-					progress + "%"
-					);
-				},
-				fail: function () {
-					$progress.hide();
-					toastr.error(constants["errorOccurredDuringSavingProcessMessage"]);
-				}
-			});
-
-			$scope.changePrivacy = function () {
-				//review: replace with data-ng-model=privacy on template
-				var privacyValue = $("#changePrivacyModal form :radio:checked").val();
-				$.post(urls.ProfilePage.ChangePrivacy, { privacy: privacyValue })
-				.done(function () {
-					toastr.success(constants["userPrivacySettingUpdatedMessage"]);
-					$("#changePrivacyModal").modal("hide");
-				}).fail(function () {
-					toastr.error(constants["errorOccurredDuringSavingProcessMessage"]);
-				});
+			$scope.changePrivacy = function (privacy) {
+				$.post(urls.ProfilePage.ChangePrivacy, { privacy: privacy })
+					.done(function () {
+						toastr.success(constants["userPrivacySettingUpdatedMessage"]);
+						$("#changePrivacyModal").modal("hide");
+					}).fail(function () {
+						toastr.error(constants["errorOccurredDuringSavingProcessMessage"]);
+					});
 			};
 		}]);

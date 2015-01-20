@@ -45,6 +45,7 @@ namespace VotingSystem.Web
 				"~/Scripts/user-defined/directives/cleanUp.js",
 				"~/Scripts/user-defined/directives/dateTimePicker.js",
 				"~/Scripts/user-defined/directives/focusOut.js",
+				"~/Scripts/user-defined/directives/fileUploader.js",
 				"~/Scripts/user-defined/directives/goBack.js",
 				"~/Scripts/user-defined/directives/notFound.js",
 				"~/Scripts/user-defined/directives/onEnterPress.js",

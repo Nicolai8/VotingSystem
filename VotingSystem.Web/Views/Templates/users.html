@@ -20,7 +20,7 @@
 					</td>
 					<td>{{user.Roles.join(",")}}</td>
 					<td>{{user.Email}}</td>
-					<td>{{user.CreateDate}}</td>
+					<td>{{user.CreateDate|date:"dd-MM-yyyy"}}</td>
 					<td>
 						<a data-ng-click="toggleLockUser(user)">
 							<span data-ng-show="user.IsBlocked">Unblock</span>

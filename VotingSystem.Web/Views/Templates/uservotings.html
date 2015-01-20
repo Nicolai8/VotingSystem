@@ -30,7 +30,7 @@
 				</td>
 				<td>{{voting.AnswersCount}}</td>
 				<td>{{voting.CommentsCount}}</td>
-				<td>{{voting.StartDate}}</td>
+				<td>{{voting.StartDate|date:"EEEE, MMMM dd, yyyy hh:mm"}}</td>
 				<td>{{voting.EndDate}}</td>
 				<td data-ng-switch="voting.Status">
 					<span data-ng-switch-when="1">Active</span>

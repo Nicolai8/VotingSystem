@@ -2,6 +2,7 @@
 	"votingSystem.directives.bootstrapMarkdown",
 	"votingSystem.directives.cleanUp",
 	"votingSystem.directives.datetimePicker",
+	"votingSystem.directives.fileUploader",
 	"votingSystem.directives.focusOut",
 	"votingSystem.directives.goBack",
 	"votingSystem.directives.notFound",

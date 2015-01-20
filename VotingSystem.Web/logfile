@@ -1140,3 +1140,942 @@ System.Configuration.Provider.ProviderException: An error occurred while updatin
 2015-01-20 17:08:55,715 WARN  default Voting is closed or blocked.
  Exception:
 
+
+2015-01-20 17:41:28,536 ERROR default An error occurred while closing the provider connection. See the inner exception for details.
+ Exception:
+System.Configuration.Provider.ProviderException: An error occurred while closing the provider connection. See the inner exception for details.
+   at VotingSystem.Web.Providers.CustomMembershipProvider.GetUser(String username, Boolean userIsOnline) in d:\TrainingProject\VotingSystem\VotingSystem.Web\Providers\CustomMembershipProvider.cs:line 350
+   at System.Web.Security.Membership.GetUser(String username, Boolean userIsOnline)
+   at System.Web.Security.Membership.GetUser()
+   at VotingSystem.Web.Controllers.BaseController.get_UserId() in d:\TrainingProject\VotingSystem\VotingSystem.Web\Controllers\BaseController.cs:line 13
+   at VotingSystem.Web.Controllers.AccountController.IsInRole() in d:\TrainingProject\VotingSystem\VotingSystem.Web\Controllers\AccountController.cs:line 91
+   at lambda_method(Closure , ControllerBase , Object[] )
+   at System.Web.Mvc.ActionMethodDispatcher.Execute(ControllerBase controller, Object[] parameters)
+   at System.Web.Mvc.ReflectedActionDescriptor.Execute(ControllerContext controllerContext, IDictionary`2 parameters)
+   at System.Web.Mvc.ControllerActionInvoker.InvokeActionMethod(ControllerContext controllerContext, ActionDescriptor actionDescriptor, IDictionary`2 parameters)
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass42.<BeginInvokeSynchronousActionMethod>b__41()
+   at System.Web.Mvc.Async.AsyncResultWrapper.<>c__DisplayClass8`1.<BeginSynchronous>b__7(IAsyncResult _)
+   at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.End()
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeActionMethod(IAsyncResult asyncResult)
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass37.<>c__DisplayClass39.<BeginInvokeActionMethodWithFilters>b__33()
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass4f.<InvokeActionMethodFilterAsynchronously>b__49()
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass37.<BeginInvokeActionMethodWithFilters>b__36(IAsyncResult asyncResult)
+   at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.End()
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeActionMethodWithFilters(IAsyncResult asyncResult)
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass25.<>c__DisplayClass2a.<BeginInvokeAction>b__20()
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass25.<BeginInvokeAction>b__22(IAsyncResult asyncResult)
+   at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.End()
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeAction(IAsyncResult asyncResult)
+   at System.Web.Mvc.Controller.<>c__DisplayClass1d.<BeginExecuteCore>b__18(IAsyncResult asyncResult)
+   at System.Web.Mvc.Async.AsyncResultWrapper.<>c__DisplayClass4.<MakeVoidDelegate>b__3(IAsyncResult ar)
+   at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.End()
+   at System.Web.Mvc.Controller.EndExecuteCore(IAsyncResult asyncResult)
+   at System.Web.Mvc.Async.AsyncResultWrapper.<>c__DisplayClass4.<MakeVoidDelegate>b__3(IAsyncResult ar)
+   at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.End()
+   at System.Web.Mvc.Controller.EndExecute(IAsyncResult asyncResult)
+   at System.Web.Mvc.Controller.System.Web.Mvc.Async.IAsyncController.EndExecute(IAsyncResult asyncResult)
+   at System.Web.Mvc.MvcHandler.<>c__DisplayClass8.<BeginProcessRequest>b__3(IAsyncResult asyncResult)
+   at System.Web.Mvc.Async.AsyncResultWrapper.<>c__DisplayClass4.<MakeVoidDelegate>b__3(IAsyncResult ar)
+   at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.End()
+   at System.Web.Mvc.MvcHandler.EndProcessRequest(IAsyncResult asyncResult)
+   at System.Web.Mvc.MvcHandler.System.Web.IHttpAsyncHandler.EndProcessRequest(IAsyncResult result)
+   at System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   at System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+
+
+2015-01-20 17:41:28,546 ERROR default An error occurred while closing the provider connection. See the inner exception for details.
+ Exception:
+System.Data.Entity.Core.EntityException: An error occurred while closing the provider connection. See the inner exception for details. ---> System.Threading.SemaphoreFullException: Adding the specified count to the semaphore would cause it to exceed its maximum count.
+   at System.Threading.Semaphore.Release(Int32 releaseCount)
+   at System.Data.ProviderBase.DbConnectionPool.PutNewObject(DbConnectionInternal obj)
+   at System.Data.ProviderBase.DbConnectionPool.DeactivateObject(DbConnectionInternal obj)
+   at System.Data.ProviderBase.DbConnectionPool.PutObject(DbConnectionInternal obj, Object owningObject)
+   at System.Data.ProviderBase.DbConnectionInternal.CloseConnection(DbConnection owningObject, DbConnectionFactory connectionFactory)
+   at System.Data.SqlClient.SqlConnection.CloseInnerConnection()
+   at System.Data.SqlClient.SqlConnection.Close()
+   at System.Data.Entity.Core.EntityClient.EntityConnection.StoreCloseHelper()
+   --- End of inner exception stack trace ---
+   at System.Data.Entity.Core.EntityClient.EntityConnection.StoreCloseHelper()
+   at System.Data.Entity.Core.EntityClient.EntityConnection.Close()
+   at System.Data.Entity.Core.Objects.ObjectContext.ReleaseConnection()
+   at System.Data.Entity.Core.Common.Internal.Materialization.Shaper`1.Finally()
+   at System.Data.Entity.Core.Common.Internal.Materialization.Shaper`1.ObjectQueryNestedEnumerator.Dispose()
+   at System.Data.Entity.Internal.LazyEnumerator`1.Dispose()
+   at System.Linq.Enumerable.SingleOrDefault[TSource](IEnumerable`1 source)
+   at VotingSystem.BLL.ThemeService.GetThemeById(Int32 themeId) in d:\TrainingProject\VotingSystem\VotingSystem.BLL\ThemeService.cs:line 44
+   at VotingSystem.Web.Controllers.API.VotingApiController.Get(Int32 id) in d:\TrainingProject\VotingSystem\VotingSystem.Web\Controllers\API\VotingApiController.cs:line 34
+   at lambda_method(Closure , Object , Object[] )
+   at System.Web.Http.Controllers.ReflectedHttpActionDescriptor.ActionExecutor.<>c__DisplayClass10.<GetExecutor>b__9(Object instance, Object[] methodParameters)
+   at System.Web.Http.Controllers.ReflectedHttpActionDescriptor.ActionExecutor.Execute(Object instance, Object[] arguments)
+   at System.Web.Http.Controllers.ReflectedHttpActionDescriptor.ExecuteAsync(HttpControllerContext controllerContext, IDictionary`2 arguments, CancellationToken cancellationToken)
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Web.Http.Controllers.ApiControllerActionInvoker.<InvokeUsingResultConverterAsync>d__8.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Web.Http.Controllers.ActionFilterResult.<ExecuteAsync>d__2.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Web.Http.ApiController.<InvokeActionWithExceptionFilters>d__1.MoveNext()
+
+
+2015-01-20 17:41:28,686 ERROR default Adding the specified count to the semaphore would cause it to exceed its maximum count.
+ Exception:
+System.Threading.SemaphoreFullException: Adding the specified count to the semaphore would cause it to exceed its maximum count.
+   at System.Threading.Semaphore.Release(Int32 releaseCount)
+   at System.Data.ProviderBase.DbConnectionPool.PutNewObject(DbConnectionInternal obj)
+   at System.Data.ProviderBase.DbConnectionPool.DeactivateObject(DbConnectionInternal obj)
+   at System.Data.ProviderBase.DbConnectionPool.PutObject(DbConnectionInternal obj, Object owningObject)
+   at System.Data.ProviderBase.DbConnectionInternal.CloseConnection(DbConnection owningObject, DbConnectionFactory connectionFactory)
+   at System.Data.SqlClient.SqlConnection.CloseInnerConnection()
+   at System.Data.SqlClient.SqlConnection.Close()
+   at System.Data.Entity.Core.EntityClient.EntityConnection.StoreCloseHelper()
+
+
+2015-01-20 17:41:29,059 ERROR default An error occurred while closing the provider connection. See the inner exception for details.
+ Exception:
+System.Data.Entity.Core.EntityException: An error occurred while closing the provider connection. See the inner exception for details. ---> System.Threading.SemaphoreFullException: Adding the specified count to the semaphore would cause it to exceed its maximum count.
+   at System.Threading.Semaphore.Release(Int32 releaseCount)
+   at System.Data.ProviderBase.DbConnectionPool.PutNewObject(DbConnectionInternal obj)
+   at System.Data.ProviderBase.DbConnectionPool.DeactivateObject(DbConnectionInternal obj)
+   at System.Data.ProviderBase.DbConnectionPool.PutObject(DbConnectionInternal obj, Object owningObject)
+   at System.Data.ProviderBase.DbConnectionInternal.CloseConnection(DbConnection owningObject, DbConnectionFactory connectionFactory)
+   at System.Data.SqlClient.SqlConnection.CloseInnerConnection()
+   at System.Data.SqlClient.SqlConnection.Close()
+   at System.Data.Entity.Core.EntityClient.EntityConnection.StoreCloseHelper()
+   --- End of inner exception stack trace ---
+   at System.Data.Entity.Core.EntityClient.EntityConnection.StoreCloseHelper()
+   at System.Data.Entity.Core.EntityClient.EntityConnection.Close()
+   at System.Data.Entity.Core.Objects.ObjectContext.ReleaseConnection()
+   at System.Data.Entity.Core.Common.Internal.Materialization.Shaper`1.Finally()
+   at System.Data.Entity.Core.Common.Internal.Materialization.Shaper`1.ObjectQueryNestedEnumerator.Dispose()
+   at System.Data.Entity.Internal.LazyEnumerator`1.Dispose()
+   at System.Linq.Enumerable.SingleOrDefault[TSource](IEnumerable`1 source)
+   at VotingSystem.BLL.ThemeService.GetThemeById(Int32 themeId) in d:\TrainingProject\VotingSystem\VotingSystem.BLL\ThemeService.cs:line 44
+   at VotingSystem.Web.Controllers.API.VotingApiController.Get(Int32 id) in d:\TrainingProject\VotingSystem\VotingSystem.Web\Controllers\API\VotingApiController.cs:line 34
+   at lambda_method(Closure , Object , Object[] )
+   at System.Web.Http.Controllers.ReflectedHttpActionDescriptor.ActionExecutor.<>c__DisplayClass10.<GetExecutor>b__9(Object instance, Object[] methodParameters)
+   at System.Web.Http.Controllers.ReflectedHttpActionDescriptor.ActionExecutor.Execute(Object instance, Object[] arguments)
+   at System.Web.Http.Controllers.ReflectedHttpActionDescriptor.ExecuteAsync(HttpControllerContext controllerContext, IDictionary`2 arguments, CancellationToken cancellationToken)
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Web.Http.Controllers.ApiControllerActionInvoker.<InvokeUsingResultConverterAsync>d__8.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Web.Http.Controllers.ActionFilterResult.<ExecuteAsync>d__2.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Web.Http.ApiController.<InvokeActionWithExceptionFilters>d__1.MoveNext()
+
+
+2015-01-20 17:41:29,065 ERROR default Adding the specified count to the semaphore would cause it to exceed its maximum count.
+ Exception:
+System.Threading.SemaphoreFullException: Adding the specified count to the semaphore would cause it to exceed its maximum count.
+   at System.Threading.Semaphore.Release(Int32 releaseCount)
+   at System.Data.ProviderBase.DbConnectionPool.PutNewObject(DbConnectionInternal obj)
+   at System.Data.ProviderBase.DbConnectionPool.DeactivateObject(DbConnectionInternal obj)
+   at System.Data.ProviderBase.DbConnectionPool.PutObject(DbConnectionInternal obj, Object owningObject)
+   at System.Data.ProviderBase.DbConnectionInternal.CloseConnection(DbConnection owningObject, DbConnectionFactory connectionFactory)
+   at System.Data.SqlClient.SqlConnection.CloseInnerConnection()
+   at System.Data.SqlClient.SqlConnection.Close()
+   at System.Data.Entity.Core.EntityClient.EntityConnection.StoreCloseHelper()
+
+
+2015-01-20 17:41:29,190 ERROR default An error occurred while closing the provider connection. See the inner exception for details.
+ Exception:
+System.Data.Entity.Core.EntityException: An error occurred while closing the provider connection. See the inner exception for details. ---> System.Threading.SemaphoreFullException: Adding the specified count to the semaphore would cause it to exceed its maximum count.
+   at System.Threading.Semaphore.Release(Int32 releaseCount)
+   at System.Data.ProviderBase.DbConnectionPool.PutNewObject(DbConnectionInternal obj)
+   at System.Data.ProviderBase.DbConnectionPool.DeactivateObject(DbConnectionInternal obj)
+   at System.Data.ProviderBase.DbConnectionPool.PutObject(DbConnectionInternal obj, Object owningObject)
+   at System.Data.ProviderBase.DbConnectionInternal.CloseConnection(DbConnection owningObject, DbConnectionFactory connectionFactory)
+   at System.Data.SqlClient.SqlConnection.CloseInnerConnection()
+   at System.Data.SqlClient.SqlConnection.Close()
+   at System.Data.Entity.Core.EntityClient.EntityConnection.StoreCloseHelper()
+   --- End of inner exception stack trace ---
+   at System.Data.Entity.Core.EntityClient.EntityConnection.StoreCloseHelper()
+   at System.Data.Entity.Core.EntityClient.EntityConnection.Close()
+   at System.Data.Entity.Core.Objects.ObjectContext.ReleaseConnection()
+   at System.Data.Entity.Core.Common.Internal.Materialization.Shaper`1.Finally()
+   at System.Data.Entity.Core.Common.Internal.Materialization.Shaper`1.ObjectQueryNestedEnumerator.Dispose()
+   at System.Data.Entity.Internal.LazyEnumerator`1.Dispose()
+   at System.Linq.Enumerable.SingleOrDefault[TSource](IEnumerable`1 source)
+   at VotingSystem.BLL.ThemeService.GetThemeById(Int32 themeId) in d:\TrainingProject\VotingSystem\VotingSystem.BLL\ThemeService.cs:line 44
+   at VotingSystem.Web.Controllers.API.VotingApiController.Get(Int32 id) in d:\TrainingProject\VotingSystem\VotingSystem.Web\Controllers\API\VotingApiController.cs:line 34
+   at lambda_method(Closure , Object , Object[] )
+   at System.Web.Http.Controllers.ReflectedHttpActionDescriptor.ActionExecutor.<>c__DisplayClass10.<GetExecutor>b__9(Object instance, Object[] methodParameters)
+   at System.Web.Http.Controllers.ReflectedHttpActionDescriptor.ActionExecutor.Execute(Object instance, Object[] arguments)
+   at System.Web.Http.Controllers.ReflectedHttpActionDescriptor.ExecuteAsync(HttpControllerContext controllerContext, IDictionary`2 arguments, CancellationToken cancellationToken)
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Web.Http.Controllers.ApiControllerActionInvoker.<InvokeUsingResultConverterAsync>d__8.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Web.Http.Controllers.ActionFilterResult.<ExecuteAsync>d__2.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Web.Http.ApiController.<InvokeActionWithExceptionFilters>d__1.MoveNext()
+
+
+2015-01-20 17:41:29,193 ERROR default Adding the specified count to the semaphore would cause it to exceed its maximum count.
+ Exception:
+System.Threading.SemaphoreFullException: Adding the specified count to the semaphore would cause it to exceed its maximum count.
+   at System.Threading.Semaphore.Release(Int32 releaseCount)
+   at System.Data.ProviderBase.DbConnectionPool.PutNewObject(DbConnectionInternal obj)
+   at System.Data.ProviderBase.DbConnectionPool.DeactivateObject(DbConnectionInternal obj)
+   at System.Data.ProviderBase.DbConnectionPool.PutObject(DbConnectionInternal obj, Object owningObject)
+   at System.Data.ProviderBase.DbConnectionInternal.CloseConnection(DbConnection owningObject, DbConnectionFactory connectionFactory)
+   at System.Data.SqlClient.SqlConnection.CloseInnerConnection()
+   at System.Data.SqlClient.SqlConnection.Close()
+   at System.Data.Entity.Core.EntityClient.EntityConnection.StoreCloseHelper()
+
+
+2015-01-20 17:41:29,210 ERROR default An error occurred while closing the provider connection. See the inner exception for details.
+ Exception:
+System.Data.Entity.Core.EntityException: An error occurred while closing the provider connection. See the inner exception for details. ---> System.Threading.SemaphoreFullException: Adding the specified count to the semaphore would cause it to exceed its maximum count.
+   at System.Threading.Semaphore.Release(Int32 releaseCount)
+   at System.Data.ProviderBase.DbConnectionPool.PutNewObject(DbConnectionInternal obj)
+   at System.Data.ProviderBase.DbConnectionPool.DeactivateObject(DbConnectionInternal obj)
+   at System.Data.ProviderBase.DbConnectionPool.PutObject(DbConnectionInternal obj, Object owningObject)
+   at System.Data.ProviderBase.DbConnectionInternal.CloseConnection(DbConnection owningObject, DbConnectionFactory connectionFactory)
+   at System.Data.SqlClient.SqlConnection.CloseInnerConnection()
+   at System.Data.SqlClient.SqlConnection.Close()
+   at System.Data.Entity.Core.EntityClient.EntityConnection.StoreCloseHelper()
+   --- End of inner exception stack trace ---
+   at System.Data.Entity.Core.EntityClient.EntityConnection.StoreCloseHelper()
+   at System.Data.Entity.Core.EntityClient.EntityConnection.Close()
+   at System.Data.Entity.Core.Objects.ObjectContext.ReleaseConnection()
+   at System.Data.Entity.Core.Common.Internal.Materialization.Shaper`1.Finally()
+   at System.Data.Entity.Core.Common.Internal.Materialization.Shaper`1.ObjectQueryNestedEnumerator.Dispose()
+   at System.Data.Entity.Internal.LazyEnumerator`1.Dispose()
+   at System.Linq.Enumerable.SingleOrDefault[TSource](IEnumerable`1 source)
+   at VotingSystem.BLL.ThemeService.GetThemeById(Int32 themeId) in d:\TrainingProject\VotingSystem\VotingSystem.BLL\ThemeService.cs:line 44
+   at VotingSystem.Web.Controllers.API.VotingApiController.Get(Int32 id) in d:\TrainingProject\VotingSystem\VotingSystem.Web\Controllers\API\VotingApiController.cs:line 34
+   at lambda_method(Closure , Object , Object[] )
+   at System.Web.Http.Controllers.ReflectedHttpActionDescriptor.ActionExecutor.<>c__DisplayClass10.<GetExecutor>b__9(Object instance, Object[] methodParameters)
+   at System.Web.Http.Controllers.ReflectedHttpActionDescriptor.ActionExecutor.Execute(Object instance, Object[] arguments)
+   at System.Web.Http.Controllers.ReflectedHttpActionDescriptor.ExecuteAsync(HttpControllerContext controllerContext, IDictionary`2 arguments, CancellationToken cancellationToken)
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Web.Http.Controllers.ApiControllerActionInvoker.<InvokeUsingResultConverterAsync>d__8.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Web.Http.Controllers.ActionFilterResult.<ExecuteAsync>d__2.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Web.Http.ApiController.<InvokeActionWithExceptionFilters>d__1.MoveNext()
+
+
+2015-01-20 17:41:29,228 ERROR default Adding the specified count to the semaphore would cause it to exceed its maximum count.
+ Exception:
+System.Threading.SemaphoreFullException: Adding the specified count to the semaphore would cause it to exceed its maximum count.
+   at System.Threading.Semaphore.Release(Int32 releaseCount)
+   at System.Data.ProviderBase.DbConnectionPool.PutNewObject(DbConnectionInternal obj)
+   at System.Data.ProviderBase.DbConnectionPool.DeactivateObject(DbConnectionInternal obj)
+   at System.Data.ProviderBase.DbConnectionPool.PutObject(DbConnectionInternal obj, Object owningObject)
+   at System.Data.ProviderBase.DbConnectionInternal.CloseConnection(DbConnection owningObject, DbConnectionFactory connectionFactory)
+   at System.Data.SqlClient.SqlConnection.CloseInnerConnection()
+   at System.Data.SqlClient.SqlConnection.Close()
+   at System.Data.Entity.Core.EntityClient.EntityConnection.StoreCloseHelper()
+
+
+2015-01-20 17:41:29,260 ERROR default An error occurred while closing the provider connection. See the inner exception for details.
+ Exception:
+System.Data.Entity.Core.EntityException: An error occurred while closing the provider connection. See the inner exception for details. ---> System.Threading.SemaphoreFullException: Adding the specified count to the semaphore would cause it to exceed its maximum count.
+   at System.Threading.Semaphore.Release(Int32 releaseCount)
+   at System.Data.ProviderBase.DbConnectionPool.PutNewObject(DbConnectionInternal obj)
+   at System.Data.ProviderBase.DbConnectionPool.DeactivateObject(DbConnectionInternal obj)
+   at System.Data.ProviderBase.DbConnectionPool.PutObject(DbConnectionInternal obj, Object owningObject)
+   at System.Data.ProviderBase.DbConnectionInternal.CloseConnection(DbConnection owningObject, DbConnectionFactory connectionFactory)
+   at System.Data.SqlClient.SqlConnection.CloseInnerConnection()
+   at System.Data.SqlClient.SqlConnection.Close()
+   at System.Data.Entity.Core.EntityClient.EntityConnection.StoreCloseHelper()
+   --- End of inner exception stack trace ---
+   at System.Data.Entity.Core.EntityClient.EntityConnection.StoreCloseHelper()
+   at System.Data.Entity.Core.EntityClient.EntityConnection.Close()
+   at System.Data.Entity.Core.Objects.ObjectContext.ReleaseConnection()
+   at System.Data.Entity.Core.Common.Internal.Materialization.Shaper`1.Finally()
+   at System.Data.Entity.Core.Common.Internal.Materialization.Shaper`1.ObjectQueryNestedEnumerator.Dispose()
+   at System.Data.Entity.Internal.LazyEnumerator`1.Dispose()
+   at System.Linq.Enumerable.SingleOrDefault[TSource](IEnumerable`1 source)
+   at VotingSystem.BLL.ThemeService.GetThemeById(Int32 themeId) in d:\TrainingProject\VotingSystem\VotingSystem.BLL\ThemeService.cs:line 44
+   at VotingSystem.Web.Controllers.API.VotingApiController.Get(Int32 id) in d:\TrainingProject\VotingSystem\VotingSystem.Web\Controllers\API\VotingApiController.cs:line 34
+   at lambda_method(Closure , Object , Object[] )
+   at System.Web.Http.Controllers.ReflectedHttpActionDescriptor.ActionExecutor.<>c__DisplayClass10.<GetExecutor>b__9(Object instance, Object[] methodParameters)
+   at System.Web.Http.Controllers.ReflectedHttpActionDescriptor.ActionExecutor.Execute(Object instance, Object[] arguments)
+   at System.Web.Http.Controllers.ReflectedHttpActionDescriptor.ExecuteAsync(HttpControllerContext controllerContext, IDictionary`2 arguments, CancellationToken cancellationToken)
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Web.Http.Controllers.ApiControllerActionInvoker.<InvokeUsingResultConverterAsync>d__8.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Web.Http.Controllers.ActionFilterResult.<ExecuteAsync>d__2.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Web.Http.ApiController.<InvokeActionWithExceptionFilters>d__1.MoveNext()
+
+
+2015-01-20 17:41:29,283 ERROR default Adding the specified count to the semaphore would cause it to exceed its maximum count.
+ Exception:
+System.Threading.SemaphoreFullException: Adding the specified count to the semaphore would cause it to exceed its maximum count.
+   at System.Threading.Semaphore.Release(Int32 releaseCount)
+   at System.Data.ProviderBase.DbConnectionPool.PutNewObject(DbConnectionInternal obj)
+   at System.Data.ProviderBase.DbConnectionPool.DeactivateObject(DbConnectionInternal obj)
+   at System.Data.ProviderBase.DbConnectionPool.PutObject(DbConnectionInternal obj, Object owningObject)
+   at System.Data.ProviderBase.DbConnectionInternal.CloseConnection(DbConnection owningObject, DbConnectionFactory connectionFactory)
+   at System.Data.SqlClient.SqlConnection.CloseInnerConnection()
+   at System.Data.SqlClient.SqlConnection.Close()
+   at System.Data.Entity.Core.EntityClient.EntityConnection.StoreCloseHelper()
+
+
+2015-01-20 17:41:29,288 ERROR default An error occurred while closing the provider connection. See the inner exception for details.
+ Exception:
+System.Data.Entity.Core.EntityException: An error occurred while closing the provider connection. See the inner exception for details. ---> System.Threading.SemaphoreFullException: Adding the specified count to the semaphore would cause it to exceed its maximum count.
+   at System.Threading.Semaphore.Release(Int32 releaseCount)
+   at System.Data.ProviderBase.DbConnectionPool.PutNewObject(DbConnectionInternal obj)
+   at System.Data.ProviderBase.DbConnectionPool.DeactivateObject(DbConnectionInternal obj)
+   at System.Data.ProviderBase.DbConnectionPool.PutObject(DbConnectionInternal obj, Object owningObject)
+   at System.Data.ProviderBase.DbConnectionInternal.CloseConnection(DbConnection owningObject, DbConnectionFactory connectionFactory)
+   at System.Data.SqlClient.SqlConnection.CloseInnerConnection()
+   at System.Data.SqlClient.SqlConnection.Close()
+   at System.Data.Entity.Core.EntityClient.EntityConnection.StoreCloseHelper()
+   --- End of inner exception stack trace ---
+   at System.Data.Entity.Core.EntityClient.EntityConnection.StoreCloseHelper()
+   at System.Data.Entity.Core.EntityClient.EntityConnection.Close()
+   at System.Data.Entity.Core.Objects.ObjectContext.ReleaseConnection()
+   at System.Data.Entity.Core.Common.Internal.Materialization.Shaper`1.Finally()
+   at System.Data.Entity.Core.Common.Internal.Materialization.Shaper`1.ObjectQueryNestedEnumerator.Dispose()
+   at System.Data.Entity.Internal.LazyEnumerator`1.Dispose()
+   at System.Linq.Enumerable.SingleOrDefault[TSource](IEnumerable`1 source)
+   at VotingSystem.BLL.ThemeService.GetThemeById(Int32 themeId) in d:\TrainingProject\VotingSystem\VotingSystem.BLL\ThemeService.cs:line 44
+   at VotingSystem.Web.Controllers.API.VotingApiController.Get(Int32 id) in d:\TrainingProject\VotingSystem\VotingSystem.Web\Controllers\API\VotingApiController.cs:line 34
+   at lambda_method(Closure , Object , Object[] )
+   at System.Web.Http.Controllers.ReflectedHttpActionDescriptor.ActionExecutor.<>c__DisplayClass10.<GetExecutor>b__9(Object instance, Object[] methodParameters)
+   at System.Web.Http.Controllers.ReflectedHttpActionDescriptor.ActionExecutor.Execute(Object instance, Object[] arguments)
+   at System.Web.Http.Controllers.ReflectedHttpActionDescriptor.ExecuteAsync(HttpControllerContext controllerContext, IDictionary`2 arguments, CancellationToken cancellationToken)
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Web.Http.Controllers.ApiControllerActionInvoker.<InvokeUsingResultConverterAsync>d__8.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Web.Http.Controllers.ActionFilterResult.<ExecuteAsync>d__2.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Web.Http.ApiController.<InvokeActionWithExceptionFilters>d__1.MoveNext()
+
+
+2015-01-20 17:41:29,300 ERROR default Adding the specified count to the semaphore would cause it to exceed its maximum count.
+ Exception:
+System.Threading.SemaphoreFullException: Adding the specified count to the semaphore would cause it to exceed its maximum count.
+   at System.Threading.Semaphore.Release(Int32 releaseCount)
+   at System.Data.ProviderBase.DbConnectionPool.PutNewObject(DbConnectionInternal obj)
+   at System.Data.ProviderBase.DbConnectionPool.DeactivateObject(DbConnectionInternal obj)
+   at System.Data.ProviderBase.DbConnectionPool.PutObject(DbConnectionInternal obj, Object owningObject)
+   at System.Data.ProviderBase.DbConnectionInternal.CloseConnection(DbConnection owningObject, DbConnectionFactory connectionFactory)
+   at System.Data.SqlClient.SqlConnection.CloseInnerConnection()
+   at System.Data.SqlClient.SqlConnection.Close()
+   at System.Data.Entity.Core.EntityClient.EntityConnection.StoreCloseHelper()
+
+
+2015-01-20 17:41:29,309 ERROR default An error occurred while closing the provider connection. See the inner exception for details.
+ Exception:
+System.Data.Entity.Core.EntityException: An error occurred while closing the provider connection. See the inner exception for details. ---> System.Threading.SemaphoreFullException: Adding the specified count to the semaphore would cause it to exceed its maximum count.
+   at System.Threading.Semaphore.Release(Int32 releaseCount)
+   at System.Data.ProviderBase.DbConnectionPool.PutNewObject(DbConnectionInternal obj)
+   at System.Data.ProviderBase.DbConnectionPool.DeactivateObject(DbConnectionInternal obj)
+   at System.Data.ProviderBase.DbConnectionPool.PutObject(DbConnectionInternal obj, Object owningObject)
+   at System.Data.ProviderBase.DbConnectionInternal.CloseConnection(DbConnection owningObject, DbConnectionFactory connectionFactory)
+   at System.Data.SqlClient.SqlConnection.CloseInnerConnection()
+   at System.Data.SqlClient.SqlConnection.Close()
+   at System.Data.Entity.Core.EntityClient.EntityConnection.StoreCloseHelper()
+   --- End of inner exception stack trace ---
+   at System.Data.Entity.Core.EntityClient.EntityConnection.StoreCloseHelper()
+   at System.Data.Entity.Core.EntityClient.EntityConnection.Close()
+   at System.Data.Entity.Core.Objects.ObjectContext.ReleaseConnection()
+   at System.Data.Entity.Core.Common.Internal.Materialization.Shaper`1.Finally()
+   at System.Data.Entity.Core.Common.Internal.Materialization.Shaper`1.ObjectQueryNestedEnumerator.Dispose()
+   at System.Data.Entity.Internal.LazyEnumerator`1.Dispose()
+   at System.Linq.Enumerable.SingleOrDefault[TSource](IEnumerable`1 source)
+   at VotingSystem.BLL.ThemeService.GetThemeById(Int32 themeId) in d:\TrainingProject\VotingSystem\VotingSystem.BLL\ThemeService.cs:line 44
+   at VotingSystem.Web.Controllers.API.VotingApiController.Get(Int32 id) in d:\TrainingProject\VotingSystem\VotingSystem.Web\Controllers\API\VotingApiController.cs:line 34
+   at lambda_method(Closure , Object , Object[] )
+   at System.Web.Http.Controllers.ReflectedHttpActionDescriptor.ActionExecutor.<>c__DisplayClass10.<GetExecutor>b__9(Object instance, Object[] methodParameters)
+   at System.Web.Http.Controllers.ReflectedHttpActionDescriptor.ActionExecutor.Execute(Object instance, Object[] arguments)
+   at System.Web.Http.Controllers.ReflectedHttpActionDescriptor.ExecuteAsync(HttpControllerContext controllerContext, IDictionary`2 arguments, CancellationToken cancellationToken)
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Web.Http.Controllers.ApiControllerActionInvoker.<InvokeUsingResultConverterAsync>d__8.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Web.Http.Controllers.ActionFilterResult.<ExecuteAsync>d__2.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Web.Http.ApiController.<InvokeActionWithExceptionFilters>d__1.MoveNext()
+
+
+2015-01-20 17:41:29,318 ERROR default Adding the specified count to the semaphore would cause it to exceed its maximum count.
+ Exception:
+System.Threading.SemaphoreFullException: Adding the specified count to the semaphore would cause it to exceed its maximum count.
+   at System.Threading.Semaphore.Release(Int32 releaseCount)
+   at System.Data.ProviderBase.DbConnectionPool.PutNewObject(DbConnectionInternal obj)
+   at System.Data.ProviderBase.DbConnectionPool.DeactivateObject(DbConnectionInternal obj)
+   at System.Data.ProviderBase.DbConnectionPool.PutObject(DbConnectionInternal obj, Object owningObject)
+   at System.Data.ProviderBase.DbConnectionInternal.CloseConnection(DbConnection owningObject, DbConnectionFactory connectionFactory)
+   at System.Data.SqlClient.SqlConnection.CloseInnerConnection()
+   at System.Data.SqlClient.SqlConnection.Close()
+   at System.Data.Entity.Core.EntityClient.EntityConnection.StoreCloseHelper()
+
+
+2015-01-20 17:41:29,328 ERROR default An error occurred while closing the provider connection. See the inner exception for details.
+ Exception:
+System.Data.Entity.Core.EntityException: An error occurred while closing the provider connection. See the inner exception for details. ---> System.Threading.SemaphoreFullException: Adding the specified count to the semaphore would cause it to exceed its maximum count.
+   at System.Threading.Semaphore.Release(Int32 releaseCount)
+   at System.Data.ProviderBase.DbConnectionPool.PutNewObject(DbConnectionInternal obj)
+   at System.Data.ProviderBase.DbConnectionPool.DeactivateObject(DbConnectionInternal obj)
+   at System.Data.ProviderBase.DbConnectionPool.PutObject(DbConnectionInternal obj, Object owningObject)
+   at System.Data.ProviderBase.DbConnectionInternal.CloseConnection(DbConnection owningObject, DbConnectionFactory connectionFactory)
+   at System.Data.SqlClient.SqlConnection.CloseInnerConnection()
+   at System.Data.SqlClient.SqlConnection.Close()
+   at System.Data.Entity.Core.EntityClient.EntityConnection.StoreCloseHelper()
+   --- End of inner exception stack trace ---
+   at System.Data.Entity.Core.EntityClient.EntityConnection.StoreCloseHelper()
+   at System.Data.Entity.Core.EntityClient.EntityConnection.Close()
+   at System.Data.Entity.Core.Objects.ObjectContext.ReleaseConnection()
+   at System.Data.Entity.Core.Common.Internal.Materialization.Shaper`1.Finally()
+   at System.Data.Entity.Core.Common.Internal.Materialization.Shaper`1.ObjectQueryNestedEnumerator.Dispose()
+   at System.Data.Entity.Internal.LazyEnumerator`1.Dispose()
+   at System.Linq.Enumerable.SingleOrDefault[TSource](IEnumerable`1 source)
+   at VotingSystem.BLL.ThemeService.GetThemeById(Int32 themeId) in d:\TrainingProject\VotingSystem\VotingSystem.BLL\ThemeService.cs:line 44
+   at VotingSystem.Web.Controllers.API.VotingApiController.Get(Int32 id) in d:\TrainingProject\VotingSystem\VotingSystem.Web\Controllers\API\VotingApiController.cs:line 34
+   at lambda_method(Closure , Object , Object[] )
+   at System.Web.Http.Controllers.ReflectedHttpActionDescriptor.ActionExecutor.<>c__DisplayClass10.<GetExecutor>b__9(Object instance, Object[] methodParameters)
+   at System.Web.Http.Controllers.ReflectedHttpActionDescriptor.ActionExecutor.Execute(Object instance, Object[] arguments)
+   at System.Web.Http.Controllers.ReflectedHttpActionDescriptor.ExecuteAsync(HttpControllerContext controllerContext, IDictionary`2 arguments, CancellationToken cancellationToken)
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Web.Http.Controllers.ApiControllerActionInvoker.<InvokeUsingResultConverterAsync>d__8.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Web.Http.Controllers.ActionFilterResult.<ExecuteAsync>d__2.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Web.Http.ApiController.<InvokeActionWithExceptionFilters>d__1.MoveNext()
+
+
+2015-01-20 17:41:29,368 ERROR default An error occurred while closing the provider connection. See the inner exception for details.
+ Exception:
+System.Data.Entity.Core.EntityException: An error occurred while closing the provider connection. See the inner exception for details. ---> System.Threading.SemaphoreFullException: Adding the specified count to the semaphore would cause it to exceed its maximum count.
+   at System.Threading.Semaphore.Release(Int32 releaseCount)
+   at System.Data.ProviderBase.DbConnectionPool.PutNewObject(DbConnectionInternal obj)
+   at System.Data.ProviderBase.DbConnectionPool.DeactivateObject(DbConnectionInternal obj)
+   at System.Data.ProviderBase.DbConnectionPool.PutObject(DbConnectionInternal obj, Object owningObject)
+   at System.Data.ProviderBase.DbConnectionInternal.CloseConnection(DbConnection owningObject, DbConnectionFactory connectionFactory)
+   at System.Data.SqlClient.SqlConnection.CloseInnerConnection()
+   at System.Data.SqlClient.SqlConnection.Close()
+   at System.Data.Entity.Core.EntityClient.EntityConnection.StoreCloseHelper()
+   --- End of inner exception stack trace ---
+   at System.Data.Entity.Core.EntityClient.EntityConnection.StoreCloseHelper()
+   at System.Data.Entity.Core.EntityClient.EntityConnection.Close()
+   at System.Data.Entity.Core.Objects.ObjectContext.ReleaseConnection()
+   at System.Data.Entity.Core.Common.Internal.Materialization.Shaper`1.Finally()
+   at System.Data.Entity.Core.Common.Internal.Materialization.Shaper`1.ObjectQueryNestedEnumerator.Dispose()
+   at System.Data.Entity.Internal.LazyEnumerator`1.Dispose()
+   at System.Linq.Enumerable.SingleOrDefault[TSource](IEnumerable`1 source)
+   at VotingSystem.BLL.ThemeService.GetThemeById(Int32 themeId) in d:\TrainingProject\VotingSystem\VotingSystem.BLL\ThemeService.cs:line 44
+   at VotingSystem.Web.Controllers.API.VotingApiController.Get(Int32 id) in d:\TrainingProject\VotingSystem\VotingSystem.Web\Controllers\API\VotingApiController.cs:line 34
+   at lambda_method(Closure , Object , Object[] )
+   at System.Web.Http.Controllers.ReflectedHttpActionDescriptor.ActionExecutor.<>c__DisplayClass10.<GetExecutor>b__9(Object instance, Object[] methodParameters)
+   at System.Web.Http.Controllers.ReflectedHttpActionDescriptor.ActionExecutor.Execute(Object instance, Object[] arguments)
+   at System.Web.Http.Controllers.ReflectedHttpActionDescriptor.ExecuteAsync(HttpControllerContext controllerContext, IDictionary`2 arguments, CancellationToken cancellationToken)
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Web.Http.Controllers.ApiControllerActionInvoker.<InvokeUsingResultConverterAsync>d__8.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Web.Http.Controllers.ActionFilterResult.<ExecuteAsync>d__2.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Web.Http.ApiController.<InvokeActionWithExceptionFilters>d__1.MoveNext()
+
+
+2015-01-20 17:41:29,375 ERROR default An error occurred while closing the provider connection. See the inner exception for details.
+ Exception:
+System.Data.Entity.Core.EntityException: An error occurred while closing the provider connection. See the inner exception for details. ---> System.Threading.SemaphoreFullException: Adding the specified count to the semaphore would cause it to exceed its maximum count.
+   at System.Threading.Semaphore.Release(Int32 releaseCount)
+   at System.Data.ProviderBase.DbConnectionPool.PutNewObject(DbConnectionInternal obj)
+   at System.Data.ProviderBase.DbConnectionPool.DeactivateObject(DbConnectionInternal obj)
+   at System.Data.ProviderBase.DbConnectionPool.PutObject(DbConnectionInternal obj, Object owningObject)
+   at System.Data.ProviderBase.DbConnectionInternal.CloseConnection(DbConnection owningObject, DbConnectionFactory connectionFactory)
+   at System.Data.SqlClient.SqlConnection.CloseInnerConnection()
+   at System.Data.SqlClient.SqlConnection.Close()
+   at System.Data.Entity.Core.EntityClient.EntityConnection.StoreCloseHelper()
+   --- End of inner exception stack trace ---
+   at System.Data.Entity.Core.EntityClient.EntityConnection.StoreCloseHelper()
+   at System.Data.Entity.Core.EntityClient.EntityConnection.Close()
+   at System.Data.Entity.Core.Objects.ObjectContext.ReleaseConnection()
+   at System.Data.Entity.Core.Common.Internal.Materialization.Shaper`1.Finally()
+   at System.Data.Entity.Core.Common.Internal.Materialization.Shaper`1.ObjectQueryNestedEnumerator.Dispose()
+   at System.Data.Entity.Internal.LazyEnumerator`1.Dispose()
+   at System.Linq.Enumerable.SingleOrDefault[TSource](IEnumerable`1 source)
+   at VotingSystem.BLL.ThemeService.GetThemeById(Int32 themeId) in d:\TrainingProject\VotingSystem\VotingSystem.BLL\ThemeService.cs:line 44
+   at VotingSystem.Web.Controllers.API.VotingApiController.Get(Int32 id) in d:\TrainingProject\VotingSystem\VotingSystem.Web\Controllers\API\VotingApiController.cs:line 34
+   at lambda_method(Closure , Object , Object[] )
+   at System.Web.Http.Controllers.ReflectedHttpActionDescriptor.ActionExecutor.<>c__DisplayClass10.<GetExecutor>b__9(Object instance, Object[] methodParameters)
+   at System.Web.Http.Controllers.ReflectedHttpActionDescriptor.ActionExecutor.Execute(Object instance, Object[] arguments)
+   at System.Web.Http.Controllers.ReflectedHttpActionDescriptor.ExecuteAsync(HttpControllerContext controllerContext, IDictionary`2 arguments, CancellationToken cancellationToken)
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Web.Http.Controllers.ApiControllerActionInvoker.<InvokeUsingResultConverterAsync>d__8.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Web.Http.Controllers.ActionFilterResult.<ExecuteAsync>d__2.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Web.Http.ApiController.<InvokeActionWithExceptionFilters>d__1.MoveNext()
+
+
+2015-01-20 17:41:29,378 ERROR default Adding the specified count to the semaphore would cause it to exceed its maximum count.
+ Exception:
+System.Threading.SemaphoreFullException: Adding the specified count to the semaphore would cause it to exceed its maximum count.
+   at System.Threading.Semaphore.Release(Int32 releaseCount)
+   at System.Data.ProviderBase.DbConnectionPool.PutNewObject(DbConnectionInternal obj)
+   at System.Data.ProviderBase.DbConnectionPool.DeactivateObject(DbConnectionInternal obj)
+   at System.Data.ProviderBase.DbConnectionPool.PutObject(DbConnectionInternal obj, Object owningObject)
+   at System.Data.ProviderBase.DbConnectionInternal.CloseConnection(DbConnection owningObject, DbConnectionFactory connectionFactory)
+   at System.Data.SqlClient.SqlConnection.CloseInnerConnection()
+   at System.Data.SqlClient.SqlConnection.Close()
+   at System.Data.Entity.Core.EntityClient.EntityConnection.StoreCloseHelper()
+
+
+2015-01-20 17:41:29,385 ERROR default Adding the specified count to the semaphore would cause it to exceed its maximum count.
+ Exception:
+System.Threading.SemaphoreFullException: Adding the specified count to the semaphore would cause it to exceed its maximum count.
+   at System.Threading.Semaphore.Release(Int32 releaseCount)
+   at System.Data.ProviderBase.DbConnectionPool.PutNewObject(DbConnectionInternal obj)
+   at System.Data.ProviderBase.DbConnectionPool.DeactivateObject(DbConnectionInternal obj)
+   at System.Data.ProviderBase.DbConnectionPool.PutObject(DbConnectionInternal obj, Object owningObject)
+   at System.Data.ProviderBase.DbConnectionInternal.CloseConnection(DbConnection owningObject, DbConnectionFactory connectionFactory)
+   at System.Data.SqlClient.SqlConnection.CloseInnerConnection()
+   at System.Data.SqlClient.SqlConnection.Close()
+   at System.Data.Entity.Core.EntityClient.EntityConnection.StoreCloseHelper()
+
+
+2015-01-20 17:41:29,388 ERROR default Adding the specified count to the semaphore would cause it to exceed its maximum count.
+ Exception:
+System.Threading.SemaphoreFullException: Adding the specified count to the semaphore would cause it to exceed its maximum count.
+   at System.Threading.Semaphore.Release(Int32 releaseCount)
+   at System.Data.ProviderBase.DbConnectionPool.PutNewObject(DbConnectionInternal obj)
+   at System.Data.ProviderBase.DbConnectionPool.DeactivateObject(DbConnectionInternal obj)
+   at System.Data.ProviderBase.DbConnectionPool.PutObject(DbConnectionInternal obj, Object owningObject)
+   at System.Data.ProviderBase.DbConnectionInternal.CloseConnection(DbConnection owningObject, DbConnectionFactory connectionFactory)
+   at System.Data.SqlClient.SqlConnection.CloseInnerConnection()
+   at System.Data.SqlClient.SqlConnection.Close()
+   at System.Data.Entity.Core.EntityClient.EntityConnection.StoreCloseHelper()
+
+
+2015-01-20 17:41:29,399 ERROR default An error occurred while closing the provider connection. See the inner exception for details.
+ Exception:
+System.Data.Entity.Core.EntityException: An error occurred while closing the provider connection. See the inner exception for details. ---> System.Threading.SemaphoreFullException: Adding the specified count to the semaphore would cause it to exceed its maximum count.
+   at System.Threading.Semaphore.Release(Int32 releaseCount)
+   at System.Data.ProviderBase.DbConnectionPool.PutNewObject(DbConnectionInternal obj)
+   at System.Data.ProviderBase.DbConnectionPool.DeactivateObject(DbConnectionInternal obj)
+   at System.Data.ProviderBase.DbConnectionPool.PutObject(DbConnectionInternal obj, Object owningObject)
+   at System.Data.ProviderBase.DbConnectionInternal.CloseConnection(DbConnection owningObject, DbConnectionFactory connectionFactory)
+   at System.Data.SqlClient.SqlConnection.CloseInnerConnection()
+   at System.Data.SqlClient.SqlConnection.Close()
+   at System.Data.Entity.Core.EntityClient.EntityConnection.StoreCloseHelper()
+   --- End of inner exception stack trace ---
+   at System.Data.Entity.Core.EntityClient.EntityConnection.StoreCloseHelper()
+   at System.Data.Entity.Core.EntityClient.EntityConnection.Close()
+   at System.Data.Entity.Core.Objects.ObjectContext.ReleaseConnection()
+   at System.Data.Entity.Core.Common.Internal.Materialization.Shaper`1.Finally()
+   at System.Data.Entity.Core.Common.Internal.Materialization.Shaper`1.ObjectQueryNestedEnumerator.Dispose()
+   at System.Data.Entity.Internal.LazyEnumerator`1.Dispose()
+   at System.Linq.Enumerable.SingleOrDefault[TSource](IEnumerable`1 source)
+   at VotingSystem.BLL.ThemeService.GetThemeById(Int32 themeId) in d:\TrainingProject\VotingSystem\VotingSystem.BLL\ThemeService.cs:line 44
+   at VotingSystem.Web.Controllers.API.VotingApiController.Get(Int32 id) in d:\TrainingProject\VotingSystem\VotingSystem.Web\Controllers\API\VotingApiController.cs:line 34
+   at lambda_method(Closure , Object , Object[] )
+   at System.Web.Http.Controllers.ReflectedHttpActionDescriptor.ActionExecutor.<>c__DisplayClass10.<GetExecutor>b__9(Object instance, Object[] methodParameters)
+   at System.Web.Http.Controllers.ReflectedHttpActionDescriptor.ActionExecutor.Execute(Object instance, Object[] arguments)
+   at System.Web.Http.Controllers.ReflectedHttpActionDescriptor.ExecuteAsync(HttpControllerContext controllerContext, IDictionary`2 arguments, CancellationToken cancellationToken)
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Web.Http.Controllers.ApiControllerActionInvoker.<InvokeUsingResultConverterAsync>d__8.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Web.Http.Controllers.ActionFilterResult.<ExecuteAsync>d__2.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Web.Http.ApiController.<InvokeActionWithExceptionFilters>d__1.MoveNext()
+
+
+2015-01-20 17:41:29,420 ERROR default Adding the specified count to the semaphore would cause it to exceed its maximum count.
+ Exception:
+System.Threading.SemaphoreFullException: Adding the specified count to the semaphore would cause it to exceed its maximum count.
+   at System.Threading.Semaphore.Release(Int32 releaseCount)
+   at System.Data.ProviderBase.DbConnectionPool.PutNewObject(DbConnectionInternal obj)
+   at System.Data.ProviderBase.DbConnectionPool.DeactivateObject(DbConnectionInternal obj)
+   at System.Data.ProviderBase.DbConnectionPool.PutObject(DbConnectionInternal obj, Object owningObject)
+   at System.Data.ProviderBase.DbConnectionInternal.CloseConnection(DbConnection owningObject, DbConnectionFactory connectionFactory)
+   at System.Data.SqlClient.SqlConnection.CloseInnerConnection()
+   at System.Data.SqlClient.SqlConnection.Close()
+   at System.Data.Entity.Core.EntityClient.EntityConnection.StoreCloseHelper()
+
+
+2015-01-20 17:41:34,503 ERROR default An error occurred while closing the provider connection. See the inner exception for details.
+ Exception:
+System.Data.Entity.Core.EntityException: An error occurred while closing the provider connection. See the inner exception for details. ---> System.Threading.SemaphoreFullException: Adding the specified count to the semaphore would cause it to exceed its maximum count.
+   at System.Threading.Semaphore.Release(Int32 releaseCount)
+   at System.Data.ProviderBase.DbConnectionPool.PutNewObject(DbConnectionInternal obj)
+   at System.Data.ProviderBase.DbConnectionPool.DeactivateObject(DbConnectionInternal obj)
+   at System.Data.ProviderBase.DbConnectionPool.PutObject(DbConnectionInternal obj, Object owningObject)
+   at System.Data.ProviderBase.DbConnectionInternal.CloseConnection(DbConnection owningObject, DbConnectionFactory connectionFactory)
+   at System.Data.SqlClient.SqlConnection.CloseInnerConnection()
+   at System.Data.SqlClient.SqlConnection.Close()
+   at System.Data.Entity.Core.EntityClient.EntityConnection.StoreCloseHelper()
+   --- End of inner exception stack trace ---
+   at System.Data.Entity.Core.EntityClient.EntityConnection.StoreCloseHelper()
+   at System.Data.Entity.Core.EntityClient.EntityConnection.Close()
+   at System.Data.Entity.Core.Objects.ObjectContext.ReleaseConnection()
+   at System.Data.Entity.Core.Common.Internal.Materialization.Shaper`1.Finally()
+   at System.Data.Entity.Core.Common.Internal.Materialization.Shaper`1.ObjectQueryNestedEnumerator.Dispose()
+   at System.Data.Entity.Internal.LazyEnumerator`1.Dispose()
+   at System.Collections.Generic.List`1..ctor(IEnumerable`1 collection)
+   at System.Linq.Enumerable.ToList[TSource](IEnumerable`1 source)
+   at VotingSystem.BLL.ThemeService.GetThemes(Filter`1 filterExtended, Expression`1 expression) in d:\TrainingProject\VotingSystem\VotingSystem.BLL\ThemeService.cs:line 116
+   at VotingSystem.BLL.ThemeService.GetAllActiveThemes(String query, Filter`1 filterExtended) in d:\TrainingProject\VotingSystem\VotingSystem.BLL\ThemeService.cs:line 75
+   at VotingSystem.Web.Controllers.API.VotingApiController.Get(PageType pageType, Int32 page, Int32 size, String query) in d:\TrainingProject\VotingSystem\VotingSystem.Web\Controllers\API\VotingApiController.cs:line 74
+   at lambda_method(Closure , Object , Object[] )
+   at System.Web.Http.Controllers.ReflectedHttpActionDescriptor.ActionExecutor.<>c__DisplayClass10.<GetExecutor>b__9(Object instance, Object[] methodParameters)
+   at System.Web.Http.Controllers.ReflectedHttpActionDescriptor.ActionExecutor.Execute(Object instance, Object[] arguments)
+   at System.Web.Http.Controllers.ReflectedHttpActionDescriptor.ExecuteAsync(HttpControllerContext controllerContext, IDictionary`2 arguments, CancellationToken cancellationToken)
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Web.Http.Controllers.ApiControllerActionInvoker.<InvokeUsingResultConverterAsync>d__8.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Web.Http.Controllers.ActionFilterResult.<ExecuteAsync>d__2.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Web.Http.ApiController.<InvokeActionWithExceptionFilters>d__1.MoveNext()
+
+
+2015-01-20 17:41:34,545 ERROR default Adding the specified count to the semaphore would cause it to exceed its maximum count.
+ Exception:
+System.Threading.SemaphoreFullException: Adding the specified count to the semaphore would cause it to exceed its maximum count.
+   at System.Threading.Semaphore.Release(Int32 releaseCount)
+   at System.Data.ProviderBase.DbConnectionPool.PutNewObject(DbConnectionInternal obj)
+   at System.Data.ProviderBase.DbConnectionPool.DeactivateObject(DbConnectionInternal obj)
+   at System.Data.ProviderBase.DbConnectionPool.PutObject(DbConnectionInternal obj, Object owningObject)
+   at System.Data.ProviderBase.DbConnectionInternal.CloseConnection(DbConnection owningObject, DbConnectionFactory connectionFactory)
+   at System.Data.SqlClient.SqlConnection.CloseInnerConnection()
+   at System.Data.SqlClient.SqlConnection.Close()
+   at System.Data.Entity.Core.EntityClient.EntityConnection.StoreCloseHelper()
+
+
+2015-01-20 17:41:35,686 ERROR default An error occurred while closing the provider connection. See the inner exception for details.
+ Exception:
+System.Data.Entity.Core.EntityException: An error occurred while closing the provider connection. See the inner exception for details. ---> System.Threading.SemaphoreFullException: Adding the specified count to the semaphore would cause it to exceed its maximum count.
+   at System.Threading.Semaphore.Release(Int32 releaseCount)
+   at System.Data.ProviderBase.DbConnectionPool.PutNewObject(DbConnectionInternal obj)
+   at System.Data.ProviderBase.DbConnectionPool.DeactivateObject(DbConnectionInternal obj)
+   at System.Data.ProviderBase.DbConnectionPool.PutObject(DbConnectionInternal obj, Object owningObject)
+   at System.Data.ProviderBase.DbConnectionInternal.CloseConnection(DbConnection owningObject, DbConnectionFactory connectionFactory)
+   at System.Data.SqlClient.SqlConnection.CloseInnerConnection()
+   at System.Data.SqlClient.SqlConnection.Close()
+   at System.Data.Entity.Core.EntityClient.EntityConnection.StoreCloseHelper()
+   --- End of inner exception stack trace ---
+   at System.Data.Entity.Core.EntityClient.EntityConnection.StoreCloseHelper()
+   at System.Data.Entity.Core.EntityClient.EntityConnection.Close()
+   at System.Data.Entity.Core.Objects.ObjectContext.ReleaseConnection()
+   at System.Data.Entity.Core.Common.Internal.Materialization.Shaper`1.Finally()
+   at System.Data.Entity.Core.Common.Internal.Materialization.Shaper`1.ObjectQueryNestedEnumerator.Dispose()
+   at System.Data.Entity.Internal.LazyEnumerator`1.Dispose()
+   at System.Collections.Generic.List`1..ctor(IEnumerable`1 collection)
+   at System.Linq.Enumerable.ToList[TSource](IEnumerable`1 source)
+   at VotingSystem.BLL.ThemeService.GetThemes(Filter`1 filterExtended, Expression`1 expression) in d:\TrainingProject\VotingSystem\VotingSystem.BLL\ThemeService.cs:line 116
+   at VotingSystem.BLL.ThemeService.GetAllActiveThemes(String query, Filter`1 filterExtended) in d:\TrainingProject\VotingSystem\VotingSystem.BLL\ThemeService.cs:line 75
+   at VotingSystem.Web.Controllers.API.VotingApiController.Get(PageType pageType, Int32 page, Int32 size, String query) in d:\TrainingProject\VotingSystem\VotingSystem.Web\Controllers\API\VotingApiController.cs:line 74
+   at lambda_method(Closure , Object , Object[] )
+   at System.Web.Http.Controllers.ReflectedHttpActionDescriptor.ActionExecutor.<>c__DisplayClass10.<GetExecutor>b__9(Object instance, Object[] methodParameters)
+   at System.Web.Http.Controllers.ReflectedHttpActionDescriptor.ActionExecutor.Execute(Object instance, Object[] arguments)
+   at System.Web.Http.Controllers.ReflectedHttpActionDescriptor.ExecuteAsync(HttpControllerContext controllerContext, IDictionary`2 arguments, CancellationToken cancellationToken)
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Web.Http.Controllers.ApiControllerActionInvoker.<InvokeUsingResultConverterAsync>d__8.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Web.Http.Controllers.ActionFilterResult.<ExecuteAsync>d__2.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Web.Http.ApiController.<InvokeActionWithExceptionFilters>d__1.MoveNext()
+
+
+2015-01-20 17:41:35,694 ERROR default Adding the specified count to the semaphore would cause it to exceed its maximum count.
+ Exception:
+System.Threading.SemaphoreFullException: Adding the specified count to the semaphore would cause it to exceed its maximum count.
+   at System.Threading.Semaphore.Release(Int32 releaseCount)
+   at System.Data.ProviderBase.DbConnectionPool.PutNewObject(DbConnectionInternal obj)
+   at System.Data.ProviderBase.DbConnectionPool.DeactivateObject(DbConnectionInternal obj)
+   at System.Data.ProviderBase.DbConnectionPool.PutObject(DbConnectionInternal obj, Object owningObject)
+   at System.Data.ProviderBase.DbConnectionInternal.CloseConnection(DbConnection owningObject, DbConnectionFactory connectionFactory)
+   at System.Data.SqlClient.SqlConnection.CloseInnerConnection()
+   at System.Data.SqlClient.SqlConnection.Close()
+   at System.Data.Entity.Core.EntityClient.EntityConnection.StoreCloseHelper()
+
+
+2015-01-20 17:50:01,492 ERROR default 
+
+Mapping types:
+Theme -> VotingModel
+VotingSystem.DAL.Entities.Theme -> VotingSystem.Web.Models.VotingModel
+
+Destination path:
+VotingModel
+
+Source value:
+System.Data.Entity.DynamicProxies.Theme_03155FD18CEAE8C5D70097F0088AE65F51BDAADFDBD1C07A05597C3838AAE880
+ Exception:
+AutoMapper.AutoMapperMappingException: 
+
+Mapping types:
+Theme -> VotingModel
+VotingSystem.DAL.Entities.Theme -> VotingSystem.Web.Models.VotingModel
+
+Destination path:
+VotingModel
+
+Source value:
+System.Data.Entity.DynamicProxies.Theme_03155FD18CEAE8C5D70097F0088AE65F51BDAADFDBD1C07A05597C3838AAE880 ---> System.InvalidOperationException: Collection was modified; enumeration operation may not execute.
+   at System.ThrowHelper.ThrowInvalidOperationException(ExceptionResource resource)
+   at System.Collections.Generic.List`1.Enumerator.MoveNextRare()
+   at System.Collections.Generic.List`1.Enumerator.MoveNext()
+   at AutoMapper.TypeMap.<get_AfterMap>b__1(Object src, Object dest)
+   at AutoMapper.Mappers.TypeMapObjectMapperRegistry.PropertyMapMappingStrategy.Map(ResolutionContext context, IMappingEngineRunner mapper)
+   at AutoMapper.Mappers.TypeMapMapper.Map(ResolutionContext context, IMappingEngineRunner mapper)
+   at AutoMapper.MappingEngine.AutoMapper.IMappingEngineRunner.Map(ResolutionContext context)
+   --- End of inner exception stack trace ---
+   at AutoMapper.MappingEngine.AutoMapper.IMappingEngineRunner.Map(ResolutionContext context)
+   at AutoMapper.MappingEngine.Map(Object source, Type sourceType, Type destinationType, Action`1 opts)
+   at AutoMapper.MappingEngine.Map[TSource,TDestination](TSource source)
+   at AutoMapper.Mapper.Map[TSource,TDestination](TSource source)
+   at VotingSystem.Web.Helpers.ConvertHelper.ToVotingModel(Theme theme, String userName) in d:\TrainingProject\VotingSystem\VotingSystem.Web\Helpers\ConvertHelper.cs:line 29
+   at VotingSystem.Web.Controllers.API.VotingApiController.<Get>b__0(Theme t) in d:\TrainingProject\VotingSystem\VotingSystem.Web\Controllers\API\VotingApiController.cs:line 81
+   at System.Linq.Enumerable.WhereSelectListIterator`2.MoveNext()
+   at System.Collections.Generic.List`1..ctor(IEnumerable`1 collection)
+   at System.Linq.Enumerable.ToList[TSource](IEnumerable`1 source)
+   at VotingSystem.Web.Controllers.API.VotingApiController.Get(PageType pageType, Int32 page, Int32 size, String query) in d:\TrainingProject\VotingSystem\VotingSystem.Web\Controllers\API\VotingApiController.cs:line 78
+   at lambda_method(Closure , Object , Object[] )
+   at System.Web.Http.Controllers.ReflectedHttpActionDescriptor.ActionExecutor.<>c__DisplayClass10.<GetExecutor>b__9(Object instance, Object[] methodParameters)
+   at System.Web.Http.Controllers.ReflectedHttpActionDescriptor.ActionExecutor.Execute(Object instance, Object[] arguments)
+   at System.Web.Http.Controllers.ReflectedHttpActionDescriptor.ExecuteAsync(HttpControllerContext controllerContext, IDictionary`2 arguments, CancellationToken cancellationToken)
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Web.Http.Controllers.ApiControllerActionInvoker.<InvokeUsingResultConverterAsync>d__8.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Web.Http.Controllers.ActionFilterResult.<ExecuteAsync>d__2.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Web.Http.ApiController.<InvokeActionWithExceptionFilters>d__1.MoveNext()
+
+
+2015-01-20 17:50:01,568 ERROR default Collection was modified; enumeration operation may not execute.
+ Exception:
+System.InvalidOperationException: Collection was modified; enumeration operation may not execute.
+   at System.ThrowHelper.ThrowInvalidOperationException(ExceptionResource resource)
+   at System.Collections.Generic.List`1.Enumerator.MoveNextRare()
+   at System.Collections.Generic.List`1.Enumerator.MoveNext()
+   at AutoMapper.TypeMap.<get_AfterMap>b__1(Object src, Object dest)
+   at AutoMapper.Mappers.TypeMapObjectMapperRegistry.PropertyMapMappingStrategy.Map(ResolutionContext context, IMappingEngineRunner mapper)
+   at AutoMapper.Mappers.TypeMapMapper.Map(ResolutionContext context, IMappingEngineRunner mapper)
+   at AutoMapper.MappingEngine.AutoMapper.IMappingEngineRunner.Map(ResolutionContext context)
+
+
+2015-01-20 18:10:59,252 ERROR default Maximum request length exceeded.
+ Exception:
+System.Web.HttpException (0x80004005): Maximum request length exceeded.
+   at System.Web.HttpRequest.GetEntireRawContent()
+   at System.Web.HttpRequest.GetMultipartContent()
+   at System.Web.HttpRequest.FillInFormCollection()
+   at System.Web.HttpRequest.EnsureForm()
+   at System.Web.HttpRequest.get_Form()
+   at System.Web.HttpRequestWrapper.get_Form()
+   at System.Web.Mvc.HttpRequestExtensions.GetHttpMethodOverride(HttpRequestBase request)
+   at System.Web.Mvc.AcceptVerbsAttribute.IsValidForRequest(ControllerContext controllerContext, MethodInfo methodInfo)
+   at System.Web.Mvc.HttpPostAttribute.IsValidForRequest(ControllerContext controllerContext, MethodInfo methodInfo)
+   at System.Web.Mvc.Async.AsyncActionMethodSelector.<>c__DisplayClass19.<RunSelectionFilters>b__15(ActionMethodSelectorAttribute attr)
+   at System.Linq.Enumerable.All[TSource](IEnumerable`1 source, Func`2 predicate)
+   at System.Web.Mvc.Async.AsyncActionMethodSelector.RunSelectionFilters(ControllerContext controllerContext, List`1 methodInfos)
+   at System.Web.Mvc.Async.AsyncActionMethodSelector.FindAction(ControllerContext controllerContext, String actionName)
+   at System.Web.Mvc.Async.ReflectedAsyncControllerDescriptor.FindAction(ControllerContext controllerContext, String actionName)
+   at System.Web.Mvc.ControllerActionInvoker.FindAction(ControllerContext controllerContext, ControllerDescriptor controllerDescriptor, String actionName)
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.BeginInvokeAction(ControllerContext controllerContext, String actionName, AsyncCallback callback, Object state)
+   at System.Web.Mvc.Controller.<>c__DisplayClass1d.<BeginExecuteCore>b__17(AsyncCallback asyncCallback, Object asyncState)
+   at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.Begin(AsyncCallback callback, Object state, Int32 timeout)
+   at System.Web.Mvc.Controller.BeginExecuteCore(AsyncCallback callback, Object state)
+   at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.Begin(AsyncCallback callback, Object state, Int32 timeout)
+   at System.Web.Mvc.Controller.BeginExecute(RequestContext requestContext, AsyncCallback callback, Object state)
+   at System.Web.Mvc.Controller.System.Web.Mvc.Async.IAsyncController.BeginExecute(RequestContext requestContext, AsyncCallback callback, Object state)
+   at System.Web.Mvc.MvcHandler.<>c__DisplayClass8.<BeginProcessRequest>b__2(AsyncCallback asyncCallback, Object asyncState)
+   at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.Begin(AsyncCallback callback, Object state, Int32 timeout)
+   at System.Web.Mvc.MvcHandler.BeginProcessRequest(HttpContextBase httpContext, AsyncCallback callback, Object state)
+   at System.Web.Mvc.MvcHandler.BeginProcessRequest(HttpContext httpContext, AsyncCallback callback, Object state)
+   at System.Web.Mvc.MvcHandler.System.Web.IHttpAsyncHandler.BeginProcessRequest(HttpContext context, AsyncCallback cb, Object extraData)
+   at System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   at System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+
+
+2015-01-20 18:12:46,214 ERROR default The controller for path '/VotingSystem.Web/Content/Pictures/61afacca-2751-44d3-bd51-0028d351d2446355736346636948381.png' was not found or does not implement IController.
+ Exception:
+System.Web.HttpException (0x80004005): The controller for path '/VotingSystem.Web/Content/Pictures/61afacca-2751-44d3-bd51-0028d351d2446355736346636948381.png' was not found or does not implement IController.
+   at System.Web.Mvc.DefaultControllerFactory.GetControllerInstance(RequestContext requestContext, Type controllerType)
+   at System.Web.Mvc.DefaultControllerFactory.CreateController(RequestContext requestContext, String controllerName)
+   at System.Web.Mvc.MvcHandler.ProcessRequestInit(HttpContextBase httpContext, IController& controller, IControllerFactory& factory)
+   at System.Web.Mvc.MvcHandler.BeginProcessRequest(HttpContextBase httpContext, AsyncCallback callback, Object state)
+   at System.Web.Mvc.MvcHandler.BeginProcessRequest(HttpContext httpContext, AsyncCallback callback, Object state)
+   at System.Web.Mvc.MvcHandler.System.Web.IHttpAsyncHandler.BeginProcessRequest(HttpContext context, AsyncCallback cb, Object extraData)
+   at System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   at System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+
+
+2015-01-20 18:12:55,554 ERROR default Maximum request length exceeded.
+ Exception:
+System.Web.HttpException (0x80004005): Maximum request length exceeded.
+   at System.Web.HttpRequest.GetEntireRawContent()
+   at System.Web.HttpRequest.GetMultipartContent()
+   at System.Web.HttpRequest.FillInFormCollection()
+   at System.Web.HttpRequest.EnsureForm()
+   at System.Web.HttpRequest.get_Form()
+   at System.Web.HttpRequestWrapper.get_Form()
+   at System.Web.Mvc.HttpRequestExtensions.GetHttpMethodOverride(HttpRequestBase request)
+   at System.Web.Mvc.AcceptVerbsAttribute.IsValidForRequest(ControllerContext controllerContext, MethodInfo methodInfo)
+   at System.Web.Mvc.HttpPostAttribute.IsValidForRequest(ControllerContext controllerContext, MethodInfo methodInfo)
+   at System.Web.Mvc.Async.AsyncActionMethodSelector.<>c__DisplayClass19.<RunSelectionFilters>b__15(ActionMethodSelectorAttribute attr)
+   at System.Linq.Enumerable.All[TSource](IEnumerable`1 source, Func`2 predicate)
+   at System.Web.Mvc.Async.AsyncActionMethodSelector.RunSelectionFilters(ControllerContext controllerContext, List`1 methodInfos)
+   at System.Web.Mvc.Async.AsyncActionMethodSelector.FindAction(ControllerContext controllerContext, String actionName)
+   at System.Web.Mvc.Async.ReflectedAsyncControllerDescriptor.FindAction(ControllerContext controllerContext, String actionName)
+   at System.Web.Mvc.ControllerActionInvoker.FindAction(ControllerContext controllerContext, ControllerDescriptor controllerDescriptor, String actionName)
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.BeginInvokeAction(ControllerContext controllerContext, String actionName, AsyncCallback callback, Object state)
+   at System.Web.Mvc.Controller.<>c__DisplayClass1d.<BeginExecuteCore>b__17(AsyncCallback asyncCallback, Object asyncState)
+   at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.Begin(AsyncCallback callback, Object state, Int32 timeout)
+   at System.Web.Mvc.Controller.BeginExecuteCore(AsyncCallback callback, Object state)
+   at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.Begin(AsyncCallback callback, Object state, Int32 timeout)
+   at System.Web.Mvc.Controller.BeginExecute(RequestContext requestContext, AsyncCallback callback, Object state)
+   at System.Web.Mvc.Controller.System.Web.Mvc.Async.IAsyncController.BeginExecute(RequestContext requestContext, AsyncCallback callback, Object state)
+   at System.Web.Mvc.MvcHandler.<>c__DisplayClass8.<BeginProcessRequest>b__2(AsyncCallback asyncCallback, Object asyncState)
+   at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.Begin(AsyncCallback callback, Object state, Int32 timeout)
+   at System.Web.Mvc.MvcHandler.BeginProcessRequest(HttpContextBase httpContext, AsyncCallback callback, Object state)
+   at System.Web.Mvc.MvcHandler.BeginProcessRequest(HttpContext httpContext, AsyncCallback callback, Object state)
+   at System.Web.Mvc.MvcHandler.System.Web.IHttpAsyncHandler.BeginProcessRequest(HttpContext context, AsyncCallback cb, Object extraData)
+   at System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   at System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+
+
+2015-01-20 18:13:19,931 ERROR default The controller for path '/VotingSystem.Web/Content/Pictures/61afacca-2751-44d3-bd51-0028d351d24463557363466369483.png' was not found or does not implement IController.
+ Exception:
+System.Web.HttpException (0x80004005): The controller for path '/VotingSystem.Web/Content/Pictures/61afacca-2751-44d3-bd51-0028d351d24463557363466369483.png' was not found or does not implement IController.
+   at System.Web.Mvc.DefaultControllerFactory.GetControllerInstance(RequestContext requestContext, Type controllerType)
+   at System.Web.Mvc.DefaultControllerFactory.CreateController(RequestContext requestContext, String controllerName)
+   at System.Web.Mvc.MvcHandler.ProcessRequestInit(HttpContextBase httpContext, IController& controller, IControllerFactory& factory)
+   at System.Web.Mvc.MvcHandler.BeginProcessRequest(HttpContextBase httpContext, AsyncCallback callback, Object state)
+   at System.Web.Mvc.MvcHandler.BeginProcessRequest(HttpContext httpContext, AsyncCallback callback, Object state)
+   at System.Web.Mvc.MvcHandler.System.Web.IHttpAsyncHandler.BeginProcessRequest(HttpContext context, AsyncCallback cb, Object extraData)
+   at System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   at System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+
+
+2015-01-20 18:13:20,189 ERROR default The controller for path '/VotingSystem.Web/Content/Pictures/61afacca-2751-44d3-bd51-0028d351d244635573634663694832.png' was not found or does not implement IController.
+ Exception:
+System.Web.HttpException (0x80004005): The controller for path '/VotingSystem.Web/Content/Pictures/61afacca-2751-44d3-bd51-0028d351d244635573634663694832.png' was not found or does not implement IController.
+   at System.Web.Mvc.DefaultControllerFactory.GetControllerInstance(RequestContext requestContext, Type controllerType)
+   at System.Web.Mvc.DefaultControllerFactory.CreateController(RequestContext requestContext, String controllerName)
+   at System.Web.Mvc.MvcHandler.ProcessRequestInit(HttpContextBase httpContext, IController& controller, IControllerFactory& factory)
+   at System.Web.Mvc.MvcHandler.BeginProcessRequest(HttpContextBase httpContext, AsyncCallback callback, Object state)
+   at System.Web.Mvc.MvcHandler.BeginProcessRequest(HttpContext httpContext, AsyncCallback callback, Object state)
+   at System.Web.Mvc.MvcHandler.System.Web.IHttpAsyncHandler.BeginProcessRequest(HttpContext context, AsyncCallback cb, Object extraData)
+   at System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   at System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+
+
+2015-01-20 18:13:20,890 ERROR default The controller for path '/VotingSystem.Web/Content/Pictures/61afacca-2751-44d3-bd51-0028d351d24463557363466369483.png' was not found or does not implement IController.
+ Exception:
+System.Web.HttpException (0x80004005): The controller for path '/VotingSystem.Web/Content/Pictures/61afacca-2751-44d3-bd51-0028d351d24463557363466369483.png' was not found or does not implement IController.
+   at System.Web.Mvc.DefaultControllerFactory.GetControllerInstance(RequestContext requestContext, Type controllerType)
+   at System.Web.Mvc.DefaultControllerFactory.CreateController(RequestContext requestContext, String controllerName)
+   at System.Web.Mvc.MvcHandler.ProcessRequestInit(HttpContextBase httpContext, IController& controller, IControllerFactory& factory)
+   at System.Web.Mvc.MvcHandler.BeginProcessRequest(HttpContextBase httpContext, AsyncCallback callback, Object state)
+   at System.Web.Mvc.MvcHandler.BeginProcessRequest(HttpContext httpContext, AsyncCallback callback, Object state)
+   at System.Web.Mvc.MvcHandler.System.Web.IHttpAsyncHandler.BeginProcessRequest(HttpContext context, AsyncCallback cb, Object extraData)
+   at System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   at System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+
+
+2015-01-20 18:13:21,092 ERROR default The controller for path '/VotingSystem.Web/Content/Pictures/61afacca-2751-44d3-bd51-0028d351d244635573634663694831.png' was not found or does not implement IController.
+ Exception:
+System.Web.HttpException (0x80004005): The controller for path '/VotingSystem.Web/Content/Pictures/61afacca-2751-44d3-bd51-0028d351d244635573634663694831.png' was not found or does not implement IController.
+   at System.Web.Mvc.DefaultControllerFactory.GetControllerInstance(RequestContext requestContext, Type controllerType)
+   at System.Web.Mvc.DefaultControllerFactory.CreateController(RequestContext requestContext, String controllerName)
+   at System.Web.Mvc.MvcHandler.ProcessRequestInit(HttpContextBase httpContext, IController& controller, IControllerFactory& factory)
+   at System.Web.Mvc.MvcHandler.BeginProcessRequest(HttpContextBase httpContext, AsyncCallback callback, Object state)
+   at System.Web.Mvc.MvcHandler.BeginProcessRequest(HttpContext httpContext, AsyncCallback callback, Object state)
+   at System.Web.Mvc.MvcHandler.System.Web.IHttpAsyncHandler.BeginProcessRequest(HttpContext context, AsyncCallback cb, Object extraData)
+   at System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   at System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+
+
+2015-01-20 18:13:21,596 ERROR default The controller for path '/VotingSystem.Web/Content/Pictures/61afacca-2751-44d3-bd51-0028d351d24463557363466369483.png' was not found or does not implement IController.
+ Exception:
+System.Web.HttpException (0x80004005): The controller for path '/VotingSystem.Web/Content/Pictures/61afacca-2751-44d3-bd51-0028d351d24463557363466369483.png' was not found or does not implement IController.
+   at System.Web.Mvc.DefaultControllerFactory.GetControllerInstance(RequestContext requestContext, Type controllerType)
+   at System.Web.Mvc.DefaultControllerFactory.CreateController(RequestContext requestContext, String controllerName)
+   at System.Web.Mvc.MvcHandler.ProcessRequestInit(HttpContextBase httpContext, IController& controller, IControllerFactory& factory)
+   at System.Web.Mvc.MvcHandler.BeginProcessRequest(HttpContextBase httpContext, AsyncCallback callback, Object state)
+   at System.Web.Mvc.MvcHandler.BeginProcessRequest(HttpContext httpContext, AsyncCallback callback, Object state)
+   at System.Web.Mvc.MvcHandler.System.Web.IHttpAsyncHandler.BeginProcessRequest(HttpContext context, AsyncCallback cb, Object extraData)
+   at System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   at System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+

@@ -30,7 +30,7 @@ votingSystem.config(["$routeProvider", "$httpProvider","spinnerProvider", functi
 		controller: "UserProfileCtrl",
 		resolve: {
 			User: function (UserStorage, $route) {
-				return UserStorage.get({ userId: $route.current.params.userId }).$promise;
+				return UserStorage.get({ id: $route.current.params.userId}).$promise;
 			}
 		}
 	}).when("/voting/:votingId?", {

@@ -1,4 +1,5 @@
-﻿using VotingSystem.DAL.Enums;
+﻿using System;
+using VotingSystem.DAL.Enums;
 
 namespace VotingSystem.Web.Models
 {
@@ -10,10 +11,10 @@ namespace VotingSystem.Web.Models
 		public string CreatedBy { get; set; }
 		public int AnswersCount { get; set; }
 		public int CommentsCount { get; set; }
-		public string StartDate { get; set; }
-		public string EndDate { get; set; }
+		public DateTime StartDate { get; set; }
+		public DateTime EndDate { get; set; }
 		public VotingStatusType? Status { get; set; }
-		public string CreateDate { get; set; }
+		public DateTime CreateDate { get; set; }
 		public string Description { get; set; }
 	}
 }

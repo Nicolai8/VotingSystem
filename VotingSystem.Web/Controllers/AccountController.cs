@@ -12,7 +12,6 @@ using VotingSystem.DAL.Enums;
 using VotingSystem.Web.Enums;
 using VotingSystem.Web.Filters;
 using VotingSystem.Web.Helpers;
-using VotingSystem.Web.Models;
 using VotingSystem.Web.Providers;
 
 namespace VotingSystem.Web.Controllers
@@ -100,25 +99,6 @@ namespace VotingSystem.Web.Controllers
 			return Json(new { result = exists }, JsonRequestBehavior.AllowGet);
 		}
 
-		[HttpGet]
-		[ActionName("Profile")]
-		[AllowAnonymous]
-		public JsonResult UserProfile(int? userId)
-		{
-			UserModel user = new UserModel();
-			MembershipUser membershipUser = userId.HasValue ? Membership.GetUser(userId): Membership.GetUser();
-			if (membershipUser != null)
-			{
-				user = membershipUser.ToUserModel(_userProfileService.GetUserProfileByUserId((int) membershipUser.ProviderUserKey));
-				if (!userId.HasValue)
-				{
-					user.Privacy = PrivacyType.WholeWorld;
-				}
-				HideFieldsAccordingToPrivacy(user);
-			}
-			return Json(user, JsonRequestBehavior.AllowGet);
-		}
-
 		[HttpPost]
 		public string UploadPicture(HttpPostedFileBase picture)
 		{
@@ -153,29 +133,5 @@ namespace VotingSystem.Web.Controllers
 		{
 			return Json(Roles.GetAllRoles(), JsonRequestBehavior.AllowGet);
 		}
-		
-		#region Private methods
-
-		private void HideFieldsAccordingToPrivacy(UserModel user)
-		{
-			switch (user.Privacy)
-			{
-				case PrivacyType.Users:
-					if (!Request.IsAuthenticated)
-					{
-						user.Privacy = null;
-						user.Email = "Hidden";
-					}
-					break;
-				case PrivacyType.WholeWorld:
-					break;
-				default:
-					user.Privacy = null;
-					user.Email = "Hidden";
-					break;
-			}
-		}
-
-		#endregion
 	}
 }

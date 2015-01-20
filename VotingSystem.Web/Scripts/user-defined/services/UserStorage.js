@@ -10,7 +10,7 @@
 					},
 					get: {
 						method: "GET",
-						url: urls.ProfilePage.GetProfile
+						url: urls.Users + "/profile/:id"
 					},
 					update: { method: "PUT", },
 					remove: { method: "DELETE", },

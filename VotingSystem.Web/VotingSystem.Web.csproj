@@ -498,6 +498,7 @@
     <Content Include="Scripts\user-defined\directives\bootstrapMarkdown.js" />
     <Content Include="Scripts\user-defined\directives\cleanUp.js" />
     <Content Include="Scripts\user-defined\directives\dateTimePicker.js" />
+    <Content Include="Scripts\user-defined\directives\fileUploader.js" />
     <Content Include="Scripts\user-defined\directives\focusOut.js" />
     <Content Include="Scripts\user-defined\directives\goBack.js" />
     <Content Include="Scripts\user-defined\directives\onEnterPress.js" />

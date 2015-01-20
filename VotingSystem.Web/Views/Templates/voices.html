@@ -15,7 +15,7 @@
 									<a data-ng-href="#/voting/{{voice.VotingId}}">{{voice.VotingName}}</a>
 								</h4>
 								<div class="mic-info">
-									on {{voice.CreateDate}}
+									on {{voice.CreateDate|date:"dd-MM-yyyy hh:mm"}}
 								</div>
 							</div>
 							<div class="widget-text">

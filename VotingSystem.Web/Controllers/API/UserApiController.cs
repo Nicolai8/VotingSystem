@@ -4,6 +4,7 @@ using System.Web.Http;
 using System.Web.Security;
 using VotingSystem.BLL.Interfaces;
 using VotingSystem.DAL.Entities;
+using VotingSystem.DAL.Enums;
 using VotingSystem.Web.Enums;
 using VotingSystem.Web.Filters;
 using VotingSystem.Web.Helpers;
@@ -101,6 +102,25 @@ namespace VotingSystem.Web.Controllers.API
 			return users;
 		}
 
+		[HttpGet]
+		[Route("profile/{id?}")]
+		[AllowAnonymous]
+		public UserModel UserProfile(int? id = null)
+		{
+			UserModel user = new UserModel();
+			MembershipUser membershipUser = id.HasValue ? Membership.GetUser(id) : Membership.GetUser();
+			if (membershipUser != null)
+			{
+				user = membershipUser.ToUserModel(_userProfileService.GetUserProfileByUserId((int)membershipUser.ProviderUserKey));
+				if (!id.HasValue)
+				{
+					user.Privacy = PrivacyType.WholeWorld;
+				}
+				HideFieldsAccordingToPrivacy(user);
+			}
+			return user;
+		}
+
 		#region Private methods
 
 		private void ChangeUserRoles(int userId, string[] roleNames)
@@ -123,6 +143,26 @@ namespace VotingSystem.Web.Controllers.API
 		{
 			CustomMembershipProvider membership = (CustomMembershipProvider)Membership.Provider;
 			membership.ToggleLockUser(userId);
+		}
+
+		private void HideFieldsAccordingToPrivacy(UserModel user)
+		{
+			switch (user.Privacy)
+			{
+				case PrivacyType.Users:
+					if (!System.Web.HttpContext.Current.Request.IsAuthenticated)
+					{
+						user.Privacy = null;
+						user.Email = "Hidden";
+					}
+					break;
+				case PrivacyType.WholeWorld:
+					break;
+				default:
+					user.Privacy = null;
+					user.Email = "Hidden";
+					break;
+			}
 		}
 
 		#endregion

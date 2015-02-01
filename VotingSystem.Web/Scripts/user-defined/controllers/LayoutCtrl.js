@@ -11,8 +11,11 @@
 			$scope.logIn = function() {
 				var userName = $("#userName").val();
 				var password = $("#password").val();
+
 				var $form = $("#loginForm form[data-validate-form]").data("bootstrapValidator");
+
 				if ($form.isValid()) {
+					// todo: need to be moved to storage
 					$.ajax({
 						url: urls.LoginPage.Login,
 						type: "POST",
@@ -43,6 +46,7 @@
 
 			$scope.$watch("authenticated", function(newValue) {
 				if (newValue) {
+					// todo: need to be moved to storage
 					$.get(urls.IsInRole).done(function(data) {
 						$scope.roles = data.toLowerCase().split(",");
 						$scope.$apply();
@@ -50,7 +54,8 @@
 				}
 			});
 
-			$scope.checkUserName = function() {
+			$scope.checkUserName = function () {
+				// todo: need to be moved to storage
 				$.get(urls.LoginPage.CheckUserName, { userName: $scope.registerUserName })
 					.done(function(data) {
 						if (!data.result) {
@@ -68,6 +73,7 @@
 				if ($form.isValid()) {
 					var userName = $scope.registerUserName;
 					var email = $scope.registerEmail;
+					// todo: need to be moved to storage
 					$.post(urls.LoginPage.Register, { newUserName: userName, email: email })
 						.done(function() {
 							$("#registerForm").modal("hide");
@@ -82,6 +88,7 @@
 
 			$scope.signOut = function($event) {
 				$event.preventDefault();
+				// todo: need to be moved to storage
 				$.ajax({
 					url: urls.LoginPage.LogOff,
 					type: "POST",

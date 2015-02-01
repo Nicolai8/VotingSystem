@@ -21,6 +21,8 @@
 			$scope.checkIfAnswered = function () {
 				$scope.isAnswered = $scope.voting.IsAnswered
 				|| (!$scope.$parent.authenticated
+				// REVIEW: it would be great if storage service will be introduced there. It can be named clientStorage or whatever you would like
+				// REVIEW: "VotingSystem.Vote#" hardcode is not a good practice
 				&& localStorage["VotingSystem.Vote#" + $scope.voting.VotingId] == "true");
 			};
 

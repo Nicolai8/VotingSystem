@@ -82,6 +82,7 @@ namespace VotingSystem.Web.Controllers.API
 			int themeId = _themeService.GetThemeByQuestionId(answers.First().QuestionId).Id;
 			if (userId != null && _answerService.IsThemeAnswered(themeId, userId.Value))
 			{
+				// REVIEW: Move all string constants to special resource file. In this Case it could be ExceptionMessages.
 				throw new VotingSystemException("You already answered on this voting.");
 			}
 			if (!_themeService.IsThemeClosed(themeId))
@@ -90,6 +91,7 @@ namespace VotingSystem.Web.Controllers.API
 				List<Answer> answersToTheme = _answerService.GetByThemeId(themeId, new Filter(1, int.MaxValue));
 				return answersToTheme.Count(a => a.QuestionId == answersToTheme.First().QuestionId);
 			}
+			// REVIEW: Move all string constants to special resource file. In this Case it could be ExceptionMessages.
 			throw new VotingSystemException("Voting is closed or blocked.");
 		}
 

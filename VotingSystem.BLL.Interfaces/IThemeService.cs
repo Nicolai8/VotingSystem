@@ -29,6 +29,7 @@ namespace VotingSystem.BLL.Interfaces
 
 		int GetNumberOfUserThemes(int userId, string partOfThemeName);
 
+		// REVIEW: Update Status of what or whom? Name of method
 		void UpdateStatus(int themeId, VotingStatusType status);
 	}
 }

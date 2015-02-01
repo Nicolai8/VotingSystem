@@ -22,6 +22,7 @@
 				$scope.roles = roles;
 			});
 
+			//REVIEW: not readable. Pls, use line indents
 			UserStorage.query({ pageType: $scope.pageType, page: $scope.page },
 			function (users) {
 				$scope.users = users;

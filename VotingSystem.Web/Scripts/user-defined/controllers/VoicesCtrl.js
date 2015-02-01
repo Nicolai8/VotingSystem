@@ -12,6 +12,7 @@
 
 			commentsHub.changePageOnHub();
 
+			//REVIEW: not readable. Pls, use line indents
 			VoiceStorage.query({ page: $scope.page },
 			function (voices) {
 				$scope.voices = voices;

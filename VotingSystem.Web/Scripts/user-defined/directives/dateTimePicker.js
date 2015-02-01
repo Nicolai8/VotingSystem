@@ -1,5 +1,5 @@
 ﻿angular.module("votingSystem.directives.datetimePicker", [])
-	.directive("datetimePicker", function() {
+	.directive("dateTimePicker", function() {
 		return function(scope, elem, attrs) {
 			var $elem = $(elem);
 			var scopeCopy = scope;

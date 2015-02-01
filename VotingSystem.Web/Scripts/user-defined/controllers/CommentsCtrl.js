@@ -12,6 +12,7 @@
 
 			commentsHub.changePageOnHub();
 
+			//REVIEW: not readable. Pls, use line indents
 			CommentStorage.query({ page: $scope.page },
 			function (data) {
 				$scope.comments = data;

@@ -49,11 +49,11 @@ namespace VotingSystem.Web.Controllers.API
 		}
 
 		[Route("{pageType}/{page:int}/{query?}")]
-		public IEnumerable<VotingModel> Get(PageType pageType, int page = 1, int size = 10, string query = "")
+		public IEnumerable<VotingModel> Get(PageType pageType, int page = 1, int size = 10, string query = null)
 		{
-			if (String.IsNullOrEmpty(query))
+			if (String.IsNullOrWhiteSpace(query))
 			{
-				query = "";
+				query = null;
 			}
 			List<Theme> themes;
 			Filter<Theme> filterExtended = new Filter<Theme>(null, page, size); 
@@ -85,11 +85,11 @@ namespace VotingSystem.Web.Controllers.API
 
 		[HttpGet]
 		[Route("totalActive")]
-		public int GetTotalActiveVotings(string query = "")
+		public int GetTotalActiveVotings(string query = null)
 		{
-			if (String.IsNullOrEmpty(query))
+			if (String.IsNullOrWhiteSpace(query))
 			{
-				query = "";
+				query = string.Empty;
 			}
 			return _themeService.GetNumberOfActiveThemesByThemeName(query);
 		}
@@ -97,11 +97,11 @@ namespace VotingSystem.Web.Controllers.API
 		[HttpGet]
 		[Route("totalUser")]
 		[CustomAuthorizeApi]
-		public int GetTotalUserVotings(string query = "")
+		public int GetTotalUserVotings(string query = null)
 		{
 			if (String.IsNullOrEmpty(query))
 			{
-				query = "";
+				query = string.Empty;
 			}
 			return _themeService.GetNumberOfUserThemes(UserId, query);
 		}
@@ -109,11 +109,11 @@ namespace VotingSystem.Web.Controllers.API
 		[HttpGet]
 		[Route("totalAdmin")]
 		[CustomAuthorizeApi(Roles = new[] { RoleType.Admin, RoleType.Moderator })]
-		public int GetTotalAdminVotings(string query = "")
+		public int GetTotalAdminVotings(string query = null)
 		{
 			if (String.IsNullOrEmpty(query))
 			{
-				query = "";
+				query = string.Empty;
 			}
 			return _themeService.GetNumberOfThemesByThemeName(query);
 		}

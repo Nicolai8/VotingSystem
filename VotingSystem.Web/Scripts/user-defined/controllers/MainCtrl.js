@@ -11,21 +11,21 @@
 			commentsHub.changePageOnHub("");
 
 			VotingStorage.query(
-			{
-				pageType: "MainPage",
-				page: $routeParams.pageNumber,
-				query: $routeParams.searchQuery
-			},
-			function (data) {
-				$scope.votings = data;
-				VotingStorage.total(
 				{
-					totalKind: "totalActive",
+					pageType: "MainPage",
+					page: $routeParams.pageNumber,
 					query: $routeParams.searchQuery
 				},
-				function (response) {
-					$scope.total = response.total;
+				function (data) {
+					$scope.votings = data;
+					VotingStorage.total(
+					{
+						totalKind: "totalActive",
+						query: $routeParams.searchQuery
+					},
+					function (response) {
+						$scope.total = response.total;
+					});
 				});
-			});
 		}]);
 

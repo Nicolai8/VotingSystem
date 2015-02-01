@@ -13,6 +13,7 @@
 
 			commentsHub.changePageOnHub();
 
+			//REVIEW: not readable. Pls, use line indents
 			VotingStorage.query(
 			{
 				pageType: "UserVotings",
@@ -94,6 +95,7 @@
 
 			$scope.setDate = function (property, date) {
 				$scope.newVoting[property] = date;
+				//REVIEW: ;
 				$scope.$apply()
 			}
 		}]);

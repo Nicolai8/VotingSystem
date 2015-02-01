@@ -14,7 +14,7 @@ using VotingSystem.Web.Providers;
 namespace VotingSystem.Web.Controllers.API
 {
 	[RoutePrefix("api/user")]
-	[CustomAuthorizeApi(Roles = new[] { RoleType.Admin })]
+	[CustomAuthorizeApi(RoleType.Admin)]
 	public class UserApiController : BaseApiController
 	{
 		private readonly IUserProfileService _userProfileService;
@@ -83,6 +83,7 @@ namespace VotingSystem.Web.Controllers.API
 		public IEnumerable<UserModel> Get(PageType pageType, int page = 1, int size = 10)
 		{
 			MembershipUserCollection membershipUsers;
+			// REVIEW: move declaration closer to usage
 			List<UserModel> users = new List<UserModel>();
 			switch (pageType)
 			{
@@ -95,10 +96,13 @@ namespace VotingSystem.Web.Controllers.API
 					membershipUsers = Membership.GetAllUsers(page, size, out totalUsers);
 					break;
 			}
+
+			// REVIEW: use Linq expression Select
 			foreach (MembershipUser user in membershipUsers)
 			{
 				users.Add(user.ToUserModel());
 			}
+
 			return users;
 		}
 

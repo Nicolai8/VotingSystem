@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using VotingSystem.BLL.Interfaces;
-using VotingSystem.Common;
 using VotingSystem.Common.Filters;
 using VotingSystem.DAL;
 using VotingSystem.DAL.Entities;

@@ -16,6 +16,12 @@ namespace VotingSystem.Web.Filters
 			Roles = new RoleType[] { };
 		}
 
+		// REVIEW: use this constructor everywhere you can do it
+		public CustomAuthorizeApiAttribute(RoleType roleType)
+		{
+			Roles = new [] { roleType };
+		}
+
 		public override void OnAuthorization(HttpActionContext actionContext)
 		{
 			if (!IsAuthorized(actionContext))

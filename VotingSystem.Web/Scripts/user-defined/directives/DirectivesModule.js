@@ -1,7 +1,7 @@
 ﻿angular.module("votingSystem.directives", [
 	"votingSystem.directives.bootstrapMarkdown",
 	"votingSystem.directives.cleanUp",
-	"votingSystem.directives.datetimePicker",
+	"votingSystem.directives.dateTimePicker",
 	"votingSystem.directives.fileUploader",
 	"votingSystem.directives.focusOut",
 	"votingSystem.directives.goBack",

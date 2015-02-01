@@ -1,4 +1,5 @@
-﻿angular.module("votingSystem.services.reload", [])
+﻿// REVIEW: module should be renamed
+angular.module("votingSystem.services.reload", [])
 	.service("reload", function () {
 		return function (scope, arrayLength, path) {
 			var pageNumber = scope.page;

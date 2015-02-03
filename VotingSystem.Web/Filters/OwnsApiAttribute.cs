@@ -9,13 +9,13 @@ namespace VotingSystem.Web.Filters
 {
 	public class OwnsApiAttribute : AuthorizeAttribute
 	{
-		private readonly IThemeService _themeService;
+		private readonly IVotingService _votingService;
 		private readonly ICommentService _commentService;
 		public OwnsType OwnsParameter { get; set; }
 
 		public OwnsApiAttribute()
 		{
-			_themeService = DependencyResolver.Current.GetService<IThemeService>();
+			_votingService = DependencyResolver.Current.GetService<IVotingService>();
 			_commentService = DependencyResolver.Current.GetService<ICommentService>();
 		}
 
@@ -26,8 +26,8 @@ namespace VotingSystem.Web.Filters
 
 			switch (OwnsParameter)
 			{
-				case OwnsType.Theme:
-					isAuthorized = AuthorizeAttributeHelper.Owns(id, themeId => _themeService.GetThemeById(themeId), AuthorizeAttributeHelper.GetUserIdFromTheme);
+				case OwnsType.Voting:
+					isAuthorized = AuthorizeAttributeHelper.Owns(id, votingId => _votingService.GetVotingById(votingId), AuthorizeAttributeHelper.GetUserIdFromVoting);
 					break;
 				case OwnsType.Comment:
 					isAuthorized = AuthorizeAttributeHelper.Owns(id, _commentService.GetCommentById, AuthorizeAttributeHelper.GetUserIdFromComment);

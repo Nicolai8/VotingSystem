@@ -6,10 +6,11 @@
 	"votingSystem.constants",
 	"votingSystem.controllers",
 	"votingSystem.directives",
-	"votingSystem.services"
+	"votingSystem.services",
+	"votingSystem.unitOfWork"
 ]);
 
-votingSystem.config(["$routeProvider", "$httpProvider","spinnerProvider", function ($routeProvider, $httpProvider, spinnerProvider) {
+votingSystem.config(["$routeProvider", "$httpProvider","spinnerProvider","constants", function ($routeProvider, $httpProvider, spinnerProvider, constants) {
 	$routeProvider.when("/", {
 		redirectTo: "/main/1"
 	}).when("/main/:pageNumber/:searchQuery?", {
@@ -49,7 +50,7 @@ votingSystem.config(["$routeProvider", "$httpProvider","spinnerProvider", functi
 		redirectTo: "/error404"
 	});
 
-	spinnerProvider.initialize();
+	spinnerProvider.initialize(constants.spinnerSelector);
 	$httpProvider.interceptors.push("myHttpInterceptor");
 	$httpProvider.defaults.transformRequest.push(spinnerProvider.showSpinner);
 }]).factory("myHttpInterceptor", ["$q", "spinner", function ($q, spinner) {

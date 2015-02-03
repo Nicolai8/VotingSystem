@@ -1,4 +1,4 @@
-﻿angular.module("votingSystem.services.voiceStorage", [])
+﻿angular.module("votingSystem.factories.voiceStorage", [])
 	.factory("VoiceStorage", ["$resource", "urls",
 		function ($resource, urls) {
 			return $resource(urls.Voices, {},

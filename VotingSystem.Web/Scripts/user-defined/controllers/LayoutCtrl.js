@@ -1,110 +1,94 @@
 ﻿angular.module("votingSystem.controllers.layout", [])
 	.controller("LayoutCtrl", [
-		"$scope", "$route", "$routeParams", "$location", "urls", "constants", "commentsHub",
-		function($scope, $route, $routeParams, $location, urls, constants, commentsHub) {
+		"$scope", "$route", "$routeParams", "$location", "urls", "UnitOfWork", "commentsHub", "notifications",
+		function ($scope, $route, $routeParams, $location, urls, UnitOfWork, commentsHub, notifications) {
 			$scope.accountName = window.loggedUserName;
 			$scope.roles = [];
 			$scope.authenticated = window.authenticated;
-			$scope.$location = $location;
 			$scope.commentsHub = commentsHub;
 
-			$scope.logIn = function() {
-				var userName = $("#userName").val();
-				var password = $("#password").val();
+			$scope.logIn = function (userName, password) {
 
 				var $form = $("#loginForm form[data-validate-form]").data("bootstrapValidator");
 
 				if ($form.isValid()) {
-					// todo: need to be moved to storage
-					$.ajax({
-						url: urls.LoginPage.Login,
-						type: "POST",
-						data: { userName: userName, password: password, rememberMe: false },
-						beforeSend: function() {
-							$scope.commentsHub.stopCommentsHub();
-						}
-					}).done(function(data) {
-						if (data && data.result) {
-							$scope.authenticated = true;
-							$scope.accountName = userName;
-							$scope.$apply();
-							$("#loginForm").modal("hide");
-							$scope.$location.path("/main/1");
-						} else {
-							toastr.error(constants["loginFailedMessage"]);
-						}
-					}).fail(function() {
-						toastr.error(constants["loginFailedMessage"]);
-					}).always(function() {
-						//commentsHub.changePageOnHub("");
-						$("#password").val("");
-					});
-				} else {
-					$form.validate();
-				}
-			};
-
-			$scope.$watch("authenticated", function(newValue) {
-				if (newValue) {
-					// todo: need to be moved to storage
-					$.get(urls.IsInRole).done(function(data) {
-						$scope.roles = data.toLowerCase().split(",");
-						$scope.$apply();
-					});
-				}
-			});
-
-			$scope.checkUserName = function () {
-				// todo: need to be moved to storage
-				$.get(urls.LoginPage.CheckUserName, { userName: $scope.registerUserName })
-					.done(function(data) {
-						if (!data.result) {
-							toastr.success(constants["canUseLoginMessage"]);
-						} else {
-							toastr.warning(constants["loginAlreadyExistsMessage"]);
-						}
-					}).fail(function() {
-						toastr.warning(constants["loginAlreadyExistsMessage"]);
-					});
-			};
-
-			$scope.register = function() {
-				var $form = $("#registerInnerForm").data("bootstrapValidator");
-				if ($form.isValid()) {
-					var userName = $scope.registerUserName;
-					var email = $scope.registerEmail;
-					// todo: need to be moved to storage
-					$.post(urls.LoginPage.Register, { newUserName: userName, email: email })
-						.done(function() {
-							$("#registerForm").modal("hide");
-							toastr.success(constants["registrationSucceedMessage"]);
-						}).fail(function() {
-							toastr.error(constants["registrationFailedMessage"]);
+					UnitOfWork.authStorage().login({
+						userName: userName,
+						password: password,
+						rememberMe: false
+					}).$promise
+						.then(function (data) {
+							if (data && data.result) {
+								$scope.authenticated = true;
+								$scope.accountName = userName;
+								$("#loginForm").modal("hide");
+								$location.path("/main/1");
+							} else {
+								notifications.loginFailed();
+							}
+						}, function () {
+							notifications.loginFailed();
+						}).finally(function () {
+							password = "";
 						});
 				} else {
 					$form.validate();
 				}
 			};
 
-			$scope.signOut = function($event) {
+			$scope.$watch("authenticated", function (newValue) {
+				if (newValue) {
+					UnitOfWork.authStorage().isInRole({},
+						function (data) {
+							$scope.roles = data.roles.toLowerCase().split(",");
+						});
+				}
+			});
+
+			$scope.checkUserName = function (userName) {
+				UnitOfWork.authStorage().checkUserName(
+					{
+						userName: userName
+					},
+					function (data) {
+						if (!data.result) {
+							notifications.canUseLogin();
+						} else {
+							notifications.loginAlreadyExists();
+						}
+					}, function () {
+						notifications.loginAlreadyExists();
+					});
+			};
+
+			$scope.register = function (userName, email) {
+				var $form = $("#registerInnerForm").data("bootstrapValidator");
+				if ($form.isValid()) {
+					UnitOfWork.authStorage().register(
+						{
+							newUserName: userName,
+							email: email
+						}, function () {
+							$("#registerForm").modal("hide");
+							notifications.registrationSucceed();
+						}, function () {
+							notifications.registrationFailed();
+						});
+				} else {
+					$form.validate();
+				}
+			};
+
+			$scope.signOut = function ($event) {
 				$event.preventDefault();
-				// todo: need to be moved to storage
-				$.ajax({
-					url: urls.LoginPage.LogOff,
-					type: "POST",
-					beforeSend: function() {
-						$scope.commentsHub.stopCommentsHub();
-					}
-				}).done(function() {
-					$scope.authenticated = false;
-					$scope.accountName = "Account";
-					$scope.$location.path("/main/1");
-					$scope.$apply();
-				}).fail(function() {
-					toastr.error(constants["logOutFailedMessage"]);
-				}).complete(function() {
-					//commentsHub.changePageOnHub("");
-				});
+				UnitOfWork.authStorage().signOut({},
+					function () {
+						$scope.authenticated = false;
+						$scope.accountName = "Account";
+						$location.path("/main/1");
+					}, function () {
+						notifications.logOutFailed();
+					});
 			};
 		}
 	]);

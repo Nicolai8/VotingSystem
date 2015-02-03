@@ -1,4 +1,4 @@
-﻿angular.module("votingSystem.services.commentStorage", [])
+﻿angular.module("votingSystem.factories.commentStorage", [])
 	.factory("CommentStorage", ["$resource", "urls", function ($resource, urls) {
 		return $resource(urls.Comments + "/:id", { id: "@CommentId" },
 			{

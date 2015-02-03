@@ -10,8 +10,8 @@ namespace VotingSystem.DAL.Entities
 		public string Text { get; set; }
 		public QuestionType Type { get; set; }
 
-		public int ThemeId { get; set; }
-		public virtual Theme Theme { get; set; }
+		public int VotingId { get; set; }
+		public virtual Voting Voting { get; set; }
 	
 		public virtual ICollection<Answer> Answers { get; set; }
 		public virtual ICollection<FixedAnswer> FixedAnswers { get; set; }

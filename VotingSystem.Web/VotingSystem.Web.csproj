@@ -257,6 +257,11 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="App_GlobalResources\Errors.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Errors.resx</DependentUpon>
+    </Compile>
     <Compile Include="App_Start\AsIsBundleOrderer.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
@@ -494,7 +499,7 @@
     <Content Include="Scripts\user-defined\controllers\VoicesCtrl.js" />
     <Content Include="Scripts\user-defined\controllers\AdminVotingsCtrl.js" />
     <Content Include="Scripts\user-defined\controllers\VotingCtrl.js" />
-    <Content Include="Scripts\user-defined\controllers\ControllersModule.js" />
+    <Content Include="Scripts\user-defined\ControllersModule.js" />
     <Content Include="Scripts\user-defined\directives\bootstrapMarkdown.js" />
     <Content Include="Scripts\user-defined\directives\cleanUp.js" />
     <Content Include="Scripts\user-defined\directives\dateTimePicker.js" />
@@ -508,20 +513,24 @@
     <Content Include="Scripts\user-defined\directives\trustHtml.js" />
     <Content Include="Scripts\user-defined\directives\validateField.js" />
     <Content Include="Scripts\user-defined\directives\validateForm.js" />
-    <Content Include="Scripts\user-defined\directives\DirectivesModule.js" />
+    <Content Include="Scripts\user-defined\DirectivesModule.js" />
+    <Content Include="Scripts\user-defined\factories\AuthStorage.js" />
+    <Content Include="Scripts\user-defined\UnitOfWork.js" />
     <Content Include="Scripts\user-defined\services\commentsHub.js" />
-    <Content Include="Scripts\user-defined\services\CommentStorage.js" />
-    <Content Include="Scripts\user-defined\services\reload.js" />
-    <Content Include="Scripts\user-defined\services\UserStorage.js" />
-    <Content Include="Scripts\user-defined\services\VoiceStorage.js" />
-    <Content Include="Scripts\user-defined\services\VotingStorage.js" />
+    <Content Include="Scripts\user-defined\factories\CommentStorage.js" />
+    <Content Include="Scripts\user-defined\factories\LocalStorage.js" />
+    <Content Include="Scripts\user-defined\services\reloadDataAfterUserAction.js" />
+    <Content Include="Scripts\user-defined\factories\UserStorage.js" />
+    <Content Include="Scripts\user-defined\factories\VoiceStorage.js" />
+    <Content Include="Scripts\user-defined\factories\VotingStorage.js" />
     <Content Include="Scripts\libraries\html5shiv.js" />
     <Content Include="Scripts\libraries\jquery.js" />
     <Content Include="Scripts\libraries\jquery.min.js" />
     <Content Include="Scripts\libraries\jquery-ui-1.10.3.js" />
-    <Content Include="Scripts\user-defined\constants.js" />
-    <Content Include="Scripts\user-defined\services\ServicesModule.js" />
-    <Content Include="Scripts\user-defined\services\spinner.js" />
+    <Content Include="Scripts\user-defined\constants\constants.js" />
+    <Content Include="Scripts\user-defined\ServicesModule.js" />
+    <Content Include="Scripts\user-defined\providers\spinner.js" />
+    <Content Include="Scripts\user-defined\services\notifications.js" />
     <Content Include="Views\Templates\adminvotings.html" />
     <Content Include="Views\Templates\comments.html" />
     <Content Include="Views\Templates\main.html" />
@@ -586,6 +595,11 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="App_GlobalResources\Errors.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Errors.Designer.cs</LastGenOutput>
+      <CustomToolNamespace>VotingSystem.Web.Resources</CustomToolNamespace>
+    </EmbeddedResource>
     <EmbeddedResource Include="App_GlobalResources\Resource.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Resource.Designer.cs</LastGenOutput>

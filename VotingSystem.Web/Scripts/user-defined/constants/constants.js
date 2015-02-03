@@ -32,6 +32,7 @@
 
 		"unknownErrorOnLoadingDataMesage": "An unknown error occurred when data loading.",
 		"userDeletedMessage": "User was successfully deleted.",
+		"userDeleteConfirmMessage": "Are you sure that you whan delete {userName} ?",
 		"userImageUpdatedMessage": "The image was successfully updated.",
 		"userLockChangedMessage": "User lock was successfully changed.",
 		"userLockChangeFailedMessage": "Change lock failed.",
@@ -46,8 +47,10 @@
 		"votingCreateValidateMessage": "Field \"{0}\" is required.",
 		"votingCreateValidateDateMessage": "\"End Date\" must be greater or equal to \"Start Date\"",
 		"votingCreateValidateTypeMessage": "Questions of \"Choice Question\" type should contain at least 2 predefined answeres.",
-		"votingCreateValidateQuestionsCountMessage": "Theme should contain at least 1 question.",
+		"votingCreateValidateQuestionsCountMessage": "Voting should contain at least 1 question.",
 		"votingDeletedMessage": "Voting was sucessfully deleted.",
 		"votingsNotFoundMessage": "Votings not found.",
 		"votingStatusChangedMessage": "Voting status was successfully updated.",
+
+		"spinnerSelector" : "#preloader"
 	});

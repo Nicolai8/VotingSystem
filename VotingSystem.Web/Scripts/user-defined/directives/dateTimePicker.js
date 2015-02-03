@@ -1,4 +1,4 @@
-﻿angular.module("votingSystem.directives.datetimePicker", [])
+﻿angular.module("votingSystem.directives.dateTimePicker", [])
 	.directive("dateTimePicker", function() {
 		return function(scope, elem, attrs) {
 			var $elem = $(elem);

@@ -25,7 +25,7 @@ namespace VotingSystem.DAL.Entities
 
 		public virtual UserProfile UserProfile { get; set; }
 		public virtual ICollection<Role> Roles { get; set; }
-		public virtual ICollection<Theme> Themes { get; set; }
+		public virtual ICollection<Voting> Votings { get; set; }
 		public virtual ICollection<Comment> Comments { get; set; }
 		public virtual ICollection<Answer> Answers { get; set; }
 	}

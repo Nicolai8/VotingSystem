@@ -21,23 +21,23 @@ namespace VotingSystem.BLL
 				.Filter(a => a.UserId == userId)
 				.OrderBy(an => an.OrderByDescending(ans => ans.CreateDate))
 				.Include(a => a.Question)
-				.Include(a => a.Question.Theme)
+				.Include(a => a.Question.Voting)
 				.Include(a => a.FixedAnswer)
 				.GetPage(filter.Page, filter.PageSize).ToList();
 		}
 
-		public List<Answer> GetByThemeId(int themeId, Filter filter)
+		public List<Answer> GetByVotingId(int votingId, Filter filter)
 		{
 			return UnitOfWork.AnswerRepository.Query()
-				.Filter(a => a.Question.ThemeId == themeId)
+				.Filter(a => a.Question.VotingId == votingId)
 				.OrderBy(an => an.OrderByDescending(ans => ans.CreateDate))
 				.GetPage(filter.Page, filter.PageSize).ToList();
 		}
 
-		public bool IsThemeAnswered(int themeId, int userId)
+		public bool IsVotingAnswered(int votingId, int userId)
 		{
 			return UnitOfWork.AnswerRepository.Query()
-				.Filter(answer => answer.Question.ThemeId == themeId && answer.UserId == userId)
+				.Filter(answer => answer.Question.VotingId == votingId && answer.UserId == userId)
 				.Get().Any();
 		}
 

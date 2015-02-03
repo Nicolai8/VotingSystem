@@ -1,8 +1,8 @@
 ﻿angular.module("votingSystem.controllers.main", [])
-	.controller("MainCtrl", ["$scope", "$http", "$route", "$routeParams", "VotingStorage", "commentsHub",
-		function ($scope, $http, $route, $routeParams, VotingStorage, commentsHub) {
+	.controller("MainCtrl", ["$scope", "$routeParams", "UnitOfWork", "commentsHub",
+		function ($scope, $routeParams, UnitOfWork, commentsHub) {
 			$scope.page = $routeParams.pageNumber;
-			$scope.breadCrumbItemName = '';
+			$scope.breadCrumbItemName = "";
 			$scope.pageName = "main";
 			$scope.total = 1;
 			$routeParams.searchQuery = $routeParams.searchQuery ? $routeParams.searchQuery : "";
@@ -10,7 +10,7 @@
 
 			commentsHub.changePageOnHub("");
 
-			VotingStorage.query(
+			UnitOfWork.votingStorage().query(
 				{
 					pageType: "MainPage",
 					page: $routeParams.pageNumber,
@@ -18,7 +18,7 @@
 				},
 				function (data) {
 					$scope.votings = data;
-					VotingStorage.total(
+					UnitOfWork.votingStorage().total(
 					{
 						totalKind: "totalActive",
 						query: $routeParams.searchQuery

@@ -1,36 +1,30 @@
 ﻿angular.module("votingSystem.controllers.users", [])
-	.controller("UsersCtrl", ["$scope", "$http", "$route", "$routeParams", "$location", "urls", "constants", "reload", "UserStorage", "commentsHub",
-		function ($scope, $http, $route, $routeParams, $location, urls, constants, reload, UserStorage, commentsHub) {
-			$scope.page = $routeParams.pageNumber;
+	.controller("UsersCtrl", ["$scope", "$routeParams", "$location", "urls", "constants",
+		"UnitOfWork", "commentsHub", "reloadDataAfterUserAction", "notifications",
+		function ($scope, $routeParams, $location, urls, constants, UnitOfWork, commentsHub,
+			reloadDataAfterUserAction, notifications) {
 			$scope.isSuggested = angular.isDefined($routeParams.suggested) && $routeParams.suggested == "suggested";
 			$scope.pageName = "users";
 			$scope.pageType = $scope.isSuggested ? "SuggestedUsers" : "Users",
 			$scope.breadCrumbItemName = "Admin" + ($scope.isSuggested ? " Suggested" : "") + " Users",
 			$scope.total = 1;
-			$scope.constants = constants;
-			$scope.$route = $route;
-			$scope.$location = $location;
-			$scope.$routeParams = $routeParams;
 			$scope.roles = [];
 			$scope.editUserRoles = [];
-			$scope.reload = reload;
 
 			commentsHub.changePageOnHub();
 
-			$http.get(urls.UsersPage.GetAllRoles)
-			.success(function (roles) {
+			UnitOfWork.userStorage().getAllRoles({}, function (roles) {
 				$scope.roles = roles;
 			});
 
-			//REVIEW: not readable. Pls, use line indents
-			UserStorage.query({ pageType: $scope.pageType, page: $scope.page },
-			function (users) {
-				$scope.users = users;
-				UserStorage.total({ pageType: $scope.pageType },
-				function (response) {
-					$scope.total = response.total;
+			UnitOfWork.userStorage().query({ pageType: $scope.pageType, page: $routeParams.pageNumber },
+				function (users) {
+					$scope.users = users;
+					UnitOfWork.userStorage().total({ pageType: $scope.pageType },
+					function (response) {
+						$scope.total = response.total;
+					});
 				});
-			});
 
 			$scope.changeUserRoles = function (user) {
 				$scope.editUser = user;
@@ -44,13 +38,13 @@
 				var $form = $modal.find("form[data-validate-form]").data("bootstrapValidator");
 				if ($form.isValid()) {
 					$scope.editUser.$update()
-					.then(function () {
-						$modal.modal("hide");
-						toastr.success(constants["userRolesChangedMessage"]);
-					}, function () {
-						$scope.editUser.Roles = oldRoles;
-						toastr.error(constants["errorOccurredDuringSavingProcessMessage"]);
-					});
+						.then(function () {
+							$modal.modal("hide");
+							notifications.userRolesChanged();
+						}, function () {
+							$scope.editUser.Roles = oldRoles;
+							notifications.savingError();
+						});
 				} else {
 					$form.validate();
 				}
@@ -59,35 +53,35 @@
 			$scope.toggleLockUser = function (user) {
 				user.IsBlocked = !user.IsBlocked;
 				user.$update()
-				.then(function () {
-					toastr.success(constants["userLockChangedMessage"]);
-				}, function () {
-					toastr.error(constants["userLockChangeFailedMessage"]);
-				});
+					.then(function () {
+						notifications.userLockChanged();
+					}, function () {
+						notifications.userLockChangeFailed();
+					});
 			};
 
 			$scope.removeUser = function (user) {
-				if (confirm("Are you sure that you whan delete " + user.UserName + "?")) {
+				if (confirm(constants["userDeleteConfirmMessage"].replace("{userName}", user.UserName))) {
 					user.$remove()
-					.then(function () {
-						$scope.users.splice($scope.users.indexOf(user), 1);
-						toastr.success(constants["userDeletedMessage"]);
-						$scope.reload($scope, $scope.users.length, "/" + $scope.pageName + "/{pageNumber}/" + $scope.$routeParams.suggested);
-					}, function () {
-						toastr.error(constants["errorOccurredDuringDeletingProcessMessage"]);
-					});
+						.then(function () {
+							$scope.users.splice($scope.users.indexOf(user), 1);
+							notifications.userDeleted();
+							reloadDataAfterUserAction($scope.users.length, "/" + $scope.pageName + "/{pageNumber}/" + $routeParams.suggested);
+						}, function () {
+							notifications.deletingError();
+						});
 				}
 			};
 
 			$scope.unsuggestUser = function (user) {
 				user.$unsuggestUser()
-				.then(function () {
-					$scope.users.splice($scope.users.indexOf(user), 1);
-					toastr.success(constants["userUnSuggestMessage"]);
-					$scope.reload($scope, $scope.users.length, "/" + $scope.pageName + "/{pageNumber}/" + $scope.$routeParams.suggested);
-				}, function () {
-					toastr.error(constants["errorOccurredDuringSavingProcessMessage"]);
-				});
+					.then(function () {
+						$scope.users.splice($scope.users.indexOf(user), 1);
+						notifications.userUnSuggestToBlock();
+						reloadDataAfterUserAction($scope.users.length, "/" + $scope.pageName + "/{pageNumber}/" + $routeParams.suggested);
+					}, function () {
+						notifications.savingError();
+					});
 			};
 
 			$scope.toggleRoleSelection = function (roleName) {

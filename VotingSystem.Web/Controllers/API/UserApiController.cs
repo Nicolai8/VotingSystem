@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Web.Http;
 using System.Web.Security;
 using VotingSystem.BLL.Interfaces;
@@ -83,8 +84,7 @@ namespace VotingSystem.Web.Controllers.API
 		public IEnumerable<UserModel> Get(PageType pageType, int page = 1, int size = 10)
 		{
 			MembershipUserCollection membershipUsers;
-			// REVIEW: move declaration closer to usage
-			List<UserModel> users = new List<UserModel>();
+
 			switch (pageType)
 			{
 				case PageType.SuggestedUsers:
@@ -97,13 +97,7 @@ namespace VotingSystem.Web.Controllers.API
 					break;
 			}
 
-			// REVIEW: use Linq expression Select
-			foreach (MembershipUser user in membershipUsers)
-			{
-				users.Add(user.ToUserModel());
-			}
-
-			return users;
+			return (from MembershipUser user in membershipUsers select user.ToUserModel()).ToList();
 		}
 
 		[HttpGet]

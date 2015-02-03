@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using VotingSystem.Common;
 using VotingSystem.Common.Filters;
 using VotingSystem.DAL.Entities;
 
@@ -9,9 +8,9 @@ namespace VotingSystem.BLL.Interfaces
 	{
 		List<Answer> GetByUserId(int userId, Filter filter);
 
-		List<Answer> GetByThemeId(int themeId, Filter filter);
+		List<Answer> GetByVotingId(int votingId, Filter filter);
 
-		bool IsThemeAnswered(int themeId, int userId);
+		bool IsVotingAnswered(int votingId, int userId);
 
 		void AddAnswer(Answer answer, int? userId = null);
 

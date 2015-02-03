@@ -35,11 +35,11 @@
 						<span data-ng-switch-when="4">Closed</span>
 					</td>
 					<td>
-						<a data-ng-if="voting.Status==2" data-ng-click="setThemeStatus(voting, 1)">Approve</a>
-						<a data-ng-if="voting.Status==3" data-ng-click="setThemeStatus(voting, 1)">Unblock</a>
-						<a data-ng-if="voting.Status!=3 && voting.Status!=4" data-ng-click="setThemeStatus(voting, 3)">Block</a>
-						<a data-ng-if="voting.Status!=4" data-ng-click="setThemeStatus(voting, 4)">Close</a>
-						<a data-ng-click="removeTheme(voting)">Remove</a>
+						<a data-ng-if="voting.Status==2" data-ng-click="setVotingStatus(voting, 1)">Approve</a>
+						<a data-ng-if="voting.Status==3" data-ng-click="setVotingStatus(voting, 1)">Unblock</a>
+						<a data-ng-if="voting.Status!=3 && voting.Status!=4" data-ng-click="setVotingStatus(voting, 3)">Block</a>
+						<a data-ng-if="voting.Status!=4" data-ng-click="setVotingStatus(voting, 4)">Close</a>
+						<a data-ng-click="removeVoting(voting)">Remove</a>
 					</td>
 
 				</tr>

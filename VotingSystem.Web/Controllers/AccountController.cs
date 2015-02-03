@@ -13,6 +13,7 @@ using VotingSystem.Web.Enums;
 using VotingSystem.Web.Filters;
 using VotingSystem.Web.Helpers;
 using VotingSystem.Web.Providers;
+using VotingSystem.Web.Resources;
 
 namespace VotingSystem.Web.Controllers
 {
@@ -35,7 +36,7 @@ namespace VotingSystem.Web.Controllers
 				FormsAuthentication.SetAuthCookie(userName, rememberMe);
 				return Json(new { result = true }, JsonRequestBehavior.AllowGet);
 			}
-			throw new VotingSystemException("Provided username or password are incorrect.");
+			throw new VotingSystemException(Errors.IncorrectUsernameOrPassword);
 		}
 
 		[HttpPost]
@@ -58,8 +59,8 @@ namespace VotingSystem.Web.Controllers
 				{
 					Roles.AddUserToRole(newUserName, "User");
 					MailHelper.SendEmail(newUserName, newPassword,
-						Resources.Resource.RegistrationMailSubject,
-						Resources.Resource.RegistrationMailBody,
+						Resource.RegistrationMailSubject,
+						Resource.RegistrationMailBody,
 						email,
 						Request.UrlReferrer.AbsoluteUri);
 					return Json(new { result = true }, JsonRequestBehavior.AllowGet);
@@ -69,7 +70,7 @@ namespace VotingSystem.Web.Controllers
 			{
 				Membership.DeleteUser(newUserName);
 			}
-			throw new VotingSystemException("Registration failed.");
+			throw new VotingSystemException(Errors.RegistrationFailed);
 		}
 
 		[HttpPost]
@@ -80,15 +81,15 @@ namespace VotingSystem.Web.Controllers
 			{
 				return;
 			}
-			throw new VotingSystemException("The password wasn't been updated.");
+			throw new VotingSystemException(Errors.UpdatePasswordFailed);
 		}
 
 		[HttpGet]
-		public JsonResult IsInRole()
+		public string IsInRole()
 		{
 			CustomRoleProvider roleProvider = (CustomRoleProvider)Roles.Provider;
 			List<string> roles = roleProvider.GetRolesForUser(UserId).ToList();
-			return Json(string.Join(",", roles), JsonRequestBehavior.AllowGet);
+			return string.Join(",", roles);
 		}
 
 		[HttpGet]
@@ -105,7 +106,7 @@ namespace VotingSystem.Web.Controllers
 			picture = picture ?? Request.Files["picture"];
 			if (picture == null)
 			{
-				throw new ArgumentException("Picture not found");
+				throw new ArgumentException(Errors.PictureNotFound);
 			}
 
 			UserProfile userProfile = _userProfileService.GetUserProfileByUserId(UserId);

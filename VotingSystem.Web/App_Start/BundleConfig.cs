@@ -54,7 +54,7 @@ namespace VotingSystem.Web
 				"~/Scripts/user-defined/directives/trustHtml.js",
 				"~/Scripts/user-defined/directives/validateField.js",
 				"~/Scripts/user-defined/directives/validateForm.js",
-				"~/Scripts/user-defined/directives/directivesModule.js"
+				"~/Scripts/user-defined/DirectivesModule.js"
 				).ForceOrdered());
 
 			bundles.Add(new ScriptBundle("~/bundles/client/controllers").Include(
@@ -67,22 +67,26 @@ namespace VotingSystem.Web
 				"~/Scripts/user-defined/controllers/userVotingsCtrl.js",
 				"~/Scripts/user-defined/controllers/voicesCtrl.js",
 				"~/Scripts/user-defined/controllers/votingCtrl.js",
-				"~/Scripts/user-defined/controllers/controllersModule.js"
+				"~/Scripts/user-defined/ControllersModule.js"
 			).ForceOrdered());
 
 			bundles.Add(new ScriptBundle("~/bundles/client/services").Include(
 				"~/Scripts/user-defined/services/commentsHub.js",
-				"~/Scripts/user-defined/services/reload.js",
-				"~/Scripts/user-defined/services/commentStorage.js",
-				"~/Scripts/user-defined/services/userStorage.js",
-				"~/Scripts/user-defined/services/voiceStorage.js",
-				"~/Scripts/user-defined/services/votingStorage.js",
-				"~/Scripts/user-defined/services/servicesModule.js",
-				"~/Scripts/user-defined/services/spinner.js"
+				"~/Scripts/user-defined/services/reloadDataAfterUserAction.js",
+				"~/Scripts/user-defined/services/notifications.js",
+				"~/Scripts/user-defined/providers/spinner.js",
+				"~/Scripts/user-defined/factories/authStorage.js",
+				"~/Scripts/user-defined/factories/commentStorage.js",
+				"~/Scripts/user-defined/factories/userStorage.js",
+				"~/Scripts/user-defined/factories/voiceStorage.js",
+				"~/Scripts/user-defined/factories/votingStorage.js",
+				"~/Scripts/user-defined/factories/localStorage.js",
+				"~/Scripts/user-defined/ServicesModule.js",
+				"~/Scripts/user-defined/UnitOfWork.js"
 			).ForceOrdered());
 
 			bundles.Add(new ScriptBundle("~/bundles/client/app").Include(
-				"~/Scripts/user-defined/constants.js",
+				"~/Scripts/user-defined/constants/constants.js",
 				"~/Scripts/user-defined/app.js"
 			).ForceOrdered());
 

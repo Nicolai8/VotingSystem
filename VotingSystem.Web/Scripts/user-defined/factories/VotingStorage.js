@@ -1,4 +1,4 @@
-﻿angular.module("votingSystem.services.votingStorage", [])
+﻿angular.module("votingSystem.factories.votingStorage", [])
 	.factory("VotingStorage", ["$resource", "urls",
 		function ($resource, urls) {
 			return $resource(urls.Votings + "/:id", { id: "@VotingId" },

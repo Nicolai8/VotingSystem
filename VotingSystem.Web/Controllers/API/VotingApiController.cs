@@ -13,39 +13,40 @@ using VotingSystem.Web.Enums;
 using VotingSystem.Web.Filters;
 using VotingSystem.Web.Helpers;
 using VotingSystem.Web.Models;
+using VotingSystem.Web.Resources;
 
 namespace VotingSystem.Web.Controllers.API
 {
 	[RoutePrefix("api/voting")]
 	public class VotingApiController : BaseApiController
 	{
-		private readonly IThemeService _themeService;
+		private readonly IVotingService _votingService;
 		private readonly IAnswerService _answerService;
 
-		public VotingApiController(IThemeService themeService, IAnswerService answerService)
+		public VotingApiController(IVotingService votingService, IAnswerService answerService)
 		{
-			_themeService = themeService;
+			_votingService = votingService;
 			_answerService = answerService;
 		}
 
 		[Route("{id:int}")]
 		public VotingPageModel Get(int id)
 		{
-			Theme theme = _themeService.GetThemeById(id);
-			if (theme != null)
+			Voting voting = _votingService.GetVotingById(id);
+			if (voting != null)
 			{
 				string userName = string.Empty;
 				bool isAnswered = false;
 				if (User.Identity.IsAuthenticated)
 				{
 					userName = User.Identity.Name;
-					isAnswered = _answerService.IsThemeAnswered(id, UserId);
+					isAnswered = _answerService.IsVotingAnswered(id, UserId);
 				}
 
-				return theme.ToVotingPageModel(isAnswered, userName);
+				return voting.ToVotingPageModel(isAnswered, userName);
 			}
 
-			throw new VotingSystemException("Voting not found.");
+			throw new VotingSystemException(Errors.VotingNotFound);
 		}
 
 		[Route("{pageType}/{page:int}/{query?}")]
@@ -53,29 +54,29 @@ namespace VotingSystem.Web.Controllers.API
 		{
 			if (String.IsNullOrWhiteSpace(query))
 			{
-				query = null;
+				query = string.Empty;
 			}
-			List<Theme> themes;
-			Filter<Theme> filterExtended = new Filter<Theme>(null, page, size); 
+			List<Voting> votings;
+			Filter<Voting> filterExtended = new Filter<Voting>(null, page, size);
 
 			switch (pageType)
 			{
 				case PageType.UserVotings:
-					themes = _themeService.GetThemesByUserId(query, UserId, filterExtended);
+					votings = _votingService.GetVotingsByUserId(query, UserId, filterExtended);
 					break;
 				case PageType.AdminVotings:
 					if (!User.IsInRole(RoleType.Admin.ToString()) && !User.IsInRole(RoleType.Moderator.ToString()))
 					{
 						throw new AuthenticationException();
 					}
-					themes = _themeService.GetAllThemes(query, filterExtended);
+					votings = _votingService.GetAllVotings(query, filterExtended);
 					break;
 				default:
-					themes = _themeService.GetAllActiveThemes(query, filterExtended);
+					votings = _votingService.GetAllActiveVotings(query, filterExtended);
 					break;
 			}
 
-			List<VotingModel> model = themes.Select(t =>
+			List<VotingModel> model = votings.Select(t =>
 				{
 					MembershipUser membershipUser = Membership.GetUser(t.UserId ?? -1);
 					return t.ToVotingModel(membershipUser != null ? membershipUser.UserName : string.Empty);
@@ -91,7 +92,7 @@ namespace VotingSystem.Web.Controllers.API
 			{
 				query = string.Empty;
 			}
-			return _themeService.GetNumberOfActiveThemesByThemeName(query);
+			return _votingService.GetNumberOfActiveVotingsByVotingName(query);
 		}
 
 		[HttpGet]
@@ -103,7 +104,7 @@ namespace VotingSystem.Web.Controllers.API
 			{
 				query = string.Empty;
 			}
-			return _themeService.GetNumberOfUserThemes(UserId, query);
+			return _votingService.GetNumberOfUserVotings(UserId, query);
 		}
 
 		[HttpGet]
@@ -115,39 +116,39 @@ namespace VotingSystem.Web.Controllers.API
 			{
 				query = string.Empty;
 			}
-			return _themeService.GetNumberOfThemesByThemeName(query);
+			return _votingService.GetNumberOfVotingsByVotingName(query);
 		}
 
 		[HttpPost]
 		[Route("")]
 		[CustomAuthorizeApi]
-		public void Post([FromBody]Theme theme)
+		public void Post([FromBody]Voting voting)
 		{
 			if (ModelState.IsValid)
 			{
-				theme.UserId = UserId;
-				theme.CreateDate = DateTime.Now;
-				theme.Status = VotingStatusType.NotApproved;
-				_themeService.InsertTheme(theme);
+				voting.UserId = UserId;
+				voting.CreateDate = DateTime.Now;
+				voting.Status = VotingStatusType.NotApproved;
+				_votingService.InsertVoting(voting);
 
 				return;
 			}
-			throw new VotingSystemException("Create new voting failed.");
+			throw new VotingSystemException(Errors.CreateNewVotingFailed);
 		}
 
 		[Route("{id:int}")]
-		[OwnsApi(OwnsParameter = OwnsType.Theme)]
-		public VotingModel Put(int id, [FromBody]VotingModel theme)
+		[OwnsApi(OwnsParameter = OwnsType.Voting)]
+		public VotingModel Put(int id, [FromBody]VotingModel voting)
 		{
-			_themeService.UpdateStatus(id, theme.Status.Value);
-			return theme;
+			_votingService.UpdateVotingStatus(id, voting.Status.Value);
+			return voting;
 		}
 
 		[Route("{id:int}")]
-		[OwnsApi(OwnsParameter = OwnsType.Theme)]
+		[OwnsApi(OwnsParameter = OwnsType.Voting)]
 		public void Delete(int id)
 		{
-			_themeService.DeleteTheme(id);
+			_votingService.DeleteVoting(id);
 		}
 	}
 }

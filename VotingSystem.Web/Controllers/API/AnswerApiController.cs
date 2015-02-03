@@ -9,6 +9,7 @@ using VotingSystem.DAL.Entities;
 using VotingSystem.Web.Filters;
 using VotingSystem.Web.Helpers;
 using VotingSystem.Web.Models;
+using VotingSystem.Web.Resources;
 
 namespace VotingSystem.Web.Controllers.API
 {
@@ -17,13 +18,13 @@ namespace VotingSystem.Web.Controllers.API
 	{
 		private readonly IAnswerService _answerService;
 		private readonly IUserProfileService _userProfileService;
-		private readonly IThemeService _themeService;
+		private readonly IVotingService _votingService;
 
-		public AnswerApiController(IAnswerService answerService, IUserProfileService userProfileService, IThemeService themeService)
+		public AnswerApiController(IAnswerService answerService, IUserProfileService userProfileService, IVotingService votingService)
 		{
 			_answerService = answerService;
 			_userProfileService = userProfileService;
-			_themeService = themeService;
+			_votingService = votingService;
 		}
 
 		#region Public Methods
@@ -43,8 +44,8 @@ namespace VotingSystem.Web.Controllers.API
 		public IEnumerable<QuestionModel> Get(int id)
 		{
 			int userId = User.Identity.IsAuthenticated ? UserId : -1;
-			Theme theme = _themeService.GetThemeById(id);
-			return theme.Questions.Select(q => q.ToQuestionModel(userId));
+			Voting voting = _votingService.GetVotingById(id);
+			return voting.Questions.Select(q => q.ToQuestionModel(userId));
 		}
 
 		[Route("")]
@@ -70,7 +71,7 @@ namespace VotingSystem.Web.Controllers.API
 			{
 				return Vote(answers, null);
 			}
-			throw new VotingSystemException("Captcha is invalid");
+			throw new VotingSystemException(Errors.InvalidCaptcha);
 		}
 
 		#endregion
@@ -79,20 +80,18 @@ namespace VotingSystem.Web.Controllers.API
 
 		private int Vote(IEnumerable<Answer> answers, int? userId)
 		{
-			int themeId = _themeService.GetThemeByQuestionId(answers.First().QuestionId).Id;
-			if (userId != null && _answerService.IsThemeAnswered(themeId, userId.Value))
+			int votingId = _votingService.GetVotingByQuestionId(answers.First().QuestionId).Id;
+			if (userId != null && _answerService.IsVotingAnswered(votingId, userId.Value))
 			{
-				// REVIEW: Move all string constants to special resource file. In this Case it could be ExceptionMessages.
-				throw new VotingSystemException("You already answered on this voting.");
+				throw new VotingSystemException(Errors.AlreadyAnsweredVoting);
 			}
-			if (!_themeService.IsThemeClosed(themeId))
+			if (!_votingService.IsVotingClosed(votingId))
 			{
 				_answerService.AddAnswer(answers, userId);
-				List<Answer> answersToTheme = _answerService.GetByThemeId(themeId, new Filter(1, int.MaxValue));
-				return answersToTheme.Count(a => a.QuestionId == answersToTheme.First().QuestionId);
+				List<Answer> answersToVoting = _answerService.GetByVotingId(votingId, new Filter(1, int.MaxValue));
+				return answersToVoting.Count(a => a.QuestionId == answersToVoting.First().QuestionId);
 			}
-			// REVIEW: Move all string constants to special resource file. In this Case it could be ExceptionMessages.
-			throw new VotingSystemException("Voting is closed or blocked.");
+			throw new VotingSystemException(Errors.VotingClosedOrBlocked);
 		}
 
 		#endregion

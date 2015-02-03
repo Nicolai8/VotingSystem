@@ -1,55 +1,50 @@
 ﻿angular.module("votingSystem.controllers.adminVotings", [])
 	.controller("AdminVotingsCtrl", [
-		"$scope", "$http", "$route", "$routeParams", "$location", "constants", "reload", "VotingStorage", "commentsHub",
-		function($scope, $http, $route, $routeParams, $location, constants, reload, VotingStorage, commentsHub) {
-			$scope.page = $routeParams.pageNumber;
+		"$scope", "$routeParams", "reloadDataAfterUserAction", "UnitOfWork", "commentsHub", "notifications",
+		function ($scope, $routeParams, reloadDataAfterUserAction, UnitOfWork, commentsHub, notifications) {
 			$scope.breadCrumbItemName = "Admin Votings";
 			$scope.pageName = "adminVotings";
 			$scope.total = 1;
-			$scope.constants = constants;
-			$scope.$location = $location;
-			$scope.$route = $route;
-			$scope.reload = reload;
 
 			commentsHub.changePageOnHub();
 
-			VotingStorage.query(
+			UnitOfWork.votingStorage().query(
 				{
 					pageType: "AdminVotings",
-					page: $scope.page
+					page: $routeParams.pageNumber
 				},
-				function(data) {
+				function (data) {
 					$scope.votings = data;
-					VotingStorage.total(
+					UnitOfWork.votingStorage().total(
 						{
 							totalKind: "totalAdmin"
 						},
-						function(response) {
+						function (response) {
 							$scope.total = response.total;
-						}); 
+						});
 				});
 
-			$scope.setThemeStatus = function(voting, status) {
+			$scope.setVotingStatus = function (voting, status) {
 				var oldStatus = angular.copy(voting.Status);
 				voting.Status = status;
 				voting.$update().then(
-					function() {
-						toastr.success(constants["votingStatusChangedMessage"]);
-					}, function() {
+					function () {
+						notifications.votingStatusChanged();
+					}, function () {
 						voting.Status = oldStatus;
-						toastr.error(constants["errorOccurredDuringSavingProcessMessage"]);
-					});
+						notifications.savingError();
+				});
 			};
 
-			$scope.removeTheme = function(voting) {
+			$scope.removeVoting = function (voting) {
 				voting.$remove(
-					function() {
+					function () {
 						$scope.votings.splice($scope.votings.indexOf(voting), 1);
-						toastr.success(constants["votingDeletedMessage"]);
-						$scope.reload($scope, $scope.votings.length, "/" + $scope.pageName + "/{pageNumber}");
+						notifications.votingDeleted();
+						reloadDataAfterUserAction($scope.votings.length, "/" + $scope.pageName + "/{pageNumber}");
 					},
-					function() {
-						toastr.error(constants["errorOccurredDuringDeletingProcessMessage"]);
+					function () {
+						notifications.deletingError();
 					});
 			};
 		}

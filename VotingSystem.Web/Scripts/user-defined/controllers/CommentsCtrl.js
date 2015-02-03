@@ -1,36 +1,30 @@
 ﻿angular.module("votingSystem.controllers.comments", [])
-	.controller("CommentsCtrl", ["$scope", "$http", "$route", "$routeParams", "$location", "constants", "reload", "CommentStorage", "commentsHub",
-		function ($scope, $http, $route, $routeParams, $location, constants, reload, CommentStorage, commentsHub) {
-			$scope.page = $routeParams.pageNumber;
+	.controller("CommentsCtrl", ["$scope", "$routeParams", "reloadDataAfterUserAction", "UnitOfWork", "commentsHub", "notifications",
+		function ($scope, $routeParams, reloadDataAfterUserAction, UnitOfWork, commentsHub, notifications) {
 			$scope.pageName = "comments";
 			$scope.total = 1;
 			$scope.breadCrumbItemName = "Comments";
-			$scope.constants = constants;
-			$scope.$location = $location;
-			$scope.$route = $route;
-			$scope.reload = reload;
 
 			commentsHub.changePageOnHub();
 
-			//REVIEW: not readable. Pls, use line indents
-			CommentStorage.query({ page: $scope.page },
-			function (data) {
-				$scope.comments = data;
-				CommentStorage.total(
-				function (response) {
-					$scope.total = response.total;
+			UnitOfWork.commentStorage().query({ page: $routeParams.pageNumber },
+				function (data) {
+					$scope.comments = data;
+					UnitOfWork.commentStorage().total(
+					function (response) {
+						$scope.total = response.total;
+					});
 				});
-			});
 
 			$scope.removeComment = function (comment) {
 				comment.$remove()
-				.then(function () {
-					$scope.comments.splice($scope.comments.indexOf(comment), 1);
-					toastr.success(constants["commentDeletedMessage"]);
-					$scope.reload($scope, $scope.comments.length, "/" + $scope.pageName + "/{pageNumber}");
-				}, function () {
-					toastr.error(constants["errorOccurredDuringDeletingProcessMessage"]);
-				});
+					.then(function () {
+						$scope.comments.splice($scope.comments.indexOf(comment), 1);
+						notifications.commentDeleted();
+						reloadDataAfterUserAction($scope.comments.length, "/" + $scope.pageName + "/{pageNumber}");
+					}, function () {
+						notifications.deletingError();
+					});
 			};
 		}]);
 

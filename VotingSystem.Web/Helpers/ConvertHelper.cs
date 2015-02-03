@@ -10,9 +10,9 @@ namespace VotingSystem.Web.Helpers
 {
 	public static class ConvertHelper
 	{
-		public static VotingModel ToVotingModel(this Theme theme, string userName)
+		public static VotingModel ToVotingModel(this Voting voting, string userName)
 		{
-			Mapper.CreateMap<Theme, VotingModel>()
+			Mapper.CreateMap<Voting, VotingModel>()
 				.ForMember(d => d.VotingId, mo => mo.MapFrom(s => s.Id))
 				.ForMember(d => d.AnswersCount, mo => mo.MapFrom(s => s.Questions.First().Answers.Count))
 				.ForMember(d => d.CommentsCount, mo => mo.MapFrom(s => s.Comments.Count))
@@ -26,12 +26,12 @@ namespace VotingSystem.Web.Helpers
 							: VotingStatusType.Closed))
 				.AfterMap((t, vm) => vm.CreatedBy = userName);
 
-			return Mapper.Map<Theme, VotingModel>(theme);
+			return Mapper.Map<Voting, VotingModel>(voting);
 		}
 
-		public static VotingPageModel ToVotingPageModel(this Theme theme, bool isAnswered, string userName)
+		public static VotingPageModel ToVotingPageModel(this Voting voting, bool isAnswered, string userName)
 		{
-			Mapper.CreateMap<Theme, VotingPageModel>()
+			Mapper.CreateMap<Voting, VotingPageModel>()
 				.ForMember(d => d.VotingId, mo => mo.MapFrom(s => s.Id))
 				.ForMember(d => d.TotalVotes, mo => mo.MapFrom(s => s.Questions.First().Answers.Count))
 				.ForMember(d => d.Comments, mo => mo.Ignore())
@@ -50,7 +50,7 @@ namespace VotingSystem.Web.Helpers
 							: "Voting closed";
 					});
 
-			return Mapper.Map<Theme, VotingPageModel>(theme);
+			return Mapper.Map<Voting, VotingPageModel>(voting);
 		}
 
 		public static UserModel ToUserModel(this MembershipUser user, UserProfile userProfile = null)
@@ -78,8 +78,8 @@ namespace VotingSystem.Web.Helpers
 		{
 			Mapper.CreateMap<Comment, CommentModel>()
 				.ForMember(d => d.CommentId, mo => mo.MapFrom(s => s.Id))
-				.ForMember(d => d.VotingId, mo => mo.MapFrom(s => s.ThemeId))
-				.ForMember(d => d.VotingName, mo => mo.MapFrom(s => s.Theme.VotingName))
+				.ForMember(d => d.VotingId, mo => mo.MapFrom(s => s.VotingId))
+				.ForMember(d => d.VotingName, mo => mo.MapFrom(s => s.Voting.VotingName))
 				.ForMember(d => d.CreatedBy, mo => mo.MapFrom(s => s.User.UserName))
 				.ForMember(d => d.PictureUrl, mo => mo.MapFrom(s => s.User.UserProfile.PictureUrl ?? GlobalVariables.DefaultImagePath))
 				.ForMember(d => d.Own, mo => mo.Ignore())
@@ -92,8 +92,8 @@ namespace VotingSystem.Web.Helpers
 		{
 			Mapper.CreateMap<Answer, AnswerModel>()
 				.ForMember(d => d.AnswerText, mo => mo.MapFrom(s => s.FixedAnswer == null ? s.AnswerText : s.FixedAnswer.AnswerText))
-				.ForMember(d => d.VotingId, mo => mo.MapFrom(s => s.Question.ThemeId))
-				.ForMember(d => d.VotingName, mo => mo.MapFrom(s => s.Question.Theme.VotingName))
+				.ForMember(d => d.VotingId, mo => mo.MapFrom(s => s.Question.VotingId))
+				.ForMember(d => d.VotingName, mo => mo.MapFrom(s => s.Question.Voting.VotingName))
 				.AfterMap((s, d) => d.PictureUrl = pictureUrl);
 
 			return Mapper.Map<Answer, AnswerModel>(answer);
@@ -103,7 +103,7 @@ namespace VotingSystem.Web.Helpers
 		{
 			Mapper.CreateMap<Question, QuestionModel>()
 				.ForMember(d => d.QuestionId, mo => mo.MapFrom(s => s.Id))
-				.ForMember(d => d.VotingId, mo => mo.MapFrom(s => s.ThemeId))
+				.ForMember(d => d.VotingId, mo => mo.MapFrom(s => s.VotingId))
 				.ForMember(d => d.FixedAnswers,
 					mo => mo.MapFrom(s => s.FixedAnswers.Select(fa => fa.ToFixedAnswerModel()).ToList()))
 				.ForMember(d => d.Answers, mo => mo.Ignore());
@@ -115,7 +115,7 @@ namespace VotingSystem.Web.Helpers
 		{
 			Mapper.CreateMap<Question, QuestionModel>()
 				.ForMember(d => d.QuestionId, mo => mo.MapFrom(s => s.Id))
-				.ForMember(d => d.VotingId, mo => mo.MapFrom(s => s.ThemeId))
+				.ForMember(d => d.VotingId, mo => mo.MapFrom(s => s.VotingId))
 				.ForMember(d => d.FixedAnswers, mo => mo.Ignore())
 				.AfterMap((s, d) =>
 					{

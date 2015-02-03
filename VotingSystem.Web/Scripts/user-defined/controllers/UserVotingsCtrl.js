@@ -1,70 +1,67 @@
 ﻿angular.module("votingSystem.controllers.userVotings", [])
-	.controller("UserVotingsCtrl", ["$scope", "$http", "$route", "$routeParams", "$location", "constants", "reload", "VotingStorage", "commentsHub",
-		function ($scope, $http, $route, $routeParams, $location, constants, reload, VotingStorage, commentsHub) {
-			$scope.page = $routeParams.pageNumber;
+	.controller("UserVotingsCtrl", [
+		"$scope", "$routeParams", "$location", "constants", "UnitOfWork", "commentsHub",
+		"reloadDataAfterUserAction", "notifications",
+		function ($scope, $routeParams, $location, constants, UnitOfWork, commentsHub,
+			reloadDataAfterUserAction, notifications) {
 			$scope.pageName = "userVotings";
 			$scope.total = 1;
-			$scope.constants = constants;
 			$scope.breadCrumbItemName = "Votings";
-			$scope.$location = $location;
-			$scope.$route = $route;
-			$scope.reload = reload;
 			$scope.votings = [];
 
 			commentsHub.changePageOnHub();
 
-			//REVIEW: not readable. Pls, use line indents
-			VotingStorage.query(
-			{
-				pageType: "UserVotings",
-				page: $scope.page
-			},
-			function (data) {
-				$scope.votings = data;
-				VotingStorage.total(
+			UnitOfWork.votingStorage().query(
 				{
-					totalKind: "totalUser"
+					pageType: "UserVotings",
+					page: $routeParams.pageNumber
 				},
-				function (response) {
-					$scope.total = response.total;
+				function (data) {
+					$scope.votings = data;
+					UnitOfWork.votingStorage().total(
+						{
+							totalKind: "totalUser"
+						},
+						function (response) {
+							$scope.total = response.total;
+						});
 				});
-			});
 
-			$scope.setThemeStatus = function (voting, status) {
+			$scope.setVotingStatus = function (voting, status) {
 				var oldStatus = angular.copy(voting.Status);
 				voting.Status = status;
-				voting.$update().then(
-				function () {
-					toastr.success(constants["votingStatusChangedMessage"]);
-				}, function () {
-					voting.Status = oldStatus;
-					toastr.error(constants["errorOccurredDuringSavingProcessMessage"]);
-				});
+				voting.$update()
+					.then(function () {
+						notifications.votingStatusChanged();
+					}, function () {
+						voting.Status = oldStatus;
+						notifications.savingError();
+					});
 			};
 
-			$scope.removeTheme = function (voting) {
+			$scope.removeVoting = function (voting) {
 				voting.$remove(
-				function () {
-					$scope.votings.splice($scope.votings.indexOf(voting), 1);
-					toastr.success(constants["votingDeletedMessage"]);
-					$scope.reload($scope, $scope.votings.length, "/" + $scope.pageName + "/{pageNumber}");
-				},
-				function () {
-					toastr.error(constants["errorOccurredDuringDeletingProcessMessage"]);
-				});
+					function () {
+						$scope.votings.splice($scope.votings.indexOf(voting), 1);
+						notifications.votingDeleted();
+						reloadDataAfterUserAction($scope.votings.length, "/" + $scope.pageName + "/{pageNumber}");
+					},
+					function () {
+						notifications.deletingError();
+					});
 			};
 
 			$scope.addNewVoting = function ($event, newVoting) {
-				VotingStorage.save(
-				{}, newVoting,
-				function () {
-					angular.element($event.currentTarget).closest(".modal").modal("hide");
-					toastr.success(constants["votingCreatedMessage"]);
-					$scope.reload($scope, $scope.votings.length, "/" + $scope.pageName + "/{pageNumber}");
-				}, function () {
-					angular.element($event.currentTarget).closest(".modal").modal("hide");
-					toastr.error(constants["errorOccurredDuringSavingProcessMessage"]);
-				});
+				UnitOfWork.votingStorage().save(
+					{}, newVoting,
+					function () {
+						angular.element($event.currentTarget).closest(".modal").modal("hide");
+						notifications.votingCreated();
+						reloadDataAfterUserAction($scope.votings.length, "/" + $scope.pageName + "/{pageNumber}");
+					}, function () {
+						angular.element($event.currentTarget).closest(".modal").modal("hide");
+						notifications.savingError();
+					});
 			};
 
 			$scope.openQuestion = function (question) {
@@ -96,6 +93,7 @@
 			$scope.setDate = function (property, date) {
 				$scope.newVoting[property] = date;
 				//REVIEW: ;
-				$scope.$apply()
+				$scope.$apply();
 			}
-		}]);
+		}
+	]);

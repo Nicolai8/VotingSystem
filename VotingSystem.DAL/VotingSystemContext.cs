@@ -15,7 +15,7 @@ namespace VotingSystem.DAL
 
 		public DbSet<Comment> Comments { get; set; }
 
-		public DbSet<Theme> Themes { get; set; }
+		public DbSet<Voting> Votings { get; set; }
 
 		public DbSet<User> Users { get; set; }
 

@@ -6,7 +6,7 @@ using VotingSystem.DAL.Enums;
 
 namespace VotingSystem.DAL.Entities
 {
-	public class Theme : BaseEntity
+	public class Voting : BaseEntity
 	{
 		[Required]
 		public string VotingName { get; set; }

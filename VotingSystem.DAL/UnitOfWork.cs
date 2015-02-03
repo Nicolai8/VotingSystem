@@ -31,11 +31,11 @@ namespace VotingSystem.DAL
 			}
 		}
 
-		public IGenericRepository<Theme> ThemeRepository
+		public IGenericRepository<Voting> VotingRepository
 		{
 			get
 			{
-				return GetGenericRepository<Theme>();
+				return GetGenericRepository<Voting>();
 			}
 		}
 

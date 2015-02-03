@@ -34,10 +34,10 @@ namespace VotingSystem.BLL
 				.GetPage(filter.Page, filter.PageSize).ToList();
 		}
 
-		public List<Comment> GetByThemeId(int themeId, int page = 1, int pageSize = 10)
+		public List<Comment> GetByVotingId(int votingId, int page = 1, int pageSize = 10)
 		{
 			return UnitOfWork.CommentRepository.Query()
-				.Filter(c => c.ThemeId == themeId)
+				.Filter(c => c.VotingId == votingId)
 				.OrderBy(co => co.OrderByDescending(com => com.CreateDate))
 				.GetPage(page, pageSize).ToList();
 		}

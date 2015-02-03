@@ -43,7 +43,7 @@
     <Compile Include="IAnswerService.cs" />
     <Compile Include="ICommentService.cs" />
     <Compile Include="IRoleService.cs" />
-    <Compile Include="IThemeService.cs" />
+    <Compile Include="IVotingService.cs" />
     <Compile Include="IUserProfileService.cs" />
     <Compile Include="IUserService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

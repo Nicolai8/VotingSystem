@@ -39,8 +39,8 @@
 					<span data-ng-switch-when="4">Closed</span>
 				</td>
 				<td>
-					<a data-ng-if="voting.Status!=4" data-ng-click="setThemeStatus(voting, 4)">Close</a>
-					<a data-ng-click="removeTheme(voting)">Remove</a>
+					<a data-ng-if="voting.Status!=4" data-ng-click="setVotingStatus(voting, 4)">Close</a>
+					<a data-ng-click="removeVoting(voting)">Remove</a>
 				</td>
 
 			</tr>
@@ -67,7 +67,7 @@
 									Field "Voting Name" is required.
 								</li>
 								<li ng-show="newVotingForm.validateQuestionsCount.$error.min">
-									Theme should contain at least 1 question.
+									Voting should contain at least 1 question.
 								</li>
 								<li ng-show="newVotingForm.startDate.$error.required">
 									Field "Start Date" is required.
@@ -95,7 +95,7 @@
 					<div class="form-group date">
 						<label class="col-sm-2 control-label" for="newVotingStartDate">* Start Date:</label>
 						<div class="col-sm-4">
-							<div class="input-group date" id="newVotingStartDate" data-datetime-picker=""
+							<div class="input-group date" id="newVotingStartDate" data-date-time-picker=""
 							     data-is-depend="true" data-depend-on="#newVotingFinishDate" data-depend-on-min="true"
 							     data-on-change="setDate" data-on-change-property="StartDate">
 								<input type="text" class="form-control" name="startDate" data-format="MM/DD/YYYY"
@@ -109,7 +109,7 @@
 					<div class="form-group date">
 						<label class="col-sm-2 control-label" for="newVotingFinishDate">* Finish Date:</label>
 						<div class="col-sm-4">
-							<div class="input-group date" id="newVotingFinishDate" data-datetime-picker=""
+							<div class="input-group date" id="newVotingFinishDate" data-date-time-picker=""
 							     data-is-depend="true" data-depend-on="#newVotingStartDate" data-depend-on-min="false"
 							     data-on-change="setDate" data-on-change-property="FinishTime">
 								<input type="text" readonly class="form-control" name="finishDate" data-format="MM/DD/YYYY"
@@ -229,7 +229,7 @@
 							<input type="text" class="form-control" data-ng-model="newQuestion.Text" name="QuestionText" required/>
 						</div>
 					</div>
-					<div class="form-group" data-ng-if="newQuestion.Type==1">
+					<div class="form-group" data-ng-if="newQuestion.Type==2">
 						<input type="number" min="2" name="validateOptions" ng-model="newQuestion.FixedAnswers.length" class="hidden"/>
 						<div class="col-sm-10 col-sm-offset-2">
 							<button type="button" class="btn btn-default btn-primary btn-sm"

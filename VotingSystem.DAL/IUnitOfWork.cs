@@ -9,7 +9,7 @@ namespace VotingSystem.DAL
 
 		IGenericRepository<Comment> CommentRepository { get; }
 
-		IGenericRepository<Theme> ThemeRepository { get; }
+		IGenericRepository<Voting> VotingRepository { get; }
 
 		IGenericRepository<User> UserRepository { get; }
 

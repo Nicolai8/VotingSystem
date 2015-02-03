@@ -61,9 +61,9 @@ namespace VotingSystem.Web.Helpers
 			return comment != null && comment.UserId.HasValue ? comment.UserId.Value : -1;
 		}
 
-		public static int GetUserIdFromTheme(Theme theme)
+		public static int GetUserIdFromVoting(Voting voting)
 		{
-			return theme != null && theme.UserId.HasValue ? theme.UserId.Value : -1;
+			return voting != null && voting.UserId.HasValue ? voting.UserId.Value : -1;
 		}
 	}
 }

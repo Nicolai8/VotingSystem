@@ -67,7 +67,7 @@
     <Compile Include="Entities\Question.cs" />
     <Compile Include="Entities\Role.cs" />
     <Compile Include="Enums\VotingStatusType.cs" />
-    <Compile Include="Entities\Theme.cs" />
+    <Compile Include="Entities\Voting.cs" />
     <Compile Include="Enums\QuestionType.cs" />
     <Compile Include="Entities\User.cs" />
     <Compile Include="Entities\UserProfile.cs" />
@@ -123,6 +123,10 @@
     <Compile Include="Migrations\201407151148461_AddQuestions.cs" />
     <Compile Include="Migrations\201407151148461_AddQuestions.Designer.cs">
       <DependentUpon>201407151148461_AddQuestions.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201502031256393_RenameThemeToVoting.cs" />
+    <Compile Include="Migrations\201502031256393_RenameThemeToVoting.Designer.cs">
+      <DependentUpon>201502031256393_RenameThemeToVoting.cs</DependentUpon>
     </Compile>
     <Compile Include="Repositories\GenericRepository.cs" />
     <Compile Include="Migrations\201312121157133_InitialCreate.cs" />
@@ -189,6 +193,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201407151148461_AddQuestions.resx">
       <DependentUpon>201407151148461_AddQuestions.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201502031256393_RenameThemeToVoting.resx">
+      <DependentUpon>201502031256393_RenameThemeToVoting.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

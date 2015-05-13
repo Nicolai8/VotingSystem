@@ -1,8 +1,8 @@
 ﻿using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using VotingSystem.Web.Enums;
 using VotingSystem.Web.Helpers;
-using VotingSystem.Web.Models;
 
 namespace VotingSystem.Web.Filters
 {

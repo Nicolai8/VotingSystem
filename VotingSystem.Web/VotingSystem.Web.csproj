@@ -8,7 +8,7 @@
     </ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{A606D668-7F89-4235-A515-AAB9939CE0A1}</ProjectGuid>
-    <ProjectTypeGuids>{E3E379DF-F4C6-4180-9B81-6769533ABE47};{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>VotingSystem.Web</RootNamespace>
@@ -57,11 +57,12 @@
       <HintPath>..\packages\dotless.1.4.1.0\lib\dotless.Core.dll</HintPath>
     </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
+      <Private>True</Private>
       <HintPath>..\packages\EntityFramework.6.0.2\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
     <Reference Include="EntityFramework.SqlServer">
       <HintPath>..\packages\EntityFramework.6.0.2\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.AspNet.SignalR.Core">
       <HintPath>..\packages\Microsoft.AspNet.SignalR.Core.2.1.0\lib\net45\Microsoft.AspNet.SignalR.Core.dll</HintPath>
@@ -256,9 +257,13 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="App_Start\AuthConfig.cs" />
+    <Compile Include="App_GlobalResources\Errors.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Errors.resx</DependentUpon>
+    </Compile>
+    <Compile Include="App_Start\AsIsBundleOrderer.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
-    <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.cs" />
     <Compile Include="App_Start\UnityWebActivator.cs" />
@@ -271,7 +276,6 @@
     <Compile Include="Controllers\API\CommentApiController.cs" />
     <Compile Include="Controllers\MainController.cs" />
     <Compile Include="Controllers\API\VotingApiController.cs" />
-    <Compile Include="Filters\OwnsHubAttribute.cs" />
     <Compile Include="Filters\CustomAuthorizeHubAttribute.cs" />
     <Compile Include="Filters\CustomAuthorizeApiAttribute.cs" />
     <Compile Include="Filters\CustomAuthorizeMvcAttribute.cs" />
@@ -292,10 +296,10 @@
     <Compile Include="Models\ConnectionMapping.cs" />
     <Compile Include="Models\FixedAnswerModel.cs" />
     <Compile Include="Models\MainPageModel.cs" />
-    <Compile Include="Models\OwnsType.cs" />
-    <Compile Include="Models\PageType.cs" />
+    <Compile Include="Enums\OwnsType.cs" />
+    <Compile Include="Enums\PageType.cs" />
     <Compile Include="Models\QuestionModel.cs" />
-    <Compile Include="Models\RoleType.cs" />
+    <Compile Include="Enums\RoleType.cs" />
     <Compile Include="Models\UserModel.cs" />
     <Compile Include="Models\VotingModel.cs" />
     <Compile Include="Models\VotingPageModel.cs" />
@@ -305,7 +309,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resource.resx</DependentUpon>
     </Compile>
-    <Compile Include="Providers\CustomeRoleProvider.cs" />
+    <Compile Include="Providers\CustomRoleProvider.cs" />
     <Compile Include="Providers\CustomMembershipProvider.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -344,7 +348,6 @@
     <Content Include="Scripts\libraries\angular\angular-touch.min.js" />
     <Content Include="Scripts\libraries\angular\angular.js" />
     <Content Include="Scripts\libraries\angular\angular.min.js" />
-    <Content Include="Scripts\libraries\async.js" />
     <Content Include="Scripts\libraries\jquery.signalR-2.1.0.js" />
     <Content Include="Scripts\libraries\jquery.signalR-2.1.0.min.js" />
     <Content Include="Content\fonts\glyphicons-halflings-regular.eot" />
@@ -470,7 +473,6 @@
     <Content Include="Scripts\libraries\bootstrapValidator.min.js">
       <DependentUpon>bootstrapValidator.js</DependentUpon>
     </Content>
-    <Content Include="Scripts\libraries\gremlins.min.js" />
     <Content Include="Scripts\libraries\jquery-ui-1.10.3.min.js">
       <DependentUpon>jquery-ui-1.10.3.js</DependentUpon>
     </Content>
@@ -482,24 +484,11 @@
     <Content Include="Scripts\libraries\jquery.iframe-transport.js" />
     <Content Include="Scripts\libraries\jquery.pagedown-bootstrap.combined.js" />
     <Content Include="Scripts\libraries\jquery.ui.widget.js" />
-    <Content Include="Scripts\libraries\less.js" />
-    <Content Include="Scripts\libraries\less.min.js">
-      <DependentUpon>less.js</DependentUpon>
-    </Content>
     <Content Include="Scripts\libraries\moment-2.4.0.js" />
-    <Content Include="Scripts\libraries\r.js" />
-    <Content Include="Scripts\libraries\require.js" />
-    <Content Include="Scripts\libraries\goog.js" />
-    <Content Include="Scripts\libraries\propertyParser.js" />
     <Content Include="Scripts\libraries\spin.js" />
     <Content Include="Scripts\libraries\toastr.min.js">
       <DependentUpon>toastr.js</DependentUpon>
     </Content>
-    <Content Include="Scripts\libraries\underi18n.js" />
-    <Content Include="Scripts\libraries\underscore.min.js">
-      <DependentUpon>underscore.js</DependentUpon>
-    </Content>
-    <Content Include="Scripts\main.js" />
     <Content Include="Scripts\libraries\toastr.js" />
     <Content Include="Scripts\user-defined\app.js" />
     <Content Include="Scripts\user-defined\controllers\CommentsCtrl.js" />
@@ -510,9 +499,11 @@
     <Content Include="Scripts\user-defined\controllers\VoicesCtrl.js" />
     <Content Include="Scripts\user-defined\controllers\AdminVotingsCtrl.js" />
     <Content Include="Scripts\user-defined\controllers\VotingCtrl.js" />
-    <Content Include="Scripts\user-defined\controllers\ControllersModule.js" />
+    <Content Include="Scripts\user-defined\ControllersModule.js" />
     <Content Include="Scripts\user-defined\directives\bootstrapMarkdown.js" />
+    <Content Include="Scripts\user-defined\directives\cleanUp.js" />
     <Content Include="Scripts\user-defined\directives\dateTimePicker.js" />
+    <Content Include="Scripts\user-defined\directives\fileUploader.js" />
     <Content Include="Scripts\user-defined\directives\focusOut.js" />
     <Content Include="Scripts\user-defined\directives\goBack.js" />
     <Content Include="Scripts\user-defined\directives\onEnterPress.js" />
@@ -522,20 +513,24 @@
     <Content Include="Scripts\user-defined\directives\trustHtml.js" />
     <Content Include="Scripts\user-defined\directives\validateField.js" />
     <Content Include="Scripts\user-defined\directives\validateForm.js" />
-    <Content Include="Scripts\user-defined\directives\DirectivesModule.js" />
+    <Content Include="Scripts\user-defined\DirectivesModule.js" />
+    <Content Include="Scripts\user-defined\factories\AuthStorage.js" />
+    <Content Include="Scripts\user-defined\UnitOfWork.js" />
     <Content Include="Scripts\user-defined\services\commentsHub.js" />
-    <Content Include="Scripts\user-defined\services\CommentStorage.js" />
-    <Content Include="Scripts\user-defined\services\reload.js" />
-    <Content Include="Scripts\user-defined\services\UserStorage.js" />
-    <Content Include="Scripts\user-defined\services\VoiceStorage.js" />
-    <Content Include="Scripts\user-defined\services\VotingStorage.js" />
+    <Content Include="Scripts\user-defined\factories\CommentStorage.js" />
+    <Content Include="Scripts\user-defined\factories\LocalStorage.js" />
+    <Content Include="Scripts\user-defined\services\reloadDataAfterUserAction.js" />
+    <Content Include="Scripts\user-defined\factories\UserStorage.js" />
+    <Content Include="Scripts\user-defined\factories\VoiceStorage.js" />
+    <Content Include="Scripts\user-defined\factories\VotingStorage.js" />
     <Content Include="Scripts\libraries\html5shiv.js" />
     <Content Include="Scripts\libraries\jquery.js" />
     <Content Include="Scripts\libraries\jquery.min.js" />
     <Content Include="Scripts\libraries\jquery-ui-1.10.3.js" />
-    <Content Include="Scripts\libraries\underscore.js" />
-    <Content Include="Scripts\user-defined\constants.js" />
-    <Content Include="Scripts\user-defined\services\ServicesModule.js" />
+    <Content Include="Scripts\user-defined\constants\constants.js" />
+    <Content Include="Scripts\user-defined\ServicesModule.js" />
+    <Content Include="Scripts\user-defined\providers\spinner.js" />
+    <Content Include="Scripts\user-defined\services\notifications.js" />
     <Content Include="Views\Templates\adminvotings.html" />
     <Content Include="Views\Templates\comments.html" />
     <Content Include="Views\Templates\main.html" />
@@ -600,6 +595,11 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="App_GlobalResources\Errors.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Errors.Designer.cs</LastGenOutput>
+      <CustomToolNamespace>VotingSystem.Web.Resources</CustomToolNamespace>
+    </EmbeddedResource>
     <EmbeddedResource Include="App_GlobalResources\Resource.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Resource.Designer.cs</LastGenOutput>

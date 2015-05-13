@@ -8,9 +8,12 @@ using System.Web.Security;
 using VotingSystem.BLL.Interfaces;
 using VotingSystem.Common;
 using VotingSystem.DAL.Entities;
+using VotingSystem.DAL.Enums;
+using VotingSystem.Web.Enums;
 using VotingSystem.Web.Filters;
 using VotingSystem.Web.Helpers;
-using VotingSystem.Web.Models;
+using VotingSystem.Web.Providers;
+using VotingSystem.Web.Resources;
 
 namespace VotingSystem.Web.Controllers
 {
@@ -33,7 +36,7 @@ namespace VotingSystem.Web.Controllers
 				FormsAuthentication.SetAuthCookie(userName, rememberMe);
 				return Json(new { result = true }, JsonRequestBehavior.AllowGet);
 			}
-			throw new VotingSystemException("Provided username or password are incorrect.");
+			throw new VotingSystemException(Errors.IncorrectUsernameOrPassword);
 		}
 
 		[HttpPost]
@@ -56,8 +59,8 @@ namespace VotingSystem.Web.Controllers
 				{
 					Roles.AddUserToRole(newUserName, "User");
 					MailHelper.SendEmail(newUserName, newPassword,
-						Resources.Resource.RegistrationMailSubject,
-						Resources.Resource.RegistrationMailBody,
+						Resource.RegistrationMailSubject,
+						Resource.RegistrationMailBody,
 						email,
 						Request.UrlReferrer.AbsoluteUri);
 					return Json(new { result = true }, JsonRequestBehavior.AllowGet);
@@ -67,7 +70,7 @@ namespace VotingSystem.Web.Controllers
 			{
 				Membership.DeleteUser(newUserName);
 			}
-			throw new VotingSystemException("Registration failed.");
+			throw new VotingSystemException(Errors.RegistrationFailed);
 		}
 
 		[HttpPost]
@@ -78,14 +81,15 @@ namespace VotingSystem.Web.Controllers
 			{
 				return;
 			}
-			throw new VotingSystemException("The password wasn't been updated.");
+			throw new VotingSystemException(Errors.UpdatePasswordFailed);
 		}
 
 		[HttpGet]
-		public JsonResult IsInRole()
+		public string IsInRole()
 		{
-			List<string> roles = Roles.GetRolesForUser(User.Identity.Name).ToList();
-			return Json(string.Join(",", roles), JsonRequestBehavior.AllowGet);
+			CustomRoleProvider roleProvider = (CustomRoleProvider)Roles.Provider;
+			List<string> roles = roleProvider.GetRolesForUser(UserId).ToList();
+			return string.Join(",", roles);
 		}
 
 		[HttpGet]
@@ -96,48 +100,33 @@ namespace VotingSystem.Web.Controllers
 			return Json(new { result = exists }, JsonRequestBehavior.AllowGet);
 		}
 
-		[HttpGet]
-		[ActionName("Profile")]
-		[AllowAnonymous]
-		public JsonResult UserProfile(string userName)
-		{
-			UserModel user = new UserModel();
-			MembershipUser membershipUser = string.IsNullOrEmpty(userName) ? Membership.GetUser() : Membership.GetUser(userName);
-			if (membershipUser != null)
-			{
-				user = membershipUser.ToUserModel(_userProfileService.GetByUserId((int)membershipUser.ProviderUserKey));
-				if (String.IsNullOrEmpty(userName))
-				{
-					user.Privacy = PrivacyType.WholeWorld;
-				}
-				HideFieldsAccordingToPrivacy(user);
-			}
-			return Json(user, JsonRequestBehavior.AllowGet);
-		}
-
 		[HttpPost]
 		public string UploadPicture(HttpPostedFileBase picture)
 		{
 			picture = picture ?? Request.Files["picture"];
 			if (picture == null)
 			{
-				throw new ArgumentException("Picture not found");
+				throw new ArgumentException(Errors.PictureNotFound);
 			}
-			UserProfile userProfile = _userProfileService.GetByUserId(UserId);
+
+			UserProfile userProfile = _userProfileService.GetUserProfileByUserId(UserId);
+
 			string oldPicture = userProfile.PictureUrl;
 			FileHelper.DeletePicture(Server, oldPicture);
+
 			string pictureUrl = FileHelper.SavePicture(Server, picture);
 			userProfile.PictureUrl = pictureUrl;
-			_userProfileService.Update(userProfile);
+
+			_userProfileService.UpdateUserProfile(userProfile);
 			return pictureUrl;
 		}
 
 		[HttpPost]
 		public void ChangePrivacy(PrivacyType privacy)
 		{
-			UserProfile userProfile = _userProfileService.GetByUserId(UserId);
+			UserProfile userProfile = _userProfileService.GetUserProfileByUserId(UserId);
 			userProfile.Privacy = privacy;
-			_userProfileService.Update(userProfile);
+			_userProfileService.UpdateUserProfile(userProfile);
 		}
 
 		[CustomAuthorizeMvc(Roles = new[] { RoleType.Admin })]
@@ -145,27 +134,5 @@ namespace VotingSystem.Web.Controllers
 		{
 			return Json(Roles.GetAllRoles(), JsonRequestBehavior.AllowGet);
 		}
-
-		#region Private methods
-		private void HideFieldsAccordingToPrivacy(UserModel user)
-		{
-			switch (user.Privacy)
-			{
-				case PrivacyType.Users:
-					if (!Request.IsAuthenticated)
-					{
-						user.Privacy = null;
-						user.Email = "Hidden";
-					}
-					break;
-				case PrivacyType.WholeWorld:
-					break;
-				default:
-					user.Privacy = null;
-					user.Email = "Hidden";
-					break;
-			}
-		}
-		#endregion
 	}
 }

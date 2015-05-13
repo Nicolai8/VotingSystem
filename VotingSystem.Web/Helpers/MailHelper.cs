@@ -12,6 +12,7 @@ namespace VotingSystem.Web.Helpers
 				mail.Subject = subject;
 				mail.Body = String.Format(bodyTemplate, userName, password, url);
 				mail.IsBodyHtml = true;
+
 				using (SmtpClient client = new SmtpClient())
 				{
 					client.Send(mail);

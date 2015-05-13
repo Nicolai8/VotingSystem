@@ -4,10 +4,12 @@ using System.Linq;
 using System.Web.Http;
 using VotingSystem.BLL.Interfaces;
 using VotingSystem.Common;
+using VotingSystem.Common.Filters;
 using VotingSystem.DAL.Entities;
 using VotingSystem.Web.Filters;
 using VotingSystem.Web.Helpers;
 using VotingSystem.Web.Models;
+using VotingSystem.Web.Resources;
 
 namespace VotingSystem.Web.Controllers.API
 {
@@ -16,22 +18,23 @@ namespace VotingSystem.Web.Controllers.API
 	{
 		private readonly IAnswerService _answerService;
 		private readonly IUserProfileService _userProfileService;
-		private readonly IThemeService _themeService;
+		private readonly IVotingService _votingService;
 
-		public AnswerApiController(IAnswerService answerService, IUserProfileService userProfileService, IThemeService themeService)
+		public AnswerApiController(IAnswerService answerService, IUserProfileService userProfileService, IVotingService votingService)
 		{
 			_answerService = answerService;
 			_userProfileService = userProfileService;
-			_themeService = themeService;
+			_votingService = votingService;
 		}
 
 		#region Public Methods
+
 		[Route("")]
 		[CustomAuthorizeApi]
 		public IEnumerable<AnswerModel> Get(int page, int size)
 		{
-			List<Answer> answers = _answerService.GetByUserId(UserId, page, size);
-			UserProfile userProfile = _userProfileService.GetByUserId(UserId);
+			List<Answer> answers = _answerService.GetByUserId(UserId, new Filter(page, size));
+			UserProfile userProfile = _userProfileService.GetUserProfileByUserId(UserId);
 			string pictureUrl = userProfile != null && !String.IsNullOrEmpty(userProfile.PictureUrl) ?
 				userProfile.PictureUrl : GlobalVariables.DefaultImagePath;
 			return answers.Select(a => a.ToAnswerModel(pictureUrl));
@@ -41,8 +44,8 @@ namespace VotingSystem.Web.Controllers.API
 		public IEnumerable<QuestionModel> Get(int id)
 		{
 			int userId = User.Identity.IsAuthenticated ? UserId : -1;
-			Theme theme = _themeService.GetByThemeId(id);
-			return theme.Questions.Select(q => q.ToQuestionModel(userId));
+			Voting voting = _votingService.GetVotingById(id);
+			return voting.Questions.Select(q => q.ToQuestionModel(userId));
 		}
 
 		[Route("")]
@@ -52,12 +55,12 @@ namespace VotingSystem.Web.Controllers.API
 			return Vote(answers, UserId);
 		}
 
-		[Route("total", Name = "TotalAnswers")]
 		[HttpGet]
+		[Route("total")]
 		[CustomAuthorizeApi]
 		public int GetTotalAnswers()
 		{
-			return _answerService.GetMyTotal(UserId);
+			return _answerService.GetNumberOfUserAnswers(UserId);
 		}
 
 		[Route("")]
@@ -68,26 +71,29 @@ namespace VotingSystem.Web.Controllers.API
 			{
 				return Vote(answers, null);
 			}
-			throw new VotingSystemException("Captcha is invalid");
+			throw new VotingSystemException(Errors.InvalidCaptcha);
 		}
+
 		#endregion
 
 		#region Private methods
+
 		private int Vote(IEnumerable<Answer> answers, int? userId)
 		{
-			int themeId = _themeService.GetByQuestionId(answers.First().QuestionId).Id;
-			if (userId != null && _answerService.IsAnswered(themeId, userId.Value))
+			int votingId = _votingService.GetVotingByQuestionId(answers.First().QuestionId).Id;
+			if (userId != null && _answerService.IsVotingAnswered(votingId, userId.Value))
 			{
-				throw new VotingSystemException("You already answered on this voting.");
+				throw new VotingSystemException(Errors.AlreadyAnsweredVoting);
 			}
-			if (!_themeService.IsClosed(themeId))
+			if (!_votingService.IsVotingClosed(votingId))
 			{
-				_answerService.Answer(answers, userId);
-				List<Answer> answersToTheme = _answerService.GetByThemeId(themeId, 1, int.MaxValue);
-				return answersToTheme.Count(a => a.QuestionId == answersToTheme.First().QuestionId);
+				_answerService.AddAnswer(answers, userId);
+				List<Answer> answersToVoting = _answerService.GetByVotingId(votingId, new Filter(1, int.MaxValue));
+				return answersToVoting.Count(a => a.QuestionId == answersToVoting.First().QuestionId);
 			}
-			throw new VotingSystemException("Voting is closed or blocked.");
+			throw new VotingSystemException(Errors.VotingClosedOrBlocked);
 		}
+
 		#endregion
 	}
 }

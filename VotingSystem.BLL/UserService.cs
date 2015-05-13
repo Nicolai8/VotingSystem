@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Linq.Expressions;
 using VotingSystem.BLL.Interfaces;
+using VotingSystem.Common.Filters;
 using VotingSystem.DAL;
 using VotingSystem.DAL.Entities;
 
@@ -19,7 +20,7 @@ namespace VotingSystem.BLL
 			_roleService = roleService;
 		}
 
-		public User GetUser(string userName)
+		public User GetUserByUserName(string userName)
 		{
 			return UnitOfWork.UserRepository.Query()
 				.Filter(u => u.UserName.Equals(userName))
@@ -27,20 +28,25 @@ namespace VotingSystem.BLL
 				.Get().SingleOrDefault();
 		}
 
-		public List<User> GetUsers(out int total, int page = 1, int pageSize = 10)
+		public List<User> GetUsers(out int total, Filter filter)
 		{
 			total = UnitOfWork.UserRepository.GetTotal();
 			return UnitOfWork.UserRepository.Query()
 				.OrderBy(u => u.OrderBy(us => us.UserName))
-				.GetPage(page, pageSize).ToList();
+				.GetPage(filter.Page, filter.PageSize).ToList();
 		}
 
-		public List<User> GetSuggestedUsers(int page = 1, int pageSize = 10)
+		public List<User> GetSuggestedUsers(Filter filter)
 		{
 			return UnitOfWork.UserRepository.Query()
 				.Filter(u => u.UserProfile.SuggestedToBlock)
 				.OrderBy(u => u.OrderBy(us => us.UserName))
-				.GetPage(page, pageSize).ToList();
+				.GetPage(filter.Page, filter.PageSize).ToList();
+		}
+
+		public string[] GetUserRolesByUserName(string username)
+		{
+			return GetUserByUserName(username).Roles.Select(r => r.RoleName).ToArray();
 		}
 
 		public User GetUserByEmail(string email)
@@ -55,40 +61,48 @@ namespace VotingSystem.BLL
 			return UnitOfWork.UserRepository.GetById(id);
 		}
 
-		public string[] GetUserRoles(string userName)
+		public string[] GetUserRolesByUserId(int userId)
 		{
-			return GetUser(userName).Roles.Select(r => r.RoleName).ToArray();
+			return GetUserById(userId).Roles.Select(r => r.RoleName).ToArray();
 		}
 
 		public List<User> GetUsersByName(string userName)
 		{
 			return UnitOfWork.UserRepository.Query()
-				.Filter(u => u.UserName.Equals(userName))
+				.Filter(u => u.UserName.Contains(userName))
 				.OrderBy(u => u.OrderBy(us => us.UserName))
 				.Get().ToList();
 		}
 
 		public void UpdateUser(User user)
 		{
-			User currentUser = GetUser(user.UserName);
+			User currentUser = GetUserByUserName(user.UserName);
 			currentUser.Roles = user.Roles;
 			UnitOfWork.Save();
 		}
 
 		public void UpdateUser(string userName, string email = null, bool? isApproved = null, string password = null, string passwordQuestion = null, string passwordAnswer = null)
 		{
-			User currentUser = GetUser(userName);
+			User currentUser = GetUserByUserName(userName);
+
 			currentUser.Email = SetValueIfNotNull(currentUser.Email, email);
 			currentUser.Password = SetValueIfNotNull(currentUser.Password, password);
 			currentUser.IsApproved = Convert.ToBoolean(SetValueIfNotNull(currentUser.IsApproved, isApproved));
 			currentUser.PasswordQuestion = SetValueIfNotNull(currentUser.PasswordQuestion, passwordQuestion);
 			currentUser.PasswordAnswer = SetValueIfNotNull(currentUser.PasswordAnswer, passwordAnswer);
+
 			UnitOfWork.Save();
 		}
 
-		public void DeleteUser(string userName, bool deleteAllRelatedData)
+		public void DeleteUser(int userId)
 		{
-			UnitOfWork.UserRepository.Delete(GetUser(userName).Id);
+			UnitOfWork.UserRepository.Delete(userId);
+			UnitOfWork.Save();
+		}
+
+		public void DeleteUser(string userName)
+		{
+			UnitOfWork.UserRepository.Delete(GetUserByUserName(userName).Id);
 			UnitOfWork.Save();
 		}
 
@@ -100,31 +114,26 @@ namespace VotingSystem.BLL
 
 		public bool IsUserInRole(string userName, string roleName)
 		{
-			User user = GetUser(userName);
+			User user = GetUserByUserName(userName);
 			return user != null && user.Roles.Any(r => r.RoleName.Equals(roleName, StringComparison.InvariantCultureIgnoreCase));
 		}
 
-		public bool ToggleLock(string userName)
+		public bool ToggleLock(int userId)
 		{
-			User user = GetUser(userName);
+			User user = GetUserById(userId);
 			user.IsLocked = !user.IsLocked;
 			UnitOfWork.Save();
 			return user.IsLocked;
 		}
 
-		private T SetValueIfNotNull<T>(T currentValue, T newValue)
-		{
-			return newValue == null ? currentValue : newValue;
-		}
-
-		public int GetTotal(Expression<Func<User, bool>> filter = null)
+		public int GetNumberOfUsers(Expression<Func<User, bool>> filter = null)
 		{
 			return UnitOfWork.UserRepository.GetTotal(filter);
 		}
 
-		public void RemoveUserFromRoles(string username)
+		public void RemoveUserFromAllRoles(int userId)
 		{
-			User user = GetUser(username);
+			User user = GetUserById(userId);
 			user.Roles = new Collection<Role>();
 			UnitOfWork.Save();
 		}
@@ -132,7 +141,7 @@ namespace VotingSystem.BLL
 		public void RemoveUserFromRoles(string username, string[] roleNames)
 		{
 			List<Role> roles = roleNames.Select(roleName => _roleService.GetRole(roleName)).ToList();
-			User user = GetUser(username);
+			User user = GetUserByUserName(username);
 			if (user.Roles != null)
 			{
 				user.Roles = user.Roles.Except(roles).ToList();
@@ -143,7 +152,7 @@ namespace VotingSystem.BLL
 		public void AddUserToRoles(string username, string[] roleNames)
 		{
 			List<Role> roles = roleNames.Select(roleName => _roleService.GetRole(roleName)).ToList();
-			User user = GetUser(username);
+			User user = GetUserByUserName(username);
 			if (user.Roles != null)
 			{
 				roles.AddRange(user.Roles);
@@ -152,6 +161,25 @@ namespace VotingSystem.BLL
 			user.Roles = new List<Role>();
 			roles.ForEach(user.Roles.Add);
 			UnitOfWork.Save();
+		}
+
+		public void AddUserToRoles(int userId, string[] roleNames)
+		{
+			List<Role> roles = roleNames.Select(roleName => _roleService.GetRole(roleName)).ToList();
+			User user = GetUserById(userId);
+			if (user.Roles != null)
+			{
+				roles.AddRange(user.Roles);
+				roles = roles.Distinct().ToList();
+			}
+			user.Roles = new List<Role>();
+			roles.ForEach(user.Roles.Add);
+			UnitOfWork.Save();
+		}
+		
+		private T SetValueIfNotNull<T>(T currentValue, T newValue)
+		{
+			return newValue == null ? currentValue : newValue;
 		}
 	}
 }

@@ -5,10 +5,12 @@ namespace VotingSystem.BLL.Interfaces
 {
 	public interface IRoleService
 	{
-		List<Role> GetRoles();
+		List<Role> GetAllRoles();
+
 		Role GetRole(string roleName);
+
 		void CreateRole(string roleName);
-		void UpdateRole(Role role);
+
 		void DeleteRole(string roleName);
 	}
 }

@@ -2,11 +2,14 @@
 using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Configuration.Provider;
+using System.Web.Hosting;
 using System.Web.Mvc;
 using System.Web.Security;
 using VotingSystem.BLL.Interfaces;
 using VotingSystem.Common;
 using VotingSystem.DAL.Entities;
+using VotingSystem.DAL.Enums;
+using Filter = VotingSystem.Common.Filters.Filter;
 
 namespace VotingSystem.Web.Providers
 {
@@ -28,7 +31,7 @@ namespace VotingSystem.Web.Providers
 			}
 			base.Initialize(name, config);
 
-			_applicationName = GetConfigValue(config["applicationName"], System.Web.Hosting.HostingEnvironment.ApplicationVirtualPath);
+			_applicationName = GetConfigValue(config["applicationName"], HostingEnvironment.ApplicationVirtualPath);
 			_maxInvalidPasswordAttempts = GetConfigValue(config["maxInvalidPasswordAttempts"], 5);
 			_passwordAttemptWindow = GetConfigValue(config["passwordAttemptWindow"], 10);
 			_minRequiredNonAlphanumericCharacters = GetConfigValue(config["minRequiredNonAlphanumericCharacters"], 1);
@@ -55,6 +58,7 @@ namespace VotingSystem.Web.Providers
 		#region Properties
 
 		private const int NewPasswordLength = 8;
+
 		private IUserService _userService
 		{
 			get
@@ -62,6 +66,7 @@ namespace VotingSystem.Web.Providers
 				return DependencyResolver.Current.GetService<IUserService>();
 			}
 		}
+
 		private string _applicationName;
 		private bool _enablePasswordReset;
 		private bool _requiresQuestionAndAnswer;
@@ -164,6 +169,7 @@ namespace VotingSystem.Web.Providers
 		#endregion
 
 		#region MembershipMethods
+
 		public override bool ChangePassword(string username, string oldPwd, string newPwd)
 		{
 			if (!ValidateUser(username, oldPwd))
@@ -264,7 +270,20 @@ namespace VotingSystem.Web.Providers
 		{
 			try
 			{
-				_userService.DeleteUser(username, deleteAllRelatedData);
+				_userService.DeleteUser(username);
+				return true;
+			}
+			catch (Exception e)
+			{
+				throw new ProviderException(e.Message);
+			}
+		}
+
+		public bool DeleteUser(int userId)
+		{
+			try
+			{
+				_userService.DeleteUser(userId);
 				return true;
 			}
 			catch (Exception e)
@@ -279,10 +298,10 @@ namespace VotingSystem.Web.Providers
 			totalRecords = 0;
 			try
 			{
-				List<User> usersInDb = _userService.GetUsers(out totalRecords, pageIndex, pageSize);
+				List<User> usersInDb = _userService.GetUsers(out totalRecords, new Filter(pageIndex, pageSize));
 				foreach (User user in usersInDb)
 				{
-					users.Add(ConvertUsertToMembershipUser(user));
+					users.Add(ConvertUserToMembershipUser(user));
 				}
 			}
 			catch (Exception e)
@@ -297,10 +316,10 @@ namespace VotingSystem.Web.Providers
 			MembershipUserCollection users = new MembershipUserCollection();
 			try
 			{
-				List<User> usersInDb = _userService.GetSuggestedUsers(pageIndex, pageSize);
+				List<User> usersInDb = _userService.GetSuggestedUsers(new Filter(pageIndex, pageSize));
 				foreach (User user in usersInDb)
 				{
-					users.Add(ConvertUsertToMembershipUser(user));
+					users.Add(ConvertUserToMembershipUser(user));
 				}
 			}
 			catch (Exception e)
@@ -324,7 +343,7 @@ namespace VotingSystem.Web.Providers
 		{
 			try
 			{
-				return ConvertUsertToMembershipUser(_userService.GetUser(username));
+				return ConvertUserToMembershipUser(_userService.GetUserByUserName(username));
 			}
 			catch (Exception e)
 			{
@@ -336,7 +355,7 @@ namespace VotingSystem.Web.Providers
 		{
 			try
 			{
-				return ConvertUsertToMembershipUser(_userService.GetUserById((int)providerUserKey));
+				return ConvertUserToMembershipUser(_userService.GetUserById((int)providerUserKey));
 			}
 			catch (Exception e)
 			{
@@ -368,11 +387,6 @@ namespace VotingSystem.Web.Providers
 			{
 				throw new NotSupportedException("Password reset is not enabled.");
 			}
-			if (answer == null && RequiresQuestionAndAnswer)
-			{
-				UpdateFailureCount(username, "passwordAnswer");
-				throw new ProviderException("Password answer required for password reset.");
-			}
 			string newPassword = Membership.GeneratePassword(NewPasswordLength, MinRequiredNonAlphanumericCharacters);
 			ValidatePasswordEventArgs args = new ValidatePasswordEventArgs(username, newPassword, true);
 			OnValidatingPassword(args);
@@ -386,7 +400,7 @@ namespace VotingSystem.Web.Providers
 			}
 			try
 			{
-				User user = _userService.GetUser(username);
+				User user = _userService.GetUserByUserName(username);
 				string passwordAnswer;
 				if (user != null)
 				{
@@ -416,7 +430,7 @@ namespace VotingSystem.Web.Providers
 		{
 			try
 			{
-				User userInDb = _userService.GetUser(user.UserName);
+				User userInDb = _userService.GetUserByUserName(user.UserName);
 				userInDb.Email = user.Email;
 				userInDb.IsApproved = user.IsApproved;
 				_userService.UpdateUser(user.UserName, user.Email, user.IsApproved);
@@ -431,7 +445,7 @@ namespace VotingSystem.Web.Providers
 		{
 			try
 			{
-				User user = _userService.GetUser(username);
+				User user = _userService.GetUserByUserName(username);
 				if (user != null && !user.IsLocked)
 				{
 					if (CheckPassword(password, user.Password))
@@ -442,10 +456,6 @@ namespace VotingSystem.Web.Providers
 						}
 						return user.IsApproved && !user.IsLocked;
 					}
-					//else
-					//{
-					//	UpdateFailureCount(username, "password");
-					//}
 				}
 				return false;
 
@@ -465,7 +475,7 @@ namespace VotingSystem.Web.Providers
 				List<User> usersInDb = _userService.GetUsersByName(usernameToMatch);
 				foreach (User user in usersInDb)
 				{
-					users.Add(ConvertUsertToMembershipUser(user));
+					users.Add(ConvertUserToMembershipUser(user));
 				}
 				return users;
 			}
@@ -483,25 +493,26 @@ namespace VotingSystem.Web.Providers
 		/// <summary>
 		/// Toggle user lock field
 		/// </summary>
-		/// <param name="userName">username of user</param>
+		/// <param name="userId">User Id of user</param>
 		/// <returns>New value of lock field</returns>
-		public bool ToggleLockUser(string userName)
+		public bool ToggleLockUser(int userId)
 		{
-			return _userService.ToggleLock(userName);
+			return _userService.ToggleLock(userId);
 		}
 
 		public int GetTotalUsers()
 		{
-			return _userService.GetTotal();
+			return _userService.GetNumberOfUsers();
 		}
 
 		public int GetTotalSuggestedUsers()
 		{
-			return _userService.GetTotal(u => u.UserProfile.SuggestedToBlock);
+			return _userService.GetNumberOfUsers(u => u.UserProfile.SuggestedToBlock);
 		}
 		#endregion
 
 		#region Helpers
+
 		private T GetConfigValue<T>(string configValue, T defaultValue)
 		{
 			if (String.IsNullOrEmpty(configValue))
@@ -509,11 +520,6 @@ namespace VotingSystem.Web.Providers
 				configValue = defaultValue.ToString();
 			}
 			return (T)Convert.ChangeType(configValue, typeof(T));
-		}
-
-		private void UpdateFailureCount(string username, string failureType)
-		{
-			throw new NotImplementedException();
 		}
 
 		private bool CheckPassword(string password, string dbpassword)
@@ -542,7 +548,7 @@ namespace VotingSystem.Web.Providers
 			return encodedPassword;
 		}
 
-		private MembershipUser ConvertUsertToMembershipUser(User user)
+		private MembershipUser ConvertUserToMembershipUser(User user)
 		{
 			return user == null ? null : new MembershipUser(
 						Name, user.UserName,

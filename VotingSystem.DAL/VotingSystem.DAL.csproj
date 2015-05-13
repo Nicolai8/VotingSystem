@@ -30,11 +30,13 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="EntityFramework">
-      <HintPath>..\packages\EntityFramework.6.0.1\lib\net45\EntityFramework.dll</HintPath>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\EntityFramework.6.0.2\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
-    <Reference Include="EntityFramework.SqlServer">
-      <HintPath>..\packages\EntityFramework.6.0.1\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\EntityFramework.6.0.2\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Practices.Unity">
       <HintPath>..\packages\Unity.3.5.1404.0\lib\net45\Microsoft.Practices.Unity.dll</HintPath>
@@ -61,12 +63,12 @@
     <Compile Include="Entities\Comment.cs" />
     <Compile Include="Entities\FixedAnswer.cs" />
     <Compile Include="Entities\Log.cs" />
-    <Compile Include="Entities\PrivacyType.cs" />
+    <Compile Include="Enums\PrivacyType.cs" />
     <Compile Include="Entities\Question.cs" />
     <Compile Include="Entities\Role.cs" />
-    <Compile Include="Entities\StatusType.cs" />
-    <Compile Include="Entities\Theme.cs" />
-    <Compile Include="Entities\QuestionType.cs" />
+    <Compile Include="Enums\VotingStatusType.cs" />
+    <Compile Include="Entities\Voting.cs" />
+    <Compile Include="Enums\QuestionType.cs" />
     <Compile Include="Entities\User.cs" />
     <Compile Include="Entities\UserProfile.cs" />
     <Compile Include="IUnitOfWork.cs" />
@@ -121,6 +123,10 @@
     <Compile Include="Migrations\201407151148461_AddQuestions.cs" />
     <Compile Include="Migrations\201407151148461_AddQuestions.Designer.cs">
       <DependentUpon>201407151148461_AddQuestions.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201502031256393_RenameThemeToVoting.cs" />
+    <Compile Include="Migrations\201502031256393_RenameThemeToVoting.Designer.cs">
+      <DependentUpon>201502031256393_RenameThemeToVoting.cs</DependentUpon>
     </Compile>
     <Compile Include="Repositories\GenericRepository.cs" />
     <Compile Include="Migrations\201312121157133_InitialCreate.cs" />
@@ -187,6 +193,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201407151148461_AddQuestions.resx">
       <DependentUpon>201407151148461_AddQuestions.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201502031256393_RenameThemeToVoting.resx">
+      <DependentUpon>201502031256393_RenameThemeToVoting.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

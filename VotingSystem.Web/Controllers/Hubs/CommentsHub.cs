@@ -29,8 +29,8 @@ namespace VotingSystem.Web.Controllers.Hubs
 			return base.OnReconnected();
 		}
 
-		[CustomAuthorizeHub]
 		[HttpPost]
+		[CustomAuthorizeHub]
 		public void CreateComment(CommentModel comment)
 		{
 			IList<string> clients= Connections.GetConnections(comment.VotingId.ToString());
@@ -39,9 +39,9 @@ namespace VotingSystem.Web.Controllers.Hubs
 		}
 
 		[HttpPost]
-		public void DeleteComment(int commentId, string themeId)
+		public void DeleteComment(int commentId, string votingId)
 		{
-			IList<string> clients = Connections.GetConnections(themeId);
+			IList<string> clients = Connections.GetConnections(votingId);
 			clients.Remove(Context.ConnectionId);
 			Clients.Clients(clients).deleteComment(commentId);
 		}

@@ -12,7 +12,9 @@ namespace VotingSystem.UnityDI
 		public UnityDependencyResolver(IUnityContainer container)
 		{
 			if (container == null)
+			{
 				throw new ArgumentNullException("container");
+			}
 
 			Container = container;
 		}

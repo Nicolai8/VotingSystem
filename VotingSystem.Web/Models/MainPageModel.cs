@@ -2,10 +2,10 @@
 
 namespace VotingSystem.Web.Models
 {
-    public class MainPageModel
-    {
-        public List<VotingModel> Votings { get; set; }
-        public int Total { get; set; }
-        public int Page { get; set; }
-    }
+	public class MainPageModel
+	{
+		public List<VotingModel> Votings { get; set; }
+		public int Total { get; set; }
+		public int Page { get; set; }
+	}
 }

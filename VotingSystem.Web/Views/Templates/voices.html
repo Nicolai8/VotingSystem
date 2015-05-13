@@ -1,5 +1,5 @@
 ﻿<div class="col-xs-12" data-ng-controller="VoicesCtrl">
-	<div data-ng-include="'views/templates/breadcrumb.html'" />
+	<div data-ng-include="'views/templates/breadcrumb.html'"/>
 	<div id="voicesPage" class="page">
 		<div data-ng-hide="voices.length==0" data-voting-paginator="" data-total="{{total}}"></div>
 		<div class="voices-widget" data-ng-hide="voices.length==0">
@@ -7,13 +7,15 @@
 				<li class="list-group-item" data-ng-repeat="voice in voices">
 					<div class="row">
 						<div class="col-xs-2 col-md-2">
-							<img data-ng-src="{{voice.PictureUrl}}" class="img-responsive img-thumbnail" alt="" />
+							<img data-ng-src="{{voice.PictureUrl}}" class="img-responsive img-thumbnail" alt=""/>
 						</div>
 						<div class="col-xs-10 col-md-10">
 							<div>
-								<h4><a data-ng-href="#/votingpage/{{voice.VotingId}}">{{voice.VotingName}}</a></h4>
+								<h4>
+									<a data-ng-href="#/voting/{{voice.VotingId}}">{{voice.VotingName}}</a>
+								</h4>
 								<div class="mic-info">
-									on {{voice.CreateDate}}
+									on {{voice.CreateDate|date:"dd-MM-yyyy hh:mm"}}
 								</div>
 							</div>
 							<div class="widget-text">
@@ -26,5 +28,5 @@
 		</div>
 		<div data-ng-hide="voices.length==0" data-voting-paginator="" data-total="{{total}}"></div>
 	</div>
-	<div data-ng-show="voices.length==0" data-not-found="dontHaveVoicesMessage" />
+	<div data-ng-show="voices.length==0" data-not-found="dontHaveVoicesMessage"/>
 </div>

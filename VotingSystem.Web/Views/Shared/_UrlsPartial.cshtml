@@ -1,6 +1,7 @@
 ﻿<script type="text/javascript">
-	define("Urls", [], function () {
-		var urls = {
+	angular.module("votingSystem.urls", [])
+		.constant("urls",
+		{
 			IsInRole: "@Url.Action("IsInRole", "Account")",
 			Captcha: "@Url.Action("Captcha", "Main")",
 			Template: "@Url.Action("GetTemplate", "Main")",
@@ -22,8 +23,6 @@
 				ChangePassword: "@Url.Action("ChangePassword", "Account")",
 				ChangePrivacy: "@Url.Action("ChangePrivacy", "Account")",
 				ChangePicture: "@Url.Action("UploadPicture", "Account")",
-			},
-		};
-		return urls;
-	});
+			}
+		})
 </script>

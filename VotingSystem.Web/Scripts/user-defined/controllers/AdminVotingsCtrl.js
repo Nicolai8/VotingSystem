@@ -1,57 +1,51 @@
-﻿define(["angular", "Urls", "constants", "toastr", "angular.route"],
-	function (angular, Urls, constants, toastr) {
-		angular.module("votingSystem.controllers.adminVotings", [])
-			.controller("AdminVotingsCtrl", function ($scope, $http, $route, $routeParams, $location, reload, VotingStorage, commentsHub) {
-				$scope.page = $routeParams.pageNumber;
-				$scope.breadCrumbItemName = "Admin Votings";
-				$scope.pageName = "adminvotingspage";
-				$scope.total = 1;
-				$scope.constants = constants;
-				$scope.$location = $location;
-				$scope.$route = $route;
-				$scope.reload = reload;
+﻿angular.module("votingSystem.controllers.adminVotings", [])
+	.controller("AdminVotingsCtrl", [
+		"$scope", "$routeParams", "reloadDataAfterUserAction", "UnitOfWork", "commentsHub", "notifications",
+		function ($scope, $routeParams, reloadDataAfterUserAction, UnitOfWork, commentsHub, notifications) {
+			$scope.breadCrumbItemName = "Admin Votings";
+			$scope.pageName = "adminVotings";
+			$scope.total = 1;
 
-				commentsHub.changePageOnHub();
+			commentsHub.changePageOnHub();
 
-				VotingStorage.query(
-					{
-						pageType: "AdminVotings",
-						page: $scope.page
-					},
-					function (data) {
-						$scope.votings = data;
-						VotingStorage.total(
-							{
-								totalKind: "totaladmin"
-							},
-							function (response) {
-								$scope.total = response.total;
-							});
-					});
-
-				$scope.setThemeStatus = function (voting, status) {
-					var oldStatus = angular.copy(voting.Status);
-					voting.Status = status;
-					voting.$update().then(
-						function () {
-							toastr.success(constants("votingStatusChangedMessage"));
-						}, function () {
-							voting.Status = oldStatus;
-							toastr.error(constants("errorOccurredDuringSavingProcessMessage"));
-						});
-				};
-
-				$scope.removeTheme = function (voting) {
-					voting.$remove(
-						function () {
-							$scope.votings.splice($scope.votings.indexOf(voting), 1);
-							toastr.success(constants("votingDeletedMessage"));
-							$scope.reload($scope, $scope.votings.length, "/" + $scope.pageName + "/{pageNumber}");
+			UnitOfWork.votingStorage().query(
+				{
+					pageType: "AdminVotings",
+					page: $routeParams.pageNumber
+				},
+				function (data) {
+					$scope.votings = data;
+					UnitOfWork.votingStorage().total(
+						{
+							totalKind: "totalAdmin"
 						},
-						function () {
-							toastr.error(constants("errorOccurredDuringDeletingProcessMessage"));
+						function (response) {
+							$scope.total = response.total;
 						});
-				};
-			});
-	});
+				});
 
+			$scope.setVotingStatus = function (voting, status) {
+				var oldStatus = angular.copy(voting.Status);
+				voting.Status = status;
+				voting.$update().then(
+					function () {
+						notifications.votingStatusChanged();
+					}, function () {
+						voting.Status = oldStatus;
+						notifications.savingError();
+				});
+			};
+
+			$scope.removeVoting = function (voting) {
+				voting.$remove(
+					function () {
+						$scope.votings.splice($scope.votings.indexOf(voting), 1);
+						notifications.votingDeleted();
+						reloadDataAfterUserAction($scope.votings.length, "/" + $scope.pageName + "/{pageNumber}");
+					},
+					function () {
+						notifications.deletingError();
+					});
+			};
+		}
+	]);

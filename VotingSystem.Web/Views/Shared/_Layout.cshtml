@@ -5,20 +5,23 @@
 	<title>Voting System</title>
 	<link href="~/Content/images/favicon.ico" rel="shortcut icon" type="image/x-icon" />
 	<meta name="viewport" content="width=device-width" />
-	
-    @Styles.Render("~/content/bootstrap")    	
-    <link href="@Url.Content("~/Content/less/toastr.less")" rel="stylesheet" type="text/css" />
-    <link href="@Url.Content("~/Content/less/font-awesome.less")" rel="stylesheet" type="text/css" />
-    @Styles.Render("~/bundles/css")
-    @Styles.Render("~/content/main")    
-    
+
+	<style type="text/css">
+		@@import url("//fonts.googleapis.com/css?family=News+Cycle:400,700");
+	</style>
+	@Styles.Render("~/content/bootstrap")
+	<link href="@Url.Content("~/Content/less/toastr.less")" rel="stylesheet" type="text/css" />
+	<link href="@Url.Content("~/Content/less/font-awesome.less")" rel="stylesheet" type="text/css" />
+	@Styles.Render("~/bundles/css")
+	@Styles.Render("~/content/main")
+
 	<script type="text/javascript">
 		var cacheScripts = false;
 		var authenticated = @Html.Raw(Request.IsAuthenticated ? "true" : "false");
 		var loggedUserName = "@Html.Raw(Request.IsAuthenticated ? User.Identity.Name : "Account")";
 	</script>
 </head>
-<body data-ng-controller="LayoutCtrl">
+<body data-ng-controller="LayoutCtrl" data-clean-up>
 	<div id="preloader" hidden=""></div>
 	<header>
 		@Html.Partial("_NavbarPartial")
@@ -43,10 +46,15 @@
 	</footer>
 	<script type="text/javascript" src="https://www.google.com/jsapi"></script>
 	<script type="text/javascript">
-		google.load("visualization", "1", {packages:["corechart"]});
+		google.load("visualization", "1", { packages: ["corechart"] });
 	</script>
-	@Scripts.Render("~/Scripts/libraries/require.js")
+	@Scripts.Render("~/bundles/externals")
+	<script type="text/javascript" src="@Url.Content("~/signalr/hubs?")"></script>
+	@Scripts.Render("~/bundles/angular")
+	@Scripts.Render("~/bundles/client/directives")
+	@Scripts.Render("~/bundles/client/controllers")
+	@Scripts.Render("~/bundles/client/services")
 	@Html.Partial("_UrlsPartial")
-	@Scripts.Render("~/Scripts/main.js")
+	@Scripts.Render("~/bundles/client/app")
 </body>
 </html>

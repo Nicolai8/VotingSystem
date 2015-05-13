@@ -9,19 +9,19 @@
 				<div class="modal-body">
 					<div class="row clearfix">
 						<div class="col-md-4 text-center">
-							<img data-ng-src="{{user.PictureUrl}}" id="userPicture" class="img-thumbnail img-responsive" alt="" />
-							<br />
+							<img data-ng-src="{{user.PictureUrl}}" class="img-thumbnail img-responsive" alt=""/>
+							<br/>
 						</div>
 						<div class="col-md-8">
 							<h4>{{user.UserName}}</h4>
 							<p>
 								<i class="glyphicon glyphicon-envelope"></i>{{user.Email}}
-								<br />
-								<i class="glyphicon glyphicon-calendar"></i>{{user.CreateDate}}
-								<br />
+								<br/>
+								<i class="glyphicon glyphicon-calendar"></i>{{user.CreateDate|date:"dd-MM-yyyy"}}
+								<br/>
 							</p>
 							<div class="row col-md-12 margin-bottom-x2" data-ng-hide="isMyPage">
-								<a id="userProfileModalVotings" href="#/mainpage/1">All user votings</a>
+								<a id="userProfileModalVotings" href="#/main/1">All user votings</a>
 							</div>
 							<div data-ng-show="isMyPage">
 								<div class="margin-bottom-x2">
@@ -38,10 +38,10 @@
 									<span class="btn btn-sm btn-success fileinput-button">
 										<i class="glyphicon glyphicon-open"></i>
 										<span>Change Picture</span>
-										<input type="file" name="picture" />
+										<input type="file" name="picture" data-file-uploader data-picture-url="user.PictureUrl" />
 									</span>
-									<br />
-									<br />
+									<br/>
+									<br/>
 									<div id="progress" class="progress" hidden>
 										<div class="progress-bar progress-bar-success"></div>
 									</div>
@@ -51,7 +51,7 @@
 								<div class="row clearfix margin-bottom-x2">
 									<div class="col-md-8">
 										<button type="button" class="btn btn-block btn-primary"
-											data-ng-show="roles.indexOf('moderator')!=-1 || roles.indexOf('admin')!=-1" data-ng-click="suggestUser()">
+										        data-ng-show="roles.indexOf('moderator')!=-1 || roles.indexOf('admin')!=-1" data-ng-click="suggestUser()">
 											<i class="glyphicon glyphicon-info-sign"></i>Suggest user to block
 										</button>
 									</div>
@@ -92,29 +92,29 @@
 						<div class="form-group">
 							<label class="col-md-4 control-label" for="oldPassword">Password</label>
 							<div class="col-md-7">
-								<input id="oldPassword" name="oldPassword" type="password" placeholder="Old password" class="form-control"
-									required data-bv-stringlength="true"
-									data-bv-stringlength-min="6" data-bv-stringlength-message="Password must be at least 6 characters length." />
+								<input name="oldPassword" type="password" placeholder="Old password" class="form-control ignore-validation"
+									   required data-bv-stringlength="true" data-ng-model="oldPassword"
+									   data-bv-stringlength-min="6" data-bv-stringlength-message="Password must be at least 6 characters length." />
 							</div>
 						</div>
 						<div class="form-group">
 							<label class="col-md-4 control-label" for="newPassword">New Password</label>
 							<div class="col-md-7">
-								<input id="newPassword" name="newPassword" type="password" placeholder="New password" class="form-control"
-									required data-bv-stringlength="true"
-									data-bv-stringlength-min="6" data-bv-stringlength-message="Password must be at least 6 characters length."
-									data-bv-identical="true" data-bv-identical-field="confirmNewPassword"
-									data-bv-identical-message="The password and its confirm are not the same." />
+								<input name="newPassword" type="password" placeholder="New password" class="form-control ignore-validation" data-ng-model="newPassword"
+									   required data-bv-stringlength="true"
+									   data-bv-stringlength-min="6" data-bv-stringlength-message="Password must be at least 6 characters length."
+									   data-bv-identical="true" data-bv-identical-field="confirmNewPassword"
+									   data-bv-identical-message="The password and its confirm are not the same." />
 							</div>
 						</div>
 						<div class="form-group">
 							<label class="col-md-4 control-label" for="confirmNewPassword">Confirm New Password</label>
 							<div class="col-md-7">
-								<input id="confirmNewPassword" name="confirmNewPassword" type="password" placeholder="Confirm new password" class="form-control"
-									required data-bv-stringlength="true"
-									data-bv-stringlength-min="6" data-bv-stringlength-message="Password must be at least 6 characters length."
-									data-bv-identical="true" data-bv-identical-field="newPassword"
-								       data-bv-identical-message="The password and its confirm are not the same." />
+								<input id="confirmNewPassword" name="confirmNewPassword" type="password" placeholder="Confirm new password" class="form-control ignore-validation"
+									   required data-bv-stringlength="true"
+									   data-bv-stringlength-min="6" data-bv-stringlength-message="Password must be at least 6 characters length."
+									   data-bv-identical="true" data-bv-identical-field="newPassword"
+									   data-bv-identical-message="The password and its confirm are not the same." />
 							</div>
 						</div>
 					</form>
@@ -127,7 +127,7 @@
 		</div>
 	</div>
 
-	<div class="modal" id="changePrivacyModal" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true"  data-on-enter-press="changePrivacy()">
+	<div class="modal" id="changePrivacyModal" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true" data-on-enter-press="changePrivacy(user.Privacy)">
 		<div class="modal-dialog">
 			<div class="modal-content">
 				<div class="modal-header">
@@ -139,19 +139,19 @@
 						<div class="form-group">
 							<div class="radio">
 								<label>
-									<input type="radio" name="privacy" value="0" required="">
+									<input type="radio" name="privacy" value="1" required="" data-ng-model="user.Privacy">
 									Closed for all.
 								</label>
 							</div>
 							<div class="radio">
 								<label>
-									<input type="radio" name="privacy" value="1" required="">
+									<input type="radio" name="privacy" value="2" required="" data-ng-model="user.Privacy">
 									Open for everyone.
 								</label>
 							</div>
 							<div class="radio">
 								<label>
-									<input type="radio" name="privacy" value="2" required="">
+									<input type="radio" name="privacy" value="3" required="" data-ng-model="user.Privacy">
 									Open for registerd users.
 								</label>
 							</div>
@@ -160,7 +160,7 @@
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-					<button type="button" class="btn btn-default" data-ng-click="changePrivacy()">Save</button>
+					<button type="button" class="btn btn-default" data-ng-click="changePrivacy(user.Privacy)">Save</button>
 				</div>
 			</div>
 		</div>

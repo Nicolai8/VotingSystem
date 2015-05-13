@@ -10,14 +10,14 @@ namespace VotingSystem.DAL.Entities
 			CreateDate = DateTime.UtcNow;
 		}
 
-		public int? UserId { get; set; }
-		public int ThemeId { get; set; }
-
 		[DatabaseGenerated(DatabaseGeneratedOption.Computed)]
 		public DateTime CreateDate { get; set; }
 		public string CommentText { get; set; }
 
+		public int? UserId { get; set; }
 		public virtual User User { get; set; }
-		public virtual Theme Theme { get; set; }
+
+		public int VotingId { get; set; }
+		public virtual Voting Voting { get; set; }
 	}
 }

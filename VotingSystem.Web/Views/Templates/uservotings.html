@@ -1,282 +1,282 @@
 ﻿<div class="col-xs-12" data-ng-controller="UserVotingsCtrl">
-    <div data-ng-include="'views/templates/breadcrumb.html'" />
-    <button type="button" class="btn btn-default btn-primary"
-            data-toggle="modal" href="#addNewVotingModal" data-ng-click="newVoting = { Questions: [], StartDate: '', FinishTime:''}">
-        <i class="glyphicon glyphicon-plus"></i>Add New
-    </button>
-    <br />
-    <br />
-    <div id="userVotingsPage" class="page">
-        <div data-ng-hide="votings.length==0" data-voting-paginator="" data-total="{{total}}"></div>
-        <div class="table-responsive" data-ng-hide="votings.length==0">
-            <table class="table table-hover">
-                <thead>
-                    <tr>
-                        <th>Voting Name</th>
-                        <th>Voices</th>
-                        <th>Comments</th>
-                        <th>Start Date</th>
-                        <th>End Date</th>
-                        <th>Status</th>
-                        <th>Action</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr data-ng-repeat="voting in votings">
-                        <td>
-                            <a data-ng-href="#/votingpage/{{voting.VotingId}}">
-                                {{voting.VotingName.substr(0,50)+(voting.VotingName.length>50?"...":"")}}
-                            </a>
-                        </td>
-                        <td>{{voting.AnswersCount}}</td>
-                        <td>{{voting.CommentsCount}}</td>
-                        <td>{{voting.StartDate}}</td>
-                        <td>{{voting.EndDate}}</td>
-                        <td data-ng-switch="voting.Status">
-                            <span data-ng-switch-when="0">Active</span>
-                            <span data-ng-switch-when="1">Active, Not approved</span>
-                            <span data-ng-switch-when="2">Blocked</span>
-                            <span data-ng-switch-when="3">Closed</span>
-                        </td>
-                        <td>
-                            <a data-ng-if="voting.Status!=3" data-ng-click="setThemeStatus(voting, 3)">Close</a>
-                            <a data-ng-click="removeTheme(voting)">Remove</a>
-                        </td>
+<div data-ng-include="'views/templates/breadcrumb.html'"/>
+<button type="button" class="btn btn-default btn-primary"
+        data-toggle="modal" href="#addNewVotingModal" data-ng-click="newVoting = { Questions: [], StartDate: '', FinishTime:''}">
+	<i class="glyphicon glyphicon-plus"></i>Add New
+</button>
+<br/>
+<br/>
+<div id="userVotingsPage" class="page">
+	<div data-ng-hide="votings.length==0" data-voting-paginator="" data-total="{{total}}"></div>
+	<div class="table-responsive" data-ng-hide="votings.length==0">
+		<table class="table table-hover">
+			<thead>
+			<tr>
+				<th>Voting Name</th>
+				<th>Voices</th>
+				<th>Comments</th>
+				<th>Start Date</th>
+				<th>End Date</th>
+				<th>Status</th>
+				<th>Action</th>
+			</tr>
+			</thead>
+			<tbody>
+			<tr data-ng-repeat="voting in votings">
+				<td>
+					<a data-ng-href="#/voting/{{voting.VotingId}}">
+						{{voting.VotingName.substr(0,50)+(voting.VotingName.length>50?"...":"")}}
+					</a>
+				</td>
+				<td>{{voting.AnswersCount}}</td>
+				<td>{{voting.CommentsCount}}</td>
+				<td>{{voting.StartDate|date:"EEEE, MMMM dd, yyyy hh:mm"}}</td>
+				<td>{{voting.EndDate}}</td>
+				<td data-ng-switch="voting.Status">
+					<span data-ng-switch-when="1">Active</span>
+					<span data-ng-switch-when="2">Active, Not approved</span>
+					<span data-ng-switch-when="3">Blocked</span>
+					<span data-ng-switch-when="4">Closed</span>
+				</td>
+				<td>
+					<a data-ng-if="voting.Status!=4" data-ng-click="setVotingStatus(voting, 4)">Close</a>
+					<a data-ng-click="removeVoting(voting)">Remove</a>
+				</td>
 
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-        <div data-ng-hide="votings.length==0" data-voting-paginator="" data-total="{{total}}"></div>
-    </div>
-    <div data-ng-show="votings.length==0" data-not-found="votingsNotFoundMessage" />
+			</tr>
+			</tbody>
+		</table>
+	</div>
+	<div data-ng-hide="votings.length==0" data-voting-paginator="" data-total="{{total}}"></div>
+</div>
+<div data-ng-show="votings.length==0" data-not-found="votingsNotFoundMessage"/>
 
-    <div class="modal" id="addNewVotingModal" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-lg">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                    <h4 class="modal-title">Create new voting</h4>
-                </div>
-                <div class="modal-body">
-                    <form role="form" name="newVotingForm" class="form-horizontal" novalidate>
-                        <div class="form-group">
-                            <div class="alert alert-info" role="alert" data-ng-show="newVotingForm.$invalid">
-                                <ul>
-                                    <li ng-show="newVotingForm.newVotingName.$error.required">
-                                        Field "Voting Name" is required.
-                                    </li>
-                                    <li ng-show="newVotingForm.validateQuestionsCount.$error.min">
-                                        Theme should contain at least 1 question.
-                                    </li>
-                                    <li ng-show="newVotingForm.startDate.$error.required">
-                                        Field "Start Date" is required.
-                                    </li>
-                                    <li ng-show="newVotingForm.finishDate.$error.required">
-                                        Field "Finish Date" is required.
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-sm-2 control-label" for="newVotingName">* Voting Name:</label>
-                            <div class="col-sm-10">
-                                <input type="text" class="form-control" name="newVotingName" required="" data-ng-model="newVoting.VotingName" />
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <div class="col-sm-10 col-sm-offset-2">
-                                <input type="number" class="hidden" min="1" name="validateQuestionsCount" ng-model="newVoting.Questions.length" />
-                                <button type="button" class="btn btn-default btn-primary" role="button" data-toggle="modal" href="#defineQuestionsModal">
-                                    <i class="glyphicon glyphicon-plus"></i>Define Questions
-                                </button>
-                            </div>
-                        </div>
-                        <div class="form-group date">
-                            <label class="col-sm-2 control-label" for="newVotingStartDate">* Start Date:</label>
-                            <div class="col-sm-4">
-                                <div class="input-group date" id="newVotingStartDate" data-datetime-picker=""
-                                     data-is-depend="true" data-depend-on="#newVotingFinishDate" data-depend-on-min="true"
-                                     data-on-change="setDate" data-on-change-property="StartDate">
-                                    <input type="text" class="form-control" name="startDate" data-format="MM/DD/YYYY"
-                                           required="" readonly ng-model="newVoting.StartDate" />
-                                    <span class="input-group-addon">
+<div class="modal" id="addNewVotingModal" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog modal-lg">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+				<h4 class="modal-title">Create new voting</h4>
+			</div>
+			<div class="modal-body">
+				<form role="form" name="newVotingForm" class="form-horizontal" novalidate>
+					<div class="form-group">
+						<div class="alert alert-info" role="alert" data-ng-show="newVotingForm.$invalid">
+							<ul>
+								<li ng-show="newVotingForm.newVotingName.$error.required">
+									Field "Voting Name" is required.
+								</li>
+								<li ng-show="newVotingForm.validateQuestionsCount.$error.min">
+									Voting should contain at least 1 question.
+								</li>
+								<li ng-show="newVotingForm.startDate.$error.required">
+									Field "Start Date" is required.
+								</li>
+								<li ng-show="newVotingForm.finishDate.$error.required">
+									Field "Finish Date" is required.
+								</li>
+							</ul>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-sm-2 control-label" for="newVotingName">* Voting Name:</label>
+						<div class="col-sm-10">
+							<input type="text" class="form-control" name="newVotingName" required="" data-ng-model="newVoting.VotingName"/>
+						</div>
+					</div>
+					<div class="form-group">
+						<div class="col-sm-10 col-sm-offset-2">
+							<input type="number" class="hidden" min="1" name="validateQuestionsCount" ng-model="newVoting.Questions.length"/>
+							<button type="button" class="btn btn-default btn-primary" role="button" data-toggle="modal" href="#defineQuestionsModal">
+								<i class="glyphicon glyphicon-plus"></i>Define Questions
+							</button>
+						</div>
+					</div>
+					<div class="form-group date">
+						<label class="col-sm-2 control-label" for="newVotingStartDate">* Start Date:</label>
+						<div class="col-sm-4">
+							<div class="input-group date" id="newVotingStartDate" data-date-time-picker=""
+							     data-is-depend="true" data-depend-on="#newVotingFinishDate" data-depend-on-min="true"
+							     data-on-change="setDate" data-on-change-property="StartDate">
+								<input type="text" class="form-control" name="startDate" data-format="MM/DD/YYYY"
+								       required="" readonly ng-model="newVoting.StartDate"/>
+								<span class="input-group-addon">
                                         <span class="glyphicon glyphicon-calendar"></span>
                                     </span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="form-group date">
-                            <label class="col-sm-2 control-label" for="newVotingFinishDate">* Finish Date:</label>
-                            <div class="col-sm-4">
-                                <div class="input-group date" id="newVotingFinishDate" data-datetime-picker=""
-                                     data-is-depend="true" data-depend-on="#newVotingStartDate" data-depend-on-min="false"
-                                     data-on-change="setDate" data-on-change-property="FinishTime">
-                                    <input type="text" readonly class="form-control" name="finishDate" data-format="MM/DD/YYYY"
-                                           required="" ng-model="newVoting.FinishTime" />
-                                    <span class="input-group-addon">
+							</div>
+						</div>
+					</div>
+					<div class="form-group date">
+						<label class="col-sm-2 control-label" for="newVotingFinishDate">* Finish Date:</label>
+						<div class="col-sm-4">
+							<div class="input-group date" id="newVotingFinishDate" data-date-time-picker=""
+							     data-is-depend="true" data-depend-on="#newVotingStartDate" data-depend-on-min="false"
+							     data-on-change="setDate" data-on-change-property="FinishTime">
+								<input type="text" readonly class="form-control" name="finishDate" data-format="MM/DD/YYYY"
+								       required="" ng-model="newVoting.FinishTime"/>
+								<span class="input-group-addon">
                                         <span class="glyphicon glyphicon-calendar"></span>
                                     </span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-sm-2 control-label" for="">Description:</label>
-                            <div class="col-sm-10">
-                                <textarea class="form-control" rows="8" name="Description"
-                                          data-ng-model="newVoting.Description" data-bootstrap-markdown=""></textarea>
-                            </div>
-                        </div>
-                    </form>
+							</div>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-sm-2 control-label" for="">Description:</label>
+						<div class="col-sm-10">
+							<textarea class="form-control" rows="8" name="Description"
+							          data-ng-model="newVoting.Description" data-bootstrap-markdown=""></textarea>
+						</div>
+					</div>
+				</form>
 
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">
-                        Close
-                    </button>
-                    <button type="button" class="btn btn-primary" ng-disabled="newVotingForm.$invalid" data-ng-click="addNewVoting($event,newVoting)">
-                        Save
-                    </button>
-                </div>
-            </div>
-        </div>
-    </div>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">
+					Close
+				</button>
+				<button type="button" class="btn btn-primary" ng-disabled="newVotingForm.$invalid" data-ng-click="addNewVoting($event,newVoting)">
+					Save
+				</button>
+			</div>
+		</div>
+	</div>
+</div>
 
-    <div class="modal" id="defineQuestionsModal" data-dismiss="modal" role="dialog" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" aria-hidden="true" data-dismiss="modal">×</button>
-                    <h4 class="modal-title">Create new voting</h4>
-                </div>
-                <div class="modal-body">
-                    <form role="form" class="form-horizontal">
-                        <div class="list-group">
-                            <a data-ng-repeat="question in newVoting.Questions" data-ng-click="openQuestion(question)" class="list-group-item">
-                                {{question.Text}}
-                                <i class="pull-right fa fa-minus" data-ng-click="removeQuestion(question)"></i>
-                                <label class="label-primary-question pull-right"
-                                       data-ng-if="question.Type==0">
-                                    (Open Question)
-                                </label>
-                                <label class="label-primary-question pull-right"
-                                       data-ng-if="question.Type==1">
-                                    (Choice Question)
-                                </label>
-                            </a>
-                        </div>
-                    </form>
-                    <div class="col-xs-12 col-sm-8 col-md-6">
-                        <button type="button" class="btn btn-primary btn-sm" data-ng-click="newQuestion={FixedAnswers:[]}" data-toggle="modal" href="#addNewQuestionModal">
-                            <i class="glyphicon glyphicon-plus"></i>
-                        </button>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-primary" data-dismiss="modal">Ok</button>
-                </div>
-            </div>
-        </div>
-    </div>
+<div class="modal" id="defineQuestionsModal" data-dismiss="modal" role="dialog" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" aria-hidden="true" data-dismiss="modal">×</button>
+				<h4 class="modal-title">Create new voting</h4>
+			</div>
+			<div class="modal-body">
+				<form role="form" class="form-horizontal">
+					<div class="list-group">
+						<a data-ng-repeat="question in newVoting.Questions" data-ng-click="openQuestion(question)" class="list-group-item">
+							{{question.Text}}
+							<i class="pull-right fa fa-minus" data-ng-click="removeQuestion(question)"></i>
+							<label class="label-primary-question pull-right"
+							       data-ng-if="question.Type==1">
+								(Open Question)
+							</label>
+							<label class="label-primary-question pull-right"
+							       data-ng-if="question.Type==2">
+								(Choice Question)
+							</label>
+						</a>
+					</div>
+				</form>
+				<div class="col-xs-12 col-sm-8 col-md-6">
+					<button type="button" class="btn btn-primary btn-sm" data-ng-click="newQuestion={FixedAnswers:[]}" data-toggle="modal" href="#addNewQuestionModal">
+						<i class="glyphicon glyphicon-plus"></i>
+					</button>
+				</div>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-primary" data-dismiss="modal">Ok</button>
+			</div>
+		</div>
+	</div>
+</div>
 
-    <div class="modal" id="addNewQuestionModal" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-lg">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                    <h4 class="modal-title">Create new question</h4>
-                </div>
-                <div class="modal-body">
-                    <form name="newQuestionForm" role="form" class="form-horizontal" novalidate>
-                        <div class="form-group">
-                            <div class="alert alert-info" role="alert" data-ng-show="newQuestionForm.$invalid">
-                                <ul>
-                                    <li ng-show="newQuestionForm.validateOptions.$error.min">
-                                        Questions of "Choice Question" type should contain at least 2 predefined answeres.
-                                    </li>
-                                    <li ng-show="newQuestionForm.Type.$error.required">
-                                        Field "Voting Type" is required.
-                                    </li>
-                                    <li ng-show="newQuestionForm.QuestionText.$error.required">
-                                        Field "Question Text" is required.
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-sm-2 control-label" for="">* Voting Type:</label>
-                            <div class="col-sm-10">
-                                <div class="radio">
-                                    <label>
-                                        <input type="radio" data-ng-model="newQuestion.Type"
-                                               data-ng-click="newQuestion.FixedAnswers=[]"
-                                               value="0" name="Type" checked="checked" required="">
-                                        Open Question
-                                    </label>
-                                </div>
-                                <div class="radio">
-                                    <label>
-                                        <input type="radio" data-ng-model="newQuestion.Type" value="1"
-                                               name="Type" required="">
-                                        Choice Question
-                                    </label>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-sm-2 control-label">* Question Text:</label>
-                            <div class="col-sm-10">
-                                <input type="text" class="form-control" data-ng-model="newQuestion.Text" name="QuestionText" required />
-                            </div>
-                        </div>
-                        <div class="form-group" data-ng-if="newQuestion.Type==1">
-                            <input type="number" min="2" name="validateOptions" ng-model="newQuestion.FixedAnswers.length" class="hidden" />
-                            <div class="col-sm-10 col-sm-offset-2">
-                                <button type="button" class="btn btn-default btn-primary btn-sm"
-                                        data-toggle="modal" href="#defineAnswersModal">
-                                    <i class="glyphicon glyphicon-plus"></i>Define Answers
-                                </button>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary" data-ng-disabled="newQuestionForm.$invalid" data-ng-click="addQuestionToVoting($event,newQuestion)">Ok</button>
-                </div>
-            </div>
-        </div>
-    </div>
+<div class="modal" id="addNewQuestionModal" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog modal-lg">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+				<h4 class="modal-title">Create new question</h4>
+			</div>
+			<div class="modal-body">
+				<form name="newQuestionForm" role="form" class="form-horizontal" novalidate>
+					<div class="form-group">
+						<div class="alert alert-info" role="alert" data-ng-show="newQuestionForm.$invalid">
+							<ul>
+								<li ng-show="newQuestionForm.validateOptions.$error.min">
+									Questions of "Choice Question" type should contain at least 2 predefined answeres.
+								</li>
+								<li ng-show="newQuestionForm.Type.$error.required">
+									Field "Voting Type" is required.
+								</li>
+								<li ng-show="newQuestionForm.QuestionText.$error.required">
+									Field "Question Text" is required.
+								</li>
+							</ul>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-sm-2 control-label" for="">* Voting Type:</label>
+						<div class="col-sm-10">
+							<div class="radio">
+								<label>
+									<input type="radio" data-ng-model="newQuestion.Type"
+									       data-ng-click="newQuestion.FixedAnswers=[]"
+									       value="1" name="Type" checked="checked" required="">
+									Open Question
+								</label>
+							</div>
+							<div class="radio">
+								<label>
+									<input type="radio" data-ng-model="newQuestion.Type" value="2"
+									       name="Type" required="">
+									Choice Question
+								</label>
+							</div>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-sm-2 control-label">* Question Text:</label>
+						<div class="col-sm-10">
+							<input type="text" class="form-control" data-ng-model="newQuestion.Text" name="QuestionText" required/>
+						</div>
+					</div>
+					<div class="form-group" data-ng-if="newQuestion.Type==2">
+						<input type="number" min="2" name="validateOptions" ng-model="newQuestion.FixedAnswers.length" class="hidden"/>
+						<div class="col-sm-10 col-sm-offset-2">
+							<button type="button" class="btn btn-default btn-primary btn-sm"
+							        data-toggle="modal" href="#defineAnswersModal">
+								<i class="glyphicon glyphicon-plus"></i>Define Answers
+							</button>
+						</div>
+					</div>
+				</form>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+				<button type="button" class="btn btn-primary" data-ng-disabled="newQuestionForm.$invalid" data-ng-click="addQuestionToVoting($event,newQuestion)">Ok</button>
+			</div>
+		</div>
+	</div>
+</div>
 
-    <div class="modal" id="defineAnswersModal" data-dismiss="modal" role="dialog" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" aria-hidden="true" data-dismiss="modal">×</button>
-                    <h4 class="modal-title">Create new voting</h4>
-                </div>
-                <div class="modal-body">
-                    <form role="form" class="form-horizontal">
-                        <div class="list-group">
-                            <a class="list-group-item" data-ng-repeat="answer in newQuestion.FixedAnswers">
-                                {{answer.AnswerText}}
-                                <i class="pull-right fa fa-minus" data-ng-click="removeAnswer(answer)"></i>
-                            </a>
-                        </div>
-                    </form>
-                    <div class="input-group col-xs-12 col-sm-8 col-md-6">
-                        <input type="text" class="form-control" required="" data-ng-model="newAnswer.AnswerText" />
-                        <span class="input-group-btn">
+<div class="modal" id="defineAnswersModal" data-dismiss="modal" role="dialog" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" aria-hidden="true" data-dismiss="modal">×</button>
+				<h4 class="modal-title">Create new voting</h4>
+			</div>
+			<div class="modal-body">
+				<form role="form" class="form-horizontal">
+					<div class="list-group">
+						<a class="list-group-item" data-ng-repeat="answer in newQuestion.FixedAnswers">
+							{{answer.AnswerText}}
+							<i class="pull-right fa fa-minus" data-ng-click="removeAnswer(answer)"></i>
+						</a>
+					</div>
+				</form>
+				<div class="input-group col-xs-12 col-sm-8 col-md-6">
+					<input type="text" class="form-control" required="" data-ng-model="newAnswer.AnswerText"/>
+					<span class="input-group-btn">
                             <button type="button" class="btn btn-primary" data-ng-click="addNewAnswerToQuestion(newAnswer)">
                                 <i class="glyphicon glyphicon-plus"></i>
                             </button>
                         </span>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-primary" data-dismiss="modal">Ok</button>
-                </div>
-            </div>
-        </div>
-    </div>
+				</div>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-primary" data-dismiss="modal">Ok</button>
+			</div>
+		</div>
+	</div>
+</div>
 </div>

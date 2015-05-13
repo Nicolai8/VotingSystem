@@ -117,6 +117,12 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="DateStringFormat" xml:space="preserve">
+    <value>dd-MM-yy</value>
+  </data>
+  <data name="FullDateStringFormat" xml:space="preserve">
+    <value>dd-MM-yy hh:mm</value>
+  </data>
   <data name="RegistrationMailBody" xml:space="preserve">
     <value>You have registered in Voting System with following credentials:
     UserName: {0}

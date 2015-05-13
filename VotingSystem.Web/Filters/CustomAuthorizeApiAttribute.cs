@@ -2,8 +2,8 @@
 using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Controllers;
+using VotingSystem.Web.Enums;
 using VotingSystem.Web.Helpers;
-using VotingSystem.Web.Models;
 
 namespace VotingSystem.Web.Filters
 {
@@ -14,6 +14,11 @@ namespace VotingSystem.Web.Filters
 		public CustomAuthorizeApiAttribute()
 		{
 			Roles = new RoleType[] { };
+		}
+
+		public CustomAuthorizeApiAttribute(RoleType roleType)
+		{
+			Roles = new [] { roleType };
 		}
 
 		public override void OnAuthorization(HttpActionContext actionContext)

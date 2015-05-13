@@ -1,130 +1,94 @@
-﻿define(["jquery", "angular", "Urls", "toastr", "constants", "spin",
-		"angular.route", "bootstrap", "bootstrapValidator"],
-	function ($, angular, Urls, toastr, constants, Spinner) {
-		angular.module("votingSystem.controllers.layout", [])
-			.controller("LayoutCtrl", function ($scope, $route, $routeParams, $location, commentsHub) {
-				$scope.accountName = window.loggedUserName;
-				$scope.roles = [];
-				$scope.authenticated = window.authenticated;
-				$scope.$location = $location;
-				$scope.commentsHub = commentsHub;
+﻿angular.module("votingSystem.controllers.layout", [])
+	.controller("LayoutCtrl", [
+		"$scope", "$route", "$routeParams", "$location", "urls", "UnitOfWork", "commentsHub", "notifications",
+		function ($scope, $route, $routeParams, $location, urls, UnitOfWork, commentsHub, notifications) {
+			$scope.accountName = window.loggedUserName;
+			$scope.roles = [];
+			$scope.authenticated = window.authenticated;
+			$scope.commentsHub = commentsHub;
 
-				$scope.logIn = function () {
-					var userName = $("#userName").val();
-					var password = $("#password").val();
-					var $form = $("#loginForm form[data-validate-form]").data("bootstrapValidator");
-					if ($form.isValid()) {
-						$.ajax({
-							url: Urls.LoginPage.Login,
-							type: "POST",
-							data: { userName: userName, password: password, rememberMe: false },
-							beforeSend: function () {
-								$scope.commentsHub.stopCommentsHub();
-							}
-						}).done(function (data) {
+			$scope.logIn = function (userName, password) {
+
+				var $form = $("#loginForm form[data-validate-form]").data("bootstrapValidator");
+
+				if ($form.isValid()) {
+					UnitOfWork.authStorage().login({
+						userName: userName,
+						password: password,
+						rememberMe: false
+					}).$promise
+						.then(function (data) {
 							if (data && data.result) {
 								$scope.authenticated = true;
 								$scope.accountName = userName;
-								$scope.$apply();
 								$("#loginForm").modal("hide");
-								$scope.$location.path("/mainpage/1");
+								$location.path("/main/1");
 							} else {
-								toastr.error(constants("loginFailedMessage"));
+								notifications.loginFailed();
 							}
-						}).fail(function () {
-							toastr.error(constants("loginFailedMessage"));
-						}).always(function () {
-							//commentsHub.changePageOnHub("");
-							$("#password").val("");
+						}, function () {
+							notifications.loginFailed();
+						}).finally(function () {
+							password = "";
 						});
-					} else {
-						$form.validate();
-					}
-				};
+				} else {
+					$form.validate();
+				}
+			};
 
-				$scope.$watch("authenticated", function (newValue) {
-					if (newValue) {
-						$.get(Urls.IsInRole).done(function (data) {
-							$scope.roles = data.toLowerCase().split(",");
-							$scope.$apply();
+			$scope.$watch("authenticated", function (newValue) {
+				if (newValue) {
+					UnitOfWork.authStorage().isInRole({},
+						function (data) {
+							$scope.roles = data.roles.toLowerCase().split(",");
 						});
-					}
-				});
+				}
+			});
 
-				$scope.checkUserName = function () {
-					$.get(Urls.LoginPage.CheckUserName, { userName: $scope.registerUserName })
-						.done(function (data) {
-							if (!data.result) {
-								toastr.success(constants("canUseLoginMessage"));
-							} else {
-								toastr.warning(constants("loginAlreadyExistsMessage"));
-							}
-						}).fail(function () {
-							toastr.warning(constants("loginAlreadyExistsMessage"));
-						});
-				};
-
-				$scope.register = function () {
-					var $form = $("#registerInnerForm").data("bootstrapValidator");
-					if ($form.isValid()) {
-						var userName = $scope.registerUserName;
-						var email = $scope.registerEmail;
-						$.post(Urls.LoginPage.Register, { newUserName: userName, email: email })
-							.done(function () {
-								$("#registerForm").modal("hide");
-								toastr.success(constants("registrationSucceedMessage"));
-							}).fail(function () {
-								toastr.error(constants("registrationFailedMessage"));
-							});
-					} else {
-						$form.validate();
-					}
-				};
-
-				$scope.signOut = function ($event) {
-					$event.preventDefault();
-					$.ajax({
-						url: Urls.LoginPage.LogOff,
-						type: "POST",
-						beforeSend: function () {
-							$scope.commentsHub.stopCommentsHub();
+			$scope.checkUserName = function (userName) {
+				UnitOfWork.authStorage().checkUserName(
+					{
+						userName: userName
+					},
+					function (data) {
+						if (!data.result) {
+							notifications.canUseLogin();
+						} else {
+							notifications.loginAlreadyExists();
 						}
-					}).done(function () {
+					}, function () {
+						notifications.loginAlreadyExists();
+					});
+			};
+
+			$scope.register = function (userName, email) {
+				var $form = $("#registerInnerForm").data("bootstrapValidator");
+				if ($form.isValid()) {
+					UnitOfWork.authStorage().register(
+						{
+							newUserName: userName,
+							email: email
+						}, function () {
+							$("#registerForm").modal("hide");
+							notifications.registrationSucceed();
+						}, function () {
+							notifications.registrationFailed();
+						});
+				} else {
+					$form.validate();
+				}
+			};
+
+			$scope.signOut = function ($event) {
+				$event.preventDefault();
+				UnitOfWork.authStorage().signOut({},
+					function () {
 						$scope.authenticated = false;
 						$scope.accountName = "Account";
-						$scope.$location.path("/mainpage/1");
-						$scope.$apply();
-					}).fail(function () {
-						toastr.error(constants("logOutFailedMessage"));
-					}).complete(function () {
-						//commentsHub.changePageOnHub("");
+						$location.path("/main/1");
+					}, function () {
+						notifications.logOutFailed();
 					});
-				};
-
-				$("body").on("hidden.bs.modal", "[role='dialog']", function (e) {
-					var $modal = $(e.currentTarget);
-					$modal.find(":text,textarea,:password").each(function () {
-						$(this).val("");
-					});
-					$modal.find(":checked").each(function () {
-						$(this).attr("checked", "false");
-					});
-					$modal.find(".wmd-preview").empty();
-					$modal.find("form[data-validate-form]").each(function () {
-						var validateForm = $(this).data("bootstrapValidator");
-						if (angular.isDefined(validateForm)) {
-							validateForm.resetForm();
-						}
-					});
-				});
-
-				var opts = {
-					lines: 10,
-					length: 15,
-					width: 8,
-					radius: 20,
-					trail: 60,
-				};
-				var spinner = new Spinner(opts).spin($("#preloader")[0]);
-			});
-	});
+			};
+		}
+	]);
